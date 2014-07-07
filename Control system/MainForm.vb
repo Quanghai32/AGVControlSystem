@@ -2,6 +2,7 @@
 Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadStartData()
+        SetupHostXbee()
         'Dim avaiableWidth As Integer = Panel1.Width - 30
         'Dim eachWidth As Integer = avaiableWidth / LineGroupArray(0).MaxPart
         'If eachWidth < 100 Then
