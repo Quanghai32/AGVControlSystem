@@ -69,22 +69,31 @@ Partial Class MainForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ListView2 = New System.Windows.Forms.ListView()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.LargeIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DetailsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SmallIconToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList2 = New System.Windows.Forms.ImageList(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage5.SuspendLayout()
@@ -345,7 +354,8 @@ Partial Class MainForm
         '
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.ListView2, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Button1, 0, 1)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
@@ -354,14 +364,59 @@ Partial Class MainForm
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1926, 968)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'Panel1
+        'ListView2
         '
-        Me.Panel1.AutoScroll = True
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1920, 478)
-        Me.Panel1.TabIndex = 0
+        Me.ListView2.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.ListView2.Location = New System.Drawing.Point(3, 3)
+        Me.ListView2.Name = "ListView2"
+        Me.ListView2.Size = New System.Drawing.Size(813, 478)
+        Me.ListView2.TabIndex = 0
+        Me.ListView2.UseCompatibleStateImageBehavior = False
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargeIconToolStripMenuItem, Me.DetailsToolStripMenuItem, Me.SmallIconToolStripMenuItem, Me.ListToolStripMenuItem, Me.TileToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(130, 114)
+        '
+        'LargeIconToolStripMenuItem
+        '
+        Me.LargeIconToolStripMenuItem.Name = "LargeIconToolStripMenuItem"
+        Me.LargeIconToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.LargeIconToolStripMenuItem.Text = "Large Icon"
+        '
+        'DetailsToolStripMenuItem
+        '
+        Me.DetailsToolStripMenuItem.Name = "DetailsToolStripMenuItem"
+        Me.DetailsToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.DetailsToolStripMenuItem.Text = "Details"
+        '
+        'SmallIconToolStripMenuItem
+        '
+        Me.SmallIconToolStripMenuItem.Name = "SmallIconToolStripMenuItem"
+        Me.SmallIconToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.SmallIconToolStripMenuItem.Text = "Small icon"
+        '
+        'ListToolStripMenuItem
+        '
+        Me.ListToolStripMenuItem.Name = "ListToolStripMenuItem"
+        Me.ListToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.ListToolStripMenuItem.Text = "List"
+        '
+        'TileToolStripMenuItem
+        '
+        Me.TileToolStripMenuItem.Name = "TileToolStripMenuItem"
+        Me.TileToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.TileToolStripMenuItem.Text = "Tile"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(3, 487)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'TabPage2
         '
@@ -421,6 +476,16 @@ Partial Class MainForm
         Me.TabPage5.Text = "Test"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"LargeIcon", "Details", "SmallIcon", "List", "Tile"})
+        Me.ComboBox1.Location = New System.Drawing.Point(872, 7)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.TabIndex = 1
+        '
         'ListView1
         '
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
@@ -444,16 +509,6 @@ Partial Class MainForm
         Me.ListView1.TabIndex = 0
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"LargeIcon", "Details", "SmallIcon", "List", "Tile"})
-        Me.ComboBox1.Location = New System.Drawing.Point(872, 7)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 1
         '
         'ColumnHeader1
         '
@@ -483,6 +538,10 @@ Partial Class MainForm
         Me.ImageList2.Images.SetKeyName(6, "Penguins.jpg")
         Me.ImageList2.Images.SetKeyName(7, "Tulips.jpg")
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 500
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -499,6 +558,7 @@ Partial Class MainForm
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage5.ResumeLayout(False)
@@ -545,7 +605,6 @@ Partial Class MainForm
     Friend WithEvents Chart1 As System.Windows.Forms.DataVisualization.Charting.Chart
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
     Friend WithEvents ListView1 As System.Windows.Forms.ListView
     Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
@@ -553,5 +612,14 @@ Partial Class MainForm
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ImageList2 As System.Windows.Forms.ImageList
+    Friend WithEvents ListView2 As System.Windows.Forms.ListView
+    Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents LargeIconToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DetailsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SmallIconToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class
