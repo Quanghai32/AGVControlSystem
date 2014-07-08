@@ -114,6 +114,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SQLData.vb" />
+    <Compile Include="VirtualAGV.Designer.vb">
+      <DependentUpon>VirtualAGV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualAGV.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
@@ -125,6 +131,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VirtualAGV.resx">
+      <DependentUpon>VirtualAGV.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
