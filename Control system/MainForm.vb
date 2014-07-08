@@ -5,6 +5,7 @@ Public Class MainForm
         SetupHostXbee()
         displayAGV()
         ComboBox1.SelectedIndex = 0
+        Timer1.Start()
     End Sub
 
     Private Sub MainForm_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -59,11 +60,15 @@ Public Class MainForm
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick 'testing
-        'ListView2.Update()
+        For i As Byte = 0 To AGVArray.Length - 1
+            If ListView2.Items(i).SubItems(1).Text <> AGVArray(i).SupplyPartStatus.ToString Then
+                ListView2.Items(i).SubItems(1).Text = AGVArray(i).SupplyPartStatus.ToString
+            End If
+        Next
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click 'Testing
         AGVArray(0).SupplyPartStatus += 1
-        ListView2.Items(0).SubItems(1).Text = AGVArray(0).SupplyPartStatus.ToString
+        'ListView2.Items(0).SubItems(1).Text = AGVArray(0).SupplyPartStatus.ToString
     End Sub
 End Class
