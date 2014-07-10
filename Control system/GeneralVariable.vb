@@ -8,8 +8,7 @@ Public Module GeneralVariable
         Public Name As String
         Public MaxPart As Byte
         Public ChildPart As Collection
-
-    End Structure
+	End Structure
 
     Public LineGroupArray() As LineGroup
 End Module
