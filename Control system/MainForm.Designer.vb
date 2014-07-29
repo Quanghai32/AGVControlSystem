@@ -24,9 +24,7 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.MainManu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -80,14 +78,14 @@ Partial Class MainForm
         Me.TileAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgAGVSmall = New System.Windows.Forms.ImageList(Me.components)
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.AGVPerformance = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TimerDisplayAGV = New System.Windows.Forms.Timer(Me.components)
         Me.TimerDisplayPart = New System.Windows.Forms.Timer(Me.components)
-        Me.VirtualAGV1 = New Control_system.VirtualAGV()
         Me.DisplayTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.VirtualAGV1 = New Control_system.VirtualAGV()
         Me.MainManu.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -95,7 +93,7 @@ Partial Class MainForm
         Me.contMenuLstViewPart.SuspendLayout()
         Me.contextMenuLstViewAGV.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MainManu
@@ -518,7 +516,7 @@ Partial Class MainForm
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.Chart1)
+        Me.TabPage2.Controls.Add(Me.AGVPerformance)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -527,21 +525,16 @@ Partial Class MainForm
         Me.TabPage2.Text = "AGV performent"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'Chart1
+        'AGVPerformance
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
-        Me.Chart1.Location = New System.Drawing.Point(6, 6)
-        Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
-        Me.Chart1.Size = New System.Drawing.Size(1875, 952)
-        Me.Chart1.TabIndex = 0
-        Me.Chart1.Text = "Chart1"
+        Me.AGVPerformance.Location = New System.Drawing.Point(6, 6)
+        Me.AGVPerformance.Name = "AGVPerformance"
+        Me.AGVPerformance.Size = New System.Drawing.Size(1508, 952)
+        Me.AGVPerformance.TabIndex = 0
+        Me.AGVPerformance.Text = "Chart1"
+        Title1.Name = "Title1"
+        Title1.Text = "AGV Status"
+        Me.AGVPerformance.Titles.Add(Title1)
         '
         'TabPage3
         '
@@ -580,6 +573,10 @@ Partial Class MainForm
         '
         Me.TimerDisplayPart.Interval = 500
         '
+        'DisplayTimer
+        '
+        Me.DisplayTimer.Interval = 500
+        '
         'VirtualAGV1
         '
         Me.VirtualAGV1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -587,10 +584,6 @@ Partial Class MainForm
         Me.VirtualAGV1.Name = "VirtualAGV1"
         Me.VirtualAGV1.Size = New System.Drawing.Size(269, 204)
         Me.VirtualAGV1.TabIndex = 3
-        '
-        'Timer1
-        '
-        Me.DisplayTimer.Interval = 500
         '
         'MainForm
         '
@@ -612,7 +605,7 @@ Partial Class MainForm
         Me.contMenuLstViewPart.ResumeLayout(False)
         Me.contextMenuLstViewAGV.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -653,7 +646,7 @@ Partial Class MainForm
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
-    Friend WithEvents Chart1 As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents AGVPerformance As System.Windows.Forms.DataVisualization.Charting.Chart
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage

@@ -4,6 +4,7 @@ Imports System.Data.SqlClient
 Public Module SQLData
     Dim con As SqlConnection
     Public Sub ReadStartData()
+        Debug.Print("Start time: " + Environment.TickCount.ToString)
         Dim str As String = "Data Source=TL-APRO-NPC08\SQLEXPRESS;Integrated Security=True"
         con = New SqlConnection(str)
         con.Open()
@@ -16,23 +17,10 @@ Public Module SQLData
         myDataTable = New DataTable
         myDataAdapter.Fill(myDataTable)
         HostXbee = New XBee(myDataTable.Rows.Count - 1) {}
-
         For i As Byte = 0 To myDataTable.Rows.Count - 1
             HostXbee(i) = New XBee()
             HostXbee(i).Address = myDataTable.Rows(i)("Address")
         Next
-
-        'Read AGV information 
-        myDataAdapter = New SqlDataAdapter("SELECT * FROM AGV", con)
-        myDataTable = New DataTable
-        myDataAdapter.Fill(myDataTable)
-        AGVArray = New AGV(myDataTable.Rows.Count - 1) {}
-        For i As Byte = 0 To myDataTable.Rows.Count - 1
-            AGVArray(i) = New AGV(myDataTable.Rows(i)("Name"), myDataTable.Rows(i)("Address"))
-            AGVArray(i).Enable = myDataTable.Rows(i)("Enable")
-            LinkDeviceAndXbee(AGVArray(i), HostXbee(myDataTable.Rows(i)("Host Xbee")))
-        Next
-
         'Read End devices information 
         myDataAdapter = New SqlDataAdapter("SELECT * FROM EndDevices", con)
         myDataTable = New DataTable
@@ -52,7 +40,6 @@ Public Module SQLData
             LineGroupArray(i).Name = myDataTable.Rows(i)("Name")
             LineGroupArray(i).MaxPart = 0
         Next
-
         'Read Part information 
         myDataAdapter = New SqlDataAdapter("SELECT * FROM Part", con)
         myDataTable = New DataTable
@@ -78,6 +65,37 @@ Public Module SQLData
                 End If
             Next
         Next
-
+        'Read AGV information 
+        myDataAdapter = New SqlDataAdapter("SELECT * FROM AGV", con)
+        myDataTable = New DataTable
+        myDataAdapter.Fill(myDataTable)
+        AGVArray = New AGV(myDataTable.Rows.Count - 1) {}
+        PreAGVArray = New AGV(myDataTable.Rows.Count - 1) {}
+        AGVnPART = New Boolean(AGVArray.Length - 1, PartArray.Length - 1) {}
+        For i As Byte = 0 To AGVArray.Length - 1
+            For j As Byte = 0 To PartArray.Length - 1
+                AGVnPART(i, j) = False
+            Next
+        Next
+        For i As Byte = 0 To myDataTable.Rows.Count - 1
+            AGVArray(i) = New AGV(myDataTable.Rows(i)("Name"), myDataTable.Rows(i)("Address"))
+            AGVArray(i).Enable = myDataTable.Rows(i)("Enable")
+            LinkDeviceAndXbee(AGVArray(i), HostXbee(myDataTable.Rows(i)("Host Xbee")))
+            setAGVSupply(i, myDataTable.Rows(i)("Part"))
+        Next
+        'Read Chart information to Display
+        Debug.Print("End time: " + Environment.TickCount.ToString)
+    End Sub
+    Public Sub setAGVSupply(ByVal AGVnumber As Byte, ByVal PartString As String)
+        If PartString.ToLower = "all" Then
+            For i As Byte = 0 To PartArray.Length - 1
+                AGVnPART(AGVnumber, i) = True
+            Next
+        Else
+            Dim str As String() = PartString.Split(";")
+            For i As Byte = 0 To str.Length - 1
+                AGVnPART(AGVnumber, Byte.Parse(str(i))) = True
+            Next
+        End If
     End Sub
 End Module

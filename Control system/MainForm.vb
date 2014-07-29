@@ -1,14 +1,17 @@
-﻿Imports ControlSystemLibrary
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Windows.Forms.DataVisualization.Charting
+
+Imports ControlSystemLibrary
 Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadStartData()
         SetupHostXbee()
 		DisplayAGV()
 		DisplayPart()
-        'TimerDisplayAGV.Start()
 		VirtualAGV1.AGVArray = AGVArray
 		SetStartViewAGV()
-        'TimerDisplayPart.Start()
+        ChartInit()
         SetStartViewPart()
         DisplayTimer.Start()
     End Sub
@@ -17,7 +20,24 @@ Public Class MainForm
         TabControl1.Dock = DockStyle.Fill
         TableLayoutPanel1.Dock = DockStyle.Fill
     End Sub
+    Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick
+        ChartDataTable.Rows(1).Item(2) += 1
 
+        Dim a As Byte
+        Select Case TabControl1.SelectedIndex
+            Case 0
+                DisplayOverView()
+            Case 1
+                UpdateChart()
+            Case 2
+                a = 2
+            Case 3
+                a = 3
+            Case 4
+                a = 4
+        End Select
+    End Sub
+#Region "Display Overview"
 #Region "Display AGV"
     Private Sub AGVToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LargeIconAGVToolStripMenuItem.Click,
         DetailsAGVToolStripMenuItem.Click, SmallIconAGVToolStripMenuItem.Click,
@@ -80,27 +100,6 @@ Public Class MainForm
         AddColumnAGVDisplay()
         For i As Byte = 0 To AGVArray.Length - 1
             DisplaySingleAGV(AGVArray(i))
-        Next
-    End Sub
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles TimerDisplayAGV.Tick 'testing
-        For i As Byte = 0 To AGVArray.Length - 1
-            If lstViewAGV.Items(i).SubItems(1).Text <> ("Part: " + AGVArray(i).SupplyPartStatus.ToString) Then
-                lstViewAGV.Items(i).SubItems(1).Text = "Part: " + AGVArray(i).SupplyPartStatus.ToString
-            End If
-            If lstViewAGV.Items(i).SubItems(2).Text <> ("Work status: " + AGVArray(i).WorkingStatus.ToString) Then
-                lstViewAGV.Items(i).SubItems(2).Text = "Work status: " + AGVArray(i).WorkingStatus.ToString
-            End If
-            If lstViewAGV.Items(i).SubItems(3).Text <> ("Position: " + AGVArray(i).Position.ToString) Then
-                lstViewAGV.Items(i).SubItems(3).Text = "Position: " + AGVArray(i).Position.ToString
-            End If
-            If lstViewAGV.Items(i).SubItems(4).Text <> ("Status: " + AGVArray(i).Status.ToString) Then
-                lstViewAGV.Items(i).SubItems(4).Text = "Status: " + AGVArray(i).Status.ToString
-                lstViewAGV.Items(i).ImageIndex = GetAGVIcon(AGVArray(i))
-            End If
-            If lstViewAGV.Items(i).SubItems(5).Text <> ("Connect: " + AGVArray(i).Connecting.ToString) Then
-                lstViewAGV.Items(i).SubItems(5).Text = "Connect: " + AGVArray(i).Connecting.ToString
-                lstViewAGV.Items(i).ImageIndex = GetAGVIcon(AGVArray(i))
-            End If
         Next
     End Sub
 #End Region
@@ -189,39 +188,7 @@ Public Class MainForm
             DisplaySinglePart(PartArray(i))
         Next
     End Sub
-    Private Sub TimerDisplayPart_Tick(sender As Object, e As EventArgs) Handles TimerDisplayPart.Tick
-        For i As Byte = 0 To PartArray.Length - 1
-            If lstViewPart.Items(i).SubItems(1).Text <> ("Status: " + PartArray(i).Status.ToString) Then
-                lstViewPart.Items(i).SubItems(1).Text = "Status: " + PartArray(i).Status.ToString
-                lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-            End If
-            If lstViewPart.Items(i).SubItems(2).Text <> ("Connect: " + PartArray(i).parent.connecting.ToString) Then
-                lstViewPart.Items(i).SubItems(2).Text = "Connect: " + PartArray(i).parent.connecting.ToString
-                lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-            End If
-            If lstViewPart.Items(i).SubItems(3).Text <> ("Supply by: " + PartArray(i).AGVSupply) Then
-                lstViewPart.Items(i).SubItems(3).Text = "Supply by: " + PartArray(i).AGVSupply
-                lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-            End If
-        Next
-    End Sub
 #End Region
-
-    Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick
-        Dim a As Byte
-        Select Case TabControl1.SelectedIndex
-            Case 0
-                DisplayOverView()
-            Case 1
-                a = 1
-            Case 2
-                a = 2
-            Case 3
-                a = 3
-            Case 4
-                a = 4
-        End Select
-    End Sub
     Public Sub DisplayOverView()
         For i As Byte = 0 To AGVArray.Length - 1
             If lstViewAGV.Items(i).SubItems(1).Text <> ("Part: " + AGVArray(i).SupplyPartStatus.ToString) Then
@@ -257,4 +224,62 @@ Public Class MainForm
             End If
         Next
     End Sub
+#End Region
+#Region "Display Chart"
+    Public Sub ChartAddSeries(ByVal name As String)
+        Dim mySeries As Series = New Series()
+        mySeries.ChartArea = "ChartArea1"
+        mySeries.Legend = "Legend1"
+        mySeries.Name = name
+        mySeries.ChartType = SeriesChartType.StackedColumn
+        mySeries.IsValueShownAsLabel = True
+        AGVPerformance.Series.Add(mySeries)
+        AGVPerformance.Series(name).XValueMember = "Name"
+        AGVPerformance.Series(name).YValueMembers = name
+    End Sub
+    Public Sub ChartInit()
+        Dim strConn As String = "Data Source=TL-APRO-NPC08\SQLEXPRESS;Integrated Security=True"
+        Dim conn As New SqlConnection(strConn)
+
+        Dim sqlProducts As String = "SELECT * FROM chart"
+        Dim da As New SqlDataAdapter(sqlProducts, conn)
+        da.Fill(ChartDataSet, "chart")
+        ChartDataTable = ChartDataSet.Tables("chart")
+        Dim ChartArea1 As ChartArea = New ChartArea()
+        Dim Legend1 As Legend = New Legend()
+
+        ChartArea1.Name = "ChartArea1"
+        AGVPerformance.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        AGVPerformance.Legends.Add(Legend1)
+        AGVPerformance.Name = "Chart1"
+        AGVPerformance.TabIndex = 0
+        AGVPerformance.Text = "Chart1"
+        AGVPerformance.DataSource = ChartDataTable
+
+        ChartAddSeries("EMG")
+        ChartAddSeries("Safety")
+        ChartAddSeries("Stop")
+        ChartAddSeries("Out line")
+        ChartAddSeries("Battery empty")
+        ChartAddSeries("No cart")
+        ChartAddSeries("Normal")
+        ChartAddSeries("Free")
+        ChartAddSeries("Disconnect")
+    End Sub
+    Public Sub UpdateChart()
+        AGVPerformance.Series("EMG").Points.Clear()
+        AGVPerformance.Series("Safety").Points.Clear()
+        AGVPerformance.Series("Stop").Points.Clear()
+        AGVPerformance.Series("Out line").Points.Clear()
+        AGVPerformance.Series("Battery empty").Points.Clear()
+        AGVPerformance.Series("No cart").Points.Clear()
+        AGVPerformance.Series("Normal").Points.Clear()
+        AGVPerformance.Series("Free").Points.Clear()
+        AGVPerformance.Series("Disconnect").Points.Clear()
+        AGVPerformance.DataSource = ""
+        AGVPerformance.DataSource = ChartDataTable
+    End Sub
+#End Region
+
 End Class

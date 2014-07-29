@@ -1,6 +1,8 @@
-﻿Imports ControlSystemLibrary
+﻿Imports System.Threading
+Imports ControlSystemLibrary
 Imports System.IO.Ports
 Public Module MainModule
+    Public UpdateThread As New Thread(AddressOf UpdateData)
     Public Sub SetupHostXbee()
         Dim HostXbeeName() As String
         HostXbeeName = SerialPort.GetPortNames()
@@ -41,6 +43,13 @@ Public Module MainModule
         For i As Byte = 0 To HostXbee.Length - 1
             If list(i) <> "" Then
                 HostXbee(i).SettingPort(list(i), 9600)
+            End If
+        Next
+    End Sub
+    Public Sub UpdateData()
+        For i As Byte = 0 To AGVArray.Length - 1
+            If AGVArray(i).Connecting Then
+
             End If
         Next
     End Sub
