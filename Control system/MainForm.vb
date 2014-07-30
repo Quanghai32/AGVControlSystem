@@ -21,8 +21,7 @@ Public Class MainForm
         TableLayoutPanel1.Dock = DockStyle.Fill
     End Sub
     Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick
-        ChartDataTable.Rows(1).Item(2) += 1
-
+		DisplayTimer.Stop()
         Dim a As Byte
         Select Case TabControl1.SelectedIndex
             Case 0
@@ -35,7 +34,8 @@ Public Class MainForm
                 a = 3
             Case 4
                 a = 4
-        End Select
+		End Select
+		DisplayTimer.Start()
     End Sub
 #Region "Display Overview"
 #Region "Display AGV"
@@ -124,7 +124,7 @@ Public Class MainForm
         If sender.Equals(LargePartToolStripMenuItem) Then
             lstViewPart.View = View.LargeIcon
             Return
-        End If
+		End If
     End Sub
     Public Sub AddColumnPartDisplay()
         Dim str As String() = New String() {"Name", "Connecting", "Status", "Supply by"}
@@ -191,9 +191,10 @@ Public Class MainForm
 #End Region
     Public Sub DisplayOverView()
         For i As Byte = 0 To AGVArray.Length - 1
-            If lstViewAGV.Items(i).SubItems(1).Text <> ("Part: " + AGVArray(i).SupplyPartStatus.ToString) Then
-                lstViewAGV.Items(i).SubItems(1).Text = "Part: " + AGVArray(i).SupplyPartStatus.ToString
-            End If
+			Application.DoEvents()
+			If lstViewAGV.Items(i).SubItems(1).Text <> ("Part: " + AGVArray(i).SupplyPartStatus.ToString) Then
+				lstViewAGV.Items(i).SubItems(1).Text = "Part: " + AGVArray(i).SupplyPartStatus.ToString
+			End If
             If lstViewAGV.Items(i).SubItems(2).Text <> ("Work status: " + AGVArray(i).WorkingStatus.ToString) Then
                 lstViewAGV.Items(i).SubItems(2).Text = "Work status: " + AGVArray(i).WorkingStatus.ToString
             End If
@@ -208,21 +209,32 @@ Public Class MainForm
                 lstViewAGV.Items(i).SubItems(5).Text = "Connect: " + AGVArray(i).Connecting.ToString
                 lstViewAGV.Items(i).ImageIndex = GetAGVIcon(AGVArray(i))
             End If
-        Next
-        For i As Byte = 0 To PartArray.Length - 1
-            If lstViewPart.Items(i).SubItems(1).Text <> ("Status: " + PartArray(i).Status.ToString) Then
-                lstViewPart.Items(i).SubItems(1).Text = "Status: " + PartArray(i).Status.ToString
-                lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-            End If
-            If lstViewPart.Items(i).SubItems(2).Text <> ("Connect: " + PartArray(i).parent.connecting.ToString) Then
-                lstViewPart.Items(i).SubItems(2).Text = "Connect: " + PartArray(i).parent.connecting.ToString
-                lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-            End If
-            If lstViewPart.Items(i).SubItems(3).Text <> ("Supply by: " + PartArray(i).AGVSupply) Then
-                lstViewPart.Items(i).SubItems(3).Text = "Supply by: " + PartArray(i).AGVSupply
-                lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-            End If
-        Next
+		Next
+		lstViewPart.BeginUpdate()
+		For i As Byte = 0 To PartArray.Length - 1
+			Dim isUpdate As Boolean = False
+			lstViewPart.Items(i).SubItems(1).Text = "Status: " + PartArray(i).Status.ToString
+			lstViewPart.Items(i).SubItems(2).Text = "Connect: " + PartArray(i).parent.connecting.ToString
+			lstViewPart.Items(i).SubItems(3).Text = "Supply by: " + PartArray(i).AGVSupply
+			lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
+			'If lstViewPart.Items(i).SubItems(1).Text <> ("Status: " + PartArray(i).Status.ToString) Then
+			'	lstViewPart.Items(i).SubItems(1).Text = "Status: " + PartArray(i).Status.ToString
+			'	isUpdate = True
+			'End If
+			'If lstViewPart.Items(i).SubItems(2).Text <> ("Connect: " + PartArray(i).parent.connecting.ToString) Then
+			'	lstViewPart.Items(i).SubItems(2).Text = "Connect: " + PartArray(i).parent.connecting.ToString
+			'	isUpdate = True
+			'End If
+			'If lstViewPart.Items(i).SubItems(3).Text <> ("Supply by: " + PartArray(i).AGVSupply) Then
+			'	lstViewPart.Items(i).SubItems(3).Text = "Supply by: " + PartArray(i).AGVSupply
+			'	isUpdate = True
+			'End If
+			'isUpdate = True
+			'If isUpdate Then
+			'	lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
+			'End If
+		Next
+		lstViewPart.EndUpdate()
     End Sub
 #End Region
 #Region "Display Chart"

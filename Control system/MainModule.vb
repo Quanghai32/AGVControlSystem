@@ -49,7 +49,9 @@ Public Module MainModule
     Public Sub UpdateData()
         For i As Byte = 0 To AGVArray.Length - 1
             If AGVArray(i).Connecting Then
-
+				If preAGVStatusArray(i).connecting_value = False Then
+					ChartDataTable.Rows(i)("Disconnect") = ChartDataTable.Rows(i)("Disconnect") + 1
+				End If
             End If
         Next
     End Sub

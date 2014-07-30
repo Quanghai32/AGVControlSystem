@@ -69,8 +69,9 @@ Public Module SQLData
         myDataAdapter = New SqlDataAdapter("SELECT * FROM AGV", con)
         myDataTable = New DataTable
         myDataAdapter.Fill(myDataTable)
-        AGVArray = New AGV(myDataTable.Rows.Count - 1) {}
-        PreAGVArray = New AGV(myDataTable.Rows.Count - 1) {}
+		AGVArray = New AGV(myDataTable.Rows.Count - 1) {}
+		'Make copy
+		preAGVStatusArray = New struct_AGVStoreStatus(myDataTable.Rows.Count - 1) {}
         AGVnPART = New Boolean(AGVArray.Length - 1, PartArray.Length - 1) {}
         For i As Byte = 0 To AGVArray.Length - 1
             For j As Byte = 0 To PartArray.Length - 1
@@ -78,8 +79,11 @@ Public Module SQLData
             Next
         Next
         For i As Byte = 0 To myDataTable.Rows.Count - 1
-            AGVArray(i) = New AGV(myDataTable.Rows(i)("Name"), myDataTable.Rows(i)("Address"))
-            AGVArray(i).Enable = myDataTable.Rows(i)("Enable")
+			AGVArray(i) = New AGV(myDataTable.Rows(i)("Name"), myDataTable.Rows(i)("Address"))
+			preAGVStatusArray(i).connecting_time = Now
+			preAGVStatusArray(i).status_time = Now
+			preAGVStatusArray(i).working_time = Now
+			AGVArray(i).Enable = myDataTable.Rows(i)("Enable")
             LinkDeviceAndXbee(AGVArray(i), HostXbee(myDataTable.Rows(i)("Host Xbee")))
             setAGVSupply(i, myDataTable.Rows(i)("Part"))
         Next
