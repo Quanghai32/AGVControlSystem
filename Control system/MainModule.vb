@@ -2,7 +2,8 @@
 Imports ControlSystemLibrary
 Imports System.IO.Ports
 Public Module MainModule
-    Public UpdateThread As New Thread(AddressOf UpdateData)
+	Public UpdateThread As New Thread(AddressOf UpdateData)
+	Public RequestThread As New Thread(AddressOf RequestData)
     Public Sub SetupHostXbee()
         Dim HostXbeeName() As String
         HostXbeeName = SerialPort.GetPortNames()
@@ -47,12 +48,9 @@ Public Module MainModule
         Next
     End Sub
     Public Sub UpdateData()
-        For i As Byte = 0 To AGVArray.Length - 1
-            If AGVArray(i).Connecting Then
-				If preAGVStatusArray(i).connecting_value = False Then
-					ChartDataTable.Rows(i)("Disconnect") = ChartDataTable.Rows(i)("Disconnect") + 1
-				End If
-            End If
-        Next
-    End Sub
+		
+	End Sub
+	Public Sub RequestData()
+
+	End Sub
 End Module

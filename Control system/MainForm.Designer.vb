@@ -60,7 +60,19 @@ Partial Class MainForm
 		Me.TabControl1 = New System.Windows.Forms.TabControl()
 		Me.TabPage1 = New System.Windows.Forms.TabPage()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+		Me.contextMenuLstViewAGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
+		Me.LargeIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.DetailsAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.SmallIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ListAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.TileAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.imgAGVSmall = New System.Windows.Forms.ImageList(Me.components)
+		Me.contMenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
+		Me.LargePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.DetailPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.SmallIconPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ListPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.TilePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.imgPartBig = New System.Windows.Forms.ImageList(Me.components)
 		Me.imgPartSmall = New System.Windows.Forms.ImageList(Me.components)
 		Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -68,18 +80,6 @@ Partial Class MainForm
 		Me.TabPage3 = New System.Windows.Forms.TabPage()
 		Me.TabPage4 = New System.Windows.Forms.TabPage()
 		Me.TabPage5 = New System.Windows.Forms.TabPage()
-		Me.contMenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.LargePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.DetailPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.SmallIconPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ListPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.TilePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.contextMenuLstViewAGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.LargeIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.DetailsAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.SmallIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ListAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.TileAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.TimerDisplayAGV = New System.Windows.Forms.Timer(Me.components)
 		Me.TimerDisplayPart = New System.Windows.Forms.Timer(Me.components)
 		Me.DisplayTimer = New System.Windows.Forms.Timer(Me.components)
@@ -90,10 +90,10 @@ Partial Class MainForm
 		Me.TabControl1.SuspendLayout()
 		Me.TabPage1.SuspendLayout()
 		Me.TableLayoutPanel1.SuspendLayout()
+		Me.contextMenuLstViewAGV.SuspendLayout()
+		Me.contMenuLstViewPart.SuspendLayout()
 		Me.TabPage2.SuspendLayout()
 		CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).BeginInit()
-		Me.contMenuLstViewPart.SuspendLayout()
-		Me.contextMenuLstViewAGV.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'MainManu
@@ -314,22 +314,23 @@ Partial Class MainForm
 		'
 		Me.imgAGVBig.ImageStream = CType(resources.GetObject("imgAGVBig.ImageStream"), System.Windows.Forms.ImageListStreamer)
 		Me.imgAGVBig.TransparentColor = System.Drawing.Color.Transparent
-		Me.imgAGVBig.Images.SetKeyName(0, "0-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(1, "0-Disconnect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(2, "1-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(3, "1-Disconnect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(4, "2-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(5, "2-Disconnect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(6, "3-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(7, "3-Disconnect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(8, "4-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(9, "4-Disconnect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(10, "5-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(11, "5-Disconnect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(12, "6-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(13, "6-Disconnect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(14, "7-Connect.jpg")
-		Me.imgAGVBig.Images.SetKeyName(15, "7-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(0, "Disable.jpg")
+		Me.imgAGVBig.Images.SetKeyName(1, "0-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(2, "0-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(3, "1-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(4, "1-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(5, "2-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(6, "2-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(7, "3-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(8, "3-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(9, "4-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(10, "4-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(11, "5-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(12, "5-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(13, "6-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(14, "6-Disconnect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(15, "7-Connect.jpg")
+		Me.imgAGVBig.Images.SetKeyName(16, "7-Disconnect.jpg")
 		'
 		'TabControl1
 		'
@@ -370,48 +371,123 @@ Partial Class MainForm
 		Me.TableLayoutPanel1.Size = New System.Drawing.Size(1529, 968)
 		Me.TableLayoutPanel1.TabIndex = 0
 		'
+		'contextMenuLstViewAGV
+		'
+		Me.contextMenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargeIconAGVToolStripMenuItem, Me.DetailsAGVToolStripMenuItem, Me.SmallIconAGVToolStripMenuItem, Me.ListAGVToolStripMenuItem, Me.TileAGVToolStripMenuItem})
+		Me.contextMenuLstViewAGV.Name = "ContextMenuStrip1"
+		Me.contextMenuLstViewAGV.Size = New System.Drawing.Size(130, 114)
+		'
+		'LargeIconAGVToolStripMenuItem
+		'
+		Me.LargeIconAGVToolStripMenuItem.Name = "LargeIconAGVToolStripMenuItem"
+		Me.LargeIconAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.LargeIconAGVToolStripMenuItem.Text = "Large Icon"
+		'
+		'DetailsAGVToolStripMenuItem
+		'
+		Me.DetailsAGVToolStripMenuItem.Name = "DetailsAGVToolStripMenuItem"
+		Me.DetailsAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.DetailsAGVToolStripMenuItem.Text = "Details"
+		'
+		'SmallIconAGVToolStripMenuItem
+		'
+		Me.SmallIconAGVToolStripMenuItem.Name = "SmallIconAGVToolStripMenuItem"
+		Me.SmallIconAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.SmallIconAGVToolStripMenuItem.Text = "Small icon"
+		'
+		'ListAGVToolStripMenuItem
+		'
+		Me.ListAGVToolStripMenuItem.Name = "ListAGVToolStripMenuItem"
+		Me.ListAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.ListAGVToolStripMenuItem.Text = "List"
+		'
+		'TileAGVToolStripMenuItem
+		'
+		Me.TileAGVToolStripMenuItem.Name = "TileAGVToolStripMenuItem"
+		Me.TileAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.TileAGVToolStripMenuItem.Text = "Tile"
+		'
 		'imgAGVSmall
 		'
 		Me.imgAGVSmall.ImageStream = CType(resources.GetObject("imgAGVSmall.ImageStream"), System.Windows.Forms.ImageListStreamer)
 		Me.imgAGVSmall.TransparentColor = System.Drawing.Color.Transparent
-		Me.imgAGVSmall.Images.SetKeyName(0, "0-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(1, "0-Disconnect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(2, "1-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(3, "1-Disconnect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(4, "2-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(5, "2-Disconnect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(6, "3-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(7, "3-Disconnect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(8, "4-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(9, "4-Disconnect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(10, "5-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(11, "5-Disconnect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(12, "6-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(13, "6-Disconnect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(14, "7-Connect.jpg")
-		Me.imgAGVSmall.Images.SetKeyName(15, "7-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(0, "Disable.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(1, "0-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(2, "0-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(3, "1-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(4, "1-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(5, "2-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(6, "2-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(7, "3-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(8, "3-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(9, "4-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(10, "4-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(11, "5-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(12, "5-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(13, "6-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(14, "6-Disconnect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(15, "7-Connect.jpg")
+		Me.imgAGVSmall.Images.SetKeyName(16, "7-Disconnect.jpg")
+		'
+		'contMenuLstViewPart
+		'
+		Me.contMenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargePartToolStripMenuItem, Me.DetailPartToolStripMenuItem, Me.SmallIconPartToolStripMenuItem, Me.ListPartToolStripMenuItem, Me.TilePartToolStripMenuItem})
+		Me.contMenuLstViewPart.Name = "contMenuListViewPart"
+		Me.contMenuLstViewPart.Size = New System.Drawing.Size(130, 114)
+		'
+		'LargePartToolStripMenuItem
+		'
+		Me.LargePartToolStripMenuItem.Name = "LargePartToolStripMenuItem"
+		Me.LargePartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.LargePartToolStripMenuItem.Text = "Large Icon"
+		'
+		'DetailPartToolStripMenuItem
+		'
+		Me.DetailPartToolStripMenuItem.Name = "DetailPartToolStripMenuItem"
+		Me.DetailPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.DetailPartToolStripMenuItem.Text = "Detail"
+		'
+		'SmallIconPartToolStripMenuItem
+		'
+		Me.SmallIconPartToolStripMenuItem.Name = "SmallIconPartToolStripMenuItem"
+		Me.SmallIconPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.SmallIconPartToolStripMenuItem.Text = "Small icon"
+		'
+		'ListPartToolStripMenuItem
+		'
+		Me.ListPartToolStripMenuItem.Name = "ListPartToolStripMenuItem"
+		Me.ListPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.ListPartToolStripMenuItem.Text = "List"
+		'
+		'TilePartToolStripMenuItem
+		'
+		Me.TilePartToolStripMenuItem.Name = "TilePartToolStripMenuItem"
+		Me.TilePartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+		Me.TilePartToolStripMenuItem.Text = "Tile"
 		'
 		'imgPartBig
 		'
 		Me.imgPartBig.ImageStream = CType(resources.GetObject("imgPartBig.ImageStream"), System.Windows.Forms.ImageListStreamer)
 		Me.imgPartBig.TransparentColor = System.Drawing.Color.Transparent
-		Me.imgPartBig.Images.SetKeyName(0, "0-Connect.jpg")
-		Me.imgPartBig.Images.SetKeyName(1, "0-Disconnect.jpg")
-		Me.imgPartBig.Images.SetKeyName(2, "1-Connect.jpg")
-		Me.imgPartBig.Images.SetKeyName(3, "1-Disconnect.jpg")
-		Me.imgPartBig.Images.SetKeyName(4, "2-Connect.jpg")
-		Me.imgPartBig.Images.SetKeyName(5, "2-Disconnect.jpg")
+		Me.imgPartBig.Images.SetKeyName(0, "Disable.jpg")
+		Me.imgPartBig.Images.SetKeyName(1, "0-Connect.jpg")
+		Me.imgPartBig.Images.SetKeyName(2, "0-Disconnect.jpg")
+		Me.imgPartBig.Images.SetKeyName(3, "1-Connect.jpg")
+		Me.imgPartBig.Images.SetKeyName(4, "1-Disconnect.jpg")
+		Me.imgPartBig.Images.SetKeyName(5, "2-Connect.jpg")
+		Me.imgPartBig.Images.SetKeyName(6, "2-Disconnect.jpg")
 		'
 		'imgPartSmall
 		'
 		Me.imgPartSmall.ImageStream = CType(resources.GetObject("imgPartSmall.ImageStream"), System.Windows.Forms.ImageListStreamer)
 		Me.imgPartSmall.TransparentColor = System.Drawing.Color.Transparent
-		Me.imgPartSmall.Images.SetKeyName(0, "0-Connect.jpg")
-		Me.imgPartSmall.Images.SetKeyName(1, "0-Disconnect.jpg")
-		Me.imgPartSmall.Images.SetKeyName(2, "1-Connect.jpg")
-		Me.imgPartSmall.Images.SetKeyName(3, "1-Disconnect.jpg")
-		Me.imgPartSmall.Images.SetKeyName(4, "2-Connect.jpg")
-		Me.imgPartSmall.Images.SetKeyName(5, "2-Disconnect.jpg")
+		Me.imgPartSmall.Images.SetKeyName(0, "Disable.jpg")
+		Me.imgPartSmall.Images.SetKeyName(1, "0-Connect.jpg")
+		Me.imgPartSmall.Images.SetKeyName(2, "0-Disconnect.jpg")
+		Me.imgPartSmall.Images.SetKeyName(3, "1-Connect.jpg")
+		Me.imgPartSmall.Images.SetKeyName(4, "1-Disconnect.jpg")
+		Me.imgPartSmall.Images.SetKeyName(5, "2-Connect.jpg")
+		Me.imgPartSmall.Images.SetKeyName(6, "2-Disconnect.jpg")
 		'
 		'TabPage2
 		'
@@ -463,78 +539,6 @@ Partial Class MainForm
 		Me.TabPage5.TabIndex = 4
 		Me.TabPage5.Text = "Test"
 		Me.TabPage5.UseVisualStyleBackColor = True
-		'
-		'contMenuLstViewPart
-		'
-		Me.contMenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargePartToolStripMenuItem, Me.DetailPartToolStripMenuItem, Me.SmallIconPartToolStripMenuItem, Me.ListPartToolStripMenuItem, Me.TilePartToolStripMenuItem})
-		Me.contMenuLstViewPart.Name = "contMenuListViewPart"
-		Me.contMenuLstViewPart.Size = New System.Drawing.Size(130, 114)
-		'
-		'LargePartToolStripMenuItem
-		'
-		Me.LargePartToolStripMenuItem.Name = "LargePartToolStripMenuItem"
-		Me.LargePartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.LargePartToolStripMenuItem.Text = "Large Icon"
-		'
-		'DetailPartToolStripMenuItem
-		'
-		Me.DetailPartToolStripMenuItem.Name = "DetailPartToolStripMenuItem"
-		Me.DetailPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.DetailPartToolStripMenuItem.Text = "Detail"
-		'
-		'SmallIconPartToolStripMenuItem
-		'
-		Me.SmallIconPartToolStripMenuItem.Name = "SmallIconPartToolStripMenuItem"
-		Me.SmallIconPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.SmallIconPartToolStripMenuItem.Text = "Small icon"
-		'
-		'ListPartToolStripMenuItem
-		'
-		Me.ListPartToolStripMenuItem.Name = "ListPartToolStripMenuItem"
-		Me.ListPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.ListPartToolStripMenuItem.Text = "List"
-		'
-		'TilePartToolStripMenuItem
-		'
-		Me.TilePartToolStripMenuItem.Name = "TilePartToolStripMenuItem"
-		Me.TilePartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.TilePartToolStripMenuItem.Text = "Tile"
-		'
-		'contextMenuLstViewAGV
-		'
-		Me.contextMenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargeIconAGVToolStripMenuItem, Me.DetailsAGVToolStripMenuItem, Me.SmallIconAGVToolStripMenuItem, Me.ListAGVToolStripMenuItem, Me.TileAGVToolStripMenuItem})
-		Me.contextMenuLstViewAGV.Name = "ContextMenuStrip1"
-		Me.contextMenuLstViewAGV.Size = New System.Drawing.Size(130, 114)
-		'
-		'LargeIconAGVToolStripMenuItem
-		'
-		Me.LargeIconAGVToolStripMenuItem.Name = "LargeIconAGVToolStripMenuItem"
-		Me.LargeIconAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.LargeIconAGVToolStripMenuItem.Text = "Large Icon"
-		'
-		'DetailsAGVToolStripMenuItem
-		'
-		Me.DetailsAGVToolStripMenuItem.Name = "DetailsAGVToolStripMenuItem"
-		Me.DetailsAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.DetailsAGVToolStripMenuItem.Text = "Details"
-		'
-		'SmallIconAGVToolStripMenuItem
-		'
-		Me.SmallIconAGVToolStripMenuItem.Name = "SmallIconAGVToolStripMenuItem"
-		Me.SmallIconAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.SmallIconAGVToolStripMenuItem.Text = "Small icon"
-		'
-		'ListAGVToolStripMenuItem
-		'
-		Me.ListAGVToolStripMenuItem.Name = "ListAGVToolStripMenuItem"
-		Me.ListAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.ListAGVToolStripMenuItem.Text = "List"
-		'
-		'TileAGVToolStripMenuItem
-		'
-		Me.TileAGVToolStripMenuItem.Name = "TileAGVToolStripMenuItem"
-		Me.TileAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-		Me.TileAGVToolStripMenuItem.Text = "Tile"
 		'
 		'TimerDisplayAGV
 		'
@@ -600,10 +604,10 @@ Partial Class MainForm
 		Me.TabControl1.ResumeLayout(False)
 		Me.TabPage1.ResumeLayout(False)
 		Me.TableLayoutPanel1.ResumeLayout(False)
+		Me.contextMenuLstViewAGV.ResumeLayout(False)
+		Me.contMenuLstViewPart.ResumeLayout(False)
 		Me.TabPage2.ResumeLayout(False)
 		CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).EndInit()
-		Me.contMenuLstViewPart.ResumeLayout(False)
-		Me.contextMenuLstViewAGV.ResumeLayout(False)
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 

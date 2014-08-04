@@ -72,13 +72,14 @@ Public Class MainForm
             lstViewAGV.Columns.Add(MyColumnHeader)
         Next
     End Sub
-    Public Function GetAGVIcon(ByVal myAGV As AGV) As Byte
-        If myAGV.Connecting Then
-            Return myAGV.Status * 2
-        Else
-            Return myAGV.Status * 2 + 1
-        End If
-    End Function
+	Public Function GetAGVIcon(ByVal myAGV As AGV) As Byte
+		If myAGV.Enable = False Then Return 0
+		If myAGV.Connecting Then
+			Return myAGV.Status * 2 + 1
+		Else
+			Return myAGV.Status * 2 + 2
+		End If
+	End Function
     Public Sub DisplaySingleAGV(ByVal myAGV As AGV)
         Dim str As String() = New String(5) {}
         str(0) = myAGV.Name
@@ -142,29 +143,30 @@ Public Class MainForm
             lstViewPart.Groups.Add(grp)
         Next
     End Sub
-    Public Function GetPartIcon(ByVal part As CPart) As Byte
-        If part.parent.connecting Then
-            If part.Status Then
-                Return 2
-            Else
-                If part.AGVSupply = "" Then
-                    Return 0
-                Else
-                    Return 4
-                End If
-            End If
-        Else
-            If part.Status Then
-                Return 3
-            Else
-                If part.AGVSupply = "" Then
-                    Return 1
-                Else
-                    Return 5
-                End If
-            End If
-        End If
-    End Function
+	Public Function GetPartIcon(ByVal part As CPart) As Byte
+		If part.Enable = False Then Return 0
+		If part.parent.connecting Then
+			If part.Status Then
+				Return 3
+			Else
+				If part.AGVSupply = "" Then
+					Return 1
+				Else
+					Return 5
+				End If
+			End If
+		Else
+			If part.Status Then
+				Return 4
+			Else
+				If part.AGVSupply = "" Then
+					Return 2
+				Else
+					Return 6
+				End If
+			End If
+		End If
+	End Function
     Public Sub DisplaySinglePart(ByVal myPart As CPart)
         Dim str As String() = New String(3) {}
         str(0) = myPart.Name
