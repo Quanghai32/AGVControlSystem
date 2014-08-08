@@ -64,7 +64,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs">
       <HintPath>..\..\..\..\01. Library\ControlSystemLibrary\ControlSystemLibrary\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
     </Reference>
     <Reference Include="System" />

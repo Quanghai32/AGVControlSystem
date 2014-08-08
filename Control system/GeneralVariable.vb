@@ -21,7 +21,14 @@ Public Module GeneralVariable
 
     Public ChartDataSet As New DataSet()
     Public ChartDataTable As New DataTable()
-
+	''' <summary>
+	''' AGVnPART(AGVNum,PartNum):
+	''' Description: Array for define which AGVs can supply for which Parts
+	''' Value type: Boolean
+	'''    true: Can supply
+	'''    false: Cannot supply
+	''' </summary>
+	''' <remarks></remarks>
 	Public AGVnPART(,) As Boolean
 
 	Public Structure struct_AGVStoreStatus

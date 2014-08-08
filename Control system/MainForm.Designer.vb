@@ -60,6 +60,7 @@ Partial Class MainForm
 		Me.TabControl1 = New System.Windows.Forms.TabControl()
 		Me.TabPage1 = New System.Windows.Forms.TabPage()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+		Me.lstViewAGV = New Control_system.DoubleListView()
 		Me.contextMenuLstViewAGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.LargeIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DetailsAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -67,6 +68,7 @@ Partial Class MainForm
 		Me.ListAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.TileAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.imgAGVSmall = New System.Windows.Forms.ImageList(Me.components)
+		Me.lstViewPart = New Control_system.DoubleListView()
 		Me.contMenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.LargePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DetailPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -80,12 +82,7 @@ Partial Class MainForm
 		Me.TabPage3 = New System.Windows.Forms.TabPage()
 		Me.TabPage4 = New System.Windows.Forms.TabPage()
 		Me.TabPage5 = New System.Windows.Forms.TabPage()
-		Me.TimerDisplayAGV = New System.Windows.Forms.Timer(Me.components)
-		Me.TimerDisplayPart = New System.Windows.Forms.Timer(Me.components)
 		Me.DisplayTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.VirtualAGV1 = New Control_system.VirtualAGV()
-		Me.lstViewAGV = New Control_system.DoubleListView()
-		Me.lstViewPart = New Control_system.DoubleListView()
 		Me.MainManu.SuspendLayout()
 		Me.TabControl1.SuspendLayout()
 		Me.TabPage1.SuspendLayout()
@@ -371,6 +368,20 @@ Partial Class MainForm
 		Me.TableLayoutPanel1.Size = New System.Drawing.Size(1529, 968)
 		Me.TableLayoutPanel1.TabIndex = 0
 		'
+		'lstViewAGV
+		'
+		Me.lstViewAGV.ContextMenuStrip = Me.contextMenuLstViewAGV
+		Me.lstViewAGV.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.lstViewAGV.EnableDoubleBuffered = True
+		Me.lstViewAGV.LargeImageList = Me.imgAGVBig
+		Me.lstViewAGV.Location = New System.Drawing.Point(3, 3)
+		Me.lstViewAGV.Name = "lstViewAGV"
+		Me.lstViewAGV.Size = New System.Drawing.Size(758, 962)
+		Me.lstViewAGV.SmallImageList = Me.imgAGVSmall
+		Me.lstViewAGV.TabIndex = 4
+		Me.lstViewAGV.UseCompatibleStateImageBehavior = False
+		Me.lstViewAGV.View = System.Windows.Forms.View.Tile
+		'
 		'contextMenuLstViewAGV
 		'
 		Me.contextMenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargeIconAGVToolStripMenuItem, Me.DetailsAGVToolStripMenuItem, Me.SmallIconAGVToolStripMenuItem, Me.ListAGVToolStripMenuItem, Me.TileAGVToolStripMenuItem})
@@ -428,6 +439,21 @@ Partial Class MainForm
 		Me.imgAGVSmall.Images.SetKeyName(14, "6-Disconnect.jpg")
 		Me.imgAGVSmall.Images.SetKeyName(15, "7-Connect.jpg")
 		Me.imgAGVSmall.Images.SetKeyName(16, "7-Disconnect.jpg")
+		'
+		'lstViewPart
+		'
+		Me.lstViewPart.ContextMenuStrip = Me.contMenuLstViewPart
+		Me.lstViewPart.Dock = System.Windows.Forms.DockStyle.Fill
+		Me.lstViewPart.EnableDoubleBuffered = True
+		Me.lstViewPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.lstViewPart.LargeImageList = Me.imgPartBig
+		Me.lstViewPart.Location = New System.Drawing.Point(767, 3)
+		Me.lstViewPart.Name = "lstViewPart"
+		Me.lstViewPart.Size = New System.Drawing.Size(759, 962)
+		Me.lstViewPart.SmallImageList = Me.imgPartSmall
+		Me.lstViewPart.TabIndex = 5
+		Me.lstViewPart.TileSize = New System.Drawing.Size(200, 100)
+		Me.lstViewPart.UseCompatibleStateImageBehavior = False
 		'
 		'contMenuLstViewPart
 		'
@@ -540,59 +566,15 @@ Partial Class MainForm
 		Me.TabPage5.Text = "Test"
 		Me.TabPage5.UseVisualStyleBackColor = True
 		'
-		'TimerDisplayAGV
-		'
-		Me.TimerDisplayAGV.Interval = 500
-		'
-		'TimerDisplayPart
-		'
-		Me.TimerDisplayPart.Interval = 500
-		'
 		'DisplayTimer
 		'
 		Me.DisplayTimer.Interval = 500
-		'
-		'VirtualAGV1
-		'
-		Me.VirtualAGV1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.VirtualAGV1.Location = New System.Drawing.Point(1561, 46)
-		Me.VirtualAGV1.Name = "VirtualAGV1"
-		Me.VirtualAGV1.Size = New System.Drawing.Size(269, 204)
-		Me.VirtualAGV1.TabIndex = 3
-		'
-		'lstViewAGV
-		'
-		Me.lstViewAGV.ContextMenuStrip = Me.contextMenuLstViewAGV
-		Me.lstViewAGV.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.lstViewAGV.EnableDoubleBuffered = True
-		Me.lstViewAGV.LargeImageList = Me.imgAGVBig
-		Me.lstViewAGV.Location = New System.Drawing.Point(3, 3)
-		Me.lstViewAGV.Name = "lstViewAGV"
-		Me.lstViewAGV.Size = New System.Drawing.Size(758, 962)
-		Me.lstViewAGV.SmallImageList = Me.imgAGVSmall
-		Me.lstViewAGV.TabIndex = 4
-		Me.lstViewAGV.UseCompatibleStateImageBehavior = False
-		Me.lstViewAGV.View = System.Windows.Forms.View.Tile
-		'
-		'lstViewPart
-		'
-		Me.lstViewPart.ContextMenuStrip = Me.contMenuLstViewPart
-		Me.lstViewPart.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.lstViewPart.EnableDoubleBuffered = True
-		Me.lstViewPart.LargeImageList = Me.imgPartBig
-		Me.lstViewPart.Location = New System.Drawing.Point(767, 3)
-		Me.lstViewPart.Name = "lstViewPart"
-		Me.lstViewPart.Size = New System.Drawing.Size(759, 962)
-		Me.lstViewPart.SmallImageList = Me.imgPartSmall
-		Me.lstViewPart.TabIndex = 5
-		Me.lstViewPart.UseCompatibleStateImageBehavior = False
 		'
 		'MainForm
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ClientSize = New System.Drawing.Size(1904, 1042)
-		Me.Controls.Add(Me.VirtualAGV1)
 		Me.Controls.Add(Me.TabControl1)
 		Me.Controls.Add(Me.MainStatus)
 		Me.Controls.Add(Me.MainManu)
@@ -659,16 +641,13 @@ Partial Class MainForm
     Friend WithEvents SmallIconAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TileAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TimerDisplayAGV As System.Windows.Forms.Timer
-    Friend WithEvents VirtualAGV1 As Control_system.VirtualAGV
-    Friend WithEvents contMenuLstViewPart As System.Windows.Forms.ContextMenuStrip
+	Friend WithEvents contMenuLstViewPart As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents LargePartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DetailPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SmallIconPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ListPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TilePartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TimerDisplayPart As System.Windows.Forms.Timer
-    Friend WithEvents imgPartBig As System.Windows.Forms.ImageList
+	Friend WithEvents imgPartBig As System.Windows.Forms.ImageList
     Friend WithEvents imgPartSmall As System.Windows.Forms.ImageList
 	Friend WithEvents DisplayTimer As System.Windows.Forms.Timer
 	Friend WithEvents lstViewAGV As Control_system.DoubleListView
