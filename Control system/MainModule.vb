@@ -4,6 +4,8 @@ Imports System.IO.Ports
 Public Module MainModule
 	Public UpdateThread As New Thread(AddressOf UpdateData)
 	Public RequestThread As New Thread(AddressOf RequestData)
+	Public DoCrossThread As New Thread(AddressOf DoCrossFunc)
+
 	Public Sub SetupHostXbee()
 		Dim HostXbeeName() As String
 		HostXbeeName = SerialPort.GetPortNames()
@@ -47,6 +49,7 @@ Public Module MainModule
 			End If
 		Next
 	End Sub
+
 	Public Sub UpdateData()
 
 	End Sub
@@ -63,6 +66,10 @@ Public Module MainModule
 			End If
 		Next
 	End Sub
+	Public Sub DoCrossFunc()
+		CheckCross()
+	End Sub
+
 	''' <summary>
 	''' Check AGV that it's already for request new route or not
 	''' </summary>

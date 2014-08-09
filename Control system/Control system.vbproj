@@ -91,6 +91,14 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="CrossFunction.vb" />
+    <Compile Include="CrossView.Designer.vb">
+      <DependentUpon>CrossView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CrossView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DoubleListView.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -127,6 +135,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CrossView.resx">
+      <DependentUpon>CrossView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
       <SubType>Designer</SubType>

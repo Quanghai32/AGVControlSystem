@@ -24,7 +24,7 @@ Partial Class MainForm
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-		Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+		Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
 		Me.MainManu = New System.Windows.Forms.MenuStrip()
 		Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -83,6 +83,7 @@ Partial Class MainForm
 		Me.TabPage4 = New System.Windows.Forms.TabPage()
 		Me.TabPage5 = New System.Windows.Forms.TabPage()
 		Me.DisplayTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.CrossTimer = New System.Windows.Forms.Timer(Me.components)
 		Me.MainManu.SuspendLayout()
 		Me.TabControl1.SuspendLayout()
 		Me.TabPage1.SuspendLayout()
@@ -533,9 +534,9 @@ Partial Class MainForm
 		Me.AGVPerformance.Size = New System.Drawing.Size(1508, 952)
 		Me.AGVPerformance.TabIndex = 0
 		Me.AGVPerformance.Text = "Chart1"
-		Title1.Name = "Title1"
-		Title1.Text = "AGV Status"
-		Me.AGVPerformance.Titles.Add(Title1)
+		Title2.Name = "Title1"
+		Title2.Text = "AGV Status"
+		Me.AGVPerformance.Titles.Add(Title2)
 		'
 		'TabPage3
 		'
@@ -569,6 +570,9 @@ Partial Class MainForm
 		'DisplayTimer
 		'
 		Me.DisplayTimer.Interval = 500
+		'
+		'CrossTimer
+		'
 		'
 		'MainForm
 		'
@@ -652,5 +656,6 @@ Partial Class MainForm
 	Friend WithEvents DisplayTimer As System.Windows.Forms.Timer
 	Friend WithEvents lstViewAGV As Control_system.DoubleListView
 	Friend WithEvents lstViewPart As Control_system.DoubleListView
+	Friend WithEvents CrossTimer As System.Windows.Forms.Timer
 
 End Class

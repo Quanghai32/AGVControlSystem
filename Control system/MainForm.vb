@@ -16,6 +16,8 @@ Public Class MainForm
 		ChartInit()
 		SetStartViewPart()
 		DisplayTimer.Start()
+		CrossTimer.Start()
+		CrossView.Show()
 	End Sub
 
 	Private Sub MainForm_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -285,4 +287,11 @@ Public Class MainForm
 	End Sub
 #End Region
 
+	Private Sub CrossTimer_Tick(sender As Object, e As EventArgs) Handles CrossTimer.Tick
+		If Not DoCrossThread.IsAlive Then
+			DoCrossThread = New Thread(AddressOf DoCrossFunc)
+			DoCrossThread.Name = "Cross Thread"
+			DoCrossThread.Start()
+		End If
+	End Sub
 End Class

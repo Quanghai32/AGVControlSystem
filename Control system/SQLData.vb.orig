@@ -14,6 +14,8 @@ Public Module SQLData
 		ReadPart()
 		ReadAGV()
 		ReadCross()
+
+
 	End Sub
 	Public Sub setAGVSupply(ByVal AGVnumber As Byte, ByVal PartString As String)
 		If PartString.ToLower = "all" Then
@@ -140,6 +142,5 @@ Public Module SQLData
 			Next
 			InitSingleCross(CrossArray(CrossNumber), CrossPosArray)
 		Next
-		initCrossVar()
 	End Sub
 End Module
