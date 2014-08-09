@@ -92,11 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="CrossFunction.vb" />
-    <Compile Include="CrossView.Designer.vb">
+    <Compile Include="CrossFunction\CrossFunction.vb" />
+    <Compile Include="CrossFunction\CrossView.Designer.vb">
       <DependentUpon>CrossView.vb</DependentUpon>
     </Compile>
-    <Compile Include="CrossView.vb">
+    <Compile Include="CrossFunction\CrossView.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DoubleListView.vb">
@@ -127,15 +127,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SQLData.vb" />
-    <Compile Include="VirtualAGV.Designer.vb">
-      <DependentUpon>VirtualAGV.vb</DependentUpon>
-    </Compile>
-    <Compile Include="VirtualAGV.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CrossView.resx">
+    <EmbeddedResource Include="CrossFunction\CrossView.resx">
       <DependentUpon>CrossView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -147,9 +141,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VirtualAGV.resx">
-      <DependentUpon>VirtualAGV.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
