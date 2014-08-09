@@ -34,9 +34,9 @@ Public Module GeneralVariable
 	Public Structure struct_AGVStoreStatus
 		Public connecting_value As Boolean
 		Public connecting_time As Date
-		Public status_value As Byte
+		Public status_value As AGV.RobocarStatusValue
 		Public status_time As Date
-		Public working_value As Byte
+		Public working_value As AGV.RobocarWorkingStatusValue
 		Public working_time As Date
 	End Structure
 	''' <summary>

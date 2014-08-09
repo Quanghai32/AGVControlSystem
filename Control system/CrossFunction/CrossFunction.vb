@@ -60,8 +60,8 @@ Public Module CrossFunction
 		Next
 	End Sub
 	Private Function isInCross(ByVal AGVNum As Byte, ByVal CrossNum As Byte) As Boolean
-		For i As Byte = 0 To MAX_POS_IN_CROSS
-			If AGVArray(AGVNum).Position = CrossArray(CrossNum).InCrossPosition(CrossNum) And CrossArray(CrossNum).InCrossPosition(CrossNum) <> 0 Then
+		For i As Byte = 0 To MAX_POS_IN_CROSS - 1
+			If AGVArray(AGVNum).Position = CrossArray(CrossNum).InCrossPosition(i) And CrossArray(CrossNum).InCrossPosition(i) <> 0 Then
 				Return True
 			End If
 		Next
