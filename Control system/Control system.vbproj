@@ -126,6 +126,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Setting\setting.vb" />
     <Compile Include="SQLData.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Setting\setting.ini" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\01. Library\ControlSystemLibrary\ControlSystemLibrary\ControlSystemLibrary.vbproj">

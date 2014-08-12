@@ -24,7 +24,9 @@ Partial Class MainForm
     Private Sub InitializeComponent()
 		Me.components = New System.ComponentModel.Container()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-		Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+		Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+		Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+		Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
 		Me.MainManu = New System.Windows.Forms.MenuStrip()
 		Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -340,7 +342,7 @@ Partial Class MainForm
 		Me.TabControl1.Location = New System.Drawing.Point(12, 24)
 		Me.TabControl1.Name = "TabControl1"
 		Me.TabControl1.SelectedIndex = 0
-		Me.TabControl1.Size = New System.Drawing.Size(1543, 990)
+		Me.TabControl1.Size = New System.Drawing.Size(1880, 990)
 		Me.TabControl1.TabIndex = 2
 		'
 		'TabPage1
@@ -349,7 +351,7 @@ Partial Class MainForm
 		Me.TabPage1.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage1.Name = "TabPage1"
 		Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage1.Size = New System.Drawing.Size(1535, 964)
+		Me.TabPage1.Size = New System.Drawing.Size(1872, 964)
 		Me.TabPage1.TabIndex = 0
 		Me.TabPage1.Text = "Overview"
 		Me.TabPage1.UseVisualStyleBackColor = True
@@ -522,28 +524,38 @@ Partial Class MainForm
 		Me.TabPage2.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage2.Name = "TabPage2"
 		Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage2.Size = New System.Drawing.Size(1535, 964)
+		Me.TabPage2.Size = New System.Drawing.Size(1872, 964)
 		Me.TabPage2.TabIndex = 1
 		Me.TabPage2.Text = "AGV performent"
 		Me.TabPage2.UseVisualStyleBackColor = True
 		'
 		'AGVPerformance
 		'
+		ChartArea1.Name = "ChartArea1"
+		Me.AGVPerformance.ChartAreas.Add(ChartArea1)
+		Legend1.Font = New System.Drawing.Font("Cambria", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Legend1.IsTextAutoFit = False
+		Legend1.Name = "Legend1"
+		Me.AGVPerformance.Legends.Add(Legend1)
 		Me.AGVPerformance.Location = New System.Drawing.Point(6, 6)
 		Me.AGVPerformance.Name = "AGVPerformance"
-		Me.AGVPerformance.Size = New System.Drawing.Size(1508, 952)
+		Me.AGVPerformance.Size = New System.Drawing.Size(1863, 952)
 		Me.AGVPerformance.TabIndex = 0
 		Me.AGVPerformance.Text = "Chart1"
-		Title2.Name = "Title1"
-		Title2.Text = "AGV Status"
-		Me.AGVPerformance.Titles.Add(Title2)
+		Title1.Font = New System.Drawing.Font("Cambria", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Title1.ForeColor = System.Drawing.Color.Maroon
+		Title1.Name = "Title1"
+		Title1.ShadowOffset = 3
+		Title1.Text = "AGV STATUS"
+		Title1.TextStyle = System.Windows.Forms.DataVisualization.Charting.TextStyle.Shadow
+		Me.AGVPerformance.Titles.Add(Title1)
 		'
 		'TabPage3
 		'
 		Me.TabPage3.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage3.Name = "TabPage3"
 		Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage3.Size = New System.Drawing.Size(1535, 964)
+		Me.TabPage3.Size = New System.Drawing.Size(1872, 964)
 		Me.TabPage3.TabIndex = 2
 		Me.TabPage3.Text = "Map"
 		Me.TabPage3.UseVisualStyleBackColor = True
@@ -552,7 +564,7 @@ Partial Class MainForm
 		'
 		Me.TabPage4.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage4.Name = "TabPage4"
-		Me.TabPage4.Size = New System.Drawing.Size(1535, 964)
+		Me.TabPage4.Size = New System.Drawing.Size(1872, 964)
 		Me.TabPage4.TabIndex = 3
 		Me.TabPage4.Text = "History"
 		Me.TabPage4.UseVisualStyleBackColor = True
@@ -562,7 +574,7 @@ Partial Class MainForm
 		Me.TabPage5.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage5.Name = "TabPage5"
 		Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage5.Size = New System.Drawing.Size(1535, 964)
+		Me.TabPage5.Size = New System.Drawing.Size(1872, 964)
 		Me.TabPage5.TabIndex = 4
 		Me.TabPage5.Text = "Test"
 		Me.TabPage5.UseVisualStyleBackColor = True

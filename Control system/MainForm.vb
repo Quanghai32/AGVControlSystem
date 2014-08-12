@@ -231,13 +231,15 @@ Public Class MainForm
 	End Sub
 #End Region
 #Region "Display Chart"
-	Public Sub ChartAddSeries(ByVal name As String)
+	Public Sub ChartAddSeries(ByVal name As String, ByVal SeriesColor As Color, Optional hatchStyle As ChartHatchStyle = ChartHatchStyle.None)
 		Dim mySeries As Series = New Series()
 		mySeries.ChartArea = "ChartArea1"
 		mySeries.Legend = "Legend1"
 		mySeries.Name = name
-		mySeries.ChartType = SeriesChartType.StackedColumn
+		mySeries.ChartType = SeriesChartType.StackedColumn100
 		mySeries.IsValueShownAsLabel = True
+		mySeries.Color = SeriesColor
+		mySeries.BackHatchStyle = hatchStyle
 		AGVPerformance.Series.Add(mySeries)
 		AGVPerformance.Series(name).XValueMember = "Name"
 		AGVPerformance.Series(name).YValueMembers = name
@@ -250,27 +252,27 @@ Public Class MainForm
 		Dim da As New SqlDataAdapter(sqlProducts, conn)
 		da.Fill(ChartDataSet, "chart")
 		ChartDataTable = ChartDataSet.Tables("chart")
-		Dim ChartArea1 As ChartArea = New ChartArea()
-		Dim Legend1 As Legend = New Legend()
+		'Dim ChartArea1 As ChartArea = New ChartArea()
+		'Dim Legend1 As Legend = New Legend()
 
-		ChartArea1.Name = "ChartArea1"
-		AGVPerformance.ChartAreas.Add(ChartArea1)
-		Legend1.Name = "Legend1"
-		AGVPerformance.Legends.Add(Legend1)
+		'ChartArea1.Name = "ChartArea1"
+		'AGVPerformance.ChartAreas.Add(ChartArea1)
+		'Legend1.Name = "Legend1"
+		'AGVPerformance.Legends.Add(Legend1)
 		AGVPerformance.Name = "Chart1"
 		AGVPerformance.TabIndex = 0
 		AGVPerformance.Text = "Chart1"
 		AGVPerformance.DataSource = ChartDataTable
 
-		ChartAddSeries("EMG")
-		ChartAddSeries("Safety")
-		ChartAddSeries("Stop")
-		ChartAddSeries("Out line")
-		ChartAddSeries("Battery empty")
-		ChartAddSeries("No cart")
-		ChartAddSeries("Normal")
-		ChartAddSeries("Free")
-		ChartAddSeries("Disconnect")
+		ChartAddSeries("EMG", Color.Red, ChartHatchStyle.Percent05)
+		ChartAddSeries("Out line", Color.Red, ChartHatchStyle.Percent25)
+		ChartAddSeries("Battery empty", Color.Red, ChartHatchStyle.Percent50)
+		ChartAddSeries("No cart", Color.Red, ChartHatchStyle.Percent70)
+		ChartAddSeries("Safety", Color.Orange)
+		ChartAddSeries("Stop", Color.Yellow)
+		ChartAddSeries("Normal", Color.Green)
+		ChartAddSeries("Free", Color.GreenYellow)
+		ChartAddSeries("Disconnect", Color.Gray)
 	End Sub
 	Public Sub UpdateChart()
 		AGVPerformance.Series("EMG").Points.Clear()
