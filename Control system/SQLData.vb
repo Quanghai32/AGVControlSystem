@@ -2,11 +2,15 @@
 Imports System.Data
 Imports System.Data.SqlClient
 Public Module SQLData
-    Dim con As SqlConnection
-    Public Sub ReadStartData()
-		Dim str As String = "Data Source=TL-APRO-NPC08\SQLEXPRESS;Integrated Security=True"
-		con = New SqlConnection(str)
-        con.Open()
+	Public SQLstrConn As String = "Data Source=TL-APRO-NPC08\SQLEXPRESS;Integrated Security=True"
+	Public SQLcon As SqlConnection
+	Public ChartDataSet As DataSet
+	Public ChartDataTable As New DataTable
+    Public ChartDataAdapter As SqlDataAdapter
+
+	Public Sub ReadStartData()
+		SQLcon = New SqlConnection(SQLstrConn)
+		SQLcon.Open()
 
 		ReadHost()
 		ReadEndDevices()
@@ -14,6 +18,7 @@ Public Module SQLData
 		ReadPart()
 		ReadAGV()
 		ReadCross()
+		ReadChart()
 	End Sub
 	Public Sub setAGVSupply(ByVal AGVnumber As Byte, ByVal PartString As String)
 		If PartString.ToLower = "all" Then
@@ -31,7 +36,7 @@ Public Module SQLData
 		Dim myDataAdapter As SqlDataAdapter
 		Dim myDataTable As DataTable
 		'Read Host Xbee information 
-		myDataAdapter = New SqlDataAdapter("SELECT * FROM HostXbee", con)
+		myDataAdapter = New SqlDataAdapter("SELECT * FROM HostXbee", SQLcon)
 		myDataTable = New DataTable
 		myDataAdapter.Fill(myDataTable)
 		HostXbee = New XBee(myDataTable.Rows.Count - 1) {}
@@ -44,7 +49,7 @@ Public Module SQLData
 		Dim myDataAdapter As SqlDataAdapter
 		Dim myDataTable As DataTable
 		'Read End devices information 
-		myDataAdapter = New SqlDataAdapter("SELECT * FROM EndDevices", con)
+		myDataAdapter = New SqlDataAdapter("SELECT * FROM EndDevices", SQLcon)
 		myDataTable = New DataTable
 		myDataAdapter.Fill(myDataTable)
 		EndDevicesArray = New EndDevices(myDataTable.Rows.Count - 1) {}
@@ -58,7 +63,7 @@ Public Module SQLData
 		Dim myDataAdapter As SqlDataAdapter
 		Dim myDataTable As DataTable
 		'Read Group information - Line information also
-		myDataAdapter = New SqlDataAdapter("SELECT * FROM LineGroup", con)
+		myDataAdapter = New SqlDataAdapter("SELECT * FROM LineGroup", SQLcon)
 		myDataTable = New DataTable
 		myDataAdapter.Fill(myDataTable)
 		LineGroupArray = New LineGroup(myDataTable.Rows.Count - 1) {}
@@ -71,7 +76,7 @@ Public Module SQLData
 		Dim myDataAdapter As SqlDataAdapter
 		Dim myDataTable As DataTable
 		'Read Part information 
-		myDataAdapter = New SqlDataAdapter("SELECT * FROM Part", con)
+		myDataAdapter = New SqlDataAdapter("SELECT * FROM Part", SQLcon)
 		myDataTable = New DataTable
 		myDataAdapter.Fill(myDataTable)
 		PartArray = New CPart(myDataTable.Rows.Count - 1) {}
@@ -100,7 +105,7 @@ Public Module SQLData
 		Dim myDataAdapter As SqlDataAdapter
 		Dim myDataTable As DataTable
 		'Read AGV information 
-		myDataAdapter = New SqlDataAdapter("SELECT * FROM AGV", con)
+		myDataAdapter = New SqlDataAdapter("SELECT * FROM AGV", SQLcon)
 		myDataTable = New DataTable
 		myDataAdapter.Fill(myDataTable)
 		AGVArray = New AGV(myDataTable.Rows.Count - 1) {}
@@ -126,7 +131,7 @@ Public Module SQLData
 		Dim myDataAdapter As SqlDataAdapter
 		Dim myDataTable As DataTable
 		'Read CrossFunction
-		myDataAdapter = New SqlDataAdapter("SELECT * FROM CrossTable", con)
+		myDataAdapter = New SqlDataAdapter("SELECT * FROM CrossTable", SQLcon)
 		myDataTable = New DataTable
 		myDataAdapter.Fill(myDataTable)
 		CrossArray = New CrossStruct(myDataTable.Rows.Count - 1) {}
@@ -142,4 +147,28 @@ Public Module SQLData
 		Next
 		initCrossVar()
 	End Sub
+	Private Sub ReadChart()
+		Dim sqlProducts As String = "SELECT * FROM chart"
+		ChartDataAdapter = New SqlDataAdapter(sqlProducts, SQLcon)
+		ChartDataSet = New DataSet()
+		ChartDataAdapter.FillSchema(ChartDataSet, SchemaType.Source, "chart")
+		ChartDataTable = New DataTable()
+		ChartDataAdapter.Fill(ChartDataSet, "chart")
+		ChartDataTable = ChartDataSet.Tables("chart")
+	End Sub
+
+    Public Sub ChartResetSQL()
+        For AGVNum As Byte = 0 To AGVArray.Length - 1
+            For column As Byte = 2 To 10
+                ChartDataTable.Rows(AGVNum)(column) = 0
+            Next
+        Next
+        Dim objCommandBuilder As New SqlCommandBuilder(ChartDataAdapter)
+        ChartDataAdapter.Update(ChartDataSet, "chart")
+    End Sub
+
+    Public Sub ChartUpdateSQL()
+        Dim objCommandBuilder As New SqlCommandBuilder(ChartDataAdapter)
+        ChartDataAdapter.Update(ChartDataSet, "chart")
+    End Sub
 End Module

@@ -10,14 +10,23 @@ Public Class MainForm
 		ReadStartData()
 		SetupHostXbee()
 		StartPoint = New Byte(1) {1, 2}
+		LoadSetting()
+
 		DisplayAGV()
 		DisplayPart()
 		SetStartViewAGV()
+
+		Dim a As Byte = isNeedReset()
+		If a <> 0 Then
+            ChartResetSQL()
+            SettingReset(a)
+		End If
 		ChartInit()
 		SetStartViewPart()
+
 		DisplayTimer.Start()
 		CrossTimer.Start()
-		CrossView.Show()
+		'CrossView.Show()
 	End Sub
 
 	Private Sub MainForm_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -245,20 +254,6 @@ Public Class MainForm
 		AGVPerformance.Series(name).YValueMembers = name
 	End Sub
 	Public Sub ChartInit()
-		Dim strConn As String = "Data Source=TL-APRO-NPC08\SQLEXPRESS;Integrated Security=True"
-		Dim conn As New SqlConnection(strConn)
-
-		Dim sqlProducts As String = "SELECT * FROM chart"
-		Dim da As New SqlDataAdapter(sqlProducts, conn)
-		da.Fill(ChartDataSet, "chart")
-		ChartDataTable = ChartDataSet.Tables("chart")
-		'Dim ChartArea1 As ChartArea = New ChartArea()
-		'Dim Legend1 As Legend = New Legend()
-
-		'ChartArea1.Name = "ChartArea1"
-		'AGVPerformance.ChartAreas.Add(ChartArea1)
-		'Legend1.Name = "Legend1"
-		'AGVPerformance.Legends.Add(Legend1)
 		AGVPerformance.Name = "Chart1"
 		AGVPerformance.TabIndex = 0
 		AGVPerformance.Text = "Chart1"
