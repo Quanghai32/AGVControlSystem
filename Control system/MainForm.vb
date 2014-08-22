@@ -25,7 +25,8 @@ Public Class MainForm
 		SetStartViewPart()
 
 		DisplayTimer.Start()
-		CrossTimer.Start()
+        CrossTimer.Start()
+        AutoSaveTimer.Start()
 		'CrossView.Show()
 	End Sub
 
@@ -291,4 +292,15 @@ Public Class MainForm
 			DoCrossThread.Start()
 		End If
 	End Sub
+    ''' <summary>
+    ''' Timer for auto save chart data
+    ''' </summary>
+    ''' <remarks>This timer interrupt each 60000ms (1 min)</remarks>
+    Private Sub AutoSaveTimer_Tick(sender As Object, e As EventArgs) Handles AutoSaveTimer.Tick
+        If Not SaveThread.IsAlive Then
+            SaveThread = New Thread(AddressOf ChartUpdateSQL)
+            SaveThread.Name = "Save Thread"
+            SaveThread.Start()
+        End If
+    End Sub
 End Class

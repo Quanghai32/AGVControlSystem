@@ -4,7 +4,8 @@ Imports System.IO.Ports
 Public Module MainModule
 	Public UpdateThread As New Thread(AddressOf UpdateData)
 	Public RequestThread As New Thread(AddressOf RequestData)
-	Public DoCrossThread As New Thread(AddressOf DoCrossFunc)
+    Public DoCrossThread As New Thread(AddressOf DoCrossFunc)
+    Public SaveThread As New Thread(AddressOf ChartUpdateSQL)
 
 	Public Sub SetupHostXbee()
 		Dim HostXbeeName() As String
@@ -74,7 +75,7 @@ Public Module MainModule
 	End Sub
 	Public Sub DoCrossFunc()
 		CheckCross()
-	End Sub
+    End Sub
 #Region "Private function for RequestData"
 	''' <summary>
 	''' Check AGV that it's already for request new route or not

@@ -38,7 +38,11 @@ Public Module SQLData
 		'Read Host Xbee information 
 		myDataAdapter = New SqlDataAdapter("SELECT * FROM HostXbee", SQLcon)
 		myDataTable = New DataTable
-		myDataAdapter.Fill(myDataTable)
+        myDataAdapter.Fill(myDataTable)
+        If myDataTable.Rows.Count = 0 Then
+            MessageBox.Show("Can not read setting for host Xbee. Please check again", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Environment.Exit(-1)
+        End If
 		HostXbee = New XBee(myDataTable.Rows.Count - 1) {}
 		For i As Byte = 0 To myDataTable.Rows.Count - 1
 			HostXbee(i) = New XBee()
@@ -49,9 +53,13 @@ Public Module SQLData
 		Dim myDataAdapter As SqlDataAdapter
 		Dim myDataTable As DataTable
 		'Read End devices information 
-		myDataAdapter = New SqlDataAdapter("SELECT * FROM EndDevices", SQLcon)
+        myDataAdapter = New SqlDataAdapter("SELECT * FROM EndDevices", SQLcon)
 		myDataTable = New DataTable
-		myDataAdapter.Fill(myDataTable)
+        myDataAdapter.Fill(myDataTable)
+        If myDataTable.Rows.Count = 0 Then
+            MessageBox.Show("Can not read setting for End Devices. Please check again", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Environment.Exit(-1)
+        End If
 		EndDevicesArray = New EndDevices(myDataTable.Rows.Count - 1) {}
 		For i As Byte = 0 To myDataTable.Rows.Count - 1
 			EndDevicesArray(i) = New EndDevices(3)
