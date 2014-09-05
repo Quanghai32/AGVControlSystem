@@ -9,24 +9,27 @@ Public Class MainForm
 	Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 		ReadStartData()
 		SetupHostXbee()
-		StartPoint = New Byte(1) {1, 2}
 		LoadSetting()
 
 		DisplayAGV()
 		DisplayPart()
 		SetStartViewAGV()
 
-		Dim a As Byte = isNeedReset()
-		If a <> 0 Then
+        'Dim ResetType As Byte = isNeedReset()
+        'If ResetType <> 0 Then
+        '    ChartResetSQL()
+        '    SettingReset(ResetType)
+        'End If
+        If isNeedToReset Then
             ChartResetSQL()
-            SettingReset(a)
-		End If
+        End If
 		ChartInit()
 		SetStartViewPart()
 
 		DisplayTimer.Start()
         CrossTimer.Start()
         AutoSaveTimer.Start()
+        RecordTimer.Start()
 		'CrossView.Show()
 	End Sub
 
@@ -246,10 +249,12 @@ Public Class MainForm
 		mySeries.ChartArea = "ChartArea1"
 		mySeries.Legend = "Legend1"
 		mySeries.Name = name
-		mySeries.ChartType = SeriesChartType.StackedColumn100
+        mySeries.ChartType = SeriesChartType.StackedColumn
 		mySeries.IsValueShownAsLabel = True
 		mySeries.Color = SeriesColor
-		mySeries.BackHatchStyle = hatchStyle
+        mySeries.BackHatchStyle = hatchStyle
+        mySeries.LabelFormat = "F1"
+        mySeries.LabelToolTip = "#SERIESNAME:\nAGV name: #AXISLABEL"
 		AGVPerformance.Series.Add(mySeries)
 		AGVPerformance.Series(name).XValueMember = "Name"
 		AGVPerformance.Series(name).YValueMembers = name
@@ -291,7 +296,8 @@ Public Class MainForm
 			DoCrossThread.Name = "Cross Thread"
 			DoCrossThread.Start()
 		End If
-	End Sub
+    End Sub
+
     ''' <summary>
     ''' Timer for auto save chart data
     ''' </summary>
@@ -301,6 +307,18 @@ Public Class MainForm
             SaveThread = New Thread(AddressOf ChartUpdateSQL)
             SaveThread.Name = "Save Thread"
             SaveThread.Start()
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Timer for record part and AGV information
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub RecordTimer_Tick(sender As Object, e As EventArgs) Handles RecordTimer.Tick
+        If Not RecordThread.IsAlive Then
+            RecordThread = New Thread(AddressOf RecordData)
+            RecordThread.Name = "Save Thread"
+            RecordThread.Start()
         End If
     End Sub
 End Class

@@ -11,6 +11,7 @@ Public Module GeneralVariable
     Public HostXbee() As XBee
     Public EndDevicesArray() As EndDevices
     Public PartArray() As CPart
+    Public isNeedToReset As Boolean
     Structure LineGroup
         Public Name As String
         Public MaxPart As Byte

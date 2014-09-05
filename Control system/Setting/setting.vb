@@ -62,7 +62,7 @@
 			End If
 		End If
 	End Function
-    Public Sub SettingReset(ByVal type)
+    Public Sub SettingReset(ByVal type As Byte)
         If type = 1 Then
             Dim iniFile As ControlSystemLibrary.CIniFile = New ControlSystemLibrary.CIniFile(Environment.CurrentDirectory + "\setting.ini")
             iniFile.WriteValue("SYSTEM SETTING", "isResetDay", "true")

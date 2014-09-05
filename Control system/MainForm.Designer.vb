@@ -62,7 +62,6 @@ Partial Class MainForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.lstViewAGV = New Control_system.DoubleListView()
         Me.contextMenuLstViewAGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.LargeIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DetailsAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,7 +69,6 @@ Partial Class MainForm
         Me.ListAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TileAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgAGVSmall = New System.Windows.Forms.ImageList(Me.components)
-        Me.lstViewPart = New Control_system.DoubleListView()
         Me.contMenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.LargePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DetailPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,6 +85,9 @@ Partial Class MainForm
         Me.DisplayTimer = New System.Windows.Forms.Timer(Me.components)
         Me.CrossTimer = New System.Windows.Forms.Timer(Me.components)
         Me.AutoSaveTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.lstViewAGV = New Control_system.DoubleListView()
+        Me.lstViewPart = New Control_system.DoubleListView()
+        Me.RecordTimer = New System.Windows.Forms.Timer(Me.components)
         Me.MainManu.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -372,20 +373,6 @@ Partial Class MainForm
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1529, 968)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'lstViewAGV
-        '
-        Me.lstViewAGV.ContextMenuStrip = Me.contextMenuLstViewAGV
-        Me.lstViewAGV.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lstViewAGV.EnableDoubleBuffered = True
-        Me.lstViewAGV.LargeImageList = Me.imgAGVBig
-        Me.lstViewAGV.Location = New System.Drawing.Point(3, 3)
-        Me.lstViewAGV.Name = "lstViewAGV"
-        Me.lstViewAGV.Size = New System.Drawing.Size(758, 962)
-        Me.lstViewAGV.SmallImageList = Me.imgAGVSmall
-        Me.lstViewAGV.TabIndex = 4
-        Me.lstViewAGV.UseCompatibleStateImageBehavior = False
-        Me.lstViewAGV.View = System.Windows.Forms.View.Tile
-        '
         'contextMenuLstViewAGV
         '
         Me.contextMenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargeIconAGVToolStripMenuItem, Me.DetailsAGVToolStripMenuItem, Me.SmallIconAGVToolStripMenuItem, Me.ListAGVToolStripMenuItem, Me.TileAGVToolStripMenuItem})
@@ -443,21 +430,6 @@ Partial Class MainForm
         Me.imgAGVSmall.Images.SetKeyName(14, "6-Disconnect.jpg")
         Me.imgAGVSmall.Images.SetKeyName(15, "7-Connect.jpg")
         Me.imgAGVSmall.Images.SetKeyName(16, "7-Disconnect.jpg")
-        '
-        'lstViewPart
-        '
-        Me.lstViewPart.ContextMenuStrip = Me.contMenuLstViewPart
-        Me.lstViewPart.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lstViewPart.EnableDoubleBuffered = True
-        Me.lstViewPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstViewPart.LargeImageList = Me.imgPartBig
-        Me.lstViewPart.Location = New System.Drawing.Point(767, 3)
-        Me.lstViewPart.Name = "lstViewPart"
-        Me.lstViewPart.Size = New System.Drawing.Size(759, 962)
-        Me.lstViewPart.SmallImageList = Me.imgPartSmall
-        Me.lstViewPart.TabIndex = 5
-        Me.lstViewPart.TileSize = New System.Drawing.Size(200, 100)
-        Me.lstViewPart.UseCompatibleStateImageBehavior = False
         '
         'contMenuLstViewPart
         '
@@ -591,6 +563,39 @@ Partial Class MainForm
         '
         Me.AutoSaveTimer.Interval = 60000
         '
+        'lstViewAGV
+        '
+        Me.lstViewAGV.ContextMenuStrip = Me.contextMenuLstViewAGV
+        Me.lstViewAGV.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lstViewAGV.EnableDoubleBuffered = True
+        Me.lstViewAGV.LargeImageList = Me.imgAGVBig
+        Me.lstViewAGV.Location = New System.Drawing.Point(3, 3)
+        Me.lstViewAGV.Name = "lstViewAGV"
+        Me.lstViewAGV.Size = New System.Drawing.Size(758, 962)
+        Me.lstViewAGV.SmallImageList = Me.imgAGVSmall
+        Me.lstViewAGV.TabIndex = 4
+        Me.lstViewAGV.UseCompatibleStateImageBehavior = False
+        Me.lstViewAGV.View = System.Windows.Forms.View.Tile
+        '
+        'lstViewPart
+        '
+        Me.lstViewPart.ContextMenuStrip = Me.contMenuLstViewPart
+        Me.lstViewPart.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lstViewPart.EnableDoubleBuffered = True
+        Me.lstViewPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstViewPart.LargeImageList = Me.imgPartBig
+        Me.lstViewPart.Location = New System.Drawing.Point(767, 3)
+        Me.lstViewPart.Name = "lstViewPart"
+        Me.lstViewPart.Size = New System.Drawing.Size(759, 962)
+        Me.lstViewPart.SmallImageList = Me.imgPartSmall
+        Me.lstViewPart.TabIndex = 5
+        Me.lstViewPart.TileSize = New System.Drawing.Size(200, 100)
+        Me.lstViewPart.UseCompatibleStateImageBehavior = False
+        '
+        'RecordTimer
+        '
+        Me.RecordTimer.Interval = 500
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -675,5 +680,6 @@ Partial Class MainForm
 	Friend WithEvents lstViewPart As Control_system.DoubleListView
     Friend WithEvents CrossTimer As System.Windows.Forms.Timer
     Friend WithEvents AutoSaveTimer As System.Windows.Forms.Timer
+    Friend WithEvents RecordTimer As System.Windows.Forms.Timer
 
 End Class
