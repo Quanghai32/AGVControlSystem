@@ -43,5 +43,6 @@ Public Module GeneralVariable
 	''' This array store preview status and time of AGVs
 	''' </summary>
 	''' <remarks></remarks>
-	Public preAGVStatusArray() As struct_AGVStoreStatus
+    Public preAGVStatusArray() As struct_AGVStoreStatus
+    Public needAlarm As Boolean = False
 End Module

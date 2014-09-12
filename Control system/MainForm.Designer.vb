@@ -62,19 +62,28 @@ Partial Class MainForm
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.contextMenuLstViewAGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.LargeIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DetailsAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SmallIconAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TileAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuLstViewAGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.MenuAGVView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVViewLargeIcon = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVViewDetails = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVViewSmallIcon = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVViewList = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVViewTile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVConfirmConn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVConfirmSelected = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVConfirmAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuAGVEnable = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgAGVSmall = New System.Windows.Forms.ImageList(Me.components)
         Me.contMenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.LargePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DetailPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SmallIconPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TilePartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartViewLargeIcon = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartViewDetail = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartViewSmallIcon = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartViewList = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartViewTile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConfirmConnectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ForEndDevicesOfSelectedPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ForAllEndDevicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.imgPartBig = New System.Windows.Forms.ImageList(Me.components)
         Me.imgPartSmall = New System.Windows.Forms.ImageList(Me.components)
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -85,14 +94,15 @@ Partial Class MainForm
         Me.DisplayTimer = New System.Windows.Forms.Timer(Me.components)
         Me.CrossTimer = New System.Windows.Forms.Timer(Me.components)
         Me.AutoSaveTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.RecordTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.AndonTimer = New System.Windows.Forms.Timer(Me.components)
         Me.lstViewAGV = New Control_system.DoubleListView()
         Me.lstViewPart = New Control_system.DoubleListView()
-        Me.RecordTimer = New System.Windows.Forms.Timer(Me.components)
         Me.MainManu.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.contextMenuLstViewAGV.SuspendLayout()
+        Me.MenuLstViewAGV.SuspendLayout()
         Me.contMenuLstViewPart.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -373,41 +383,73 @@ Partial Class MainForm
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1529, 968)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'contextMenuLstViewAGV
+        'MenuLstViewAGV
         '
-        Me.contextMenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargeIconAGVToolStripMenuItem, Me.DetailsAGVToolStripMenuItem, Me.SmallIconAGVToolStripMenuItem, Me.ListAGVToolStripMenuItem, Me.TileAGVToolStripMenuItem})
-        Me.contextMenuLstViewAGV.Name = "ContextMenuStrip1"
-        Me.contextMenuLstViewAGV.Size = New System.Drawing.Size(130, 114)
+        Me.MenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuAGVView, Me.MenuAGVConfirmConn, Me.MenuAGVEnable})
+        Me.MenuLstViewAGV.Name = "ContextMenuStrip1"
+        Me.MenuLstViewAGV.Size = New System.Drawing.Size(182, 70)
         '
-        'LargeIconAGVToolStripMenuItem
+        'MenuAGVView
         '
-        Me.LargeIconAGVToolStripMenuItem.Name = "LargeIconAGVToolStripMenuItem"
-        Me.LargeIconAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.LargeIconAGVToolStripMenuItem.Text = "Large Icon"
+        Me.MenuAGVView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuAGVViewLargeIcon, Me.MenuAGVViewDetails, Me.MenuAGVViewSmallIcon, Me.MenuAGVViewList, Me.MenuAGVViewTile})
+        Me.MenuAGVView.Name = "MenuAGVView"
+        Me.MenuAGVView.Size = New System.Drawing.Size(181, 22)
+        Me.MenuAGVView.Text = "View"
         '
-        'DetailsAGVToolStripMenuItem
+        'MenuAGVViewLargeIcon
         '
-        Me.DetailsAGVToolStripMenuItem.Name = "DetailsAGVToolStripMenuItem"
-        Me.DetailsAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.DetailsAGVToolStripMenuItem.Text = "Details"
+        Me.MenuAGVViewLargeIcon.Name = "MenuAGVViewLargeIcon"
+        Me.MenuAGVViewLargeIcon.Size = New System.Drawing.Size(129, 22)
+        Me.MenuAGVViewLargeIcon.Text = "Large Icon"
         '
-        'SmallIconAGVToolStripMenuItem
+        'MenuAGVViewDetails
         '
-        Me.SmallIconAGVToolStripMenuItem.Name = "SmallIconAGVToolStripMenuItem"
-        Me.SmallIconAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.SmallIconAGVToolStripMenuItem.Text = "Small icon"
+        Me.MenuAGVViewDetails.Name = "MenuAGVViewDetails"
+        Me.MenuAGVViewDetails.Size = New System.Drawing.Size(129, 22)
+        Me.MenuAGVViewDetails.Text = "Details"
         '
-        'ListAGVToolStripMenuItem
+        'MenuAGVViewSmallIcon
         '
-        Me.ListAGVToolStripMenuItem.Name = "ListAGVToolStripMenuItem"
-        Me.ListAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.ListAGVToolStripMenuItem.Text = "List"
+        Me.MenuAGVViewSmallIcon.Name = "MenuAGVViewSmallIcon"
+        Me.MenuAGVViewSmallIcon.Size = New System.Drawing.Size(129, 22)
+        Me.MenuAGVViewSmallIcon.Text = "Small Icon"
         '
-        'TileAGVToolStripMenuItem
+        'MenuAGVViewList
         '
-        Me.TileAGVToolStripMenuItem.Name = "TileAGVToolStripMenuItem"
-        Me.TileAGVToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.TileAGVToolStripMenuItem.Text = "Tile"
+        Me.MenuAGVViewList.Name = "MenuAGVViewList"
+        Me.MenuAGVViewList.Size = New System.Drawing.Size(129, 22)
+        Me.MenuAGVViewList.Text = "List"
+        '
+        'MenuAGVViewTile
+        '
+        Me.MenuAGVViewTile.Name = "MenuAGVViewTile"
+        Me.MenuAGVViewTile.Size = New System.Drawing.Size(129, 22)
+        Me.MenuAGVViewTile.Text = "Tile"
+        '
+        'MenuAGVConfirmConn
+        '
+        Me.MenuAGVConfirmConn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuAGVConfirmSelected, Me.MenuAGVConfirmAll})
+        Me.MenuAGVConfirmConn.Name = "MenuAGVConfirmConn"
+        Me.MenuAGVConfirmConn.Size = New System.Drawing.Size(181, 22)
+        Me.MenuAGVConfirmConn.Text = "Confirm connection"
+        '
+        'MenuAGVConfirmSelected
+        '
+        Me.MenuAGVConfirmSelected.Name = "MenuAGVConfirmSelected"
+        Me.MenuAGVConfirmSelected.Size = New System.Drawing.Size(163, 22)
+        Me.MenuAGVConfirmSelected.Text = "For selected AGV"
+        '
+        'MenuAGVConfirmAll
+        '
+        Me.MenuAGVConfirmAll.Name = "MenuAGVConfirmAll"
+        Me.MenuAGVConfirmAll.Size = New System.Drawing.Size(163, 22)
+        Me.MenuAGVConfirmAll.Text = "For all AGV"
+        '
+        'MenuAGVEnable
+        '
+        Me.MenuAGVEnable.Name = "MenuAGVEnable"
+        Me.MenuAGVEnable.Size = New System.Drawing.Size(181, 22)
+        Me.MenuAGVEnable.Text = "Enable"
         '
         'imgAGVSmall
         '
@@ -433,39 +475,65 @@ Partial Class MainForm
         '
         'contMenuLstViewPart
         '
-        Me.contMenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LargePartToolStripMenuItem, Me.DetailPartToolStripMenuItem, Me.SmallIconPartToolStripMenuItem, Me.ListPartToolStripMenuItem, Me.TilePartToolStripMenuItem})
+        Me.contMenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem, Me.ConfirmConnectionToolStripMenuItem1})
         Me.contMenuLstViewPart.Name = "contMenuListViewPart"
-        Me.contMenuLstViewPart.Size = New System.Drawing.Size(130, 114)
+        Me.contMenuLstViewPart.Size = New System.Drawing.Size(182, 48)
         '
-        'LargePartToolStripMenuItem
+        'ViewToolStripMenuItem
         '
-        Me.LargePartToolStripMenuItem.Name = "LargePartToolStripMenuItem"
-        Me.LargePartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.LargePartToolStripMenuItem.Text = "Large Icon"
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuPartViewLargeIcon, Me.MenuPartViewDetail, Me.MenuPartViewSmallIcon, Me.MenuPartViewList, Me.MenuPartViewTile})
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.ViewToolStripMenuItem.Text = "View"
         '
-        'DetailPartToolStripMenuItem
+        'MenuPartViewLargeIcon
         '
-        Me.DetailPartToolStripMenuItem.Name = "DetailPartToolStripMenuItem"
-        Me.DetailPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.DetailPartToolStripMenuItem.Text = "Detail"
+        Me.MenuPartViewLargeIcon.Name = "MenuPartViewLargeIcon"
+        Me.MenuPartViewLargeIcon.Size = New System.Drawing.Size(129, 22)
+        Me.MenuPartViewLargeIcon.Text = "Large Icon"
         '
-        'SmallIconPartToolStripMenuItem
+        'MenuPartViewDetail
         '
-        Me.SmallIconPartToolStripMenuItem.Name = "SmallIconPartToolStripMenuItem"
-        Me.SmallIconPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.SmallIconPartToolStripMenuItem.Text = "Small icon"
+        Me.MenuPartViewDetail.Name = "MenuPartViewDetail"
+        Me.MenuPartViewDetail.Size = New System.Drawing.Size(129, 22)
+        Me.MenuPartViewDetail.Text = "Detail"
         '
-        'ListPartToolStripMenuItem
+        'MenuPartViewSmallIcon
         '
-        Me.ListPartToolStripMenuItem.Name = "ListPartToolStripMenuItem"
-        Me.ListPartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.ListPartToolStripMenuItem.Text = "List"
+        Me.MenuPartViewSmallIcon.Name = "MenuPartViewSmallIcon"
+        Me.MenuPartViewSmallIcon.Size = New System.Drawing.Size(129, 22)
+        Me.MenuPartViewSmallIcon.Text = "Small icon"
         '
-        'TilePartToolStripMenuItem
+        'MenuPartViewList
         '
-        Me.TilePartToolStripMenuItem.Name = "TilePartToolStripMenuItem"
-        Me.TilePartToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
-        Me.TilePartToolStripMenuItem.Text = "Tile"
+        Me.MenuPartViewList.Name = "MenuPartViewList"
+        Me.MenuPartViewList.Size = New System.Drawing.Size(129, 22)
+        Me.MenuPartViewList.Text = "List"
+        '
+        'MenuPartViewTile
+        '
+        Me.MenuPartViewTile.Name = "MenuPartViewTile"
+        Me.MenuPartViewTile.Size = New System.Drawing.Size(129, 22)
+        Me.MenuPartViewTile.Text = "Tile"
+        '
+        'ConfirmConnectionToolStripMenuItem1
+        '
+        Me.ConfirmConnectionToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ForEndDevicesOfSelectedPartToolStripMenuItem, Me.ForAllEndDevicesToolStripMenuItem})
+        Me.ConfirmConnectionToolStripMenuItem1.Name = "ConfirmConnectionToolStripMenuItem1"
+        Me.ConfirmConnectionToolStripMenuItem1.Size = New System.Drawing.Size(181, 22)
+        Me.ConfirmConnectionToolStripMenuItem1.Text = "Confirm connection"
+        '
+        'ForEndDevicesOfSelectedPartToolStripMenuItem
+        '
+        Me.ForEndDevicesOfSelectedPartToolStripMenuItem.Name = "ForEndDevicesOfSelectedPartToolStripMenuItem"
+        Me.ForEndDevicesOfSelectedPartToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.ForEndDevicesOfSelectedPartToolStripMenuItem.Text = "For EndDevices of selected part"
+        '
+        'ForAllEndDevicesToolStripMenuItem
+        '
+        Me.ForAllEndDevicesToolStripMenuItem.Name = "ForAllEndDevicesToolStripMenuItem"
+        Me.ForAllEndDevicesToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.ForAllEndDevicesToolStripMenuItem.Text = "For all EndDevices"
         '
         'imgPartBig
         '
@@ -563,9 +631,17 @@ Partial Class MainForm
         '
         Me.AutoSaveTimer.Interval = 60000
         '
+        'RecordTimer
+        '
+        Me.RecordTimer.Interval = 500
+        '
+        'AndonTimer
+        '
+        Me.AndonTimer.Interval = 500
+        '
         'lstViewAGV
         '
-        Me.lstViewAGV.ContextMenuStrip = Me.contextMenuLstViewAGV
+        Me.lstViewAGV.ContextMenuStrip = Me.MenuLstViewAGV
         Me.lstViewAGV.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstViewAGV.EnableDoubleBuffered = True
         Me.lstViewAGV.LargeImageList = Me.imgAGVBig
@@ -592,10 +668,6 @@ Partial Class MainForm
         Me.lstViewPart.TileSize = New System.Drawing.Size(200, 100)
         Me.lstViewPart.UseCompatibleStateImageBehavior = False
         '
-        'RecordTimer
-        '
-        Me.RecordTimer.Interval = 500
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -612,7 +684,7 @@ Partial Class MainForm
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.contextMenuLstViewAGV.ResumeLayout(False)
+        Me.MenuLstViewAGV.ResumeLayout(False)
         Me.contMenuLstViewPart.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).EndInit()
@@ -661,25 +733,35 @@ Partial Class MainForm
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
     Friend WithEvents imgAGVSmall As System.Windows.Forms.ImageList
-    Friend WithEvents contextMenuLstViewAGV As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents LargeIconAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DetailsAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SmallIconAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ListAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TileAGVToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents contMenuLstViewPart As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents LargePartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DetailPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SmallIconPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ListPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents TilePartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents imgPartBig As System.Windows.Forms.ImageList
+    Friend WithEvents MenuLstViewAGV As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents contMenuLstViewPart As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents imgPartBig As System.Windows.Forms.ImageList
     Friend WithEvents imgPartSmall As System.Windows.Forms.ImageList
-	Friend WithEvents DisplayTimer As System.Windows.Forms.Timer
-	Friend WithEvents lstViewAGV As Control_system.DoubleListView
-	Friend WithEvents lstViewPart As Control_system.DoubleListView
+    Friend WithEvents DisplayTimer As System.Windows.Forms.Timer
+    Friend WithEvents lstViewAGV As Control_system.DoubleListView
+    Friend WithEvents lstViewPart As Control_system.DoubleListView
     Friend WithEvents CrossTimer As System.Windows.Forms.Timer
     Friend WithEvents AutoSaveTimer As System.Windows.Forms.Timer
     Friend WithEvents RecordTimer As System.Windows.Forms.Timer
+    Friend WithEvents ViewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartViewLargeIcon As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartViewDetail As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartViewSmallIcon As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartViewList As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartViewTile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVView As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVViewLargeIcon As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVViewDetails As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVViewSmallIcon As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVViewList As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVViewTile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVConfirmConn As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVConfirmSelected As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVConfirmAll As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ConfirmConnectionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ForEndDevicesOfSelectedPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ForAllEndDevicesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuAGVEnable As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AndonTimer As System.Windows.Forms.Timer
 
 End Class
