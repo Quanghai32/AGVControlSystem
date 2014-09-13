@@ -23,7 +23,7 @@ Public Module SQLData
     End Sub
     Public Sub setAGVSupply(ByVal AGVnumber As Byte, ByVal PartString As String)
         If PartString.ToLower = "all" Then
-            For i As Byte = 0 To PartArray.Length - 1
+            For i As Byte = 0 To PartList.Count - 1
                 AGVnPART(AGVnumber, i) = True
             Next
         Else
@@ -88,7 +88,7 @@ Public Module SQLData
         myDataAdapter = New SqlDataAdapter("SELECT * FROM Part", SQLcon)
         myDataTable = New DataTable
         myDataAdapter.Fill(myDataTable)
-        PartArray = New CPart(myDataTable.Rows.Count - 1) {}
+        PartList = New List(Of CPart)
         For i As Byte = 0 To myDataTable.Rows.Count - 1
             Dim num As Byte
             num = myDataTable.Rows(i)("EndDevices")
@@ -104,7 +104,7 @@ Public Module SQLData
                         LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart = New Collection
                     End If
                     LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart.Add(EndDevicesArray(num).Parts(j))
-                    PartArray(i) = EndDevicesArray(num).Parts(j)
+                    PartList.Add(EndDevicesArray(num).Parts(j))
                     Exit For
                 End If
             Next
@@ -120,9 +120,9 @@ Public Module SQLData
         AGVList = New List(Of AGV)
         'Make copy
         preAGVStatusArray = New struct_AGVStoreStatus(myDataTable.Rows.Count - 1) {}
-        AGVnPART = New Boolean(myDataTable.Rows.Count - 1, PartArray.Length - 1) {}
+        AGVnPART = New Boolean(myDataTable.Rows.Count - 1, PartList.Count - 1) {}
         For i As Byte = 0 To myDataTable.Rows.Count - 1
-            For j As Byte = 0 To PartArray.Length - 1
+            For j As Byte = 0 To PartList.Count - 1
                 AGVnPART(i, j) = False
             Next
         Next

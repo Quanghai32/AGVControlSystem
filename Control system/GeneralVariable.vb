@@ -11,7 +11,7 @@ Public Module GeneralVariable
     ''' <remarks></remarks>
     Public HostXbee() As XBee
     Public EndDevicesArray() As EndDevices
-    Public PartArray() As CPart
+    Public PartList As List(Of CPart)
     Public isNeedToReset As Boolean
     Structure LineGroup
         Public Name As String

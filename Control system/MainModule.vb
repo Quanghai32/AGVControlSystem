@@ -69,7 +69,7 @@ Public Module MainModule
                     AGVList(AGVNum).RequestRoute(partNeedSupply)
                     AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.SUPPLYING
                     AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL
-                    PartArray(partNeedSupply).AGVSupply = AGVList(AGVNum).Name
+                    PartList(partNeedSupply).AGVSupply = AGVList(AGVNum).Name
                 End If
             End If
         Next
@@ -102,11 +102,11 @@ Public Module MainModule
         End If
     End Function
     Private Function isPartNeedSupply(ByVal PartNum As Byte) As Boolean
-        If (PartArray(PartNum).Enable And _
-            PartArray(PartNum).parent.connecting And _
-            PartArray(PartNum).Status = False And _
-            PartArray(PartNum).AGVSupply = "" And _
-            PartArray(PartNum).isRequested = False) Then
+        If (PartList(PartNum).Enable And _
+            PartList(PartNum).parent.connecting And _
+            PartList(PartNum).Status = False And _
+            PartList(PartNum).AGVSupply = "" And _
+            PartList(PartNum).isRequested = False) Then
 
             Return True
         Else
@@ -121,12 +121,12 @@ Public Module MainModule
     ''' <returns>Return true if FirstPart's priority is higher or same with SecondPart's</returns>
     ''' <remarks></remarks>
     Private Function ComparePartPriority(ByVal FirstPart As Byte, ByVal SecondPart As Byte) As Boolean
-        If PartArray(FirstPart).priority < PartArray(SecondPart).priority Then
+        If PartList(FirstPart).priority < PartList(SecondPart).priority Then
             Return True
-        ElseIf PartArray(FirstPart).priority > PartArray(SecondPart).priority Then
+        ElseIf PartList(FirstPart).priority > PartList(SecondPart).priority Then
             Return False
         Else
-            If PartArray(FirstPart).EmptyTime <= PartArray(SecondPart).EmptyTime Then
+            If PartList(FirstPart).EmptyTime <= PartList(SecondPart).EmptyTime Then
                 Return True
             Else
                 Return False
@@ -135,7 +135,7 @@ Public Module MainModule
     End Function
     Private Function findSupplyPart4AGV(ByVal AGVNum As Byte) As Byte
         Dim returnValue As Byte = 99
-        For PartNum As Byte = 0 To PartArray.Length - 1
+        For PartNum As Byte = 0 To PartList.Count - 1
             If AGVnPART(AGVNum, PartNum) Then
                 If isPartNeedSupply(PartNum) Then
                     If returnValue = 99 Then
@@ -289,29 +289,29 @@ Public Module MainModule
     End Sub
 
     Public Sub PartConnectRecord()
-        Static PrePartConnectRecord() As Boolean = New Boolean(PartArray.Length - 1) {}
-        For i As Byte = 0 To PartArray.Length - 1
-            If PrePartConnectRecord(i) <> PartArray(i).parent.connecting Then
-                Record(PartArray(i).Name, "Connect", PartArray(i).parent.connecting.ToString)
-                PrePartConnectRecord(i) = PartArray(i).parent.connecting
+        Static PrePartConnectRecord() As Boolean = New Boolean(PartList.Count - 1) {}
+        For i As Byte = 0 To PartList.Count - 1
+            If PrePartConnectRecord(i) <> PartList(i).parent.connecting Then
+                Record(PartList(i).Name, "Connect", PartList(i).parent.connecting.ToString)
+                PrePartConnectRecord(i) = PartList(i).parent.connecting
             End If
         Next
     End Sub
     Public Sub PartStatusRecord()
-        Static PrePartStatusRecord() As Boolean = New Boolean(PartArray.Length - 1) {}
-        For i As Byte = 0 To PartArray.Length - 1
-            If PrePartStatusRecord(i) <> PartArray(i).Status Then
-                Record(PartArray(i).Name, "Status", PartArray(i).Status.ToString)
-                PrePartStatusRecord(i) = PartArray(i).Status
+        Static PrePartStatusRecord() As Boolean = New Boolean(PartList.Count - 1) {}
+        For i As Byte = 0 To PartList.Count - 1
+            If PrePartStatusRecord(i) <> PartList(i).Status Then
+                Record(PartList(i).Name, "Status", PartList(i).Status.ToString)
+                PrePartStatusRecord(i) = PartList(i).Status
             End If
         Next
     End Sub
     Public Sub PartAGVSupplyRecord()
-        Static PrePartStatusRecord() As String = New String(PartArray.Length - 1) {}
-        For i As Byte = 0 To PartArray.Length - 1
-            If PrePartStatusRecord(i) <> PartArray(i).AGVSupply Then
-                Record(PartArray(i).Name, "AGV supply", PartArray(i).AGVSupply)
-                PrePartStatusRecord(i) = PartArray(i).AGVSupply
+        Static PrePartStatusRecord() As String = New String(PartList.Count - 1) {}
+        For i As Byte = 0 To PartList.Count - 1
+            If PrePartStatusRecord(i) <> PartList(i).AGVSupply Then
+                Record(PartList(i).Name, "AGV supply", PartList(i).AGVSupply)
+                PrePartStatusRecord(i) = PartList(i).AGVSupply
             End If
         Next
     End Sub

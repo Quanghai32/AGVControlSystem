@@ -20,7 +20,6 @@ Public Class MainForm
             ChartResetSQL()
         End If
         ChartInit()
-        SetStartViewPart()
 
         DisplayTimer.Start()
         CrossTimer.Start()
@@ -297,110 +296,193 @@ Public Class MainForm
 #Region "For context menu"
     Private Sub MenuPartViewItem_Click(sender As Object, e As EventArgs) Handles MenuPartViewLargeIcon.Click, MenuPartViewDetail.Click, MenuPartViewSmallIcon.Click, MenuPartViewList.Click, MenuPartViewTile.Click
         If sender.Equals(MenuPartViewTile) Then
-            lstViewPart.View = View.Tile
+            olvPart.View = View.Tile
             Return
         End If
         If sender.Equals(MenuPartViewList) Then
-            lstViewPart.View = View.List
+            olvPart.View = View.List
             Return
         End If
         If sender.Equals(MenuPartViewSmallIcon) Then
-            lstViewPart.View = View.SmallIcon
+            olvPart.View = View.SmallIcon
             Return
         End If
         If sender.Equals(MenuPartViewDetail) Then
-            lstViewPart.View = View.Details
+            olvPart.View = View.Details
             Return
         End If
         If sender.Equals(MenuPartViewLargeIcon) Then
-            lstViewPart.View = View.LargeIcon
+            olvPart.View = View.LargeIcon
             Return
         End If
     End Sub
     Private Sub ForEndDevicesOfSelectedPartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForEndDevicesOfSelectedPartToolStripMenuItem.Click
-        Dim listSelected As System.Windows.Forms.ListView.SelectedIndexCollection = lstViewPart.SelectedIndices
+        Dim listSelected As System.Windows.Forms.ListView.SelectedIndexCollection = olvPart.SelectedIndices
         If listSelected.Count > 0 Then
             For Each index In listSelected
-                PartArray(index).parent.SettingAddress()
+                PartList(index).parent.SettingAddress()
             Next
         End If
     End Sub
 #End Region
-    Public Sub AddColumnPartDisplay()
-        Dim str As String() = New String() {"Name", "Connecting", "Status", "Supply by"}
-        For i As Byte = 0 To str.Length - 1
-            Dim MyColumnHeader As System.Windows.Forms.ColumnHeader
-            MyColumnHeader = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-            MyColumnHeader.Text = str(i)
-            lstViewPart.Columns.Add(MyColumnHeader)
-        Next
+    Public Sub InitializeOlvPart(ByVal list As List(Of CPart))
+        olvPart.AddDecoration(New EditingCellBorderDecoration(True))
+        Dim tlist As TypedObjectListView(Of CPart) = New TypedObjectListView(Of CPart)(olvPart)
+        tlist.GenerateAspectGetters()
+        olvPart.ItemRenderer = New PartRenderer()
+        olvPart.SetObjects(list)
+        olvPart.View = View.Tile
+        olvPart.OwnerDraw = True
     End Sub
-    Public Sub AddGroupPart()
-        For i As Byte = 0 To LineGroupArray.Length - 1
-            Dim grp As ListViewGroup
-            grp = New ListViewGroup(LineGroupArray(i).Name)
-            lstViewPart.Groups.Add(grp)
-        Next
-    End Sub
-    Public Function GetPartIcon(ByVal part As CPart) As Byte
-        If part.Enable = False Then Return 0
-        If part.parent.connecting Then
-            If part.Status Then
-                Return 3
+
+    Class PartRenderer
+        Inherits AbstractRenderer
+        Public Overrides Function RenderItem(e As DrawListViewItemEventArgs, g As Graphics, itemBounds As Rectangle, rowObject As Object) As Boolean
+            Dim olv As ObjectListView = CType(e.Item.ListView, ObjectListView)
+            If IsNothing(olv) Or (olv.View <> View.Tile) Then Return False
+            Dim buffered As BufferedGraphics = BufferedGraphicsManager.Current.Allocate(g, itemBounds)
+            g = buffered.Graphics
+            g.Clear(olv.BackColor)
+            g.SmoothingMode = ObjectListView.TextRenderingHint
+
+            If (e.Item.Selected) Then
+                BorderPen = Pens.Blue
+                HeaderBackBrush = New SolidBrush(olv.HighlightBackgroundColorOrDefault)
             Else
-                If part.AGVSupply = "" Then
-                    Return 1
+                BorderPen = New Pen(Color.FromArgb(&H33, &H33, &H33))
+                HeaderBackBrush = New SolidBrush(Color.FromArgb(&H33, &H33, &H33))
+            End If
+            DrawPart(g, itemBounds, rowObject, olv, CType(e.Item, OLVListItem))
+
+            ' Finally render the buffered graphics
+            buffered.Render()
+            buffered.Dispose()
+
+            ' Return true to say that we've handled the drawing
+            Return True
+        End Function
+        Friend BorderPen As Pen = New Pen(Color.FromArgb(&H33, &H33, &H33))
+        Friend TextBrush As Brush = New SolidBrush(Color.FromArgb(&H22, &H22, &H22))
+        Friend HeaderTextBrush As Brush = Brushes.AliceBlue
+        'Friend HeaderBackBrush As Brush = New SolidBrush(Color.FromArgb(&H33, &H33, &H33))
+        Friend HeaderBackBrush As Brush = Brushes.Brown
+        Friend BackBrush As Brush = Brushes.LemonChiffon
+        Public Sub DrawPart(g As Graphics, itemBounds As Rectangle, rowObject As Object, olv As ObjectListView, item As OLVListItem)
+            Const spacing As Integer = 8
+
+            ' Allow a border around the card
+            itemBounds.Inflate(-2, -2)
+
+            ' Draw card background
+            Const rounding As Integer = 20
+            Dim path As Drawing2D.GraphicsPath = GetRoundedRect(itemBounds, rounding)
+
+            If CType(rowObject, CPart).Enable Then
+                If CType(rowObject, CPart).parent.connecting Then
+                    BackBrush = Brushes.YellowGreen
                 Else
-                    Return 5
+                    BackBrush = Brushes.Gray
+                End If
+            Else
+                BackBrush = Brushes.LightGray
+            End If
+            g.FillPath(BackBrush, path)
+            g.DrawPath(BorderPen, path)
+
+            g.Clip = New Region(itemBounds)
+
+            'Draw the photo
+            Dim photoRect As Rectangle = itemBounds
+            photoRect.Inflate(-spacing, -spacing)
+            Dim part As CPart = CType(rowObject, CPart)
+            If Not IsNothing(part) Then
+                photoRect.Width = 80
+                Dim photoFile As String = String.Format(".\img\part\{0}.png", CalcImgFile(part))
+                If File.Exists(photoFile) Then
+                    Dim photo As Image = Image.FromFile(photoFile)
+                    If photo.Width > photoRect.Width Then
+                        photoRect.Height = CType(photo.Height * (CType(photoRect.Width, Single) / photo.Width), Integer)
+                    Else
+                        photoRect.Height = photo.Height
+                    End If
+                    g.DrawImage(photo, photoRect)
+                Else
+                    g.DrawRectangle(Pens.DarkGray, photoRect)
                 End If
             End If
-        Else
-            If part.Status Then
-                Return 4
-            Else
-                If part.AGVSupply = "" Then
-                    Return 2
+
+            ' Now draw the text portion
+            Dim textBoxRect As RectangleF = photoRect
+            textBoxRect.X += (photoRect.Width + spacing)
+            textBoxRect.Width = itemBounds.Right - textBoxRect.X - spacing
+
+            Dim fmt As StringFormat = New StringFormat(StringFormatFlags.NoWrap)
+            fmt.Trimming = StringTrimming.EllipsisCharacter
+            fmt.Alignment = StringAlignment.Center
+            fmt.LineAlignment = StringAlignment.Near
+            Dim txt As String = CType(rowObject, CPart).Name
+
+            Using uFont As Font = New Font("Tahoma", 11)
+                ' Measure the height of the title
+                Dim size As SizeF = g.MeasureString(txt, uFont, CType(textBoxRect.Width, Integer), fmt)
+                ' Draw the title
+                Dim r3 As RectangleF = textBoxRect
+                r3.Height = size.Height
+                path = GetRoundedRect(r3, 15)
+                'g.FillPath(HeaderBackBrush, path)
+                g.FillPath(Brushes.DarkKhaki, path)
+                g.DrawString(txt, uFont, HeaderTextBrush, textBoxRect, fmt)
+                textBoxRect.Y += size.Height + 5
+            End Using
+
+            'Draw the other bits of information
+            Using uFont As Font = New Font("Tahoma", 11)
+                Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
+                textBoxRect.Height = size.Height
+                fmt.Alignment = StringAlignment.Near
+
+                txt = "Supply by: " + CType(rowObject, CPart).AGVSupply
+                g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                textBoxRect.Y += size.Height
+            End Using
+        End Sub
+        Private Function GetRoundedRect(rect As RectangleF, diameter As Single) As Drawing2D.GraphicsPath
+            Dim path As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath()
+
+            Dim arc As RectangleF = New RectangleF(rect.X, rect.Y, diameter, diameter)
+            path.AddArc(arc, 180, 90)
+            arc.X = rect.Right - diameter
+            path.AddArc(arc, 270, 90)
+            arc.Y = rect.Bottom - diameter
+            path.AddArc(arc, 0, 90)
+            arc.X = rect.Left
+            path.AddArc(arc, 90, 90)
+            path.CloseFigure()
+
+            Return path
+        End Function
+        Private Function CalcImgFile(part As CPart) As String
+            If part.Enable Then
+                If part.parent.connecting Then
+                    Return part.Status.ToString + "-Connecting"
                 Else
-                    Return 6
+                    Return part.Status.ToString + "-Disconnecting"
                 End If
+            Else
+                Return "disable"
             End If
-        End If
-    End Function
-    Public Sub DisplaySinglePart(ByVal myPart As CPart)
-        Dim str As String() = New String(3) {}
-        str(0) = myPart.Name + " (" + myPart.index.ToString + ")"
-        str(1) = "Status: " + myPart.Status.ToString
-        str(2) = "Connect: " + myPart.parent.connecting.ToString
-        str(3) = "Supply by: " + myPart.AGVSupply
-        Dim PartItem As ListViewItem = New ListViewItem(str)
-        PartItem.Group = lstViewPart.Groups(myPart.group)
-        lstViewPart.Items.Add(PartItem)
-    End Sub
-    Public Sub SetStartViewPart()
-        For i As Byte = 0 To PartArray.Length - 1
-            lstViewPart.Items(i).SubItems(1).Text = "Status: " + PartArray(i).Status.ToString
-            lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-        Next
-    End Sub
+        End Function
+    End Class
     Public Sub DisplayPart()
-        AddColumnPartDisplay()
-        AddGroupPart()
-        For i As Byte = 0 To PartArray.Length - 1
-            DisplaySinglePart(PartArray(i))
-        Next
+        olvPart.View = View.Tile
+        olvPart.OwnerDraw = True
+        InitializeOlvPart(PartList)
     End Sub
+    
 #End Region
     Public Sub DisplayOverView()
         olvAGV.Refresh()
-        lstViewPart.BeginUpdate()
-        For i As Byte = 0 To PartArray.Length - 1
-            Dim isUpdate As Boolean = False
-            lstViewPart.Items(i).SubItems(1).Text = "Status: " + PartArray(i).Status.ToString
-            lstViewPart.Items(i).SubItems(2).Text = "Connect: " + PartArray(i).parent.connecting.ToString
-            lstViewPart.Items(i).SubItems(3).Text = "Supply by: " + PartArray(i).AGVSupply
-            lstViewPart.Items(i).ImageIndex = GetPartIcon(PartArray(i))
-        Next
-        lstViewPart.EndUpdate()
+        olvPart.Refresh()
     End Sub
 #End Region
 #Region "Display Chart"
