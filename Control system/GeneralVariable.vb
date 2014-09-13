@@ -3,11 +3,12 @@ Public Module GeneralVariable
     ''' <summary>
     ''' This array store all AGV object
     ''' </summary>
-    Public AGVArray() As AGV
-	''' <summary>
-	''' Array of Host Xbee
-	''' </summary>
-	''' <remarks></remarks>
+
+    Public AGVList As List(Of AGV)
+    ''' <summary>
+    ''' Array of Host Xbee
+    ''' </summary>
+    ''' <remarks></remarks>
     Public HostXbee() As XBee
     Public EndDevicesArray() As EndDevices
     Public PartArray() As CPart
