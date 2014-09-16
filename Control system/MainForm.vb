@@ -73,7 +73,7 @@ Public Class MainForm
             MenuAGVConfirmSelected.Enabled = True
             MenuAGVConfirmAll.Enabled = True
             MenuAGVEnable.Visible = True
-            If AGVList(olvAGV.SelectedIndices(0)).Enable Then
+            If CType(olvAGV.SelectedObject, AGV).Enable Then
                 MenuAGVEnable.Text = "Disable"
             Else
                 MenuAGVEnable.Text = "Enable"
@@ -118,7 +118,14 @@ Public Class MainForm
         End If
     End Sub
     Private Sub MenuAGVEnable_Click(sender As Object, e As EventArgs) Handles MenuAGVEnable.Click
-        AGVList(olvAGV.SelectedIndices(0)).Enable = Not AGVList(olvAGV.SelectedIndices(0)).Enable
+        Dim rbc As AGV = CType(olvAGV.SelectedObject, AGV)
+        rbc.Enable = Not rbc.Enable
+        Dim cmdValue As String = Convert.ToByte(rbc.Enable)
+        Dim cmdWhere As String = rbc.Name
+
+        Dim cmdText As String = "UPDATE AGV SET Enable=" + cmdValue + " WHERE Name='" + cmdWhere + "'"
+        Dim cmdUpdate As SqlCommand = New SqlCommand(cmdText, SQLcon)
+        cmdUpdate.ExecuteNonQuery()
     End Sub
 #End Region
     Public Sub InitializeOlvAGV(ByVal list As List(Of AGV))
@@ -179,7 +186,7 @@ Public Class MainForm
             If CType(rowObject, AGV).Enable Then
                 If CType(rowObject, AGV).Connecting Then
                     If CType(rowObject, AGV).WorkingStatus = AGV.RobocarWorkingStatusValue.FREE Then
-                        BackBrush = Brushes.YellowGreen
+                        BackBrush = Brushes.Yellow
                     Else
                         BackBrush = Brushes.GreenYellow
                     End If
@@ -232,31 +239,34 @@ Public Class MainForm
                 Dim r3 As RectangleF = textBoxRect
                 r3.Height = size.Height
                 path = GetRoundedRect(r3, 15)
-                'g.FillPath(HeaderBackBrush, path)
-                g.FillPath(Brushes.DarkKhaki, path)
+                If rbc.Enable Then
+                    g.FillPath(Brushes.DarkKhaki, path)
+                Else
+                    g.FillPath(Brushes.DarkGray, path)
+                End If
                 g.DrawString(txt, uFont, HeaderTextBrush, textBoxRect, fmt)
                 textBoxRect.Y += size.Height + 5
             End Using
+            If rbc.Enable Then
+                'Draw the other bits of information
+                Using uFont As Font = New Font("Tahoma", 11)
+                    Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
+                    textBoxRect.Height = size.Height
+                    fmt.Alignment = StringAlignment.Near
 
-            'Draw the other bits of information
-            Using uFont As Font = New Font("Tahoma", 11)
-                Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
-                textBoxRect.Height = size.Height
-                fmt.Alignment = StringAlignment.Near
+                    txt = "Part: " + CType(rowObject, AGV).SupplyPartStatus.ToString
+                    g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                    textBoxRect.Y += size.Height
 
-                txt = "Part: " + CType(rowObject, AGV).SupplyPartStatus.ToString
-                g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
-                textBoxRect.Y += size.Height
+                    txt = "Position: " + CType(rowObject, AGV).Position.ToString
+                    g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                    textBoxRect.Y += size.Height
 
-                txt = "Position: " + CType(rowObject, AGV).Position.ToString
-                g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
-                textBoxRect.Y += size.Height
-
-                txt = CType(rowObject, AGV).SupplyPartStatus.ToString
-                g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
-                textBoxRect.Y += size.Height
-            End Using
-
+                    txt = "Bat: " + CType(rowObject, AGV).Battery(0).ToString + "-" + CType(rowObject, AGV).Battery(1).ToString + "-" + CType(rowObject, AGV).Battery(2).ToString + "-" + CType(rowObject, AGV).Battery(3).ToString
+                    g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                    textBoxRect.Y += size.Height
+                End Using
+            End If
         End Sub
         Private Function GetRoundedRect(rect As RectangleF, diameter As Single) As Drawing2D.GraphicsPath
             Dim path As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath()
@@ -278,9 +288,17 @@ Public Class MainForm
                 Return "disable"
             Else
                 If rbc.Connecting Then
-                    Return rbc.Status.ToString + "-" + "Connecting"
+                    If rbc.WorkingStatus = AGV.RobocarWorkingStatusValue.FREE Then
+                        Return rbc.WorkingStatus.ToString + "-" + "Connecting"
+                    Else
+                        Return rbc.Status.ToString + "-" + "Connecting"
+                    End If
                 Else
-                    Return rbc.Status.ToString + "-" + "Disconnecting"
+                    If rbc.WorkingStatus = AGV.RobocarWorkingStatusValue.FREE Then
+                        Return rbc.WorkingStatus.ToString + "-" + "Disconnecting"
+                    Else
+                        Return rbc.Status.ToString + "-" + "Disconnecting"
+                    End If
                 End If
             End If
         End Function
@@ -294,6 +312,33 @@ Public Class MainForm
 #End Region
 #Region "Display part"
 #Region "For context menu"
+    Private Sub MenuLstViewPart_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MenuLstViewPart.Opening
+        If olvPart.SelectedIndices.Count = 0 Then
+            MenuPartView.Visible = True
+            MenuPartConfirmConn.Visible = True
+            MenuPartConfirmSelected.Enabled = False
+            MenuPartConfirmAll.Enabled = True
+            MenuPartEnable.Visible = False
+        ElseIf olvPart.SelectedIndices.Count = 1 Then
+            MenuPartView.Visible = False
+            MenuPartConfirmConn.Visible = True
+            MenuPartConfirmSelected.Enabled = True
+            MenuPartConfirmAll.Enabled = True
+            MenuPartEnable.Visible = True
+            If CType(olvPart.SelectedObject, CPart).Enable Then
+                MenuPartEnable.Text = "Disable"
+            Else
+                MenuPartEnable.Text = "Enable"
+            End If
+        Else
+            MenuPartView.Visible = False
+            MenuPartConfirmConn.Visible = True
+            MenuPartConfirmSelected.Enabled = True
+            MenuPartConfirmAll.Enabled = True
+            MenuPartEnable.Visible = False
+        End If
+        Dim a = olvPart.Items(0).ToString
+    End Sub
     Private Sub MenuPartViewItem_Click(sender As Object, e As EventArgs) Handles MenuPartViewLargeIcon.Click, MenuPartViewDetail.Click, MenuPartViewSmallIcon.Click, MenuPartViewList.Click, MenuPartViewTile.Click
         If sender.Equals(MenuPartViewTile) Then
             olvPart.View = View.Tile
@@ -316,7 +361,7 @@ Public Class MainForm
             Return
         End If
     End Sub
-    Private Sub ForEndDevicesOfSelectedPartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForEndDevicesOfSelectedPartToolStripMenuItem.Click
+    Private Sub MenuPartConfirmSelected_Click(sender As Object, e As EventArgs) Handles MenuPartConfirmSelected.Click
         Dim listSelected As System.Windows.Forms.ListView.SelectedIndexCollection = olvPart.SelectedIndices
         If listSelected.Count > 0 Then
             For Each index In listSelected
@@ -324,11 +369,33 @@ Public Class MainForm
             Next
         End If
     End Sub
+    Private Sub MenuPartEnable_Click(sender As Object, e As EventArgs) Handles MenuPartEnable.Click
+        Dim PartIndex As Byte = CType(olvPart.SelectedObject, CPart).index
+        PartList(PartIndex).Enable = Not PartList(PartIndex).Enable
+        Dim cmdValue As String = Convert.ToByte(PartList(PartIndex).Enable)
+        Dim cmdWhere As String = PartIndex.ToString
+
+        Dim cmdText As String = "UPDATE Part SET Enable=" + cmdValue + " WHERE ID=" + cmdWhere
+        Dim cmdUpdate As SqlCommand = New SqlCommand(cmdText, SQLcon)
+        cmdUpdate.ExecuteNonQuery()
+    End Sub
 #End Region
     Public Sub InitializeOlvPart(ByVal list As List(Of CPart))
         olvPart.AddDecoration(New EditingCellBorderDecoration(True))
         Dim tlist As TypedObjectListView(Of CPart) = New TypedObjectListView(Of CPart)(olvPart)
         tlist.GenerateAspectGetters()
+        OlvColumnPartConnecting.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+                                                                            Dim part As CPart = CType(row, CPart)
+                                                                            If (part.connecting) Then
+                                                                                Return "Connected"
+                                                                            Else
+                                                                                Return "Disconnect"
+                                                                            End If
+                                                                        End Function)
+        OlvColumnPartGroup.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+                                                                       Dim part As CPart = CType(row, CPart)
+                                                                       Return LineGroupArray(part.group).Name
+                                                                   End Function)
         olvPart.ItemRenderer = New PartRenderer()
         olvPart.SetObjects(list)
         olvPart.View = View.Tile
@@ -410,7 +477,7 @@ Public Class MainForm
                     g.DrawRectangle(Pens.DarkGray, photoRect)
                 End If
             End If
-
+            
             ' Now draw the text portion
             Dim textBoxRect As RectangleF = photoRect
             textBoxRect.X += (photoRect.Width + spacing)
@@ -420,7 +487,7 @@ Public Class MainForm
             fmt.Trimming = StringTrimming.EllipsisCharacter
             fmt.Alignment = StringAlignment.Center
             fmt.LineAlignment = StringAlignment.Near
-            Dim txt As String = CType(rowObject, CPart).Name
+            Dim txt As String = part.Name + " (" + part.index.ToString + ")"
 
             Using uFont As Font = New Font("Tahoma", 11)
                 ' Measure the height of the title
@@ -429,22 +496,31 @@ Public Class MainForm
                 Dim r3 As RectangleF = textBoxRect
                 r3.Height = size.Height
                 path = GetRoundedRect(r3, 15)
-                'g.FillPath(HeaderBackBrush, path)
-                g.FillPath(Brushes.DarkKhaki, path)
+                If part.Enable Then
+                    g.FillPath(Brushes.DarkKhaki, path)
+                Else
+                    g.FillPath(Brushes.DarkGray, path)
+                End If
+
                 g.DrawString(txt, uFont, HeaderTextBrush, textBoxRect, fmt)
                 textBoxRect.Y += size.Height + 5
             End Using
+            If part.Enable Then
+                'Draw the other bits of information
+                Using uFont As Font = New Font("Tahoma", 11)
+                    Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
+                    textBoxRect.Height = size.Height
+                    fmt.Alignment = StringAlignment.Near
 
-            'Draw the other bits of information
-            Using uFont As Font = New Font("Tahoma", 11)
-                Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
-                textBoxRect.Height = size.Height
-                fmt.Alignment = StringAlignment.Near
+                    txt = "Supply by: " + part.AGVSupply
+                    g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                    textBoxRect.Y += size.Height
 
-                txt = "Supply by: " + CType(rowObject, CPart).AGVSupply
-                g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
-                textBoxRect.Y += size.Height
-            End Using
+                    txt = "Count: " + part.supplyCount.ToString + "/" + part.target.ToString
+                    g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                    textBoxRect.Y += size.Height
+                End Using
+            End If
         End Sub
         Private Function GetRoundedRect(rect As RectangleF, diameter As Single) As Drawing2D.GraphicsPath
             Dim path As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath()
@@ -464,9 +540,17 @@ Public Class MainForm
         Private Function CalcImgFile(part As CPart) As String
             If part.Enable Then
                 If part.parent.connecting Then
-                    Return part.Status.ToString + "-Connecting"
+                    If part.AGVSupply = "" Then
+                        Return part.Status.ToString + "-Connecting"
+                    Else
+                        Return "AGV-Connecting"
+                    End If
                 Else
-                    Return part.Status.ToString + "-Disconnecting"
+                    If part.AGVSupply = "" Then
+                        Return part.Status.ToString + "-Disconnecting"
+                    Else
+                        Return "AGV-Disconnecting"
+                    End If
                 End If
             Else
                 Return "disable"
@@ -481,8 +565,8 @@ Public Class MainForm
     
 #End Region
     Public Sub DisplayOverView()
-        olvAGV.Refresh()
-        olvPart.Refresh()
+        olvAGV.BuildList()
+        olvPart.BuildList()
     End Sub
 #End Region
 #Region "Display Chart"
@@ -593,6 +677,7 @@ Public Class MainForm
         'Else
         '    olvAGV.BackColor = Color.White
         'End If
+        'EndDevicesArray(0).connecting = True
     End Sub
     Private Function isAndonAlarmCondition(ByVal value As AGV.RobocarStatusValue) As Boolean
         If value = AGV.RobocarStatusValue.BATTERY_EMPTY Or value = AGV.RobocarStatusValue.EMERGENCY Or value = AGV.RobocarStatusValue.NO_CART Or value = AGV.RobocarStatusValue.OUT_OF_LINE Then
@@ -601,4 +686,8 @@ Public Class MainForm
             Return False
         End If
     End Function
+
+    Private Sub MainMenuSetting_Click(sender As Object, e As EventArgs) Handles MainMenuSetting.Click
+        SettingForm.ShowDialog()
+    End Sub
 End Class

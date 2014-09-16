@@ -24,9 +24,9 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.MainManu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,6 +51,7 @@ Partial Class MainForm
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CustomizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainMenuSetting = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IndexToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -83,21 +84,27 @@ Partial Class MainForm
         Me.MenuAGVEnable = New System.Windows.Forms.ToolStripMenuItem()
         Me.olvPart = New BrightIdeasSoftware.ObjectListView()
         Me.OlvColumnPartGroup = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.AGVPerformance = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.contMenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OlvColumnPartName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartStatus = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartConnecting = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartEmptyTime = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartAGVSupply = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.MenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.MenuPartView = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPartViewLargeIcon = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPartViewDetail = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPartViewSmallIcon = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPartViewList = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPartViewTile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ConfirmConnectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ForEndDevicesOfSelectedPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ForAllEndDevicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartConfirmConn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartConfirmSelected = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartConfirmAll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MenuPartEnable = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.AGVPerformance = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.imgPartBig = New System.Windows.Forms.ImageList(Me.components)
         Me.imgPartSmall = New System.Windows.Forms.ImageList(Me.components)
         Me.imgAGVSmall = New System.Windows.Forms.ImageList(Me.components)
@@ -113,9 +120,9 @@ Partial Class MainForm
         CType(Me.olvAGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuLstViewAGV.SuspendLayout()
         CType(Me.olvPart, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuLstViewPart.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.contMenuLstViewPart.SuspendLayout()
         Me.SuspendLayout()
         '
         'MainManu
@@ -271,7 +278,7 @@ Partial Class MainForm
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomizeToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomizeToolStripMenuItem, Me.OptionsToolStripMenuItem, Me.MainMenuSetting})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -287,6 +294,12 @@ Partial Class MainForm
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.OptionsToolStripMenuItem.Text = "&Options"
+        '
+        'MainMenuSetting
+        '
+        Me.MainMenuSetting.Name = "MainMenuSetting"
+        Me.MainMenuSetting.Size = New System.Drawing.Size(130, 22)
+        Me.MainMenuSetting.Text = "Setting"
         '
         'HelpToolStripMenuItem1
         '
@@ -405,24 +418,32 @@ Partial Class MainForm
         Me.olvAGV.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnName, Me.OlvColumnPart, Me.OlvColumnWorkingType, Me.OlvColumnPosition, Me.OlvColumnStatus, Me.OlvColumnConnecting, Me.OlvColumnBattery})
         Me.olvAGV.ContextMenuStrip = Me.MenuLstViewAGV
         Me.olvAGV.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.olvAGV.FullRowSelect = True
+        Me.olvAGV.GridLines = True
+        Me.olvAGV.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.olvAGV.Location = New System.Drawing.Point(3, 3)
         Me.olvAGV.Name = "olvAGV"
         Me.olvAGV.Size = New System.Drawing.Size(758, 962)
         Me.olvAGV.TabIndex = 6
         Me.olvAGV.TileSize = New System.Drawing.Size(230, 100)
         Me.olvAGV.UseCompatibleStateImageBehavior = False
-        Me.olvAGV.View = System.Windows.Forms.View.Tile
+        Me.olvAGV.UseTranslucentSelection = True
+        Me.olvAGV.View = System.Windows.Forms.View.Details
         '
         'OlvColumnName
         '
         Me.OlvColumnName.AspectName = "Name"
         Me.OlvColumnName.CellPadding = Nothing
+        Me.OlvColumnName.Groupable = False
+        Me.OlvColumnName.Sortable = False
         Me.OlvColumnName.Text = "Name"
+        Me.OlvColumnName.UseFiltering = False
         '
         'OlvColumnPart
         '
         Me.OlvColumnPart.AspectName = "SupplyPartStatus"
         Me.OlvColumnPart.CellPadding = Nothing
+        Me.OlvColumnPart.IsTileViewColumn = True
         Me.OlvColumnPart.Text = "Part supply"
         '
         'OlvColumnWorkingType
@@ -526,96 +547,81 @@ Partial Class MainForm
         'olvPart
         '
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartGroup)
-        Me.olvPart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnPartGroup})
-        Me.olvPart.ContextMenuStrip = Me.contMenuLstViewPart
+        Me.olvPart.AllColumns.Add(Me.OlvColumnPartName)
+        Me.olvPart.AllColumns.Add(Me.OlvColumnPartStatus)
+        Me.olvPart.AllColumns.Add(Me.OlvColumnPartConnecting)
+        Me.olvPart.AllColumns.Add(Me.OlvColumnPartEmptyTime)
+        Me.olvPart.AllColumns.Add(Me.OlvColumnPartAGVSupply)
+        Me.olvPart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnPartGroup, Me.OlvColumnPartName, Me.OlvColumnPartStatus, Me.OlvColumnPartConnecting, Me.OlvColumnPartEmptyTime, Me.OlvColumnPartAGVSupply})
+        Me.olvPart.ContextMenuStrip = Me.MenuLstViewPart
         Me.olvPart.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.olvPart.FullRowSelect = True
+        Me.olvPart.GridLines = True
+        Me.olvPart.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.olvPart.Location = New System.Drawing.Point(767, 3)
         Me.olvPart.Name = "olvPart"
+        Me.olvPart.SelectedColumnTint = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.olvPart.Size = New System.Drawing.Size(759, 962)
+        Me.olvPart.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.olvPart.TabIndex = 7
         Me.olvPart.TileSize = New System.Drawing.Size(230, 100)
         Me.olvPart.UseCompatibleStateImageBehavior = False
+        Me.olvPart.UseTranslucentSelection = True
         Me.olvPart.View = System.Windows.Forms.View.Details
         '
         'OlvColumnPartGroup
         '
         Me.OlvColumnPartGroup.AspectName = "group"
         Me.OlvColumnPartGroup.CellPadding = Nothing
+        Me.OlvColumnPartGroup.IsTileViewColumn = True
         Me.OlvColumnPartGroup.Text = "Line"
         '
-        'TabPage2
+        'OlvColumnPartName
         '
-        Me.TabPage2.Controls.Add(Me.AGVPerformance)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1872, 964)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "AGV performent"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.OlvColumnPartName.AspectName = "Name"
+        Me.OlvColumnPartName.CellPadding = Nothing
+        Me.OlvColumnPartName.Groupable = False
+        Me.OlvColumnPartName.Sortable = False
+        Me.OlvColumnPartName.Text = "Name"
         '
-        'AGVPerformance
+        'OlvColumnPartStatus
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.AGVPerformance.ChartAreas.Add(ChartArea1)
-        Legend1.Font = New System.Drawing.Font("Cambria", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Legend1.IsTextAutoFit = False
-        Legend1.Name = "Legend1"
-        Me.AGVPerformance.Legends.Add(Legend1)
-        Me.AGVPerformance.Location = New System.Drawing.Point(6, 6)
-        Me.AGVPerformance.Name = "AGVPerformance"
-        Me.AGVPerformance.Size = New System.Drawing.Size(1863, 952)
-        Me.AGVPerformance.TabIndex = 0
-        Me.AGVPerformance.Text = "Chart1"
-        Title1.Font = New System.Drawing.Font("Cambria", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Title1.ForeColor = System.Drawing.Color.Maroon
-        Title1.Name = "Title1"
-        Title1.ShadowOffset = 3
-        Title1.Text = "AGV STATUS"
-        Title1.TextStyle = System.Windows.Forms.DataVisualization.Charting.TextStyle.Shadow
-        Me.AGVPerformance.Titles.Add(Title1)
+        Me.OlvColumnPartStatus.AspectName = "Status"
+        Me.OlvColumnPartStatus.CellPadding = Nothing
+        Me.OlvColumnPartStatus.Text = "Status"
         '
-        'TabPage3
+        'OlvColumnPartConnecting
         '
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1872, 964)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Map"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        Me.OlvColumnPartConnecting.AspectName = "connecting"
+        Me.OlvColumnPartConnecting.CellPadding = Nothing
+        Me.OlvColumnPartConnecting.Text = "Connection"
+        Me.OlvColumnPartConnecting.Width = 77
         '
-        'TabPage4
+        'OlvColumnPartEmptyTime
         '
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(1872, 964)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "History"
-        Me.TabPage4.UseVisualStyleBackColor = True
+        Me.OlvColumnPartEmptyTime.AspectName = "EmptyTime"
+        Me.OlvColumnPartEmptyTime.CellPadding = Nothing
+        Me.OlvColumnPartEmptyTime.Text = "Empty time"
         '
-        'TabPage5
+        'OlvColumnPartAGVSupply
         '
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(1872, 964)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Test"
-        Me.TabPage5.UseVisualStyleBackColor = True
+        Me.OlvColumnPartAGVSupply.AspectName = "AGVSupply"
+        Me.OlvColumnPartAGVSupply.CellPadding = Nothing
+        Me.OlvColumnPartAGVSupply.Text = "AGV Supply"
         '
-        'contMenuLstViewPart
+        'MenuLstViewPart
         '
-        Me.contMenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem, Me.ConfirmConnectionToolStripMenuItem1})
-        Me.contMenuLstViewPart.Name = "contMenuListViewPart"
-        Me.contMenuLstViewPart.Size = New System.Drawing.Size(182, 48)
+        Me.MenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuPartView, Me.MenuPartConfirmConn, Me.MenuPartEnable})
+        Me.MenuLstViewPart.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.MenuLstViewPart.Name = "contMenuListViewPart"
+        Me.MenuLstViewPart.Size = New System.Drawing.Size(182, 70)
         '
-        'ViewToolStripMenuItem
+        'MenuPartView
         '
-        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuPartViewLargeIcon, Me.MenuPartViewDetail, Me.MenuPartViewSmallIcon, Me.MenuPartViewList, Me.MenuPartViewTile})
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
-        Me.ViewToolStripMenuItem.Text = "View"
+        Me.MenuPartView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuPartViewLargeIcon, Me.MenuPartViewDetail, Me.MenuPartViewSmallIcon, Me.MenuPartViewList, Me.MenuPartViewTile})
+        Me.MenuPartView.Name = "MenuPartView"
+        Me.MenuPartView.Size = New System.Drawing.Size(181, 22)
+        Me.MenuPartView.Text = "View"
         '
         'MenuPartViewLargeIcon
         '
@@ -647,24 +653,91 @@ Partial Class MainForm
         Me.MenuPartViewTile.Size = New System.Drawing.Size(129, 22)
         Me.MenuPartViewTile.Text = "Tile"
         '
-        'ConfirmConnectionToolStripMenuItem1
+        'MenuPartConfirmConn
         '
-        Me.ConfirmConnectionToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ForEndDevicesOfSelectedPartToolStripMenuItem, Me.ForAllEndDevicesToolStripMenuItem})
-        Me.ConfirmConnectionToolStripMenuItem1.Name = "ConfirmConnectionToolStripMenuItem1"
-        Me.ConfirmConnectionToolStripMenuItem1.Size = New System.Drawing.Size(181, 22)
-        Me.ConfirmConnectionToolStripMenuItem1.Text = "Confirm connection"
+        Me.MenuPartConfirmConn.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuPartConfirmSelected, Me.MenuPartConfirmAll})
+        Me.MenuPartConfirmConn.Name = "MenuPartConfirmConn"
+        Me.MenuPartConfirmConn.Size = New System.Drawing.Size(181, 22)
+        Me.MenuPartConfirmConn.Text = "Confirm connection"
         '
-        'ForEndDevicesOfSelectedPartToolStripMenuItem
+        'MenuPartConfirmSelected
         '
-        Me.ForEndDevicesOfSelectedPartToolStripMenuItem.Name = "ForEndDevicesOfSelectedPartToolStripMenuItem"
-        Me.ForEndDevicesOfSelectedPartToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
-        Me.ForEndDevicesOfSelectedPartToolStripMenuItem.Text = "For EndDevices of selected part"
+        Me.MenuPartConfirmSelected.Name = "MenuPartConfirmSelected"
+        Me.MenuPartConfirmSelected.Size = New System.Drawing.Size(238, 22)
+        Me.MenuPartConfirmSelected.Text = "For EndDevices of selected part"
         '
-        'ForAllEndDevicesToolStripMenuItem
+        'MenuPartConfirmAll
         '
-        Me.ForAllEndDevicesToolStripMenuItem.Name = "ForAllEndDevicesToolStripMenuItem"
-        Me.ForAllEndDevicesToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
-        Me.ForAllEndDevicesToolStripMenuItem.Text = "For all EndDevices"
+        Me.MenuPartConfirmAll.Name = "MenuPartConfirmAll"
+        Me.MenuPartConfirmAll.Size = New System.Drawing.Size(238, 22)
+        Me.MenuPartConfirmAll.Text = "For all EndDevices"
+        '
+        'MenuPartEnable
+        '
+        Me.MenuPartEnable.Name = "MenuPartEnable"
+        Me.MenuPartEnable.Size = New System.Drawing.Size(181, 22)
+        Me.MenuPartEnable.Text = "Enable"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.AGVPerformance)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(1872, 964)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "AGV performent"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'AGVPerformance
+        '
+        ChartArea2.Name = "ChartArea1"
+        Me.AGVPerformance.ChartAreas.Add(ChartArea2)
+        Legend2.Font = New System.Drawing.Font("Cambria", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Legend2.IsTextAutoFit = False
+        Legend2.Name = "Legend1"
+        Me.AGVPerformance.Legends.Add(Legend2)
+        Me.AGVPerformance.Location = New System.Drawing.Point(6, 6)
+        Me.AGVPerformance.Name = "AGVPerformance"
+        Me.AGVPerformance.Size = New System.Drawing.Size(1863, 952)
+        Me.AGVPerformance.TabIndex = 0
+        Me.AGVPerformance.Text = "Chart1"
+        Title2.Font = New System.Drawing.Font("Cambria", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Title2.ForeColor = System.Drawing.Color.Maroon
+        Title2.Name = "Title1"
+        Title2.ShadowOffset = 3
+        Title2.Text = "AGV STATUS"
+        Title2.TextStyle = System.Windows.Forms.DataVisualization.Charting.TextStyle.Shadow
+        Me.AGVPerformance.Titles.Add(Title2)
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(1872, 964)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Map"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(1872, 964)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "History"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(1872, 964)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Test"
+        Me.TabPage5.UseVisualStyleBackColor = True
         '
         'imgPartBig
         '
@@ -742,6 +815,7 @@ Partial Class MainForm
         Me.MainMenuStrip = Me.MainManu
         Me.Name = "MainForm"
         Me.Text = "Main windows"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MainManu.ResumeLayout(False)
         Me.MainManu.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
@@ -750,9 +824,9 @@ Partial Class MainForm
         CType(Me.olvAGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuLstViewAGV.ResumeLayout(False)
         CType(Me.olvPart, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuLstViewPart.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
         CType(Me.AGVPerformance, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.contMenuLstViewPart.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -799,14 +873,14 @@ Partial Class MainForm
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
     Friend WithEvents imgAGVSmall As System.Windows.Forms.ImageList
     Friend WithEvents MenuLstViewAGV As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents contMenuLstViewPart As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents MenuLstViewPart As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents imgPartBig As System.Windows.Forms.ImageList
     Friend WithEvents imgPartSmall As System.Windows.Forms.ImageList
     Friend WithEvents DisplayTimer As System.Windows.Forms.Timer
     Friend WithEvents CrossTimer As System.Windows.Forms.Timer
     Friend WithEvents AutoSaveTimer As System.Windows.Forms.Timer
     Friend WithEvents RecordTimer As System.Windows.Forms.Timer
-    Friend WithEvents ViewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartView As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuPartViewLargeIcon As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuPartViewDetail As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuPartViewSmallIcon As System.Windows.Forms.ToolStripMenuItem
@@ -821,9 +895,9 @@ Partial Class MainForm
     Friend WithEvents MenuAGVConfirmConn As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuAGVConfirmSelected As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuAGVConfirmAll As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ConfirmConnectionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ForEndDevicesOfSelectedPartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ForAllEndDevicesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartConfirmConn As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartConfirmSelected As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuPartConfirmAll As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MenuAGVEnable As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AndonTimer As System.Windows.Forms.Timer
     Friend WithEvents olvAGV As BrightIdeasSoftware.ObjectListView
@@ -836,5 +910,12 @@ Partial Class MainForm
     Friend WithEvents OlvColumnBattery As BrightIdeasSoftware.OLVColumn
     Friend WithEvents olvPart As BrightIdeasSoftware.ObjectListView
     Friend WithEvents OlvColumnPartGroup As BrightIdeasSoftware.OLVColumn
+    Friend WithEvents OlvColumnPartName As BrightIdeasSoftware.OLVColumn
+    Friend WithEvents OlvColumnPartStatus As BrightIdeasSoftware.OLVColumn
+    Friend WithEvents OlvColumnPartConnecting As BrightIdeasSoftware.OLVColumn
+    Friend WithEvents OlvColumnPartEmptyTime As BrightIdeasSoftware.OLVColumn
+    Friend WithEvents OlvColumnPartAGVSupply As BrightIdeasSoftware.OLVColumn
+    Friend WithEvents MenuPartEnable As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MainMenuSetting As System.Windows.Forms.ToolStripMenuItem
 
 End Class

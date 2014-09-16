@@ -70,6 +70,7 @@ Public Module MainModule
                     AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.SUPPLYING
                     AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL
                     PartList(partNeedSupply).AGVSupply = AGVList(AGVNum).Name
+                    PartList(partNeedSupply).supplyCount += 1
                 End If
             End If
         Next

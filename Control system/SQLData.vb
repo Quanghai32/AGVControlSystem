@@ -11,7 +11,9 @@ Public Module SQLData
     Public Sub ReadStartData()
         SQLcon = New SqlConnection(SQLstrConn)
         SQLcon.Open()
-
+        If isNeedToReset Then
+            ResetPartCounter()
+        End If
         ReadHost()
         ReadEndDevices()
         ReadLineGroup()
@@ -99,6 +101,8 @@ Public Module SQLData
                     EndDevicesArray(num).Parts(j).index = myDataTable.Rows(i)("ID")
                     EndDevicesArray(num).Parts(j).priority = myDataTable.Rows(i)("Priority")
                     EndDevicesArray(num).Parts(j).group = myDataTable.Rows(i)("Group")
+                    EndDevicesArray(num).Parts(j).supplyCount = myDataTable.Rows(i)("count")
+                    EndDevicesArray(num).Parts(j).target = myDataTable.Rows(i)("target")
                     LineGroupArray(EndDevicesArray(num).Parts(j).group).MaxPart += 1
                     If IsNothing(LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart) Then
                         LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart = New Collection
@@ -177,7 +181,6 @@ Public Module SQLData
             StartPoint(SPnum) = myDataTable.Rows(SPnum)(1)
         Next
     End Sub
-
     Public Sub ChartResetSQL()
         For AGVNum As Byte = 0 To AGVList.Count - 1
             For column As Byte = 2 To 10
@@ -191,5 +194,11 @@ Public Module SQLData
     Public Sub ChartUpdateSQL()
         Dim objCommandBuilder As New SqlCommandBuilder(ChartDataAdapter)
         ChartDataAdapter.Update(ChartDataSet, "chart")
+    End Sub
+
+    Public Sub ResetPartCounter()
+        Dim cmdText As String = "UPDATE PART SET COUNT=0"
+        Dim sqlcmd = New SqlCommand(cmdText, SQLcon)
+        sqlcmd.ExecuteNonQuery()
     End Sub
 End Module
