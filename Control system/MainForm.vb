@@ -27,15 +27,11 @@ Public Class MainForm
         RecordTimer.Start()
         AndonTimer.Start()
         'CrossView.Show()
-
-        For i As Byte = 0 To olvAGV.Columns.Count - 1
-
-        Next
     End Sub
 
     Private Sub MainForm_Resize(sender As Object, e As EventArgs) Handles Me.Resize
         TabControl1.Dock = DockStyle.Fill
-        TableLayoutPanel1.Dock = DockStyle.Fill
+        'TableLayoutPanel1.Dock = DockStyle.Fill
     End Sub
     Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick
         DisplayTimer.Stop()
@@ -254,16 +250,20 @@ Public Class MainForm
                     textBoxRect.Height = size.Height
                     fmt.Alignment = StringAlignment.Near
 
-                    txt = "Part: " + CType(rowObject, AGV).SupplyPartStatus.ToString
+                    txt = "Part: " + PartList(rbc.SupplyPartStatus).Name + " (" + rbc.SupplyPartStatus.ToString + ")"
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
 
                     txt = "Position: " + CType(rowObject, AGV).Position.ToString
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
-
-                    txt = "Bat: " + CType(rowObject, AGV).Battery(0).ToString + "-" + CType(rowObject, AGV).Battery(1).ToString + "-" + CType(rowObject, AGV).Battery(2).ToString + "-" + CType(rowObject, AGV).Battery(3).ToString
-                    g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                    Dim value = rbc.BatteryPercent()
+                    txt = "Battery: " + value.ToString + "%"
+                    If value < 25 Then
+                        g.DrawString(txt, uFont, Brushes.DarkRed, textBoxRect, fmt)
+                    Else
+                        g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
+                    End If
                     textBoxRect.Y += size.Height
                 End Using
             End If
@@ -512,13 +512,20 @@ Public Class MainForm
                     textBoxRect.Height = size.Height
                     fmt.Alignment = StringAlignment.Near
 
-                    txt = "Supply by: " + part.AGVSupply
-                    g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
-                    textBoxRect.Y += size.Height
-
                     txt = "Count: " + part.supplyCount.ToString + "/" + part.target.ToString
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
+                    If part.AGVSupply = "" Then
+                        If part.Status = False Then
+                            txt = "Time: " + Math.Round((Now - part.EmptyTime).TotalSeconds).ToString() + "s"
+                            g.DrawString(txt, uFont, Brushes.DarkRed, textBoxRect, fmt)
+                            textBoxRect.Y += size.Height
+                        End If
+                    Else
+                        txt = "AGV: " + part.AGVSupply
+                        g.DrawString(txt, uFont, Brushes.DarkGreen, textBoxRect, fmt)
+                        textBoxRect.Y += size.Height
+                    End If
                 End Using
             End If
         End Sub
@@ -677,7 +684,6 @@ Public Class MainForm
         'Else
         '    olvAGV.BackColor = Color.White
         'End If
-        'EndDevicesArray(0).connecting = True
     End Sub
     Private Function isAndonAlarmCondition(ByVal value As AGV.RobocarStatusValue) As Boolean
         If value = AGV.RobocarStatusValue.BATTERY_EMPTY Or value = AGV.RobocarStatusValue.EMERGENCY Or value = AGV.RobocarStatusValue.NO_CART Or value = AGV.RobocarStatusValue.OUT_OF_LINE Then
