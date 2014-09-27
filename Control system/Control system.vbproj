@@ -173,12 +173,6 @@
     <None Include="Setting\setting.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\01. Library\ControlSystemLibrary\ControlSystemLibrary\ControlSystemLibrary.vbproj">
-      <Project>{1115160A-EA7E-466E-A328-19006FDF7AD4}</Project>
-      <Name>ControlSystemLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
@@ -199,6 +193,12 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\01. Library\ControlSystemLibrary\ControlSystemLibrary\ControlSystemLibrary.vbproj">
+      <Project>{1115160a-ea7e-466e-a328-19006fdf7ad4}</Project>
+      <Name>ControlSystemLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

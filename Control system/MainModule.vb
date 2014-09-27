@@ -3,7 +3,7 @@ Imports ControlSystemLibrary
 Imports System.IO.Ports
 Imports System.IO
 Public Module MainModule
-	Public UpdateThread As New Thread(AddressOf UpdateData)
+    Public UpdateThread As New Thread(AddressOf UpdateData)
 	Public RequestThread As New Thread(AddressOf RequestData)
     Public DoCrossThread As New Thread(AddressOf DoCrossFunc)
     Public SaveThread As New Thread(AddressOf ChartUpdateSQL)

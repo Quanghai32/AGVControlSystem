@@ -194,6 +194,16 @@ Public Module SQLData
     Public Sub ChartUpdateSQL()
         Dim objCommandBuilder As New SqlCommandBuilder(ChartDataAdapter)
         ChartDataAdapter.Update(ChartDataSet, "chart")
+
+        Static Dim PartCounter() As Integer = New Integer(PartList.Count - 1) {}
+        For i As Byte = 0 To PartList.Count - 1
+            If PartCounter(i) <> PartList(i).supplyCount Then
+                Dim cmdText As String = "UPDATE PART SET COUNT=" + PartList(i).supplyCount.ToString + " WHERE Id=" + i.ToString
+                Dim sqlcmd = New SqlCommand(cmdText, SQLcon)
+                sqlcmd.ExecuteNonQuery()
+                PartCounter(i) = PartList(i).supplyCount
+            End If
+        Next
     End Sub
 
     Public Sub ResetPartCounter()
