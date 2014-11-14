@@ -11,7 +11,6 @@ Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadStartData()
         SetupHostXbee()
-        LoadSetting()
 
         DisplayAGV()
         DisplayPart()
@@ -81,7 +80,11 @@ Public Class MainForm
             MenuAGVConfirmAll.Enabled = True
             MenuAGVEnable.Visible = False
         End If
-        Dim a = olvAGV.Items(0).ToString
+        If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
+            MenuAGVEnable.Enabled = True
+        Else
+            MenuAGVEnable.Enabled = False
+        End If
     End Sub
     Private Sub MenuAGVView_Click(sender As Object, e As EventArgs) Handles MenuAGVViewLargeIcon.Click, MenuAGVViewDetails.Click, MenuAGVViewList.Click, MenuAGVViewSmallIcon.Click, MenuAGVViewTile.Click, MenuAGVViewDetails.Click
         If sender.Equals(MenuAGVViewTile) Then
@@ -106,12 +109,11 @@ Public Class MainForm
         End If
     End Sub
     Private Sub ForSelectedAGVToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MenuAGVConfirmSelected.Click
-        Dim listSelected As System.Windows.Forms.ListView.SelectedIndexCollection = olvAGV.SelectedIndices
-        If listSelected.Count > 0 Then
-            For Each index In listSelected
-                AGVList(index).SetHostAddress()
-            Next
-        End If
+        Dim AGVSelectedCollection As ArrayList = olvAGV.SelectedObjects
+        For i As Byte = 0 To AGVSelectedCollection.Count - 1
+            Dim AGVIndex As AGV = CType(AGVSelectedCollection(i), AGV)
+            AGVIndex.SetHostAddress()
+        Next
     End Sub
     Private Sub MenuAGVEnable_Click(sender As Object, e As EventArgs) Handles MenuAGVEnable.Click
         Dim rbc As AGV = CType(olvAGV.SelectedObject, AGV)
@@ -337,7 +339,11 @@ Public Class MainForm
             MenuPartConfirmAll.Enabled = True
             MenuPartEnable.Visible = False
         End If
-        Dim a = olvPart.Items(0).ToString
+        If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
+            MenuPartEnable.Enabled = True
+        Else
+            MenuPartEnable.Enabled = False
+        End If
     End Sub
     Private Sub MenuPartViewItem_Click(sender As Object, e As EventArgs) Handles MenuPartViewLargeIcon.Click, MenuPartViewDetail.Click, MenuPartViewSmallIcon.Click, MenuPartViewList.Click, MenuPartViewTile.Click
         If sender.Equals(MenuPartViewTile) Then
@@ -362,12 +368,14 @@ Public Class MainForm
         End If
     End Sub
     Private Sub MenuPartConfirmSelected_Click(sender As Object, e As EventArgs) Handles MenuPartConfirmSelected.Click
-        Dim listSelected As System.Windows.Forms.ListView.SelectedIndexCollection = olvPart.SelectedIndices
-        If listSelected.Count > 0 Then
-            For Each index In listSelected
-                PartList(index).parent.SettingAddress()
-            Next
-        End If
+        Dim PartSelectedCollection As ArrayList = olvPart.SelectedObjects
+        For i As Byte = 0 To PartSelectedCollection.Count - 1
+            Dim PartIndex As Byte = CType(PartSelectedCollection(i), CPart).index
+            PartList(PartIndex).parent.SettingAddress()
+        Next
+
+        'Dim PartIndex As Byte = CType(olvPart.SelectedObject, CPart).index
+        'PartList(PartIndex).parent.SettingAddress()
     End Sub
     Private Sub MenuPartEnable_Click(sender As Object, e As EventArgs) Handles MenuPartEnable.Click
         Dim PartIndex As Byte = CType(olvPart.SelectedObject, CPart).index
@@ -694,6 +702,12 @@ Public Class MainForm
     End Function
 
     Private Sub MainMenuSetting_Click(sender As Object, e As EventArgs) Handles MainMenuSetting.Click
-        SettingForm.ShowDialog()
+        If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
+            System.Diagnostics.Process.Start("setting.exe")
+        Else
+            MessageBox.Show("Access is denied." + vbCrLf + "You cannot have permission to use this function. Please conntact with your administrator." + vbCrLf + vbCrLf +
+                            "Truy cập bị từ chối." + vbCrLf + "Bạn không có quyền sử dụng tính năng này. Hãy liên hệ với người quản trị để biết thêm chi tiết.",
+                            "Control system - Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
 End Class

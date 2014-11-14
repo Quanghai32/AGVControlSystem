@@ -168,15 +168,33 @@ Public Module SQLData
         ChartDataTable = New DataTable()
         ChartDataAdapter.Fill(ChartDataSet, "chart")
         ChartDataTable = ChartDataSet.Tables("chart")
+        If ChartDataTable.Rows.Count < AGVList.Count Then
+            While ChartDataTable.Rows.Count < AGVList.Count
+                Dim newRow As DataRow = ChartDataTable.NewRow()
+                newRow(0) = ChartDataTable.Rows.Count
+                For i As Byte = 1 To 10
+                    newRow(i) = 0
+                Next
+                ChartDataTable.Rows.Add(newRow)
+            End While
+            ChartResetSQL()
+        ElseIf ChartDataTable.Rows.Count > AGVList.Count Then
+            While ChartDataTable.Rows.Count > AGVList.Count
+                ChartDataTable.Rows.RemoveAt(ChartDataTable.Rows.Count - 1)
+            End While
+            ChartResetSQL()
+        End If
+        For i As Byte = 0 To ChartDataTable.Rows.Count - 1
+            ChartDataTable.Rows.Item(i)(1) = AGVList(i).Name
+        Next
     End Sub
     Private Sub ReadStartPoint()
         Dim myDataAdapter As SqlDataAdapter
         Dim myDataTable As DataTable
-        'Read CrossFunction
         myDataAdapter = New SqlDataAdapter("SELECT * FROM StartPoint", SQLcon)
         myDataTable = New DataTable
         myDataAdapter.Fill(myDataTable)
-        StartPoint = New Byte(myDataTable.Rows.Count - 1) {}
+        StartPoint = New Integer(myDataTable.Rows.Count - 1) {}
         For SPnum As Byte = 0 To myDataTable.Rows.Count - 1
             StartPoint(SPnum) = myDataTable.Rows(SPnum)(1)
         Next

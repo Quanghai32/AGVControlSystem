@@ -318,7 +318,7 @@ Public Module MainModule
     End Sub
 
     Public Sub Record(ByVal section As String, ByVal key As String, ByVal value As String)
-        Using writer As StreamWriter = File.AppendText(Environment.CurrentDirectory + "\" + Today.Year.ToString + Today.Month.ToString + Today.Day.ToString + ".txt")
+        Using writer As StreamWriter = File.AppendText(Environment.CurrentDirectory + "\log\" + Today.Year.ToString + Today.Month.ToString + Today.Day.ToString + ".txt")
             writer.WriteLine(Now.ToString + "-" + section + "-" + key + "-" + value)
             writer.Close()
         End Using
