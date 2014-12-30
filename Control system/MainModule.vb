@@ -78,8 +78,10 @@ Public Module MainModule
                         AGVList(AGVNum).RequestRoute(partNeedSupply)
                         AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.SUPPLYING
                         AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL
+                        AGVList(AGVNum).SupplyTime = Now
                         PartList(partNeedSupply).AGVSupply = AGVList(AGVNum).Name
                         PartList(partNeedSupply).supplyCount += 1
+                        PartList(partNeedSupply).SupplyTime = Now
                     End If
 
                 End If

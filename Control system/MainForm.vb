@@ -251,7 +251,7 @@ Public Class MainForm
             End Using
             If rbc.Enable Then
                 'Draw the other bits of information
-                Using uFont As Font = New Font("Tahoma", 11)
+                Using uFont As Font = New Font("Tahoma", 10)
                     Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
                     textBoxRect.Height = size.Height
                     fmt.Alignment = StringAlignment.Near
@@ -264,6 +264,11 @@ Public Class MainForm
                     textBoxRect.Y += size.Height
 
                     txt = "Position: " + CType(rowObject, AGV).Position.ToString
+                    If rbc.WorkingStatus = AGV.RobocarWorkingStatusValue.FREE Then
+                        txt += " | Free: " + Math.Round((Now - rbc.FreeTime).TotalSeconds).ToString() + "s"
+                    Else
+                        txt += " | Supply: " + Math.Round((Now - rbc.SupplyTime).TotalSeconds).ToString() + "s"
+                    End If
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     Dim value = rbc.BatteryPercent()
@@ -522,7 +527,7 @@ Public Class MainForm
             End Using
             If part.Enable Then
                 'Draw the other bits of information
-                Using uFont As Font = New Font("Tahoma", 11)
+                Using uFont As Font = New Font("Tahoma", 10)
                     Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
                     textBoxRect.Height = size.Height
                     fmt.Alignment = StringAlignment.Near
@@ -532,13 +537,20 @@ Public Class MainForm
                     textBoxRect.Y += size.Height
                     If part.AGVSupply = "" Then
                         If part.Status = False Then
-                            txt = "Time: " + Math.Round((Now - part.EmptyTime).TotalSeconds).ToString() + "s"
+                            txt = "Empty time: " + Math.Round((Now - part.EmptyTime).TotalSeconds).ToString() + "s"
                             g.DrawString(txt, uFont, Brushes.DarkRed, textBoxRect, fmt)
+                            textBoxRect.Y += size.Height
+                        Else
+                            txt = "Full time: " + Math.Round((Now - part.FullTime).TotalSeconds).ToString() + "s"
+                            g.DrawString(txt, uFont, Brushes.DarkGreen, textBoxRect, fmt)
                             textBoxRect.Y += size.Height
                         End If
                     Else
                         txt = "AGV: " + part.AGVSupply
                         g.DrawString(txt, uFont, Brushes.DarkGreen, textBoxRect, fmt)
+                        textBoxRect.Y += size.Height
+                        txt = "Supply time: " + Math.Round((Now - part.SupplyTime).TotalSeconds).ToString() + "s"
+                        g.DrawString(txt, uFont, Brushes.DarkBlue, textBoxRect, fmt)
                         textBoxRect.Y += size.Height
                     End If
                 End Using
