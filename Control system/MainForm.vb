@@ -80,11 +80,11 @@ Public Class MainForm
             MenuAGVConfirmAll.Enabled = True
             MenuAGVEnable.Visible = False
         End If
-        If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
-            MenuAGVEnable.Enabled = True
-        Else
-            MenuAGVEnable.Enabled = False
-        End If
+        'If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
+        '    MenuAGVEnable.Enabled = True
+        'Else
+        '    MenuAGVEnable.Enabled = False
+        'End If
     End Sub
     Private Sub MenuAGVView_Click(sender As Object, e As EventArgs) Handles MenuAGVViewLargeIcon.Click, MenuAGVViewDetails.Click, MenuAGVViewList.Click, MenuAGVViewSmallIcon.Click, MenuAGVViewTile.Click, MenuAGVViewDetails.Click
         If sender.Equals(MenuAGVViewTile) Then
@@ -130,11 +130,15 @@ Public Class MainForm
         olvAGV.AddDecoration(New EditingCellBorderDecoration(True))
         Dim tlist As TypedObjectListView(Of AGV) = New TypedObjectListView(Of AGV)(olvAGV)
         tlist.GenerateAspectGetters()
+        OlvColumnGroup.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+                                                                   Dim myAGV As AGV = CType(row, AGV)
+                                                                   Return AGVGroupArray(myAGV.group).Name
+                                                               End Function)
         olvAGV.ItemRenderer = New AGVRenderer()
         olvAGV.SetObjects(list)
         olvAGV.View = View.Tile
         olvAGV.OwnerDraw = True
-        olvAGV.Groups.Clear()
+        'olvAGV.Groups.Clear()
     End Sub
 
     Class AGVRenderer
@@ -228,7 +232,7 @@ Public Class MainForm
             fmt.Trimming = StringTrimming.EllipsisCharacter
             fmt.Alignment = StringAlignment.Center
             fmt.LineAlignment = StringAlignment.Near
-            Dim txt As String = item.Text
+            Dim txt As String = rbc.Name
 
             Using uFont As Font = New Font("Tahoma", 11)
                 ' Measure the height of the title
@@ -251,8 +255,11 @@ Public Class MainForm
                     Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
                     textBoxRect.Height = size.Height
                     fmt.Alignment = StringAlignment.Near
-
-                    txt = "Part: " + PartList(rbc.SupplyPartStatus).Name + " (" + rbc.SupplyPartStatus.ToString + ")"
+                    If rbc.SupplyPartStatus > PartList.Count Then
+                        txt = "Part: " + "Unknown" + " (" + rbc.SupplyPartStatus.ToString + ")"
+                    Else
+                        txt = "Part: " + PartList(rbc.SupplyPartStatus).Name + " (" + rbc.SupplyPartStatus.ToString + ")"
+                    End If
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
 
@@ -339,11 +346,11 @@ Public Class MainForm
             MenuPartConfirmAll.Enabled = True
             MenuPartEnable.Visible = False
         End If
-        If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
-            MenuPartEnable.Enabled = True
-        Else
-            MenuPartEnable.Enabled = False
-        End If
+        'If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
+        '    MenuPartEnable.Enabled = True
+        'Else
+        '    MenuPartEnable.Enabled = False
+        'End If
     End Sub
     Private Sub MenuPartViewItem_Click(sender As Object, e As EventArgs) Handles MenuPartViewLargeIcon.Click, MenuPartViewDetail.Click, MenuPartViewSmallIcon.Click, MenuPartViewList.Click, MenuPartViewTile.Click
         If sender.Equals(MenuPartViewTile) Then
@@ -702,12 +709,6 @@ Public Class MainForm
     End Function
 
     Private Sub MainMenuSetting_Click(sender As Object, e As EventArgs) Handles MainMenuSetting.Click
-        If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
-            System.Diagnostics.Process.Start("setting.exe")
-        Else
-            MessageBox.Show("Access is denied." + vbCrLf + "You cannot have permission to use this function. Please conntact with your administrator." + vbCrLf + vbCrLf +
-                            "Truy cập bị từ chối." + vbCrLf + "Bạn không có quyền sử dụng tính năng này. Hãy liên hệ với người quản trị để biết thêm chi tiết.",
-                            "Control system - Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
+        System.Diagnostics.Process.Start("setting.exe")
     End Sub
 End Class

@@ -21,6 +21,14 @@ Public Module GeneralVariable
 
     Public LineGroupArray() As LineGroup
 
+    Structure AGVGroup
+        Public Name As String
+        Public MaxAGV As Byte
+        Public ChildAGV As Collection
+    End Structure
+
+    Public AGVGroupArray() As AGVGroup
+
     
 	''' <summary>
 	''' AGVnPART(AGVNum,PartNum):

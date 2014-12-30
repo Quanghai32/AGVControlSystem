@@ -66,17 +66,36 @@ Public Module MainModule
             If isAGVFree4Supply(AGVNum) Then
                 Dim partNeedSupply As Byte = findSupplyPart4AGV(AGVNum)
                 If partNeedSupply <> 99 Then
-                    AGVList(AGVNum).RequestRoute(partNeedSupply)
-                    AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.SUPPLYING
-                    AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL
-                    PartList(partNeedSupply).AGVSupply = AGVList(AGVNum).Name
-                    PartList(partNeedSupply).supplyCount += 1
+                    For iTry As Byte = 0 To 4
+                        Dim TimePoint As Integer = Environment.TickCount
+                        AGVList(AGVNum).RequestRoute(partNeedSupply)
+                        While (AGVList(AGVNum).Status <> AGV.RobocarStatusValue.NORMAL And (TimePoint + 5000) > Environment.TickCount)
+
+                        End While
+                        If (AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL) Then Exit For
+                    Next
+                    If (AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL) Then
+                        AGVList(AGVNum).RequestRoute(partNeedSupply)
+                        AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.SUPPLYING
+                        AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL
+                        PartList(partNeedSupply).AGVSupply = AGVList(AGVNum).Name
+                        PartList(partNeedSupply).supplyCount += 1
+                    End If
+
                 End If
             End If
         Next
     End Sub
     Public Sub DoCrossFunc()
         CheckCross()
+
+        If Not IsNothing(ParkPointArray) Then
+            For AGVNum As Byte = 0 To AGVList.Count - 1
+                If isCanRun(AGVNum) And (AGVList(AGVNum).Connecting = True) And (AGVList(AGVNum).Status = AGV.RobocarStatusValue.STOP_BY_CARD) Then
+                    AGVList(AGVNum).AGVRun()
+                End If
+            Next
+        End If
     End Sub
     Public Sub RecordData()
         AGVConnectRecord()
@@ -262,7 +281,7 @@ Public Module MainModule
         Next
     End Sub
     Public Sub AGVPositionRecord()
-        Static PreAGVPositionRecord() As Byte = New Byte(AGVList.Count - 1) {}
+        Static PreAGVPositionRecord() As Integer = New Integer(AGVList.Count - 1) {}
         For i As Byte = 0 To AGVList.Count - 1
             If PreAGVPositionRecord(i) <> AGVList(i).Position Then
                 Record(AGVList(i).Name, "Position", AGVList(i).Position.ToString)

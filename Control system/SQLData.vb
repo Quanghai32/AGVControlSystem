@@ -17,11 +17,13 @@ Public Module SQLData
         ReadHost()
         ReadEndDevices()
         ReadLineGroup()
+        ReadAGVGroup()
         ReadPart()
         ReadAGV()
         ReadCross()
         ReadChart()
         ReadStartPoint()
+        ReadParkPoint()
     End Sub
     Public Sub setAGVSupply(ByVal AGVnumber As Byte, ByVal PartString As String)
         If PartString.ToLower = "all" Then
@@ -83,6 +85,21 @@ Public Module SQLData
             LineGroupArray(i).MaxPart = 0
         Next
     End Sub
+
+    Private Sub ReadAGVGroup()
+        Dim myDataAdapter As SqlDataAdapter
+        Dim myDataTable As DataTable
+        'Read Group information - Line information also
+        myDataAdapter = New SqlDataAdapter("SELECT * FROM AGVGroup", SQLcon)
+        myDataTable = New DataTable
+        myDataAdapter.Fill(myDataTable)
+        AGVGroupArray = New AGVGroup(myDataTable.Rows.Count - 1) {}
+        For i As Byte = 0 To myDataTable.Rows.Count - 1
+            AGVGroupArray(i).Name = myDataTable.Rows(i)("Name")
+            AGVGroupArray(i).MaxAGV = 0
+        Next
+    End Sub
+
     Private Sub ReadPart()
         Dim myDataAdapter As SqlDataAdapter
         Dim myDataTable As DataTable
@@ -93,25 +110,28 @@ Public Module SQLData
         PartList = New List(Of CPart)
         For i As Byte = 0 To myDataTable.Rows.Count - 1
             Dim num As Byte
-            num = myDataTable.Rows(i)("EndDevices")
-            For j As Byte = 0 To 2
-                If EndDevicesArray(num).Parts(j).Name = "" Then
-                    EndDevicesArray(num).Parts(j).Name = myDataTable.Rows(i)("Name")
-                    EndDevicesArray(num).Parts(j).Enable = myDataTable.Rows(i)("Enable")
-                    EndDevicesArray(num).Parts(j).index = myDataTable.Rows(i)("ID")
-                    EndDevicesArray(num).Parts(j).priority = myDataTable.Rows(i)("Priority")
-                    EndDevicesArray(num).Parts(j).group = myDataTable.Rows(i)("Group")
-                    EndDevicesArray(num).Parts(j).supplyCount = myDataTable.Rows(i)("count")
-                    EndDevicesArray(num).Parts(j).target = myDataTable.Rows(i)("target")
-                    LineGroupArray(EndDevicesArray(num).Parts(j).group).MaxPart += 1
-                    If IsNothing(LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart) Then
-                        LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart = New Collection
+            If Not IsDBNull(myDataTable.Rows(i)("EndDevices")) Then
+                num = myDataTable.Rows(i)("EndDevices")
+                For j As Byte = 0 To 2
+                    If EndDevicesArray(num).Parts(j).Name = "" Then
+                        EndDevicesArray(num).Parts(j).Name = myDataTable.Rows(i)("Name")
+                        EndDevicesArray(num).Parts(j).Enable = myDataTable.Rows(i)("Enable")
+                        EndDevicesArray(num).Parts(j).index = myDataTable.Rows(i)("ID")
+                        EndDevicesArray(num).Parts(j).priority = myDataTable.Rows(i)("Priority")
+                        EndDevicesArray(num).Parts(j).group = myDataTable.Rows(i)("Group")
+                        EndDevicesArray(num).Parts(j).supplyCount = myDataTable.Rows(i)("count")
+                        EndDevicesArray(num).Parts(j).target = myDataTable.Rows(i)("target")
+                        EndDevicesArray(num).Parts(j).Status = True
+                        LineGroupArray(EndDevicesArray(num).Parts(j).group).MaxPart += 1
+                        If IsNothing(LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart) Then
+                            LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart = New Collection
+                        End If
+                        LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart.Add(EndDevicesArray(num).Parts(j))
+                        PartList.Add(EndDevicesArray(num).Parts(j))
+                        Exit For
                     End If
-                    LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart.Add(EndDevicesArray(num).Parts(j))
-                    PartList.Add(EndDevicesArray(num).Parts(j))
-                    Exit For
-                End If
-            Next
+                Next
+            End If
         Next
     End Sub
     Private Sub ReadAGV()
@@ -136,6 +156,12 @@ Public Module SQLData
             preAGVStatusArray(i).status_time = Now
             preAGVStatusArray(i).working_time = Now
             AGVList(i).Enable = myDataTable.Rows(i)("Enable")
+            AGVList(i).group = myDataTable.Rows(i)("Group")
+            AGVGroupArray(AGVList(i).group).MaxAGV += 1
+            If IsNothing(AGVGroupArray(AGVList(i).group).ChildAGV) Then
+                AGVGroupArray(AGVList(i).group).ChildAGV = New Collection
+            End If
+            AGVGroupArray(AGVList(i).group).ChildAGV.Add(AGVList(i))
             LinkDeviceAndXbee(AGVList(i), HostXbee(myDataTable.Rows(i)("Host Xbee")))
             setAGVSupply(i, myDataTable.Rows(i)("Part"))
         Next
@@ -147,6 +173,7 @@ Public Module SQLData
         myDataAdapter = New SqlDataAdapter("SELECT * FROM CrossTable", SQLcon)
         myDataTable = New DataTable
         myDataAdapter.Fill(myDataTable)
+        MAX_CROSS = myDataTable.Rows.Count
         CrossArray = New CrossStruct(myDataTable.Rows.Count - 1) {}
         For CrossNumber As Byte = 0 To myDataTable.Rows.Count - 1
             Dim CrossPosArray() As Integer = New Integer(MAX_POS_IN_CROSS - 1) {}
@@ -199,6 +226,52 @@ Public Module SQLData
             StartPoint(SPnum) = myDataTable.Rows(SPnum)(1)
         Next
     End Sub
+    'Private Sub ReadSpecialPart()
+    '    Dim myDataAdapter As SqlDataAdapter
+    '    Dim myDataTable As DataTable
+    '    'Read Part information 
+    '    myDataAdapter = New SqlDataAdapter("SELECT * FROM Part", SQLcon)
+    '    myDataTable = New DataTable
+    '    myDataAdapter.Fill(myDataTable)
+    '    PartList = New List(Of CPart)
+    '    For i As Byte = 0 To myDataTable.Rows.Count - 1
+    '        Dim num As Byte
+    '        num = myDataTable.Rows(i)("EndDevices")
+    '        For j As Byte = 0 To 2
+    '            If EndDevicesArray(num).Parts(j).Name = "" Then
+    '                EndDevicesArray(num).Parts(j).Name = myDataTable.Rows(i)("Name")
+    '                EndDevicesArray(num).Parts(j).Enable = myDataTable.Rows(i)("Enable")
+    '                EndDevicesArray(num).Parts(j).index = myDataTable.Rows(i)("ID")
+    '                EndDevicesArray(num).Parts(j).priority = myDataTable.Rows(i)("Priority")
+    '                EndDevicesArray(num).Parts(j).group = myDataTable.Rows(i)("Group")
+    '                EndDevicesArray(num).Parts(j).supplyCount = myDataTable.Rows(i)("count")
+    '                EndDevicesArray(num).Parts(j).target = myDataTable.Rows(i)("target")
+    '                LineGroupArray(EndDevicesArray(num).Parts(j).group).MaxPart += 1
+    '                If IsNothing(LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart) Then
+    '                    LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart = New Collection
+    '                End If
+    '                LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart.Add(EndDevicesArray(num).Parts(j))
+    '                PartList.Add(EndDevicesArray(num).Parts(j))
+    '                Exit For
+    '            End If
+    '        Next
+    '    Next
+    'End Sub
+    Private Sub ReadParkPoint()
+        Dim myDataAdapter As SqlDataAdapter
+        Dim myDataTable As DataTable
+        myDataAdapter = New SqlDataAdapter("SELECT * FROM ParkPoint", SQLcon)
+        myDataTable = New DataTable
+        myDataAdapter.Fill(myDataTable)
+        If myDataTable.Rows.Count > 0 Then
+            ParkPointArray = New Integer(1, myDataTable.Rows.Count - 1) {}
+            For PPNum As Byte = 0 To myDataTable.Rows.Count - 1
+                ParkPointArray(0, PPNum) = myDataTable.Rows(PPNum)("First")
+                ParkPointArray(1, PPNum) = myDataTable.Rows(PPNum)("Second")
+            Next
+        End If
+    End Sub
+
     Public Sub ChartResetSQL()
         For AGVNum As Byte = 0 To AGVList.Count - 1
             For column As Byte = 2 To 10
@@ -208,7 +281,6 @@ Public Module SQLData
         Dim objCommandBuilder As New SqlCommandBuilder(ChartDataAdapter)
         ChartDataAdapter.Update(ChartDataSet, "chart")
     End Sub
-
     Public Sub ChartUpdateSQL()
         Dim objCommandBuilder As New SqlCommandBuilder(ChartDataAdapter)
         ChartDataAdapter.Update(ChartDataSet, "chart")
@@ -230,3 +302,4 @@ Public Module SQLData
         sqlcmd.ExecuteNonQuery()
     End Sub
 End Module
+

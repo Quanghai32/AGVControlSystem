@@ -112,6 +112,7 @@ Partial Class MainForm
         Me.AutoSaveTimer = New System.Windows.Forms.Timer(Me.components)
         Me.RecordTimer = New System.Windows.Forms.Timer(Me.components)
         Me.AndonTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.OlvColumnGroup = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
         Me.MainMenu.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -411,6 +412,7 @@ Partial Class MainForm
         '
         'olvAGV
         '
+        Me.olvAGV.AllColumns.Add(Me.OlvColumnGroup)
         Me.olvAGV.AllColumns.Add(Me.OlvColumnName)
         Me.olvAGV.AllColumns.Add(Me.OlvColumnPart)
         Me.olvAGV.AllColumns.Add(Me.OlvColumnWorkingType)
@@ -418,7 +420,7 @@ Partial Class MainForm
         Me.olvAGV.AllColumns.Add(Me.OlvColumnStatus)
         Me.olvAGV.AllColumns.Add(Me.OlvColumnConnecting)
         Me.olvAGV.AllColumns.Add(Me.OlvColumnBattery)
-        Me.olvAGV.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnName, Me.OlvColumnPart, Me.OlvColumnWorkingType, Me.OlvColumnPosition, Me.OlvColumnStatus, Me.OlvColumnConnecting, Me.OlvColumnBattery})
+        Me.olvAGV.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnGroup, Me.OlvColumnName, Me.OlvColumnPart, Me.OlvColumnWorkingType, Me.OlvColumnPosition, Me.OlvColumnStatus, Me.OlvColumnConnecting, Me.OlvColumnBattery})
         Me.olvAGV.ContextMenuStrip = Me.MenuLstViewAGV
         Me.olvAGV.Dock = System.Windows.Forms.DockStyle.Fill
         Me.olvAGV.FullRowSelect = True
@@ -797,6 +799,13 @@ Partial Class MainForm
         '
         Me.AndonTimer.Interval = 500
         '
+        'OlvColumnGroup
+        '
+        Me.OlvColumnGroup.AspectName = "Group"
+        Me.OlvColumnGroup.CellPadding = Nothing
+        Me.OlvColumnGroup.IsTileViewColumn = True
+        Me.OlvColumnGroup.Text = "Group"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -912,5 +921,6 @@ Partial Class MainForm
     Friend WithEvents OlvColumnPartAGVSupply As BrightIdeasSoftware.OLVColumn
     Friend WithEvents MenuPartEnable As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MainMenuSetting As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OlvColumnGroup As BrightIdeasSoftware.OLVColumn
 
 End Class
