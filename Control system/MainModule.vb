@@ -19,18 +19,22 @@ Public Module MainModule
             For i As Byte = 0 To HostXbeeName.Length - 1
                 tempXbee.SettingPort(HostXbeeName(i), 9600)
                 tempXbee.Address = 0
-                tempXbee.Send_AT_Command(XBee.AT_COMMAND_ENUM.SERIAL_NUMBER_LOW)
-                Dim CurrentTime As Integer = Environment.TickCount
-                While (tempXbee.Address = 0) And (CurrentTime + 1000) > Environment.TickCount
-                End While
-                If tempXbee.Address <> 0 Then
-                    For j As Byte = 0 To HostXbee.Length - 1
-                        If tempXbee.Address = HostXbee(j).Address Then
-                            list(j) = HostXbeeName(i)
-                            Exit For
-                        End If
-                    Next
-                End If
+                For k As Byte = 0 To 2
+                    tempXbee.Send_AT_Command(XBee.AT_COMMAND_ENUM.SERIAL_NUMBER_LOW)
+                    Dim CurrentTime As Integer = Environment.TickCount
+                    While (tempXbee.Address = 0) And (CurrentTime + 1000) > Environment.TickCount
+                    End While
+                    If tempXbee.Address <> 0 Then
+                        For j As Byte = 0 To HostXbee.Length - 1
+                            If tempXbee.Address = HostXbee(j).Address Then
+                                list(j) = HostXbeeName(i)
+                                Exit For
+                            End If
+                        Next
+                        Exit For
+                    End If
+                Next
+
                 tempXbee.ClosePort()
             Next
         End If

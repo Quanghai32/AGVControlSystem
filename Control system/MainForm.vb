@@ -265,9 +265,9 @@ Public Class MainForm
 
                     txt = "Position: " + CType(rowObject, AGV).Position.ToString
                     If rbc.WorkingStatus = AGV.RobocarWorkingStatusValue.FREE Then
-                        txt += " | Free: " + Math.Round((Now - rbc.FreeTime).TotalSeconds).ToString() + "s"
+                        txt += " | F.Time: " + Math.Round((Now - rbc.FreeTime).TotalSeconds).ToString() + "s"
                     Else
-                        txt += " | Supply: " + Math.Round((Now - rbc.SupplyTime).TotalSeconds).ToString() + "s"
+                        txt += " | S.Time: " + Math.Round((Now - rbc.SupplyTime).TotalSeconds).ToString() + "s"
                     End If
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
