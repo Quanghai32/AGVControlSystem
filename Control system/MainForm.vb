@@ -634,6 +634,8 @@ Public Class MainForm
         ChartAddSeries("Normal", Color.Green)
         ChartAddSeries("Free", Color.GreenYellow)
         ChartAddSeries("Disconnect", Color.Gray)
+
+        AGVPerformance.ChartAreas(0).AxisX.Interval = 1
     End Sub
     Public Sub UpdateChart()
         AGVPerformance.Series("EMG").Points.Clear()

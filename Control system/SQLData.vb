@@ -214,6 +214,21 @@ Public Module SQLData
         For i As Byte = 0 To ChartDataTable.Rows.Count - 1
             ChartDataTable.Rows.Item(i)(1) = AGVList(i).Name
         Next
+        Dim MaxTime As Double = 0
+        For i As Byte = 0 To ChartDataTable.Rows.Count - 1
+            Dim totalTime As Double = 0
+            For j As Byte = 2 To 10
+                totalTime = totalTime + ChartDataTable.Rows.Item(i)(j)
+            Next
+            If MaxTime < totalTime Then MaxTime = totalTime
+        Next
+        For i As Byte = 0 To ChartDataTable.Rows.Count - 1
+            Dim notDisconnectTime As Double = 0
+            For j As Byte = 2 To 9
+                notDisconnectTime += ChartDataTable.Rows.Item(i)(j)
+            Next
+            ChartDataTable.Rows.Item(i)(10) = MaxTime - notDisconnectTime
+        Next
     End Sub
     Private Sub ReadStartPoint()
         Dim myDataAdapter As SqlDataAdapter
