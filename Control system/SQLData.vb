@@ -121,6 +121,7 @@ Public Module SQLData
                         EndDevicesArray(num).Parts(j).group = myDataTable.Rows(i)("Group")
                         EndDevicesArray(num).Parts(j).supplyCount = myDataTable.Rows(i)("count")
                         EndDevicesArray(num).Parts(j).target = myDataTable.Rows(i)("target")
+                        EndDevicesArray(num).Parts(j).route = myDataTable.Rows(i)("Route")
                         EndDevicesArray(num).Parts(j).Status = True
                         LineGroupArray(EndDevicesArray(num).Parts(j).group).MaxPart += 1
                         If IsNothing(LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart) Then
@@ -157,6 +158,7 @@ Public Module SQLData
             preAGVStatusArray(i).working_time = Now
             AGVList(i).Enable = myDataTable.Rows(i)("Enable")
             AGVList(i).group = myDataTable.Rows(i)("Group")
+            AGVList(i).index = myDataTable.Rows(i)("id")
             AGVGroupArray(AGVList(i).group).MaxAGV += 1
             If IsNothing(AGVGroupArray(AGVList(i).group).ChildAGV) Then
                 AGVGroupArray(AGVList(i).group).ChildAGV = New Collection

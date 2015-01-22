@@ -255,10 +255,17 @@ Public Class MainForm
                     Dim size As SizeF = g.MeasureString("Wj", uFont, itemBounds.Width, fmt)
                     textBoxRect.Height = size.Height
                     fmt.Alignment = StringAlignment.Near
-                    If rbc.SupplyPartStatus > PartList.Count Then
+                    txt = ""
+                    For i As Byte = 0 To AGVnPART.GetLength(1) - 1
+                        If AGVnPART(rbc.index, i) = True Then
+                            If rbc.SupplyPartStatus = PartList(i).route Then
+                                txt = "Part: " + PartList(i).Name + " (" + rbc.SupplyPartStatus.ToString + ")"
+                                Exit For
+                            End If
+                        End If
+                    Next
+                    If txt = "" Then
                         txt = "Part: " + "Unknown" + " (" + rbc.SupplyPartStatus.ToString + ")"
-                    Else
-                        txt = "Part: " + PartList(rbc.SupplyPartStatus).Name + " (" + rbc.SupplyPartStatus.ToString + ")"
                     End If
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
@@ -507,7 +514,7 @@ Public Class MainForm
             fmt.Trimming = StringTrimming.EllipsisCharacter
             fmt.Alignment = StringAlignment.Center
             fmt.LineAlignment = StringAlignment.Near
-            Dim txt As String = part.Name + " (" + part.index.ToString + ")"
+            Dim txt As String = part.Name + " (" + part.route.ToString + ")"
 
             Using uFont As Font = New Font("Tahoma", 11)
                 ' Measure the height of the title
