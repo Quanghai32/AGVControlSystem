@@ -72,14 +72,14 @@ Public Module MainModule
                 If partNeedSupply <> 99 Then
                     For iTry As Byte = 0 To 4
                         Dim TimePoint As Integer = Environment.TickCount
-                        AGVList(AGVNum).RequestRoute(partNeedSupply)
+                        AGVList(AGVNum).RequestRoute(PartList(partNeedSupply).route)
                         While (AGVList(AGVNum).Status <> AGV.RobocarStatusValue.NORMAL And (TimePoint + 5000) > Environment.TickCount)
 
                         End While
                         If (AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL) Then Exit For
                     Next
                     If (AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL) Then
-                        AGVList(AGVNum).RequestRoute(partNeedSupply)
+                        AGVList(AGVNum).RequestRoute(PartList(partNeedSupply).route)
                         AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.SUPPLYING
                         AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL
                         AGVList(AGVNum).SupplyTime = Now
