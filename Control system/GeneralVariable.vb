@@ -54,4 +54,13 @@ Public Module GeneralVariable
 	''' <remarks></remarks>
     Public preAGVStatusArray() As struct_AGVStoreStatus
     Public needAlarm As Boolean = False
+
+    Public Structure struct_Workingtime
+        Public StartTime As DateTime
+        Public StopTime As DateTime
+    End Structure
+
+    Public WorkingTimeArray() As struct_Workingtime
+    Public isPreOnTime As Boolean = False
+
 End Module

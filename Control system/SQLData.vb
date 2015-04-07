@@ -24,6 +24,7 @@ Public Module SQLData
         ReadChart()
         ReadStartPoint()
         ReadParkPoint()
+        ReadWorkingTime()
     End Sub
     Public Sub setAGVSupply(ByVal AGVnumber As Byte, ByVal PartString As String)
         If PartString.ToLower = "all" Then
@@ -243,37 +244,6 @@ Public Module SQLData
             StartPoint(SPnum) = myDataTable.Rows(SPnum)(1)
         Next
     End Sub
-    'Private Sub ReadSpecialPart()
-    '    Dim myDataAdapter As SqlDataAdapter
-    '    Dim myDataTable As DataTable
-    '    'Read Part information 
-    '    myDataAdapter = New SqlDataAdapter("SELECT * FROM Part", SQLcon)
-    '    myDataTable = New DataTable
-    '    myDataAdapter.Fill(myDataTable)
-    '    PartList = New List(Of CPart)
-    '    For i As Byte = 0 To myDataTable.Rows.Count - 1
-    '        Dim num As Byte
-    '        num = myDataTable.Rows(i)("EndDevices")
-    '        For j As Byte = 0 To 2
-    '            If EndDevicesArray(num).Parts(j).Name = "" Then
-    '                EndDevicesArray(num).Parts(j).Name = myDataTable.Rows(i)("Name")
-    '                EndDevicesArray(num).Parts(j).Enable = myDataTable.Rows(i)("Enable")
-    '                EndDevicesArray(num).Parts(j).index = myDataTable.Rows(i)("ID")
-    '                EndDevicesArray(num).Parts(j).priority = myDataTable.Rows(i)("Priority")
-    '                EndDevicesArray(num).Parts(j).group = myDataTable.Rows(i)("Group")
-    '                EndDevicesArray(num).Parts(j).supplyCount = myDataTable.Rows(i)("count")
-    '                EndDevicesArray(num).Parts(j).target = myDataTable.Rows(i)("target")
-    '                LineGroupArray(EndDevicesArray(num).Parts(j).group).MaxPart += 1
-    '                If IsNothing(LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart) Then
-    '                    LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart = New Collection
-    '                End If
-    '                LineGroupArray(EndDevicesArray(num).Parts(j).group).ChildPart.Add(EndDevicesArray(num).Parts(j))
-    '                PartList.Add(EndDevicesArray(num).Parts(j))
-    '                Exit For
-    '            End If
-    '        Next
-    '    Next
-    'End Sub
     Private Sub ReadParkPoint()
         Dim myDataAdapter As SqlDataAdapter
         Dim myDataTable As DataTable
@@ -285,6 +255,20 @@ Public Module SQLData
             For PPNum As Byte = 0 To myDataTable.Rows.Count - 1
                 ParkPointArray(0, PPNum) = myDataTable.Rows(PPNum)("First")
                 ParkPointArray(1, PPNum) = myDataTable.Rows(PPNum)("Second")
+            Next
+        End If
+    End Sub
+    Private Sub ReadWorkingTime()
+        Dim myDataAdapter As SqlDataAdapter
+        Dim myDataTable As DataTable
+        myDataAdapter = New SqlDataAdapter("SELECT * FROM WorkingTime", SQLcon)
+        myDataTable = New DataTable
+        myDataAdapter.Fill(myDataTable)
+        If myDataTable.Rows.Count > 0 Then
+            WorkingTimeArray = New struct_Workingtime(myDataTable.Rows.Count - 1) {}
+            For PPNum As Byte = 0 To myDataTable.Rows.Count - 1
+                WorkingTimeArray(PPNum).StartTime = New DateTime(2015, 1, 1, CType(myDataTable.Rows(PPNum)("BeginTime"), DateTime).Hour, CType(myDataTable.Rows(PPNum)("BeginTime"), DateTime).Minute, 0)
+                WorkingTimeArray(PPNum).StopTime = New DateTime(2015, 1, 1, CType(myDataTable.Rows(PPNum)("EndTime"), DateTime).Hour, CType(myDataTable.Rows(PPNum)("EndTime"), DateTime).Minute, 0)
             Next
         End If
     End Sub

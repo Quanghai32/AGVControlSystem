@@ -692,34 +692,34 @@ Public Class MainForm
     End Sub
 
     Private Sub AndonTimer_Tick(sender As Object, e As EventArgs) Handles AndonTimer.Tick
-        'Static AlarmCounter() As Byte = New Byte(AGVList.Count - 1) {}
-        'Static PreStatusForAndon() As AGV.RobocarStatusValue = New AGV.RobocarStatusValue(AGVList.Count - 1) {}
-        'Static blind As Boolean = False
-        'For i As Byte = 0 To AGVList.Count - 1
-        '    If PreStatusForAndon(i) <> AGVList(i).Status Then
-        '        AlarmCounter(i) = 0
-        '        PreStatusForAndon(i) = AGVList(i).Status
-        '    ElseIf isAndonAlarmCondition(PreStatusForAndon(i)) And AlarmCounter(i) < 200 Then
-        '        AlarmCounter(i) += 1
-        '    End If
-        'Next
-        'needAlarm = False
-        'For i As Byte = 0 To AGVList.Count - 1
-        '    If AlarmCounter(i) > 10 Then
-        '        needAlarm = True
-        '        Exit For
-        '    End If
-        'Next
-        'If needAlarm Then
-        '    If blind Then
-        '        olvAGV.BackColor = Color.Red
-        '    Else
-        '        olvAGV.BackColor = Color.Yellow
-        '    End If
-        '    blind = Not blind
-        'Else
-        '    olvAGV.BackColor = Color.White
-        'End If
+        Static AlarmCounter() As Byte = New Byte(AGVList.Count - 1) {}
+        Static PreStatusForAndon() As AGV.RobocarStatusValue = New AGV.RobocarStatusValue(AGVList.Count - 1) {}
+        Static blind As Boolean = False
+        For i As Byte = 0 To AGVList.Count - 1
+            If PreStatusForAndon(i) <> AGVList(i).Status Then
+                AlarmCounter(i) = 0
+                PreStatusForAndon(i) = AGVList(i).Status
+            ElseIf isAndonAlarmCondition(PreStatusForAndon(i)) And AlarmCounter(i) < 200 Then
+                AlarmCounter(i) += 1
+            End If
+        Next
+        needAlarm = False
+        For i As Byte = 0 To AGVList.Count - 1
+            If AlarmCounter(i) > 10 Then
+                needAlarm = True
+                Exit For
+            End If
+        Next
+        If needAlarm Then
+            If blind Then
+                olvAGV.BackColor = Color.Red
+            Else
+                olvAGV.BackColor = Color.Yellow
+            End If
+            blind = Not blind
+        Else
+            olvAGV.BackColor = Color.White
+        End If
     End Sub
     Private Function isAndonAlarmCondition(ByVal value As AGV.RobocarStatusValue) As Boolean
         If value = AGV.RobocarStatusValue.BATTERY_EMPTY Or value = AGV.RobocarStatusValue.EMERGENCY Or value = AGV.RobocarStatusValue.NO_CART Or value = AGV.RobocarStatusValue.OUT_OF_LINE Then

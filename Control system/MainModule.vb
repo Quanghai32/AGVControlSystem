@@ -57,13 +57,27 @@ Public Module MainModule
         Next
     End Sub
     Public Sub UpdateData()
-        For AGVNum As Byte = 0 To AGVList.Count - 1
-            If AGVList(AGVNum).Connecting Then
-                UpdateWhenConnect(AGVNum)
+        If isOnWorkingTime(Now.Hour, Now.Minute) Then
+            For AGVNum As Byte = 0 To AGVList.Count - 1
+                If AGVList(AGVNum).Connecting Then
+                    UpdateWhenConnect(AGVNum)
+                Else
+                    UpdateWhenDisconnect(AGVNum)
+                End If
+            Next
+            isPreOnTime = True
+        Else
+            If isPreOnTime Then
+                ForceUpdate()
+                isPreOnTime = False
             Else
-                UpdateWhenDisconnect(AGVNum)
+                For AGVNum As Byte = 0 To AGVList.Count - 1
+                    UpdateAllValue(AGVNum)
+                Next
+                isPreOnTime = False
             End If
-        Next
+        End If
+
     End Sub
     Public Sub RequestData()
         For AGVNum As Byte = 0 To AGVList.Count - 1
@@ -108,6 +122,7 @@ Public Module MainModule
         AGVRouteRecord()
         AGVPositionRecord()
         AGVWorkingStatusRecord()
+        AGVStatusRecord()
 
         PartConnectRecord()
         PartStatusRecord()
@@ -207,7 +222,7 @@ Public Module MainModule
     Private Sub UpdateWhenConnect(ByVal AGVNum As Byte)
         If preAGVStatusArray(AGVNum).connecting_value Then
             If AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.FREE Then
-                If Not preAGVStatusArray(AGVNum).working_value = AGV.RobocarWorkingStatusValue.FREE Then
+                If preAGVStatusArray(AGVNum).working_value <> AGV.RobocarWorkingStatusValue.FREE Then
                     Select Case preAGVStatusArray(AGVNum).status_value
                         Case AGV.RobocarStatusValue.EMERGENCY
                             ChartDataTable.Rows(AGVNum)("EMG") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
@@ -265,6 +280,115 @@ Public Module MainModule
         preAGVStatusArray(AGVNum).connecting_time = Now
         preAGVStatusArray(AGVNum).status_time = Now
         preAGVStatusArray(AGVNum).working_time = Now
+    End Sub
+    Private Function isOnWorkingTime(ByVal hour As Integer, ByVal min As Integer) As Boolean
+        Dim checkTime As DateTime = New DateTime(2015, 1, 1, hour, min, 0)
+        For i As Byte = 0 To WorkingTimeArray.Length - 1
+            Dim StartTime As DateTime = WorkingTimeArray(i).StartTime
+            Dim StopTime As DateTime = WorkingTimeArray(i).StopTime
+            If StartTime < StopTime Then
+                If (checkTime >= StartTime) And (checkTime < StopTime) Then
+                    Return True
+                End If
+            Else
+                If (checkTime >= StartTime) Or (checkTime < StopTime) Then
+                    Return True
+                End If
+            End If
+        Next
+        Return False
+    End Function
+    Private Sub ForceUpdate()
+        For i As Byte = 0 To AGVList.Count - 1
+            If AGVList(i).Connecting Then
+                ForceUpdateWhenConnect(i)
+            Else
+                ForceUpdateWhenDisconnect(i)
+            End If
+        Next
+    End Sub
+    Private Sub ForceUpdateWhenConnect(ByVal AGVNum As Byte)
+        If preAGVStatusArray(AGVNum).connecting_value Then
+            If AGVList(AGVNum).WorkingStatus = AGV.RobocarWorkingStatusValue.FREE Then
+                If preAGVStatusArray(AGVNum).working_value = AGV.RobocarWorkingStatusValue.FREE Then
+                    ChartDataTable.Rows(AGVNum)("Free") += (Now - preAGVStatusArray(AGVNum).working_time).TotalMinutes
+                    UpdateAllValue(AGVNum)
+                Else
+                    Select Case preAGVStatusArray(AGVNum).status_value
+                        Case AGV.RobocarStatusValue.EMERGENCY
+                            ChartDataTable.Rows(AGVNum)("EMG") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.SAFETY
+                            ChartDataTable.Rows(AGVNum)("Safety") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.STOP_BY_CARD
+                            ChartDataTable.Rows(AGVNum)("Stop") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.OUT_OF_LINE
+                            ChartDataTable.Rows(AGVNum)("Out line") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.BATTERY_EMPTY
+                            ChartDataTable.Rows(AGVNum)("Battery empty") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.NO_CART
+                            ChartDataTable.Rows(AGVNum)("No cart") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.NORMAL
+                            ChartDataTable.Rows(AGVNum)("Normal") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    End Select
+                    UpdateAllValue(AGVNum)
+                End If
+            Else
+                If preAGVStatusArray(AGVNum).working_value = AGV.RobocarWorkingStatusValue.FREE Then
+                    ChartDataTable.Rows(AGVNum)("Free") += (Now - preAGVStatusArray(AGVNum).working_time).TotalMinutes
+                    UpdateAllValue(AGVNum)
+                Else
+                    Select Case preAGVStatusArray(AGVNum).status_value
+                        Case AGV.RobocarStatusValue.EMERGENCY
+                            ChartDataTable.Rows(AGVNum)("EMG") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.SAFETY
+                            ChartDataTable.Rows(AGVNum)("Safety") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.STOP_BY_CARD
+                            ChartDataTable.Rows(AGVNum)("Stop") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.OUT_OF_LINE
+                            ChartDataTable.Rows(AGVNum)("Out line") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.BATTERY_EMPTY
+                            ChartDataTable.Rows(AGVNum)("Battery empty") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.NO_CART
+                            ChartDataTable.Rows(AGVNum)("No cart") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                        Case AGV.RobocarStatusValue.NORMAL
+                            ChartDataTable.Rows(AGVNum)("Normal") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    End Select
+                    UpdateAllValue(AGVNum)
+                End If
+            End If
+        Else
+            ChartDataTable.Rows(AGVNum)("Disconnect") += (Now - preAGVStatusArray(AGVNum).connecting_time).TotalMinutes
+            UpdateAllValue(AGVNum)
+        End If
+    End Sub
+    Private Sub ForceUpdateWhenDisconnect(ByVal AGVNum As Byte)
+        If preAGVStatusArray(AGVNum).connecting_value Then
+            If preAGVStatusArray(AGVNum).working_value = AGV.RobocarWorkingStatusValue.FREE Then
+                ChartDataTable.Rows(AGVNum)("Free") += (Now - preAGVStatusArray(AGVNum).working_time).TotalMinutes
+                UpdateAllValue(AGVNum)
+            Else
+                Select Case preAGVStatusArray(AGVNum).status_value
+                    Case AGV.RobocarStatusValue.EMERGENCY
+                        ChartDataTable.Rows(AGVNum)("EMG") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    Case AGV.RobocarStatusValue.SAFETY
+                        ChartDataTable.Rows(AGVNum)("Safety") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    Case AGV.RobocarStatusValue.STOP_BY_CARD
+                        ChartDataTable.Rows(AGVNum)("Stop") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    Case AGV.RobocarStatusValue.OUT_OF_LINE
+                        ChartDataTable.Rows(AGVNum)("Out line") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    Case AGV.RobocarStatusValue.BATTERY_EMPTY
+                        ChartDataTable.Rows(AGVNum)("Battery empty") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    Case AGV.RobocarStatusValue.NO_CART
+                        ChartDataTable.Rows(AGVNum)("No cart") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                    Case AGV.RobocarStatusValue.NORMAL
+                        ChartDataTable.Rows(AGVNum)("Normal") += (Now - preAGVStatusArray(AGVNum).status_time).TotalMinutes
+                End Select
+                UpdateAllValue(AGVNum)
+            End If
+        Else
+            ChartDataTable.Rows(AGVNum)("Disconnect") += (Now - preAGVStatusArray(AGVNum).connecting_time).TotalMinutes
+            UpdateAllValue(AGVNum)
+        End If
     End Sub
 #End Region
 #Region "Private function for RecordData"
