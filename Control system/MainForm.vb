@@ -732,4 +732,8 @@ Public Class MainForm
     Private Sub MainMenuSetting_Click(sender As Object, e As EventArgs) Handles MainMenuSetting.Click
         System.Diagnostics.Process.Start("setting.exe")
     End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        About.ShowDialog()
+    End Sub
 End Class

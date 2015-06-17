@@ -1,0 +1,6 @@
+﻿This file using for define how to make version number.
+- Version number format: a.b.c.d
+a: Increase this number if new version use other program concept with previous version (Program concept mean program language, program paradigm ...).
+b: Increase this number if new version need changing enviroment before replace previous version (Changing enviroment mean we must change SQL, change file or folder system,... ).
+c: Increase this number if new version have new function, but it can run at the same enviroment with previous version.
+d: Increase this number if new version have same function with previous version, only different about user interface.

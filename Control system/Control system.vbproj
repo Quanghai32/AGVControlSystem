@@ -69,6 +69,9 @@
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>remove.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ObjectListView">
       <HintPath>.\ObjectListView.dll</HintPath>
@@ -95,6 +98,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.Designer.vb">
+      <DependentUpon>About.vb</DependentUpon>
+    </Compile>
+    <Compile Include="About.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="CrossFunction\CrossFunction.vb" />
     <Compile Include="CrossFunction\CrossView.Designer.vb">
@@ -139,6 +148,9 @@
     <Compile Include="SQLData.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CrossFunction\CrossView.resx">
       <DependentUpon>CrossView.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -198,6 +210,13 @@
       <Project>{1115160a-ea7e-466e-a328-19006fdf7ad4}</Project>
       <Name>ControlSystemLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Define version number.txt" />
+    <Content Include="remove.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
