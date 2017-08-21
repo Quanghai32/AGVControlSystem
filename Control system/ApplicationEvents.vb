@@ -14,11 +14,16 @@
         End Sub
 
         Private Sub MyApplication_Startup(sender As Object, e As ApplicationServices.StartupEventArgs) Handles Me.Startup
-            Record("System", "Running", "Startup")
-            If MessageBox.Show("Do you want to reset all information (Shift starting)?" + vbCrLf + "Ban co muon cai dat lai cac thong tin khong? (Bat dau chay ca)", Application.Info.AssemblyName, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                isNeedToReset = False
-            Else : isNeedToReset = True
-            End If
+			'Record("System", "Running", "Startup")
+			Dim Result As DialogResult = MessageBox.Show("Do you want to reset all information (Shift starting)?" + vbCrLf + "Ban co muon cai dat lai cac thong tin khong? (Bat dau chay ca)", Application.Info.AssemblyName, MessageBoxButtons.YesNoCancel, MessageBoxIcon.None, MessageBoxDefaultButton.Button2)
+
+			If Result = DialogResult.No Then
+				isNeedToReset = False
+			ElseIf Result = DialogResult.Yes Then : isNeedToReset = True
+			Else
+				isNeedToReset = False
+				Environment.Exit(0)
+			End If
         End Sub
 
         Private Sub MyApplication_UnhandledException(sender As Object, e As ApplicationServices.UnhandledExceptionEventArgs) Handles Me.UnhandledException
