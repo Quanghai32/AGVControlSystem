@@ -8,7 +8,7 @@ Public Module GeneralVariable
     Public TextList() As TextSource
 
     Public PartList As List(Of CPart)
-    Public isNeedToReset As Boolean   
+    Public isNeedToReset As Boolean
     Public MapPartWidth As Integer
     Public MapPartHeight As Integer
     Public PartCounterList As List(Of CPart)
@@ -85,7 +85,9 @@ Public Module GeneralVariable
     Public isPreOnTime As Boolean = False
     Public IsReadText As Boolean = True
     Public Path_Text As String
-	Public Tab_start As Byte = 0
+    Public Tab_start As Byte = 0
+    Public NextPartNeedSupply() As Integer
+
 
     'for visualize map
     Public Map_High As Integer

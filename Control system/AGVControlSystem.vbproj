@@ -94,6 +94,10 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MoreLinq, Version=2.6.20831.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.6.0\lib\net40\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -105,6 +109,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
@@ -126,6 +131,10 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
       <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Forms" />
@@ -270,8 +279,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Concept\IAnalyses.vb" />
-    <Compile Include="Concept\RemainAnalyse.vb" />
+    <Compile Include="Concept\Concept2Part.vb" />
+    <Compile Include="Concept\ClassToTest.vb" />
+    <Compile Include="Concept\NormalConcept.vb" />
+    <Compile Include="Text\IAnalyses.vb" />
+    <Compile Include="Text\RemainAnalyse.vb" />
     <Compile Include="CrossFunction\CrossFunction.vb" />
     <Compile Include="CrossFunction\CrossView.Designer.vb">
       <DependentUpon>CrossView.vb</DependentUpon>
@@ -326,8 +338,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="DAL\SQLData.vb" />
-    <Compile Include="Concept\TextSource.vb" />
-    <Compile Include="Concept\OnOffAnalyse.vb" />
+    <Compile Include="Text\TextSource.vb" />
+    <Compile Include="Text\OnOffAnalyse.vb" />
     <Compile Include="Vitual\VitualPart.Designer.vb">
       <DependentUpon>VitualPart.vb</DependentUpon>
     </Compile>
@@ -417,6 +429,7 @@
     <Content Include="remove.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>

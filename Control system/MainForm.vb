@@ -23,8 +23,9 @@ Public Class MainForm
         ReadXmlData()
         RecordPartEmptyCounterInit()
         If IsReadText = True Then
-            SetupTextFile()
+            SetupNewConcept()
         End If
+        SetupNewConcept()
         SetupHostXbee()
         DisplayAGV()
         DisplayPart()
