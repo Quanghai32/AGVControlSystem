@@ -1,8 +1,8 @@
-﻿Imports System.Drawing
-Imports System.Windows.Forms
-Imports ControlSystemLibrary
-Public Class MapPart
-	Private _AGVSupply As String
+﻿Public Class MapPart
+    Private Sub MPart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+    Private _AGVSupply As String
 	Private _status As Boolean = False				'Full or Empty
 	Private _connectStatus As Boolean = False		'Connect or Disconnect
 	Private _used As Boolean						'Enable or Disable
@@ -26,7 +26,7 @@ Public Class MapPart
 			Return _name
 		End Get
 		Set(value As String)
-			labelName.Text = value
+			labelName.UserText = value
 			'SetName(value & "(" & _route.ToString & ")")
 		End Set
 	End Property
@@ -131,11 +131,12 @@ Public Class MapPart
 		Else
 			_AGVSupply = value
 			If _used = False Then
-				LabelAGV.Text = ""
-				Hide()
+				'LabelAGV.UserText = ""
+				'Hide()
+                SetBackground(Color.LightGray)
 			Else
-				Show()
-				LabelAGV.Text = value
+				'Show()
+				'LabelAGV.UserText = value
 				If _connectStatus Then		'If status is connecting
 					'Enabled = True
 					If value = "" Then		'If no AGV supply
@@ -165,8 +166,8 @@ Public Class MapPart
 	End Property
 
 	Private Sub SetBackground(c As Color)
-		labelName.BackColor = c
-		LabelAGV.BackColor = c
+		'labelName.BackColor = c
+		'LabelAGV.BackColor = c
 		BackColor = c
 	End Sub
 
@@ -183,7 +184,7 @@ Public Class MapPart
 		Me.Size = New System.Drawing.Size(MapPartWidth, MapPartHeight)
 	End Sub
 
-	Private Sub labelName_Click(sender As Object, e As EventArgs) Handles labelName.Click
+	Private Sub labelName_Click(sender As Object, e As EventArgs) 
 		Me.BringToFront()
 		If Me.Size.Height = MapPartHeight Then
 			Me.Size = New System.Drawing.Size(97, 46)
@@ -202,7 +203,11 @@ Public Class MapPart
 	Dim CursorX, CursorY As Integer
 	Dim Dragging As Boolean
 
-	Private Sub Control_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown
+    Private Sub MapPart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Control_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown
 		If isReadOnlyMap Then Return
 		If e.Button = Windows.Forms.MouseButtons.Left Then
 			If My.Computer.Keyboard.CtrlKeyDown Then
@@ -256,7 +261,7 @@ Public Class MapPart
 			Pick(3) = D
 		End If
 	End Sub
-	Public Sub New()
+	Public Sub New(ByVal width As Integer,ByVal height As Integer,ByVal isVertical As Boolean)
 
 		' This call is required by the designer.
 		InitializeComponent()
@@ -275,5 +280,16 @@ Public Class MapPart
 		Pick(2) = C
 		Pick(3) = D
 
+        labelName.UserFont=new Font("Arial", 12)
+        labelAGV.UserFont=new Font("Arial", 12)
+        Me.Width=width
+        Me.Height=height
+        If isVertical
+            labelName.UserDirection=StringFormatFlags.DirectionVertical
+            labelAGV.UserDirection=StringFormatFlags.DirectionVertical
+            labelName.Location=New Point(0,0)
+            labelAGV.Location=New Point(18,0)
+            labelAGV.UserText="AGV"
+        End If
 	End Sub
 End Class

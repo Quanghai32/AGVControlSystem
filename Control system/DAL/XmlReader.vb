@@ -35,10 +35,11 @@ Module XmlReader
         End If
         TextList = New TextSource(myDataTable.Rows.Count - 1) {}
         For i As Byte = 0 To myDataTable.Rows.Count - 1
-            Dim a = New OnOffAnalyse() 'Depending on which method
+            Dim a = New RemainAnalyse() 'Depending on which method
             'Dim a = New RemainAnalyse()
+            
             Dim path As String = myDataTable.Rows(i)("Path")
-            TextList(i) = New TextSource(path, a) 'Dependency injection
+            TextList(i) = New TextSource(i,path, a) 'Dependency injection
         Next
     End Sub
 
@@ -283,7 +284,7 @@ Module XmlReader
                 AGVList(i).Enable = myDataTable.Rows(i)("Enable")
             End If
             AGVList(i).group = myDataTable.Rows(i)("Group")
-            AGVList(i).index = myDataTable.Rows(i)("id")
+            AGVList(i).index = i' myDataTable.Rows(i)("id")
             AGVList(i).HostControl = myDataTable.Rows(i)("Host Xbee")
             AGVList(i).SupplyCount = myDataTable.Rows(i)("Count")
             AGVGroupArray(AGVList(i).group).MaxAGV += 1

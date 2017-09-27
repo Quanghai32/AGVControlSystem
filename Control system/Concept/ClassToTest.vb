@@ -53,3 +53,9 @@ Public Class ClassToTest
         End If
     End Sub
 End Class
+
+Public Class ClassTestModule
+    Public Sub TestModule()
+        SetupNewConcept()
+    End Sub
+End Class

@@ -33,5 +33,11 @@ namespace UnitTestControlSystem
             r.Find2SupplyPart4AGV(0,ref firstIndex,ref secondIndex, PartList);
             
         }
+        [TestMethod]
+        public void TestModule()
+        {
+            ClassTestModule clsModule = new ClassTestModule();
+            clsModule.TestModule();
+        }
     }
 }

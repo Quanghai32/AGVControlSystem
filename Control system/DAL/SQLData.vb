@@ -70,16 +70,16 @@ Public Module SQLData
             Environment.Exit(-1)
         End If
         EndDevicesArray = New EndDevices(myDataTable.Rows.Count - 1) {}
-        If IsReadText = False Then
+        'If RequestRouteConcept = False Then
             For i As Byte = 0 To myDataTable.Rows.Count - 1
                 EndDevicesArray(i) = New EndDevices()
                 EndDevicesArray(i).Address = Convert.ToInt32(myDataTable.Rows(i)("Address"), 16)
                 LinkDeviceAndXbee(EndDevicesArray(i), HostXbee(myDataTable.Rows(i)("Host Xbee")))
                 EndDevicesArray(i).Host = (myDataTable.Rows(i)("Host Xbee"))
             Next
-        Else 'read text
+        'Else 'read text
      
-        End If
+        'End If
     End Sub
     Private Sub ReadLineGroup()
         Dim myDataAdapter As SqlDataAdapter

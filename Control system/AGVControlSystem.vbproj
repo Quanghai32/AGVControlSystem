@@ -17,6 +17,15 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\TL-APRO-NPC089\AppData\Roaming\ICSharpCode\SharpDevelop5\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,15 +40,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NoWin32Manifest>False</NoWin32Manifest>
-    <SignAssembly>False</SignAssembly>
-    <DelaySign>False</DelaySign>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>False</RunCodeAnalysis>
-    <SourceAnalysisOverrideSettingsFile>C:\Users\TL-APRO-NPC089\AppData\Roaming\ICSharpCode\SharpDevelop5\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -282,6 +282,30 @@
     <Compile Include="Concept\Concept2Part.vb" />
     <Compile Include="Concept\ClassToTest.vb" />
     <Compile Include="Concept\NormalConcept.vb" />
+    <Compile Include="Concept\RequestRouteForm.Designer.vb">
+      <DependentUpon>RequestRouteForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Concept\RequestRouteForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Concept\SupplyForm.Designer.vb">
+      <DependentUpon>SupplyForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Concept\SupplyForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Concept\ucAgvSupply.Designer.vb">
+      <DependentUpon>ucAgvSupply.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Concept\ucAgvSupply.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapAGV\MapPart.Designer.vb">
+      <DependentUpon>MapPart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MapAGV\MapPart.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Text\IAnalyses.vb" />
     <Compile Include="Text\RemainAnalyse.vb" />
     <Compile Include="CrossFunction\CrossFunction.vb" />
@@ -314,12 +338,6 @@
       <DependentUpon>MapAGV.vb</DependentUpon>
     </Compile>
     <Compile Include="MapAGV\MapAGV.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MapAGV\MapPart.Designer.vb">
-      <DependentUpon>MapPart.vb</DependentUpon>
-    </Compile>
-    <Compile Include="MapAGV\MapPart.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -357,6 +375,15 @@
   <ItemGroup>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Concept\RequestRouteForm.resx">
+      <DependentUpon>RequestRouteForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Concept\SupplyForm.resx">
+      <DependentUpon>SupplyForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Concept\ucAgvSupply.resx">
+      <DependentUpon>ucAgvSupply.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CrossFunction\CrossView.resx">
       <DependentUpon>CrossView.vb</DependentUpon>

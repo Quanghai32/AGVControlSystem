@@ -4,7 +4,6 @@ Imports System.Data.SqlClient
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Drawing.Point
 
-
 Imports ControlSystemLibrary
 Imports System.Threading
 Imports BrightIdeasSoftware
@@ -13,19 +12,24 @@ Imports Microsoft.Win32
 Imports Newtonsoft.Json
 
 Public Class MainForm
-    Shared DesignColor() As Brush = {Brushes.Black, Brushes.Gold, Brushes.Red, Brushes.Orange, Brushes.Green, Brushes.Blue, Brushes.Violet, Brushes.Gray, Brushes.Chocolate, Brushes.Pink, Brushes.Navy, Brushes.Aqua, Brushes.Teal, Brushes.Red, Brushes.Orange, Brushes.Green, Brushes.Blue, Brushes.Violet, Brushes.Gray, Brushes.Chocolate, Brushes.Pink, Brushes.WhiteSmoke}
+    Shared DesignColor() As Brush = {Brushes.Black, Brushes.Gold, Brushes.Red, Brushes.Orange,
+        Brushes.Green, Brushes.Blue, Brushes.Violet, Brushes.Gray, Brushes.Chocolate, Brushes.Pink,
+        Brushes.Navy, Brushes.Aqua, Brushes.Teal, Brushes.Red, Brushes.Orange, Brushes.Green, Brushes.Blue,
+        Brushes.Violet, Brushes.Gray, Brushes.Chocolate, Brushes.Pink, Brushes.WhiteSmoke}
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TabControl1.SelectedIndex = Tab_start
-
         ReadSetting()
         Record("System", "Running", "Startup")
         ReadXmlData()
         RecordPartEmptyCounterInit()
-        If IsReadText = True Then
-            SetupNewConcept()
-        End If
-        SetupNewConcept()
+
+        Select Case RequestRouteConcept
+            Case "Normal"
+
+            Case "2Routes"
+                SetupNewConcept()
+        End Select
+
         SetupHostXbee()
         DisplayAGV()
         DisplayPart()
@@ -43,10 +47,10 @@ Public Class MainForm
         AndonTimer.Start()
         RequestDataTimer.Start()
 
-        
-
         SplitContainerOverView.SplitterDistance = Settings.SplitDistance
+        MainTabControl.SelectedIndex = Tab_start
         panelDetail.Hide()
+
     End Sub
 
     Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
@@ -71,12 +75,17 @@ Public Class MainForm
 
     Private Sub RequestDataTimer_Tick(sender As Object, e As EventArgs) Handles RequestDataTimer.Tick
         RequestDataTimer.Stop()
-        RequestData()
+        Select Case RequestRouteConcept
+            Case "Normal"
+                RequestData()
+            Case "2Routes"
+                Request2Data()
+        End Select
         RequestDataTimer.Start()
     End Sub
     Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick '500 ms
         DisplayTimer.Stop()
-        Select Case TabControl1.SelectedIndex
+        Select Case MainTabControl.SelectedIndex
             Case 0
                 DisplayOverView()
             Case 1
@@ -890,7 +899,7 @@ Public Class MainForm
                     textBoxRect.Y += size.Height
                     'host				
                     txt = "Host:" + part.parent.Host.ToString   '"Host: " & index
-                    If IsReadText = False Then
+                    If RequestRouteConcept = "Normal" Then
                         If IsNothing(part.parent.myXbee.port) = False Then
                             txt = txt & "|" & part.parent.myXbee.port.PortName
                         Else
@@ -902,7 +911,7 @@ Public Class MainForm
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     'CH and ID
-                    If IsReadText = False Then
+                    If RequestRouteConcept = "Normal" Then
                         txt = "CH:" & Conversion.Hex(part.parent.myXbee.CH) & "|ID:" & Conversion.Hex(part.parent.myXbee.ID)
                     Else
                         txt = "Text"
@@ -1029,12 +1038,15 @@ Public Class MainForm
                     End If
                 Else                                                'show setting
                     'End
-                    txt = "End:" & part.EndDevice & "." & part.NumberInEnd.ToString & "|" & Conversion.Hex(part.parent.Address)
+                    If RequestRouteConcept = "Normal" Then
+                        txt = "End:" & part.EndDevice & "." & part.NumberInEnd.ToString & "|" & Conversion.Hex(part.parent.Address)
+                    End If
+
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     'host				
                     txt = "Host:" + part.parent.Host.ToString   '"Host: " & index
-                    If IsReadText = False Then
+                    If RequestRouteConcept = "Normal" Then
                         If IsNothing(part.parent.myXbee.port) = False Then
                             txt = txt & "|" & part.parent.myXbee.port.PortName
                         Else
@@ -1046,7 +1058,7 @@ Public Class MainForm
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     'CH and ID
-                    If IsReadText = False Then
+                    If RequestRouteConcept = "Normal" Then
                         txt = "CH:" & Conversion.Hex(part.parent.myXbee.CH) & "|ID:" & Conversion.Hex(part.parent.myXbee.ID)
                     Else
                         txt = "Text"
@@ -1300,9 +1312,6 @@ Public Class MainForm
     Private Sub Form1_MouseMove(sender As Object, e As MouseEventArgs) Handles PictureBoxMap.MouseMove
         If canResize = False Then Return
 
-        Label_GreenDetail.Text = e.X
-        Label_Red.Text = e.Y
-
         If X < e.X Then 'mouse move to right
             rect.X = X
             rect.Width = e.X - X
@@ -1370,10 +1379,10 @@ Public Class MainForm
         MapPartList = New List(Of MapPart)
         PartForAlign = New List(Of MapPart)
         For i As Integer = 0 To PartList.Count - 1
-            Dim Part As MapPart = New MapPart
+            Dim Part As MapPart = New MapPart(MapPartWidth,MapPartHeight,IsVerticalPart)
             PictureBoxMap.Controls.Add(Part)
-            Part.setDataBinding(PartList(i))           'setDataBinding
-            Part.Size = New Size(MapPartWidth, MapPartHeight)
+            Part.setDataBinding(PartList(i))
+            'Part.Size = New Size(MapPartWidth, MapPartHeight)
             Part.Location = New Point(PartList(i).X, PartList(i).Y)
             Part.PartName = PartList(i).Name + "(" + PartList(i).route.ToString + ")"
             MapPartList.Add(Part)
@@ -1642,7 +1651,7 @@ Public Class MainForm
     End Sub
 
 
-    Private Sub UserSettingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserSettingToolStripMenuItem.Click
+    Private Sub UserSettingToolStripMenuItem_Click(sender As Object, e As EventArgs)
         Try
             System.Diagnostics.Process.Start("User Setting.exe")
         Catch
@@ -1659,8 +1668,8 @@ Public Class MainForm
         vitual.Show()
     End Sub
 
-    Private Sub CrossViewToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles CrossViewToolStripMenuItem1.Click
-        CrossView.Show()
+    Private Sub CrossViewToolStripMenuItem1_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub VitualPartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles VitualPartToolStripMenuItem.Click
@@ -1677,21 +1686,34 @@ Public Class MainForm
         Settings.Save()
     End Sub
 
-    Private Sub DebugModeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DebugModeToolStripMenuItem.Click
+    Private Sub DebugFormToolStripMenuItem_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub DebugModeToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DebugModeToolStripMenuItem.Click
         If DebugMode = True Then
             DebugMode = False
-            DebugModeToolStripMenuItem.Text = "Normal mode"
+            DebugModeToolStripMenuItem.Text = "Debug mode"
         Else
             DebugMode = True
-            DebugModeToolStripMenuItem.Text = "Debug mode"
+            DebugModeToolStripMenuItem.Text = "Normal mode"
         End If
     End Sub
 
-    Private Sub DebugFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DebugFormToolStripMenuItem.Click
+    Private Sub RequestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RequestFormToolStripMenuItem.Click
+        RequestForm.Close
+        RequestForm =New SupplyForm()
+        RequestForm.Visible=True
+        RequestForm.TopMost=True
+    End Sub
+
+    Private Sub CrossViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CrossViewToolStripMenuItem.Click
+        CrossView.Show()
+    End Sub
+
+    Private Sub DebugFormToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DebugFormToolStripMenuItem1.Click
         DebugForm = New CDebug_Form
         IsAllowPrintDebug = True
         DebugForm.Show()
     End Sub
-
-
 End Class

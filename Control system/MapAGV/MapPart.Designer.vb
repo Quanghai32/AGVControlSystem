@@ -22,51 +22,56 @@ Partial Class MapPart
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-		Me.components = New System.ComponentModel.Container()
-		Me.labelName = New System.Windows.Forms.Label()
-		Me.LabelAGV = New System.Windows.Forms.Label()
-		Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-		Me.SuspendLayout()
-		'
-		'labelName
-		'
-		Me.labelName.AutoSize = True
-		Me.labelName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.labelName.Location = New System.Drawing.Point(3, 4)
-		Me.labelName.Name = "labelName"
-		Me.labelName.Size = New System.Drawing.Size(32, 16)
-		Me.labelName.TabIndex = 0
-		Me.labelName.Text = "Part"
-		'
-		'LabelAGV
-		'
-		Me.LabelAGV.AutoSize = True
-		Me.LabelAGV.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LabelAGV.Location = New System.Drawing.Point(3, 23)
-		Me.LabelAGV.Name = "LabelAGV"
-		Me.LabelAGV.Size = New System.Drawing.Size(36, 16)
-		Me.LabelAGV.TabIndex = 1
-		Me.LabelAGV.Text = "AGV"
-		'
-		'Timer1
-		'
-		'
-		'MapPart
-		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.BackColor = System.Drawing.SystemColors.Highlight
-		Me.Controls.Add(Me.LabelAGV)
-		Me.Controls.Add(Me.labelName)
-		Me.Cursor = System.Windows.Forms.Cursors.Default
-		Me.Name = "MapPart"
-		Me.Size = New System.Drawing.Size(80, 45)
-		Me.ResumeLayout(False)
-		Me.PerformLayout()
+        Me.components = New System.ComponentModel.Container()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.labelName = New ControlSystemLibrary.CustomText()
+        Me.labelAGV = New ControlSystemLibrary.CustomText()
+        Me.SuspendLayout
+        '
+        'Timer1
+        '
+        '
+        'labelName
+        '
+        Me.labelName.AutoSize = true
+        Me.labelName.Location = New System.Drawing.Point(0, 0)
+        Me.labelName.Name = "labelName"
+        Me.labelName.Size = New System.Drawing.Size(24, 14)
+        Me.labelName.TabIndex = 0
+        Me.labelName.UserFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.labelName.UserRotate = 0
+        Me.labelName.UserText = "Part"
+        Me.labelName.UserXOrigin = 0
+        Me.labelName.UserYOrigin = 0
+        '
+        'labelAGV
+        '
+        Me.labelAGV.AutoSize = true
+        Me.labelAGV.Location = New System.Drawing.Point(0, 20)
+        Me.labelAGV.Name = "labelAGV"
+        Me.labelAGV.Size = New System.Drawing.Size(28, 14)
+        Me.labelAGV.TabIndex = 1
+        Me.labelAGV.UserFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.labelAGV.UserRotate = 0
+        Me.labelAGV.UserText = "AGV"
+        Me.labelAGV.UserXOrigin = 0
+        Me.labelAGV.UserYOrigin = 0
+        '
+        'MapPart
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Controls.Add(Me.labelName)
+        Me.Controls.Add(Me.labelAGV)
+        Me.Name = "MapPart"
+        Me.Size = New System.Drawing.Size(108, 105)
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-	End Sub
-	Friend WithEvents labelName As System.Windows.Forms.Label
-	Friend WithEvents LabelAGV As System.Windows.Forms.Label
-	Friend WithEvents Timer1 As System.Windows.Forms.Timer
+End Sub
 
+    Friend WithEvents labelName As CustomText
+    Friend WithEvents labelAGV As CustomText
+    Friend WithEvents Timer1 As Forms.Timer
 End Class

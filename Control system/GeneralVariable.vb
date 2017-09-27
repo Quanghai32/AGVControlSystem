@@ -11,6 +11,7 @@ Public Module GeneralVariable
     Public isNeedToReset As Boolean
     Public MapPartWidth As Integer
     Public MapPartHeight As Integer
+    Public IsVerticalPart As Boolean
     Public PartCounterList As List(Of CPart)
     Public Part_EmptyCount As String
     Public IsOptionShow As Boolean = True
@@ -83,10 +84,11 @@ Public Module GeneralVariable
 
     Public WorkingTimeArray() As struct_Workingtime
     Public isPreOnTime As Boolean = False
-    Public IsReadText As Boolean = True
+    Public RequestRouteConcept As string
     Public Path_Text As String
     Public Tab_start As Byte = 0
     Public NextPartNeedSupply() As Integer
+    Public RequestForm As SupplyForm
 
 
     'for visualize map

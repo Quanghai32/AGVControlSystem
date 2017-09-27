@@ -22,7 +22,7 @@ Public Module MainModule
     Public Sub ReadSetting()
         Dim settingFile As CIniFile
         settingFile = New CIniFile(Environment.CurrentDirectory + "\setting.ini")
-        IsReadText = Convert.ToBoolean(settingFile.ReadValue("IsReadTextFile", "value"))
+        RequestRouteConcept = settingFile.ReadValue("Concept", "value")
         Tab_start = Convert.ToByte(settingFile.ReadValue("Tab_start", "value"))
         Path_Text = settingFile.ReadValue("Path_Text", "value")
         TimerChangePartSttValue = Conversion.Int(settingFile.ReadValue("TimerPart", "value"))
@@ -40,6 +40,12 @@ Public Module MainModule
         If DurationCopy > 0 Then
             CopyTimer.Interval = DurationCopy
             CopyTimer.Start()
+        End If
+
+        If MapPartHeight > MapPartWidth Then
+            IsVerticalPart = True
+        Else
+            IsVerticalPart = False
         End If
     End Sub
     Public Sub SetupHostXbee()
@@ -109,7 +115,7 @@ Public Module MainModule
                 isPreOnTime = False
             End If
         End If
-    End Sub    
+    End Sub
     Public Sub RecordData()
         AGVConnectRecord()
         AGVRouteRecord()
