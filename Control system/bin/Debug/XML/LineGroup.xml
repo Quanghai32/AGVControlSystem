@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <LineGroup>
+    <Id>0</Id>
+    <Name>PDC</Name>
+  </LineGroup>
+  <LineGroup>
+    <Id>1</Id>
+    <Name>LOG</Name>
+  </LineGroup>
+</DocumentElement>

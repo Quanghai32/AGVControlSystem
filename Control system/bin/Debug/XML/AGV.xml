@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DocumentElement>
+  <AGV>
+    <Id>0</Id>
+    <Name>Cua01</Name>
+    <Enable>true</Enable>
+    <Address>40B2764D</Address>
+    <Host_x0020_Xbee>0</Host_x0020_Xbee>
+    <Count>7</Count>
+    <Group>0</Group>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>1</Id>
+    <Name>Cua02</Name>
+    <Enable>true</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>0</Host_x0020_Xbee>
+    <Count>0</Count>
+    <Group>0</Group>
+    <Part>all</Part>
+  </AGV>
+</DocumentElement>

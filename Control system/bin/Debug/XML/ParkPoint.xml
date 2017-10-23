@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <ParkPoint>
+    <Id>0</Id>
+    <First>9</First>
+    <Second>8</Second>
+  </ParkPoint>
+</DocumentElement>

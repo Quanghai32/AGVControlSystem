@@ -1,0 +1,2 @@
+﻿5/30/2017 9:59:55 AMThe process cannot access the file 'D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\02.Project\00.Control System common\Xml version\Control system Xml\Control system\bin\Debug\log\2017530.csv' because it is being used by another process.
+5/30/2017 9:59:55 AMThe process cannot access the file 'D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\02.Project\00.Control System common\Xml version\Control system Xml\Control system\bin\Debug\log\2017530.csv' because it is being used by another process.

@@ -1,0 +1,21 @@
+alter table[chart]drop column [Disconnect]
+go
+alter table[chart] add [Disable]float
+go
+alter table[chart] add [Shutdown]float
+go
+alter table[chart] add [Disconnect]float
+go
+
+alter table[AGV] drop column [Address]
+go
+alter table[AGV] add [Address][nvarchar](8)
+go
+alter table[HostXbee] drop column [Address]
+go
+alter table[HostXbee] add [Address][nvarchar](8)
+go
+alter table[EndDevices] drop column [Address]
+go
+alter table[EndDevices] add [Address][nvarchar](8)
+go

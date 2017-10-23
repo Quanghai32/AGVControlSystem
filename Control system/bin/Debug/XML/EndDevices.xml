@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <EndDevices>
+    <Id>0</Id>
+    <Address>0</Address>
+    <Host_x0020_Xbee>0</Host_x0020_Xbee>
+  </EndDevices>
+</DocumentElement>

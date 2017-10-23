@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <TextSource>
+    <Id>0</Id>
+    <Path>\\192.168.173.62\transfer\30082017\ACC and IT Div\IT\Pdc_export.txt</Path>
+  </TextSource>
+  <TextSource>
+    <Id>1</Id>
+    <Path>\\192.168.173.62\transfer\30082017\ACC and IT Div\IT\Log_export.txt</Path>
+  </TextSource>
+</DocumentElement>
