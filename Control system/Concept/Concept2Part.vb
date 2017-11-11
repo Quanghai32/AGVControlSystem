@@ -8,6 +8,9 @@ Module Concept2Part
         NextPartNeedSupply = New Integer(AGVList.Count) {}
         RequestForm = New SupplyForm
         RequestForm.TopMost = True
+        For i As Integer = 0 To TextList.Count - 1
+            TextList(i).Init()
+        Next
         RequestForm.Show()
     End Sub
 

@@ -48,6 +48,41 @@ Public Module MainModule
             IsVerticalPart = False
         End If
     End Sub
+    Private Sub SomeMethodRunsAt1600(time As TimeSpan)
+
+    End Sub
+
+    Private timer As System.Threading.Timer
+    Public Sub SetUpTimer(alertTime As TimeSpan)
+        Dim current As DateTime = DateTime.Now
+        Dim timeToGo As TimeSpan = alertTime - current.TimeOfDay
+        If timeToGo < TimeSpan.Zero Then
+            'time already passed
+            Return
+        End If
+        timer = New System.Threading.Timer(Function(x)
+                                               SomeMethodRunsAt1600(alertTime)
+                                           End Function, Nothing, timeToGo, Timeout.InfiniteTimeSpan)
+    End Sub
+
+    Public Sub RecordInitialInfor()
+        Dim initial As String = "Initial"
+        For PPNum As Integer = 0 To WorkingTimeArray.Count - 1
+            Record(initial, "StartTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StartTime.TimeOfDay.ToString())
+            Record(initial, "StartMorningTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StartMorningTime.TimeOfDay.ToString())
+            Record(initial, "StopMorningTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StopMorningTime.TimeOfDay.ToString())
+            Record(initial, "StartLunchTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StartLunchTime.TimeOfDay.ToString())
+            Record(initial, "StopLunchTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StopLunchTime.TimeOfDay.ToString())
+            Record(initial, "StartAfterTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StartAfterTime.TimeOfDay.ToString())
+            Record(initial, "StopAfterTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StopAfterTime.TimeOfDay.ToString())
+            Record(initial, "StopTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StopTime.TimeOfDay.ToString())
+        Next
+        For i As Integer = 0 To PartList.Count - 1
+            Record(initial, PartList(i).Name,
+                   "Target", PartList(i).target.ToString(),
+                   "CycleTime", PartList(i).CycleTime.ToString())
+        Next
+    End Sub
     Public Sub SetupHostXbee()
         Dim HostXbeeName() As String
         HostXbeeName = SerialPort.GetPortNames()

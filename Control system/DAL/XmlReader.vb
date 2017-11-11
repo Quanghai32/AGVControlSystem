@@ -37,9 +37,9 @@ Module XmlReader
         For i As Byte = 0 To myDataTable.Rows.Count - 1
             Dim a = New RemainAnalyse() 'Depending on which method
             'Dim a = New RemainAnalyse()
-            
+
             Dim path As String = myDataTable.Rows(i)("Path")
-            TextList(i) = New TextSource(i,path, a) 'Dependency injection
+            TextList(i) = New TextSource(i, path, a) 'Dependency injection
         Next
     End Sub
 
@@ -284,7 +284,7 @@ Module XmlReader
                 AGVList(i).Enable = myDataTable.Rows(i)("Enable")
             End If
             AGVList(i).group = myDataTable.Rows(i)("Group")
-            AGVList(i).index = i' myDataTable.Rows(i)("id")
+            AGVList(i).index = i ' myDataTable.Rows(i)("id")
             AGVList(i).HostControl = myDataTable.Rows(i)("Host Xbee")
             AGVList(i).SupplyCount = myDataTable.Rows(i)("Count")
             AGVGroupArray(AGVList(i).group).MaxAGV += 1
@@ -371,22 +371,45 @@ Module XmlReader
 
     End Sub
 
+    Private Sub CreateChart(ByRef ChartDataTable As DataTable)
+        ChartDataTable = New DataTable
+        ChartDataTable.Columns.Add("Id", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Name")
+        ChartDataTable.Columns.Add("EMG", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Safety", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Stop", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Out line", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Battery empty", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("No cart", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Normal", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Free", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Pole error", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Disconnect", System.Type.GetType("System.Double"))
+        ChartDataTable.Columns.Add("Shutdown", System.Type.GetType("System.Double"))
+        ChartDataTable.TableName = "Chart"
+    End Sub
+
     Private Sub ReadChart()
         ChartDataSet = New DataSet()
         ChartDataTable = New DataTable()
         Dim tempChartDataSet = New DataSet()
         Dim tempChartDataTable As DataTable = New DataTable()
-        ChartDataSet.ReadXml(".\XML\Chart.xml")
 
         ChartDataSet.ReadXml(".\XML\Chart.xml")
         tempChartDataSet.ReadXml(".\XML\Chart.xml")
+
+        ChartDataTable = ChartDataSet.Tables("chart")
         tempChartDataTable = tempChartDataSet.Tables("chart")
 
-        ChartDataTable = ChartDataSet.Tables("chart") 'create table
+        If IsNothing(ChartDataTable) Then
+            CreateChart(ChartDataTable)
+            CreateChart(tempChartDataTable)
+        End If
         While ChartDataTable.Rows.Count > 0
             ChartDataTable.Rows.RemoveAt(ChartDataTable.Rows.Count - 1)
         End While
 
+        'check if agv is not contain in chart
         For agvNum As Integer = 0 To AGVList.Count - 1
             Dim agv = AGVList(agvNum).Name
             Dim contain As Boolean = False
@@ -394,9 +417,8 @@ Module XmlReader
             newRow(0) = ChartDataTable.Rows.Count
             newRow(1) = agv
 
-            'agvlist.count > chart.count
             For chartNum As Integer = 0 To tempChartDataTable.Rows.Count - 1
-                If tempChartDataTable.Rows.Item(chartNum)(1) = agv Then
+                If tempChartDataTable.Rows.Item(chartNum)(1) = agv Then 'if chart already contain AGV in agvlist
                     For i As Byte = 2 To 12
                         newRow(i) = tempChartDataTable.Rows.Item(chartNum)(i)
                     Next
@@ -404,7 +426,7 @@ Module XmlReader
                     Exit For
                 End If
             Next
-            If contain = False Then
+            If contain = False Then 'if not contail --> add with all value = 0
                 For i As Byte = 2 To 12
                     newRow(i) = 0
                 Next
@@ -416,12 +438,12 @@ Module XmlReader
             Return
         End If
 
-        'if agvlist.count < chart.count or not contain
+        'check if chart have agv was not contain in agvlist
         For chartNum As Integer = 0 To tempChartDataTable.Rows.Count - 1
             Dim agv = tempChartDataTable.Rows.Item(chartNum)(1)
             Dim contain As Boolean = False
             For agvNum As Integer = 0 To AGVList.Count - 1
-                If AGVList(agvNum).Name = agv Then
+                If AGVList(agvNum).Name = agv Then 'if agvlist already contain agv in chart
                     contain = True
                     Exit For
                 End If
@@ -435,8 +457,6 @@ Module XmlReader
                 ChartDataTable.Rows.Add(newRow)
             End If
         Next
-
-        Dim s As String = ChartDataTable.Rows.Count
 
         Dim MaxTime As Double = 0
         For i As Byte = 0 To ChartDataTable.Rows.Count - 1

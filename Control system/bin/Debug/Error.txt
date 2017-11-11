@@ -232,3 +232,29 @@
    at System.Windows.Forms.Control.WndProc(Message& m)
    at System.Windows.Forms.Form.WmShowWindow(Message& m)
    at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+11/11/2017 11:52:27 AM: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Control_system.XmlReader.ReadChart() in D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\AGVControlSystem\Control system\DAL\XmlReader.vb:line 386
+   at Control_system.XmlReader.ReadXmlData() in D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\AGVControlSystem\Control system\DAL\XmlReader.vb:line 20
+   at Control_system.MainForm.MainForm_Load(Object sender, EventArgs e) in D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\AGVControlSystem\Control system\MainForm.vb:line 23
+   at System.EventHandler.Invoke(Object sender, EventArgs e)
+   at System.Windows.Forms.Form.OnLoad(EventArgs e)
+   at System.Windows.Forms.Form.OnCreateControl()
+   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
+   at System.Windows.Forms.Control.CreateControl()
+   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.Form.WmShowWindow(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+11/11/2017 11:52:42 AM: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Control_system.XmlReader.ReadChart() in D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\AGVControlSystem\Control system\DAL\XmlReader.vb:line 386
+   at Control_system.XmlReader.ReadXmlData() in D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\AGVControlSystem\Control system\DAL\XmlReader.vb:line 20
+   at Control_system.MainForm.MainForm_Load(Object sender, EventArgs e) in D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\AGVControlSystem\Control system\MainForm.vb:line 23
+   at System.EventHandler.Invoke(Object sender, EventArgs e)
+   at System.Windows.Forms.Form.OnLoad(EventArgs e)
+   at System.Windows.Forms.Form.OnCreateControl()
+   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
+   at System.Windows.Forms.Control.CreateControl()
+   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.Form.WmShowWindow(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

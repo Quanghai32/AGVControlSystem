@@ -154,3 +154,6 @@ $RECYCLE.BIN/
 .DS_Store
 /packages
 /UnitTestControlSystem/bin/Debug
+/Control system/bin/Debug/Log
+/Control system/bin/Debug/Performance
+/.vs/AGVControlSystem/v15/Server/sqlite3

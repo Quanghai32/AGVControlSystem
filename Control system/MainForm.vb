@@ -21,6 +21,7 @@ Public Class MainForm
         ReadSetting()
         Record("System", "Running", "Startup")
         ReadXmlData()
+        RecordInitialInfor()
         RecordPartEmptyCounterInit()
 
         Select Case RequestRouteConcept

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" standalone="yes"?>
 <DocumentElement>
   <AGV>
     <Id>0</Id>
@@ -6,7 +6,7 @@
     <Enable>true</Enable>
     <Address>40B2764D</Address>
     <Host_x0020_Xbee>0</Host_x0020_Xbee>
-    <Count>7</Count>
+    <Count>0</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>

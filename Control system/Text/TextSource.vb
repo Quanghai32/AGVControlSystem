@@ -14,9 +14,12 @@
         _filePath = filePath
         DisConnectTimer = New System.Timers.Timer(5000)
         ReadTime = New Timers.Timer(1000)
-        ReadTime.Start()
         connecting = True
         Me.Id = id
+    End Sub
+
+    Public Sub Init()
+        ReadTime.Start()
     End Sub
     Property Id As Integer
         Get
