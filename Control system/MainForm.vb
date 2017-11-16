@@ -52,11 +52,19 @@ Public Class MainForm
         MainTabControl.SelectedIndex = Tab_start
         panelDetail.Hide()
 
+        ReadVersion()
     End Sub
 
+    Private Sub ReadVersion()
+        Dim assembly As System.Reflection.Assembly = System.Reflection.Assembly.GetExecutingAssembly()
+        Dim fileInfo As New System.IO.FileInfo(assembly.Location)
+        Dim lastModified As DateTime = fileInfo.LastWriteTime
+        Text = "AGVControlSystem -- version: " + lastModified.ToString()
+    End Sub
     Private Sub MainForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Record("System", "Running", "Close")
         RemoveHandler SystemEvents.DisplaySettingsChanged, AddressOf MyEH
+        UploadToServer()
         Environment.Exit(0)
     End Sub
     Public Sub MyEH(ByVal sender As Object, ByVal e As EventArgs)
@@ -1380,7 +1388,7 @@ Public Class MainForm
         MapPartList = New List(Of MapPart)
         PartForAlign = New List(Of MapPart)
         For i As Integer = 0 To PartList.Count - 1
-            Dim Part As MapPart = New MapPart(MapPartWidth,MapPartHeight,IsVerticalPart)
+            Dim Part As MapPart = New MapPart(MapPartWidth, MapPartHeight, IsVerticalPart)
             PictureBoxMap.Controls.Add(Part)
             Part.setDataBinding(PartList(i))
             'Part.Size = New Size(MapPartWidth, MapPartHeight)
@@ -1702,10 +1710,15 @@ Public Class MainForm
     End Sub
 
     Private Sub RequestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RequestFormToolStripMenuItem.Click
-        RequestForm.Close
-        RequestForm =New SupplyForm()
-        RequestForm.Visible=True
-        RequestForm.TopMost=True
+        Select Case RequestRouteConcept
+            Case "Normal"
+
+            Case "2Routes"
+                RequestForm.Close()
+                RequestForm = New SupplyForm()
+                RequestForm.Visible = True
+                RequestForm.TopMost = True
+        End Select
     End Sub
 
     Private Sub CrossViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CrossViewToolStripMenuItem.Click
@@ -1716,5 +1729,9 @@ Public Class MainForm
         DebugForm = New CDebug_Form
         IsAllowPrintDebug = True
         DebugForm.Show()
+    End Sub
+
+    Private Sub ForceUploadToServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForceUploadToServerToolStripMenuItem.Click
+        UploadToServer()
     End Sub
 End Class

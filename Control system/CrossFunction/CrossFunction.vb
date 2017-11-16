@@ -63,7 +63,8 @@ Public Module CrossFunction
 						AGVList(myAGVNumber).Status = AGV.RobocarStatusValue.STOP_BY_CARD
 
                         Record(AGVList(myAGVNumber).Name, "Status", "CROSS_STOP", "Position", AGVList(myAGVNumber).Position.ToString, "CrossNum", CrossPositionIndex.ToString)
-                        PrintToDebug(Now.ToString & " - " & AGVList(myAGVNumber).Name & " - STOP_by_cross" & " - Position - " & AGVList(myAGVNumber).Position.ToString & " - CrossNum - " & CrossPositionIndex.ToString & vbCrLf)
+                        PrintToDebug(EnumDebugInfor.CROSS_FUNCTION,Now.ToString & AGVList(myAGVNumber).Name & ",STOP_by_cross,Position," &
+                                     AGVList(myAGVNumber).Position.ToString & ",CrossNum," & CrossPositionIndex.ToString & vbCrLf)
 
 					End If
 				Else 'Neu ko co tg nao trong cross
@@ -76,7 +77,8 @@ Public Module CrossFunction
 						AGVList(myAGVNumber).CrossNum = 9999
 
                         Record(AGVList(myAGVNumber).Name, "Status", "CROSS_RUN", "Position", AGVList(myAGVNumber).Position.ToString, "CrossNum", CrossPositionIndex.ToString)
-                        PrintToDebug(Now.ToString & " - " & AGVList(myAGVNumber).Name & " - RUN_by_cross" & " - Position - " & AGVList(myAGVNumber).Position.ToString & " - CrossNum - " & CrossPositionIndex.ToString & vbCrLf)
+                        PrintToDebug(EnumDebugInfor.CROSS_FUNCTION,Now.ToString & AGVList(myAGVNumber).Name & ",RUN_by_cross,Position," &
+                                     AGVList(myAGVNumber).Position.ToString & ",CrossNum," & CrossPositionIndex.ToString & vbCrLf)
 
 					End If
 				End If
@@ -133,7 +135,6 @@ Public Module CrossFunction
                         AGVList(myAGVNumber).AGVStop()
                         AGVList(myAGVNumber).isStopByCross = True
                         Record(AGVList(myAGVNumber).Name, "Status", "STOP_by_cross", "Position", AGVList(myAGVNumber).Position.ToString, "CrossNum", CrossPositionIndex.ToString)
-                        PrintToDebug(Now.ToString & AGVList(myAGVNumber).Name & " - STOP_by_cross" & " - Position - " & AGVList(myAGVNumber).Position.ToString & " - CrossNum - " & CrossPositionIndex.ToString & vbCrLf)
                         AGVList(myAGVNumber).Status = AGV.RobocarStatusValue.STOP_BY_CARD
                     End If
                 Else 'Neu ko co tg nao trong cross
@@ -141,7 +142,6 @@ Public Module CrossFunction
                     CrossArray(CrossPositionIndex).AGVExist = AGVList(myAGVNumber).Name
                     If AGVList(myAGVNumber).Status = AGV.RobocarStatusValue.STOP_BY_CARD Then 'Neu hien tai dang dung thi cho chay tiep
                         Record(AGVList(myAGVNumber).Name, "Status", "RUN_by_cross", "Position", AGVList(myAGVNumber).Position.ToString, "CrossNum", CrossPositionIndex.ToString)
-                        PrintToDebug(Now.ToString & AGVList(myAGVNumber).Name & " - RUN_by_cross" & " - Position - " & AGVList(myAGVNumber).Position.ToString & " - CrossNum - " & CrossPositionIndex.ToString & vbCrLf)
                         AGVList(myAGVNumber).AGVRun()
                         AGVList(myAGVNumber).isStopByCross = False
                         AGVList(myAGVNumber).Status = AGV.RobocarStatusValue.NORMAL

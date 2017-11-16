@@ -3,7 +3,7 @@ Imports ControlSystemLibrary
 Imports System.IO.Ports
 Imports System.IO
 Imports Newtonsoft.Json
-Imports MoreLinq
+'Imports MoreLinq
 
 Public Module MainModule
     Public UpdateThread As New Thread(AddressOf UpdateData)
@@ -13,10 +13,14 @@ Public Module MainModule
     Public WithEvents CopyTimer As Timers.Timer = New Timers.Timer
 
     Sub CopyTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CopyTimer.Elapsed
+        UploadToServer()
+    End Sub
+
+    Public Sub UploadToServer()
         Dim fileLog As String = BlockName + "_" + Now.ToString("yyyyMMdd") + ".csv"
         CopyFile(fileLog, "./Log", pathLogFile + "/" + fileLog)
 
-        Dim filePerformance = BlockName + "_" + Now.ToString("yyyyMMdd") + "_" + ShipName + ".txt"
+        Dim filePerformance = BlockName + "_" + DayName + "_" + ShipName + ".txt"
         CopyFile(filePerformance, "./Performance/", pathPerformance + "/" + filePerformance)
     End Sub
     Public Sub ReadSetting()
@@ -49,7 +53,7 @@ Public Module MainModule
         End If
     End Sub
     Private Sub SomeMethodRunsAt1600(time As TimeSpan)
-
+        MessageBox.Show(Now.ToString())
     End Sub
 
     Private timer As System.Threading.Timer
@@ -60,6 +64,7 @@ Public Module MainModule
             'time already passed
             Return
         End If
+
         timer = New System.Threading.Timer(Function(x)
                                                SomeMethodRunsAt1600(alertTime)
                                            End Function, Nothing, timeToGo, Timeout.InfiniteTimeSpan)
@@ -78,9 +83,9 @@ Public Module MainModule
             Record(initial, "StopTime_" + PPNum.ToString(), WorkingTimeArray(PPNum).StopTime.TimeOfDay.ToString())
         Next
         For i As Integer = 0 To PartList.Count - 1
-            Record(initial, PartList(i).Name,
-                   "Target", PartList(i).target.ToString(),
-                   "CycleTime", PartList(i).CycleTime.ToString())
+            Record(initial, PartList(i).Name, PartList(i).route.ToString(),
+                   "SupplyTimeTarget", PartList(i).target.ToString(),
+                   "CycleTimeTarget", PartList(i).CycleTime.ToString())
         Next
     End Sub
     Public Sub SetupHostXbee()
@@ -610,11 +615,12 @@ Public Module MainModule
 #End Region
 #Region "Function for debug form"
     Public DebugForm As CDebug_Form
-    Public Sub PrintToDebug(ByVal str As String)
+    Public Sub PrintToDebug(ByVal mode As EnumDebugInfor, ByVal str As String)
         If IsAllowPrintDebug Then
-            DebugForm.Print(str)
+            DebugForm.Print(mode, str)
         End If
     End Sub
+
 #End Region
 #Region "Json"
     Public Sub DataTableToJson(ByVal dt As DataTable, ByRef json As String)

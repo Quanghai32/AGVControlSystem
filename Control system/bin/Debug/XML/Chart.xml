@@ -3,31 +3,31 @@
   <Chart>
     <Id>0</Id>
     <Name>Cua01</Name>
-    <EMG>0</EMG>
-    <Safety>0</Safety>
-    <Stop>0</Stop>
-    <Out_x0020_line>0</Out_x0020_line>
-    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <EMG>0.0352833333333334</EMG>
+    <Safety>0.0174166666666667</Safety>
+    <Stop>1.49301333666667</Stop>
+    <Out_x0020_line>0.0356166666666666</Out_x0020_line>
+    <Battery_x0020_empty>0.0172166666666667</Battery_x0020_empty>
     <No_x0020_cart>0</No_x0020_cart>
     <Normal>0</Normal>
-    <Free>0</Free>
-    <Pole_x0020_error>0</Pole_x0020_error>
+    <Free>0.706740001666667</Free>
+    <Pole_x0020_error>0.298766668333333</Pole_x0020_error>
     <Disconnect>0</Disconnect>
-    <Shutdown>0</Shutdown>
+    <Shutdown>5037.987686695</Shutdown>
   </Chart>
   <Chart>
     <Id>1</Id>
     <Name>Cua02</Name>
-    <EMG>0</EMG>
-    <Safety>0</Safety>
-    <Stop>0</Stop>
+    <EMG>0.10835</EMG>
+    <Safety>0.0180066666666667</Safety>
+    <Stop>1.59611334</Stop>
     <Out_x0020_line>0</Out_x0020_line>
-    <Battery_x0020_empty>0</Battery_x0020_empty>
-    <No_x0020_cart>0</No_x0020_cart>
-    <Normal>0</Normal>
-    <Free>0</Free>
-    <Pole_x0020_error>0</Pole_x0020_error>
+    <Battery_x0020_empty>0.0901633333333333</Battery_x0020_empty>
+    <No_x0020_cart>0.0178666666666667</No_x0020_cart>
+    <Normal>0.221973333333333</Normal>
+    <Free>4.53791336166667</Free>
+    <Pole_x0020_error>0.418276668333334</Pole_x0020_error>
     <Disconnect>0</Disconnect>
-    <Shutdown>0</Shutdown>
+    <Shutdown>5033.583076665</Shutdown>
   </Chart>
 </DocumentElement>

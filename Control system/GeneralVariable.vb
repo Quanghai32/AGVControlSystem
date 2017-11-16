@@ -25,6 +25,8 @@ Public Module GeneralVariable
     Public httpResponse As HttpResponseMessage
     Public DurationCopy As Integer
     Public ShipName As String = ""
+    Public DayName As String = ""
+    Public DebugMode As Boolean = False
 
     Structure LineGroup
         Public Name As String
@@ -98,4 +100,11 @@ Public Module GeneralVariable
     Public MapPartList As List(Of MapPart)
     Public PartForAlign As List(Of MapPart)
     Public CollectNotExistCard As Collection
+
+    'For debug mode
+    Public Enum EnumDebugInfor
+        THREAD
+        REQUEST_AGV
+        CROSS_FUNCTION
+    End Enum
 End Module

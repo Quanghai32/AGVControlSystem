@@ -24,9 +24,9 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Title5 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.MainMenu = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -53,6 +53,7 @@ Partial Class MainForm
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowAllCardToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowAllCardToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ForceUploadToServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenuSetting = New System.Windows.Forms.ToolStripMenuItem()
         Me.DebugModeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -61,6 +62,10 @@ Partial Class MainForm
         Me.SearchToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RequestFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CrossViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DebugFormToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainStatus = New System.Windows.Forms.StatusStrip()
         Me.imgAGVBig = New System.Windows.Forms.ImageList(Me.components)
         Me.MainTabControl = New System.Windows.Forms.TabControl()
@@ -167,10 +172,6 @@ Partial Class MainForm
         Me.AndonTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TimerAndonMap = New System.Windows.Forms.Timer(Me.components)
         Me.RequestDataTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RequestFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CrossViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DebugFormToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenu.SuspendLayout
         Me.MainTabControl.SuspendLayout
         Me.TabMainForm.SuspendLayout
@@ -363,7 +364,7 @@ Partial Class MainForm
         '
         'OptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowAllCardToolStripMenuItem, Me.ShowAllCardToolStripMenuItem1})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowAllCardToolStripMenuItem, Me.ShowAllCardToolStripMenuItem1, Me.ForceUploadToServerToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.OptionsToolStripMenuItem.Text = "&Options"
@@ -372,15 +373,21 @@ Partial Class MainForm
         '
         Me.ShowAllCardToolStripMenuItem.Name = "ShowAllCardToolStripMenuItem"
         Me.ShowAllCardToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D1),System.Windows.Forms.Keys)
-        Me.ShowAllCardToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ShowAllCardToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.ShowAllCardToolStripMenuItem.Text = "Show Setting"
         '
         'ShowAllCardToolStripMenuItem1
         '
         Me.ShowAllCardToolStripMenuItem1.Name = "ShowAllCardToolStripMenuItem1"
         Me.ShowAllCardToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D2),System.Windows.Forms.Keys)
-        Me.ShowAllCardToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.ShowAllCardToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
         Me.ShowAllCardToolStripMenuItem1.Text = "Show all card"
+        '
+        'ForceUploadToServerToolStripMenuItem
+        '
+        Me.ForceUploadToServerToolStripMenuItem.Name = "ForceUploadToServerToolStripMenuItem"
+        Me.ForceUploadToServerToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.ForceUploadToServerToolStripMenuItem.Text = "Force upload to Server"
         '
         'MainMenuSetting
         '
@@ -406,32 +413,57 @@ Partial Class MainForm
         'ContentsToolStripMenuItem
         '
         Me.ContentsToolStripMenuItem.Name = "ContentsToolStripMenuItem"
-        Me.ContentsToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.ContentsToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ContentsToolStripMenuItem.Text = "&Contents"
         '
         'IndexToolStripMenuItem
         '
         Me.IndexToolStripMenuItem.Name = "IndexToolStripMenuItem"
-        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.IndexToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.IndexToolStripMenuItem.Text = "&Index"
         '
         'SearchToolStripMenuItem
         '
         Me.SearchToolStripMenuItem.Name = "SearchToolStripMenuItem"
         Me.SearchToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F),System.Windows.Forms.Keys)
-        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.SearchToolStripMenuItem.Text = "&Search"
         '
         'toolStripSeparator5
         '
         Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        Me.toolStripSeparator5.Size = New System.Drawing.Size(165, 6)
+        Me.toolStripSeparator5.Size = New System.Drawing.Size(146, 6)
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RequestFormToolStripMenuItem, Me.CrossViewToolStripMenuItem, Me.DebugFormToolStripMenuItem1})
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.ViewToolStripMenuItem.Text = "View"
+        '
+        'RequestFormToolStripMenuItem
+        '
+        Me.RequestFormToolStripMenuItem.Name = "RequestFormToolStripMenuItem"
+        Me.RequestFormToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RequestFormToolStripMenuItem.Text = "Request form"
+        '
+        'CrossViewToolStripMenuItem
+        '
+        Me.CrossViewToolStripMenuItem.Name = "CrossViewToolStripMenuItem"
+        Me.CrossViewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CrossViewToolStripMenuItem.Text = "Cross view"
+        '
+        'DebugFormToolStripMenuItem1
+        '
+        Me.DebugFormToolStripMenuItem1.Name = "DebugFormToolStripMenuItem1"
+        Me.DebugFormToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.DebugFormToolStripMenuItem1.Text = "Catch log"
         '
         'MainStatus
         '
@@ -1058,25 +1090,25 @@ Partial Class MainForm
         '
         'agvChart
         '
-        ChartArea5.Name = "ChartArea1"
-        Me.agvChart.ChartAreas.Add(ChartArea5)
+        ChartArea1.Name = "ChartArea1"
+        Me.agvChart.ChartAreas.Add(ChartArea1)
         Me.agvChart.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend5.Font = New System.Drawing.Font("Cambria", 20!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Legend5.IsTextAutoFit = false
-        Legend5.Name = "Legend1"
-        Me.agvChart.Legends.Add(Legend5)
+        Legend1.Font = New System.Drawing.Font("Cambria", 20!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Legend1.IsTextAutoFit = false
+        Legend1.Name = "Legend1"
+        Me.agvChart.Legends.Add(Legend1)
         Me.agvChart.Location = New System.Drawing.Point(3, 3)
         Me.agvChart.Name = "agvChart"
         Me.agvChart.Size = New System.Drawing.Size(716, 378)
         Me.agvChart.TabIndex = 0
         Me.agvChart.Text = "ChartPerformance"
-        Title5.Font = New System.Drawing.Font("Cambria", 36!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Title5.ForeColor = System.Drawing.Color.Maroon
-        Title5.Name = "Title1"
-        Title5.ShadowOffset = 3
-        Title5.Text = "AGV STATUS"
-        Title5.TextStyle = System.Windows.Forms.DataVisualization.Charting.TextStyle.Shadow
-        Me.agvChart.Titles.Add(Title5)
+        Title1.Font = New System.Drawing.Font("Cambria", 36!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Title1.ForeColor = System.Drawing.Color.Maroon
+        Title1.Name = "Title1"
+        Title1.ShadowOffset = 3
+        Title1.Text = "AGV STATUS"
+        Title1.TextStyle = System.Windows.Forms.DataVisualization.Charting.TextStyle.Shadow
+        Me.agvChart.Titles.Add(Title1)
         '
         'TabMap
         '
@@ -1479,31 +1511,6 @@ Partial Class MainForm
         '
         Me.RequestDataTimer.Interval = 200
         '
-        'ViewToolStripMenuItem
-        '
-        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RequestFormToolStripMenuItem, Me.CrossViewToolStripMenuItem, Me.DebugFormToolStripMenuItem1})
-        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-        Me.ViewToolStripMenuItem.Text = "View"
-        '
-        'RequestFormToolStripMenuItem
-        '
-        Me.RequestFormToolStripMenuItem.Name = "RequestFormToolStripMenuItem"
-        Me.RequestFormToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.RequestFormToolStripMenuItem.Text = "Request form"
-        '
-        'CrossViewToolStripMenuItem
-        '
-        Me.CrossViewToolStripMenuItem.Name = "CrossViewToolStripMenuItem"
-        Me.CrossViewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CrossViewToolStripMenuItem.Text = "Cross view"
-        '
-        'DebugFormToolStripMenuItem1
-        '
-        Me.DebugFormToolStripMenuItem1.Name = "DebugFormToolStripMenuItem1"
-        Me.DebugFormToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.DebugFormToolStripMenuItem1.Text = "Debug form"
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -1693,4 +1700,5 @@ End Sub
     Friend WithEvents RequestFormToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CrossViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DebugFormToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ForceUploadToServerToolStripMenuItem As ToolStripMenuItem
 End Class

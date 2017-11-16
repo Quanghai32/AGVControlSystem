@@ -611,11 +611,10 @@ Module XmlReader
             End If
         Next
 
-        Dim day As String = ""
-        FCheckTime(day, ShipName)
-        If day <> "" Then
+        FCheckTime(DayName, ShipName)
+        If DayName <> "" Then
             Dim json As String = ""
-            Dim fileName As String = BlockName + "_" + day + "_" + ShipName + ".txt"
+            Dim fileName As String = BlockName + "_" + DayName + "_" + ShipName + ".txt"
             Dim path As String = "./Performance/" + fileName
             DataTableToJson(ChartDataTable, json)
             File.WriteAllText(path, json)
@@ -623,8 +622,6 @@ Module XmlReader
 
         GenerateAgvPerformanceObject()
     End Sub
-
-
 
     Public Sub FCheckTime(ByRef day As String, ByRef ship As String)
         Dim time As DateTime = Now

@@ -11,6 +11,7 @@
 
         Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
             Record("System", "Running", "Shutdown")
+            UploadToServer()
         End Sub
 
         Private Sub MyApplication_Startup(sender As Object, e As ApplicationServices.StartupEventArgs) Handles Me.Startup
@@ -33,6 +34,7 @@
             Dim strPromt As String = "Sorry! Program have error! Please run again." + vbCrLf + vbCrLf + "Chúng tôi rất xin lỗi! Chương trình không thể chạy tiếp được. Xin vui lòng khởi động lại chương trình."
             MessageBox.Show(strPromt, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
             My.Computer.FileSystem.WriteAllText("Error.txt", str, True)
+            UploadToServer()
         End Sub
     End Class
 

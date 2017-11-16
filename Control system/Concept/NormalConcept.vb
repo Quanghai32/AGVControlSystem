@@ -20,18 +20,23 @@
             End If
         Next
     End Sub
-   
 
     Private Sub RequestAGV(ByVal AGVnum As Byte)
+        PrintToDebug(EnumDebugInfor.THREAD, Now.ToString() + ",Thread,RequestAGV," + AGVList(AGVnum).Name)
         AGVList(AGVnum).isRequesting = True 'todo: thread
-        Debug.WriteLine("start find Part" & Environment.TickCount.ToString)
+        'Debug.WriteLine("start find Part" & Environment.TickCount.ToString)
         Dim partNeedSupply As Byte = findSupplyPart4AGV(AGVnum)
-        Debug.WriteLine("finise find Part" & Environment.TickCount)
+        'Debug.WriteLine("finise find Part" & Environment.TickCount)
         If partNeedSupply <> 99 Then
             PartList(partNeedSupply).isRequesting = True 'todo: thread
             For iTry As Byte = 0 To 4
                 Dim TimePoint As Integer = Environment.TickCount
                 AGVList(AGVnum).RequestRoute(PartList(partNeedSupply).route)
+                Record("System", "Call", AGVList(AGVnum).Name, "Call_Time", iTry.ToString(), PartList(partNeedSupply).Name, PartList(partNeedSupply).route)
+                PrintToDebug(EnumDebugInfor.REQUEST_AGV, Now.ToString() + ",Request," +
+                             AGVList(AGVnum).Name + ",Call_Time," + iTry.ToString() + "," +
+                             PartList(partNeedSupply).Name + "," +
+                             PartList(partNeedSupply).route.ToString())
                 While (AGVList(AGVnum).Status = AGV.RobocarStatusValue.STOP_BY_CARD And (TimePoint + 5000) > Environment.TickCount) 'neu = Nomal-->false
                 End While
                 If (AGVList(AGVnum).Status <> AGV.RobocarStatusValue.STOP_BY_CARD) Then Exit For
@@ -44,6 +49,9 @@
                 AGVList(AGVnum).SupplyTime = Now
                 AGVList(AGVnum).SupplyCount += 1
                 Record(AGVList(AGVnum).Name, "Status", "CALL_BY_SYSTEM", "Route", PartList(partNeedSupply).route, "Part", PartList(partNeedSupply).Name)
+                PrintToDebug(EnumDebugInfor.REQUEST_AGV, Now.ToString() + "," + AGVList(AGVnum).Name +
+                             ",CALL_BY_SYSTEM," + PartList(partNeedSupply).Name + "," +
+                             PartList(partNeedSupply).route.ToString())
                 PartList(partNeedSupply).AGVSupply = AGVList(AGVnum).Name
                 PartList(partNeedSupply).SupplyCount += 1
                 PartList(partNeedSupply).SupplyTime = Now
@@ -65,7 +73,7 @@
             Next
         End If
     End Sub
-    #Region "Private function for RequestData"
+#Region "Private function for RequestData"
     ''' <summary>
     ''' Check AGV that it's already for request new route or not
     ''' </summary>
@@ -131,6 +139,6 @@
         Next
         Return returnValue
     End Function
-    
+
 #End Region
 End Module

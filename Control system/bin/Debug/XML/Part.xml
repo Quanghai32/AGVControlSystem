@@ -1,11 +1,11 @@
-<?xml version="1.0" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <DocumentElement>
   <Part>
     <Id>0</Id>
     <Name>TS13-01</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>222</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
@@ -25,7 +25,7 @@
     <Name>TS13-02</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>2</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
@@ -45,7 +45,7 @@
     <Name>TM14-01</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>3</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
@@ -65,18 +65,18 @@
     <Name>TM14-02</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>2</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>2</Priority>
     <Group>0</Group>
-    <Count>0</Count>
+    <Count>5</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>0</EmptyCount>
+    <EmptyCount>1</EmptyCount>
     <X>1516</X>
     <Y>359</Y>
   </Part>
@@ -85,7 +85,7 @@
     <Name>TM14-03</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>1</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
@@ -105,7 +105,7 @@
     <Name>TM14-04</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>32</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
@@ -125,7 +125,7 @@
     <Name>TM16-05</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>5</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
@@ -145,18 +145,18 @@
     <Name>TM16-06</Name>
     <Enable>true</Enable>
     <TargetPoint>1</TargetPoint>
-    <Route>0</Route>
+    <Route>2</Route>
     <EndDevices>0</EndDevices>
     <Text>false</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>3</Priority>
     <Group>0</Group>
-    <Count>0</Count>
+    <Count>3</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>0</EmptyCount>
+    <EmptyCount>1</EmptyCount>
     <X>1317</X>
     <Y>358</Y>
   </Part>
