@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <WorkingTime>
+    <Id>0</Id>
+    <BeginTime>P2D</BeginTime>
+    <StartMorTime>P3D</StartMorTime>
+    <StopMorTime>P3D</StopMorTime>
+    <StartLunTime>PT0S</StartLunTime>
+    <StopLunTime>PT0S</StopLunTime>
+    <StartAftTime>PT0S</StartAftTime>
+    <StopAftTime>PT0S</StopAftTime>
+    <EndTime>PT0S</EndTime>
+  </WorkingTime>
+</DocumentElement>

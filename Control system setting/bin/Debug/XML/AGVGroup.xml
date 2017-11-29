@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <AGVGroup>
+    <Id>0</Id>
+    <Name>0. Big Part</Name>
+  </AGVGroup>
+  <AGVGroup>
+    <Id>1</Id>
+    <Name>1. Kitting</Name>
+  </AGVGroup>
+  <AGVGroup>
+    <Id>2</Id>
+    <Name>2.ADF</Name>
+  </AGVGroup>
+</DocumentElement>

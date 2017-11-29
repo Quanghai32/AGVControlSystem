@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <LineGroup>
+    <Id>0</Id>
+    <Name>0. MD5-04</Name>
+  </LineGroup>
+  <LineGroup>
+    <Id>1</Id>
+    <Name>1. MD5-03</Name>
+  </LineGroup>
+  <LineGroup>
+    <Id>2</Id>
+    <Name>2. MD5-02</Name>
+  </LineGroup>
+  <LineGroup>
+    <Id>3</Id>
+    <Name>3. MD5-06</Name>
+  </LineGroup>
+  <LineGroup>
+    <Id>4</Id>
+    <Name>4. MD5-05</Name>
+  </LineGroup>
+  <LineGroup>
+    <Id>5</Id>
+    <Name>5. MD5-01</Name>
+  </LineGroup>
+  <LineGroup>
+    <Id>6</Id>
+    <Name>6. MD5-07</Name>
+  </LineGroup>
+</DocumentElement>

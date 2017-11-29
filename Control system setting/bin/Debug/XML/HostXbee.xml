@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <HostXbee>
+    <Id>0</Id>
+    <Address>40E44BC2</Address>
+  </HostXbee>
+  <HostXbee>
+    <Id>1</Id>
+    <Address>40DAEE52</Address>
+  </HostXbee>
+  <HostXbee>
+    <Id>2</Id>
+    <Address>40E44BAE</Address>
+  </HostXbee>
+  <HostXbee>
+    <Id>3</Id>
+    <Address>40A890D8</Address>
+  </HostXbee>
+  <HostXbee>
+    <Id>4</Id>
+    <Address>40BE3FB0</Address>
+  </HostXbee>
+  <HostXbee>
+    <Id>5</Id>
+    <Address>40E44BDB</Address>
+  </HostXbee>
+  <HostXbee>
+    <Id>6</Id>
+    <Address>40A890C8</Address>
+  </HostXbee>
+</DocumentElement>
