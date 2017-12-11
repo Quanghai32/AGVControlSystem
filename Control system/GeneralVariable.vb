@@ -8,6 +8,7 @@ Public Module GeneralVariable
     Public TextList() As TextSource
 
     Public PartList As List(Of CPart)
+    'Public PartListRefer As List(Of CPart)
     Public isNeedToReset As Boolean
     Public MapPartWidth As Integer
     Public MapPartHeight As Integer
@@ -27,6 +28,7 @@ Public Module GeneralVariable
     Public ShipName As String = ""
     Public DayName As String = ""
     Public DebugMode As Boolean = False
+    Public TimerChangePartSttValue As Integer
 
     Structure LineGroup
         Public Name As String
@@ -35,6 +37,7 @@ Public Module GeneralVariable
     End Structure
 
     Public LineGroupArray() As LineGroup
+    Public StartPoint As Integer() = New Integer(1) {10, 20}
 
     Structure AGVGroup
         Public Name As String

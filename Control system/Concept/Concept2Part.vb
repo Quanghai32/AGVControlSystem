@@ -23,35 +23,6 @@ Module Concept2Part
         End If
     End Sub
 
-    'Public Sub UpdateAgvWorkingStt(ByVal position As Integer, ByVal agvNum As Integer)
-    '    If AGVList(agvNum).WorkingStatus <> RobocarWorkingStatusValue.FREE Then 'đang Supplying
-    '        If AGVList(agvNum).Status = RobocarStatusValue.STOP_BY_CARD Then
-    '            If Not AGVList(agvNum).BeingStartPoint Then 'trước đó chưa ở start point
-    '                If isInStartPoint(position) Then 'giờ đang ở start point
-    '                    AGVList(agvNum).BeingStartPoint = True 'bắt đầu Free
-    '                    AGVList(agvNum).timerFree.Start()
-    '                Else
-    '                    AGVList(agvNum).timerFree.Stop()
-    '                End If
-    '            End If
-    '        End If
-    '    ElseIf AGVList(agvNum).Status <> RobocarStatusValue.STOP_BY_CARD Then
-    '        AGVList(agvNum).BeingStartPoint = False
-    '        AGVList(agvNum).timerFree.Stop()
-    '        AGVList(agvNum).WorkingStatus = RobocarWorkingStatusValue.SUPPLYING 'set lại sau mỗi lần đọc thẻ mới mà trước đó không phải thẻ free. Chỉ cần agv đi là set supplying
-    '    End If
-    'End Sub
-
-    'Private Function isInStartPoint(ByVal _Position As Integer) As Boolean
-    '    Dim i As Byte
-    '    For i = 0 To StartPoint.Length - 1
-    '        If _Position = StartPoint(i) Then
-    '            Return True
-    '        End If
-    '    Next
-    '    Return False
-    'End Function
-
     Public Sub Request2Data()
         For AGVNum As Byte = 0 To AGVList.Count - 1
             If isAGVFree4Supply(AGVNum) Then
@@ -80,17 +51,17 @@ Module Concept2Part
         Find2SupplyPart4AGV(firstIndex, secondIndex)
 
         If firstIndex = -1 And secondIndex <> -1 Then
-            RequestForm.AddSupply(AGVList(agvNum).Name, "", PartList(secondIndex).Name + "(" + PartList(secondIndex).route.ToString + ")")
+            'RequestForm.AddSupply(AGVList(agvNum).Name, "", PartList(secondIndex).Name + "(" + PartList(secondIndex).route.ToString + ")")
             RequestRoute(agvNum, secondIndex, -1)
             NextPartNeedSupply(agvNum) = -1
         ElseIf firstIndex <> -1 And secondIndex = -1 Then
-            RequestForm.AddSupply(AGVList(agvNum).Name, PartList(firstIndex).Name + "(" + PartList(firstIndex).route.ToString + ")", "")
+            'RequestForm.AddSupply(AGVList(agvNum).Name, PartList(firstIndex).Name + "(" + PartList(firstIndex).route.ToString + ")", "")
             RequestRoute(agvNum, firstIndex, -1)
             NextPartNeedSupply(agvNum) = -1
         ElseIf firstIndex = -1 And secondIndex = -1 Then
             Return
         ElseIf firstIndex <> -1 And secondIndex <> -1 Then
-            RequestForm.AddSupply(AGVList(agvNum).Name, PartList(firstIndex).Name + "(" + PartList(firstIndex).route.ToString + ")", PartList(secondIndex).Name + "(" + PartList(secondIndex).route.ToString + ")")
+            'RequestForm.AddSupply(AGVList(agvNum).Name, PartList(firstIndex).Name + "(" + PartList(firstIndex).route.ToString + ")", PartList(secondIndex).Name + "(" + PartList(secondIndex).route.ToString + ")")
             RequestRoute(agvNum, firstIndex, secondIndex)
             NextPartNeedSupply(agvNum) = secondIndex 'remember second part            
         End If

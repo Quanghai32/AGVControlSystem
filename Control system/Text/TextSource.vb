@@ -53,7 +53,7 @@
             CopyFile(_filePath)
         Catch
             ReadTime.Start()
-            connecting=False
+            connecting = False
         End Try
         ReadTime.Start()
     End Sub
@@ -70,8 +70,27 @@
     End Structure
 
     Private Sub CopyFile(ByVal srcPath As String)
-        File.Copy(srcPath, _fileName, True)
-        GetdataReceive()
+        'If Not File.Exists(srcPath) Then Return
+        'Static prevFile = File.GetLastWriteTime(srcPath)
+        'Static isFileNotChange As Boolean = False
+        'Dim currentFileModifyTime = File.GetLastWriteTime(srcPath)
+        'If (prevFile = currentFileModifyTime) Then
+        '    If isFileNotChange
+
+        '    End If
+        '    isFileNotChange = True
+        '    DisConnectTimer.Start()
+        'Else
+        '    isFileNotChange = False
+        '    DisConnectTimer.Stop()
+        '    prevFile = currentFileModifyTime
+        'End If
+
+        Try
+            File.Copy(srcPath, _fileName, True)
+            GetdataReceive()
+        Catch ex As Exception
+        End Try
     End Sub
     Public Sub GetdataReceive()
         Dim fStream As New FileStream(_fileName, FileMode.Open)
@@ -82,8 +101,9 @@
             Dim line As String
             line = sReader.ReadLine
             Dim TempArray() As String = Split(line, ",")
-            If ChildCollection.Contains(TempArray(0)) Then
-                If Int32.Parse(ChildCollection(TempArray(0))) > Int32.Parse(TempArray(1)) Then
+            If Int32.Parse(TempArray(1)) = -1 Then Continue Do
+            If ChildCollection.Contains(TempArray(0)) Then '2 pallet in ASSY line
+                If Int32.Parse(ChildCollection(TempArray(0))) > Int32.Parse(TempArray(1)) Then 'get bigger value
                     ChildCollection.Remove(TempArray(0).ToString())
                     ChildCollection.Add(TempArray(1), TempArray(0))
                 End If
@@ -94,7 +114,7 @@
         fStream.Close()
         sReader.Close()
 
-        connecting=True
+        connecting = True
         DisConnectTimer.Stop()
         DisConnectTimer.Start()
         AnalyseInfo(ChildCollection, Parts)

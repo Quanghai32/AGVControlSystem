@@ -282,12 +282,6 @@
     <Compile Include="Concept\Concept2Part.vb" />
     <Compile Include="Concept\ClassToTest.vb" />
     <Compile Include="Concept\NormalConcept.vb" />
-    <Compile Include="Concept\RequestRouteForm.Designer.vb">
-      <DependentUpon>RequestRouteForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Concept\RequestRouteForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Concept\SupplyForm.Designer.vb">
       <DependentUpon>SupplyForm.vb</DependentUpon>
     </Compile>
@@ -376,9 +370,6 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concept\RequestRouteForm.resx">
-      <DependentUpon>RequestRouteForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Concept\SupplyForm.resx">
       <DependentUpon>SupplyForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -460,7 +451,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ControlSystemLibrary\ControlSystemLibrary\ControlSystemLibrary.vbproj">
+    <ProjectReference Include="..\ControlSystemLibrary\ControlSystemLibrary.vbproj">
       <Project>{1115160a-ea7e-466e-a328-19006fdf7ad4}</Project>
       <Name>ControlSystemLibrary</Name>
     </ProjectReference>

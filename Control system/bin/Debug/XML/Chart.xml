@@ -2,32 +2,47 @@
 <DocumentElement>
   <Chart>
     <Id>0</Id>
-    <Name>Cua01</Name>
-    <EMG>0.0352833333333334</EMG>
-    <Safety>0.0174166666666667</Safety>
-    <Stop>1.49301333666667</Stop>
-    <Out_x0020_line>0.0356166666666666</Out_x0020_line>
-    <Battery_x0020_empty>0.0172166666666667</Battery_x0020_empty>
+    <Name>Cua 01</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>3.29850000000001</Stop>
+    <Out_x0020_line>0</Out_x0020_line>
+    <Battery_x0020_empty>0.0173166666666667</Battery_x0020_empty>
     <No_x0020_cart>0</No_x0020_cart>
     <Normal>0</Normal>
-    <Free>0.706740001666667</Free>
-    <Pole_x0020_error>0.298766668333333</Pole_x0020_error>
+    <Free>10.6542666666667</Free>
+    <Pole_x0020_error>0.317600000000001</Pole_x0020_error>
     <Disconnect>0</Disconnect>
-    <Shutdown>5037.987686695</Shutdown>
+    <Shutdown>23.2149333333332</Shutdown>
   </Chart>
   <Chart>
     <Id>1</Id>
-    <Name>Cua02</Name>
-    <EMG>0.10835</EMG>
-    <Safety>0.0180066666666667</Safety>
-    <Stop>1.59611334</Stop>
-    <Out_x0020_line>0</Out_x0020_line>
-    <Battery_x0020_empty>0.0901633333333333</Battery_x0020_empty>
-    <No_x0020_cart>0.0178666666666667</No_x0020_cart>
-    <Normal>0.221973333333333</Normal>
-    <Free>4.53791336166667</Free>
-    <Pole_x0020_error>0.418276668333334</Pole_x0020_error>
+    <Name>Cua 02</Name>
+    <EMG>0.0178666666666667</EMG>
+    <Safety>0.0353166666666667</Safety>
+    <Stop>1.20815</Stop>
+    <Out_x0020_line>0.01715</Out_x0020_line>
+    <Battery_x0020_empty>0.0174333333333333</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0.05285</Normal>
+    <Free>16.91355</Free>
+    <Pole_x0020_error>0.3792</Pole_x0020_error>
     <Disconnect>0</Disconnect>
-    <Shutdown>5033.583076665</Shutdown>
+    <Shutdown>18.8610999999999</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>2</Id>
+    <Name>Của 03</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0.219483333333333</Stop>
+    <Out_x0020_line>0</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0</Free>
+    <Pole_x0020_error>0</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>37.2831333333332</Shutdown>
   </Chart>
 </DocumentElement>

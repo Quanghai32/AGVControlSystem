@@ -116,7 +116,7 @@ Module XmlReader
 
         'Read Part table
         For i As Byte = 0 To myDataTable.Rows.Count - 1
-            Dim part As CPart = New CPart()
+            Dim part As CPart = New CPart() With {.TIME_EMPTY = TimerChangePartSttValue, .TIME_FULL = TimerChangePartSttValue}
             part.index = myDataTable.Rows(i)("ID")
             part.Name = myDataTable.Rows(i)("Name")
             part.Enable = Boolean.Parse(myDataTable.Rows(i)("Enable"))
@@ -136,6 +136,7 @@ Module XmlReader
             part.EmptyCount = myDataTable.Rows(i)("EmptyCount")
             part.X = myDataTable.Rows(i)("X")
             part.Y = myDataTable.Rows(i)("y")
+            
 
             If part.Text = False Then
                 part.parent = EndDevicesArray(part.EndDevice)
@@ -143,10 +144,10 @@ Module XmlReader
             Else
                 part.parent = TextList(part.TextSource)
                 TextList(part.TextSource).Parts.Add(part)
+                TextList(part.TextSource).Init()
             End If
 
             PartList.Add(part)
-
         Next
     End Sub
     Private Sub ReadPartBka()
@@ -691,4 +692,26 @@ Module XmlReader
         Next
         ChartDataTable.WriteXml(".\XML\Chart.xml")
     End Sub
+
+    ''' <summary>
+    ''' Link AGV or End Devices and Xbee together
+    ''' </summary>
+    ''' <param name="userAGV">AGV object</param>
+    ''' <param name="userXbee">Xbee which receive data from AGV</param>
+    ''' <remarks></remarks>
+    Public Sub LinkDeviceAndXbee(ByVal userAGV As AGV, ByVal userXbee As XBee)
+        userXbee.ChildComponent.Add(userAGV)
+        userAGV.myXbee = userXbee
+    End Sub
+    ''' <summary>
+    ''' Link AGV or End Devices and Xbee together
+    ''' </summary>
+    ''' <param name="userEndDevices">End Devices</param>
+    ''' <param name="userXbee">Xbee which receive data from AGV</param>
+    ''' <remarks></remarks>
+    Public Sub LinkDeviceAndXbee(ByVal userEndDevices As EndDevices, ByVal userXbee As XBee)
+        userXbee.ChildComponent.Add(userEndDevices)
+        userEndDevices.myXbee = userXbee
+    End Sub
+
 End Module

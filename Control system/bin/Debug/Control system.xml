@@ -78,5 +78,21 @@ Control system
  </summary>
  <remarks></remarks>
 </member>
+<member name="M:Control_system.XmlReader.LinkDeviceAndXbee(ControlSystemLibrary.AGV,ControlSystemLibrary.XBee)">
+ <summary>
+ Link AGV or End Devices and Xbee together
+ </summary>
+ <param name="userAGV">AGV object</param>
+ <param name="userXbee">Xbee which receive data from AGV</param>
+ <remarks></remarks>
+</member>
+<member name="M:Control_system.XmlReader.LinkDeviceAndXbee(ControlSystemLibrary.EndDevices,ControlSystemLibrary.XBee)">
+ <summary>
+ Link AGV or End Devices and Xbee together
+ </summary>
+ <param name="userEndDevices">End Devices</param>
+ <param name="userXbee">Xbee which receive data from AGV</param>
+ <remarks></remarks>
+</member>
 </members>
 </doc>

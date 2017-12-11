@@ -25,12 +25,14 @@ Partial Class SupplyForm
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.AddToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AutoSizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OptionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout
         Me.SuspendLayout
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.AutoSizeToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddToolStripMenuItem, Me.AutoSizeToolStripMenuItem, Me.OptionToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1138, 24)
@@ -48,6 +50,19 @@ Partial Class SupplyForm
         Me.AutoSizeToolStripMenuItem.Name = "AutoSizeToolStripMenuItem"
         Me.AutoSizeToolStripMenuItem.Size = New System.Drawing.Size(67, 20)
         Me.AutoSizeToolStripMenuItem.Text = "Auto size"
+        '
+        'OptionToolStripMenuItem
+        '
+        Me.OptionToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem})
+        Me.OptionToolStripMenuItem.Name = "OptionToolStripMenuItem"
+        Me.OptionToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
+        Me.OptionToolStripMenuItem.Text = "Option"
+        '
+        'CloseToolStripMenuItem
+        '
+        Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CloseToolStripMenuItem.Text = "Close"
         '
         'SupplyForm
         '
@@ -70,4 +85,6 @@ End Sub
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents AddToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AutoSizeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OptionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CloseToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -28,10 +28,14 @@ Public Class MainForm
             Case "Normal"
 
             Case "2Routes"
-                SetupNewConcept()
+                RequestForm = New SupplyForm
+                RequestForm.TopMost = True
+                RequestForm.Show()
         End Select
 
         SetupHostXbee()
+        SetupEventAgv()
+
         DisplayAGV()
         DisplayPart()
         Display_Map()
@@ -84,12 +88,7 @@ Public Class MainForm
 
     Private Sub RequestDataTimer_Tick(sender As Object, e As EventArgs) Handles RequestDataTimer.Tick
         RequestDataTimer.Stop()
-        Select Case RequestRouteConcept
-            Case "Normal"
-                RequestData()
-            Case "2Routes"
-                Request2Data()
-        End Select
+        RequestData()
         RequestDataTimer.Start()
     End Sub
     Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick '500 ms
@@ -1710,15 +1709,14 @@ Public Class MainForm
     End Sub
 
     Private Sub RequestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RequestFormToolStripMenuItem.Click
-        Select Case RequestRouteConcept
-            Case "Normal"
-
-            Case "2Routes"
-                RequestForm.Close()
-                RequestForm = New SupplyForm()
-                RequestForm.Visible = True
-                RequestForm.TopMost = True
-        End Select
+        If IsNothing(RequestForm) Then
+            RequestForm = New SupplyForm()
+        Else
+            RequestForm.Close()
+        End If
+        RequestForm = New SupplyForm()
+        RequestForm.Visible = True
+        RequestForm.TopMost = True
     End Sub
 
     Private Sub CrossViewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CrossViewToolStripMenuItem.Click

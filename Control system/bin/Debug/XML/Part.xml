@@ -7,7 +7,7 @@
     <TargetPoint>1</TargetPoint>
     <Route>222</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>5</Priority>
@@ -16,7 +16,7 @@
     <Target>47</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>0</EmptyCount>
+    <EmptyCount>4</EmptyCount>
     <X>1663</X>
     <Y>312</Y>
   </Part>
@@ -27,16 +27,16 @@
     <TargetPoint>1</TargetPoint>
     <Route>2</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>4</Priority>
     <Group>0</Group>
-    <Count>0</Count>
+    <Count>3</Count>
     <Target>8</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>0</EmptyCount>
+    <EmptyCount>3</EmptyCount>
     <X>1615</X>
     <Y>358</Y>
   </Part>
@@ -47,7 +47,7 @@
     <TargetPoint>1</TargetPoint>
     <Route>3</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>3</Priority>
@@ -67,7 +67,7 @@
     <TargetPoint>1</TargetPoint>
     <Route>2</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>2</Priority>
@@ -87,7 +87,7 @@
     <TargetPoint>1</TargetPoint>
     <Route>1</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>1</Priority>
@@ -96,7 +96,7 @@
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>0</EmptyCount>
+    <EmptyCount>2</EmptyCount>
     <X>1456</X>
     <Y>310</Y>
   </Part>
@@ -107,7 +107,7 @@
     <TargetPoint>1</TargetPoint>
     <Route>32</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>5</Priority>
@@ -116,7 +116,7 @@
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>0</EmptyCount>
+    <EmptyCount>33</EmptyCount>
     <X>1417</X>
     <Y>360</Y>
   </Part>
@@ -127,7 +127,7 @@
     <TargetPoint>1</TargetPoint>
     <Route>5</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>4</Priority>
@@ -136,7 +136,7 @@
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>0</EmptyCount>
+    <EmptyCount>3</EmptyCount>
     <X>1355</X>
     <Y>311</Y>
   </Part>
@@ -147,7 +147,7 @@
     <TargetPoint>1</TargetPoint>
     <Route>2</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
+    <Text>true</Text>
     <TextSource>0</TextSource>
     <RemainStock>1</RemainStock>
     <Priority>3</Priority>
@@ -156,7 +156,7 @@
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>1</EmptyCount>
+    <EmptyCount>2</EmptyCount>
     <X>1317</X>
     <Y>358</Y>
   </Part>

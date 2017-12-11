@@ -3,6 +3,7 @@ Imports ControlSystemLibrary
 Imports System.IO.Ports
 Imports System.IO
 Imports Newtonsoft.Json
+Imports ControlSystemLibrary.AGV
 'Imports MoreLinq
 
 Public Module MainModule
@@ -56,19 +57,19 @@ Public Module MainModule
         MessageBox.Show(Now.ToString())
     End Sub
 
-    Private timer As System.Threading.Timer
-    Public Sub SetUpTimer(alertTime As TimeSpan)
-        Dim current As DateTime = DateTime.Now
-        Dim timeToGo As TimeSpan = alertTime - current.TimeOfDay
-        If timeToGo < TimeSpan.Zero Then
-            'time already passed
-            Return
-        End If
+    'Private timer As System.Threading.Timer
+    'Public Sub SetUpTimer(alertTime As TimeSpan)
+    '    Dim current As DateTime = DateTime.Now
+    '    Dim timeToGo As TimeSpan = alertTime - current.TimeOfDay
+    '    If timeToGo < TimeSpan.Zero Then
+    '        'time already passed
+    '        Return
+    '    End If
 
-        timer = New System.Threading.Timer(Function(x)
-                                               SomeMethodRunsAt1600(alertTime)
-                                           End Function, Nothing, timeToGo, Timeout.InfiniteTimeSpan)
-    End Sub
+    '    timer = New System.Threading.Timer(Function(x)
+    '                                           SomeMethodRunsAt1600(alertTime)
+    '                                       End Function, Nothing, timeToGo, Threading.Timeout.InfiniteTimeSpan)
+    'End Sub
 
     Public Sub RecordInitialInfor()
         Dim initial As String = "Initial"
@@ -134,6 +135,55 @@ Public Module MainModule
             End If
         Next
     End Sub
+
+    Public Sub SetupEventAgv()
+        For Each agv In AGVList
+            AddHandler agv.ReceiveDataPostion, AddressOf UpdateAgvWorkingStt
+        Next
+    End Sub
+
+    Public Sub UpdateAgvWorkingStt(ByVal position As Integer, ByVal agvNum As Integer)
+        If AGVList(agvNum).WorkingStatus <> RobocarWorkingStatusValue.FREE Then 'đang Supplying
+            If AGVList(agvNum).Status = RobocarStatusValue.STOP_BY_CARD Then
+                If Not AGVList(agvNum).BeingStartPoint Then 'trước đó chưa ở start point
+                    If isInStartPoint(position) Then 'giờ đang ở start point
+                        AGVList(agvNum).BeingStartPoint = True 'bắt đầu Free
+                        AGVList(agvNum).timerFree.Start()
+                    Else
+                        AGVList(agvNum).timerFree.Stop()
+                    End If
+                End If
+            End If
+        ElseIf AGVList(agvNum).Status <> RobocarStatusValue.STOP_BY_CARD Then
+            AGVList(agvNum).BeingStartPoint = False
+            AGVList(agvNum).timerFree.Stop()
+            AGVList(agvNum).WorkingStatus = RobocarWorkingStatusValue.SUPPLYING 'set lại sau mỗi lần đọc thẻ mới mà trước đó không phải thẻ free. Chỉ cần agv đi là set supplying
+        End If
+    End Sub
+
+    Private Function isInStartPoint(ByVal _Position As Integer) As Boolean
+        Dim i As Byte
+        For i = 0 To StartPoint.Length - 1
+            If _Position = StartPoint(i) Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
+    Public Sub DoCrossFunc()
+        CheckCross()
+        If Not IsNothing(ParkPointArray) Then
+            For AGVNum As Byte = 0 To AGVList.Count - 1
+                If isCanRun(AGVNum) And (AGVList(AGVNum).Connecting = True) And (AGVList(AGVNum).Status = AGV.RobocarStatusValue.STOP_BY_CARD) Then
+                    AGVList(AGVNum).AGVRun()
+                    Record(AGVList(AGVNum).Name, "Status", "CALL_IN_PARKPOINT",,,,)
+                    AGVList(AGVNum).Status = AGV.RobocarStatusValue.NORMAL
+                End If
+            Next
+        End If
+    End Sub
+
     Public Sub UpdateData() 'todo: ignore disconect time if turn on AGV.position=0
         If isOnWorkingTime(Now.Hour, Now.Minute) Then
             For AGVNum As Byte = 0 To AGVList.Count - 1
@@ -632,6 +682,7 @@ Public Module MainModule
 #End Region
 
     Public Sub CopyFile(ByVal fileName As String, ByVal pathSrc As String, ByVal pathDest As String)
+        If DurationCopy = 0 Then Return
         If pathDest = "" Then Return
         Dim extention As String = fileName.Split(".")(1)
         Static objlock As Object = New Object

@@ -22,22 +22,6 @@ ControlSystemLibrary
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
-<member name="M:ControlSystemLibrary.SystemModule.LinkDeviceAndXbee(ControlSystemLibrary.AGV,ControlSystemLibrary.XBee)">
- <summary>
- Link AGV or End Devices and Xbee together
- </summary>
- <param name="userAGV">AGV object</param>
- <param name="userXbee">Xbee which receive data from AGV</param>
- <remarks></remarks>
-</member>
-<member name="M:ControlSystemLibrary.SystemModule.LinkDeviceAndXbee(ControlSystemLibrary.EndDevices,ControlSystemLibrary.XBee)">
- <summary>
- Link AGV or End Devices and Xbee together
- </summary>
- <param name="userEndDevices">End Devices</param>
- <param name="userXbee">Xbee which receive data from AGV</param>
- <remarks></remarks>
-</member>
 <member name="P:ControlSystemLibrary.AGV.RobocarStatusName">
  <summary>
  Define the name of all status of AGV - Use with status property

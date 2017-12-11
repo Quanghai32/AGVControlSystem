@@ -22,20 +22,35 @@
         'Me.Controls.Add(uc)      
     End Sub
 
-    Public Sub AddSupply(ByVal agvName As String, ByVal firstPart As String, ByVal secondPart As String)
+    'Public Sub AddSupply(ByVal agvName As String, ByVal firstPart As String, ByVal secondPart As String)
+    '    Dim uc As ucAgvSupply = New ucAgvSupply()
+    '    uc.Name = agvName
+    '    uc.LabelAgv.Text = agvName
+    '    uc.Dock = DockStyle.Top
+
+    '    If firstPart <> "" Then
+    '        uc.LabelFirstPart.Text = firstPart
+    '        uc.PanelFirstPart.BackColor = Color.GreenYellow
+    '    End If
+    '    If secondPart <> "" Then
+    '        uc.LabelSecondPart.Text = secondPart
+    '        uc.PanelSecondPart.BackColor = Color.Coral
+    '    End If
+    '    AddHandler uc.DeleteControl, AddressOf RemoveCtrl
+    '    AddCtrl(uc)
+    'End Sub
+
+    Public Sub AddSupply(ByVal agvName As String, ByVal firstPart As String)
         Dim uc As ucAgvSupply = New ucAgvSupply()
         uc.Name = agvName
         uc.LabelAgv.Text = agvName
         uc.Dock = DockStyle.Top
 
         If firstPart <> "" Then
-            uc.LabelFirstPart.Text = firstPart
-            uc.PanelFirstPart.BackColor = Color.GreenYellow
+            uc.LabelSecondPart.Text = firstPart
+            uc.PanelSecondPart.BackColor = Color.GreenYellow
         End If
-        If secondPart <> "" Then
-            uc.LabelSecondPart.Text = secondPart
-            uc.PanelSecondPart.BackColor = Color.Coral
-        End If
+
         AddHandler uc.DeleteControl, AddressOf RemoveCtrl
         AddCtrl(uc)
     End Sub
@@ -65,7 +80,7 @@
     Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddToolStripMenuItem.Click
         Dim agvName As String = InputBox("Input AGV name")
         If agvName = "" Then Return
-        AddSupply(agvName, "Pdc", "Log")
+        AddSupply(agvName, "Test")
     End Sub
 
     Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -84,5 +99,9 @@
             isAllowExpand = False
             AutoSizeToolStripMenuItem.Text="Auto size"
         End If
+    End Sub
+
+    Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
+        Me.Close()
     End Sub
 End Class
