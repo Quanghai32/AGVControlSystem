@@ -6,7 +6,7 @@
     <Enable>true</Enable>
     <Address>40B2764D</Address>
     <Host_x0020_Xbee>0</Host_x0020_Xbee>
-    <Count>5</Count>
+    <Count>7</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
@@ -28,6 +28,6 @@
     <Host_x0020_Xbee>0</Host_x0020_Xbee>
     <Count>0</Count>
     <Group>0</Group>
-    <Part>0</Part>
+    <Part>all</Part>
   </AGV>
 </DocumentElement>

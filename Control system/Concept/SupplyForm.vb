@@ -78,9 +78,7 @@
     End Sub
 
     Private Sub AddToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddToolStripMenuItem.Click
-        Dim agvName As String = InputBox("Input AGV name")
-        If agvName = "" Then Return
-        AddSupply(agvName, "Test")
+        AddSupply("AGV 00", "TM15-03(24)_No:12_Re:24")
     End Sub
 
     Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs)

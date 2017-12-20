@@ -36,17 +36,16 @@ Partial Class ucAgvSupply
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
-        Me.TableLayoutPanel1.ColumnCount = 3
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.28767!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.097394!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.70644!))
+        Me.TableLayoutPanel1.ColumnCount = 2
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.PanelAgv, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.PanelSecondPart, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.PanelSecondPart, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(730, 150)
         Me.TableLayoutPanel1.TabIndex = 3
         '
@@ -56,14 +55,14 @@ Partial Class ucAgvSupply
         Me.PanelAgv.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelAgv.Location = New System.Drawing.Point(4, 4)
         Me.PanelAgv.Name = "PanelAgv"
-        Me.PanelAgv.Size = New System.Drawing.Size(235, 142)
+        Me.PanelAgv.Size = New System.Drawing.Size(175, 142)
         Me.PanelAgv.TabIndex = 0
         '
         'LabelAgv
         '
-        Me.LabelAgv.AutoSize = true
-        Me.LabelAgv.Font = New System.Drawing.Font("Microsoft Sans Serif", 48!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelAgv.Location = New System.Drawing.Point(28, 41)
+        Me.LabelAgv.AutoSize = True
+        Me.LabelAgv.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelAgv.Location = New System.Drawing.Point(11, 41)
         Me.LabelAgv.Name = "LabelAgv"
         Me.LabelAgv.Size = New System.Drawing.Size(168, 73)
         Me.LabelAgv.TabIndex = 1
@@ -74,26 +73,26 @@ Partial Class ucAgvSupply
         Me.PanelSecondPart.Controls.Add(Me.btnRelease)
         Me.PanelSecondPart.Controls.Add(Me.LabelSecondPart)
         Me.PanelSecondPart.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelSecondPart.Location = New System.Drawing.Point(254, 4)
+        Me.PanelSecondPart.Location = New System.Drawing.Point(186, 4)
         Me.PanelSecondPart.Name = "PanelSecondPart"
-        Me.PanelSecondPart.Size = New System.Drawing.Size(472, 142)
+        Me.PanelSecondPart.Size = New System.Drawing.Size(540, 142)
         Me.PanelSecondPart.TabIndex = 0
         '
         'btnRelease
         '
-        Me.btnRelease.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRelease.Location = New System.Drawing.Point(394, 3)
+        Me.btnRelease.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRelease.Location = New System.Drawing.Point(462, 3)
         Me.btnRelease.Name = "btnRelease"
         Me.btnRelease.Size = New System.Drawing.Size(75, 23)
         Me.btnRelease.TabIndex = 1
         Me.btnRelease.Text = "Release"
-        Me.btnRelease.UseVisualStyleBackColor = true
+        Me.btnRelease.UseVisualStyleBackColor = True
         '
         'LabelSecondPart
         '
-        Me.LabelSecondPart.AutoSize = true
-        Me.LabelSecondPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 48!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LabelSecondPart.Location = New System.Drawing.Point(75, 41)
+        Me.LabelSecondPart.AutoSize = True
+        Me.LabelSecondPart.Font = New System.Drawing.Font("Microsoft Sans Serif", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelSecondPart.Location = New System.Drawing.Point(21, 41)
         Me.LabelSecondPart.Name = "LabelSecondPart"
         Me.LabelSecondPart.Size = New System.Drawing.Size(86, 73)
         Me.LabelSecondPart.TabIndex = 0

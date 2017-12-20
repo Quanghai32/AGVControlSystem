@@ -282,6 +282,7 @@
     <Compile Include="Concept\Concept2Part.vb" />
     <Compile Include="Concept\ClassToTest.vb" />
     <Compile Include="Concept\NormalConcept.vb" />
+    <Compile Include="Concept\PalletConcept.vb" />
     <Compile Include="Concept\SupplyForm.Designer.vb">
       <DependentUpon>SupplyForm.vb</DependentUpon>
     </Compile>

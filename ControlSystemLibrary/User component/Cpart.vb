@@ -20,6 +20,9 @@
     Property RemainStock As Integer
     Property Text As Boolean
     Property TextSource As Integer
+    Property PalletNo As Integer
+    Property RemainPallet As Integer
+    Property IsSetRemainValue As Boolean = False
 
     Public EmptyCounter As Integer = 0
     Public FullCounter As Integer = 0
@@ -137,5 +140,27 @@
             RaiseEvent PropertyChanged(Me, New System.ComponentModel.PropertyChangedEventArgs("connecting"))
         End Set
     End Property
+
+    'Public Function ClonePart() As CPart
+    '    Return New CPart With
+    '        {
+    '            .Name = Me.Name,
+    '            .route = Me.route,
+    '            .Text = Me.Text,
+    '            .TextSource = Me.TextSource,
+    '            .X = Me.X,
+    '            .Y = Me.Y,
+    '            .target = Me.target,
+    '            .TargetPoint = Me.TargetPoint,
+    '            .RemainStock = Me.RemainStock,
+    '            .priority = Me.priority,
+    '            .group = Me.group,
+    '            .TIME_EMPTY = Me.TIME_EMPTY,
+    '            .TIME_FULL = Me.TIME_FULL,
+    '            .CycleTime = Me.CycleTime,
+    '            .NumberInEnd = Me.NumberInEnd,
+    '            .Enable = True
+    '        }
+    'End Function
     Private Event PropertyChanged(ByVal sender As Object, ByVal e As System.ComponentModel.PropertyChangedEventArgs) Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
 End Class
