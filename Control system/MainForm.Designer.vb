@@ -66,6 +66,7 @@ Partial Class MainForm
         Me.RequestFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CrossViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DebugFormToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainStatus = New System.Windows.Forms.StatusStrip()
         Me.imgAGVBig = New System.Windows.Forms.ImageList(Me.components)
         Me.MainTabControl = New System.Windows.Forms.TabControl()
@@ -97,6 +98,7 @@ Partial Class MainForm
         Me.OlvColumnPartConnecting = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
         Me.OlvColumnPartEmptyTime = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
         Me.OlvColumnPartAGVSupply = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartPalletNo = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
         Me.MenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MenuPartView = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPartViewSmallIcon = New System.Windows.Forms.ToolStripMenuItem()
@@ -203,7 +205,7 @@ Partial Class MainForm
         Me.MainMenu.Margin = New System.Windows.Forms.Padding(0, 0, 20, 0)
         Me.MainMenu.Name = "MainMenu"
         Me.MainMenu.Padding = New System.Windows.Forms.Padding(6, 2, 10, 2)
-        Me.MainMenu.Size = New System.Drawing.Size(730, 24)
+        Me.MainMenu.Size = New System.Drawing.Size(979, 24)
         Me.MainMenu.TabIndex = 0
         Me.MainMenu.Text = "MenuStrip1"
         '
@@ -442,7 +444,7 @@ Partial Class MainForm
         '
         'ViewToolStripMenuItem
         '
-        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RequestFormToolStripMenuItem, Me.CrossViewToolStripMenuItem, Me.DebugFormToolStripMenuItem1})
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RequestFormToolStripMenuItem, Me.CrossViewToolStripMenuItem, Me.DebugFormToolStripMenuItem1, Me.DisplayPartToolStripMenuItem})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
@@ -450,26 +452,32 @@ Partial Class MainForm
         'RequestFormToolStripMenuItem
         '
         Me.RequestFormToolStripMenuItem.Name = "RequestFormToolStripMenuItem"
-        Me.RequestFormToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RequestFormToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
         Me.RequestFormToolStripMenuItem.Text = "Request form"
         '
         'CrossViewToolStripMenuItem
         '
         Me.CrossViewToolStripMenuItem.Name = "CrossViewToolStripMenuItem"
-        Me.CrossViewToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CrossViewToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
         Me.CrossViewToolStripMenuItem.Text = "Cross view"
         '
         'DebugFormToolStripMenuItem1
         '
         Me.DebugFormToolStripMenuItem1.Name = "DebugFormToolStripMenuItem1"
-        Me.DebugFormToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.DebugFormToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
         Me.DebugFormToolStripMenuItem1.Text = "Catch log"
+        '
+        'DisplayPartToolStripMenuItem
+        '
+        Me.DisplayPartToolStripMenuItem.Name = "DisplayPartToolStripMenuItem"
+        Me.DisplayPartToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.DisplayPartToolStripMenuItem.Text = "Display part"
         '
         'MainStatus
         '
         Me.MainStatus.Location = New System.Drawing.Point(0, 434)
         Me.MainStatus.Name = "MainStatus"
-        Me.MainStatus.Size = New System.Drawing.Size(730, 22)
+        Me.MainStatus.Size = New System.Drawing.Size(979, 22)
         Me.MainStatus.TabIndex = 1
         Me.MainStatus.Text = "StatusStrip1"
         '
@@ -505,7 +513,7 @@ Partial Class MainForm
         Me.MainTabControl.Location = New System.Drawing.Point(0, 24)
         Me.MainTabControl.Name = "MainTabControl"
         Me.MainTabControl.SelectedIndex = 0
-        Me.MainTabControl.Size = New System.Drawing.Size(730, 410)
+        Me.MainTabControl.Size = New System.Drawing.Size(979, 410)
         Me.MainTabControl.TabIndex = 2
         '
         'TabMainForm
@@ -514,7 +522,7 @@ Partial Class MainForm
         Me.TabMainForm.Location = New System.Drawing.Point(4, 22)
         Me.TabMainForm.Name = "TabMainForm"
         Me.TabMainForm.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabMainForm.Size = New System.Drawing.Size(722, 384)
+        Me.TabMainForm.Size = New System.Drawing.Size(971, 384)
         Me.TabMainForm.TabIndex = 0
         Me.TabMainForm.Text = "Overview"
         Me.TabMainForm.UseVisualStyleBackColor = true
@@ -532,8 +540,8 @@ Partial Class MainForm
         'SplitContainerOverView.Panel2
         '
         Me.SplitContainerOverView.Panel2.Controls.Add(Me.olvPart)
-        Me.SplitContainerOverView.Size = New System.Drawing.Size(716, 378)
-        Me.SplitContainerOverView.SplitterDistance = 351
+        Me.SplitContainerOverView.Size = New System.Drawing.Size(965, 378)
+        Me.SplitContainerOverView.SplitterDistance = 472
         Me.SplitContainerOverView.TabIndex = 0
         '
         'olvAGV
@@ -553,7 +561,7 @@ Partial Class MainForm
         Me.olvAGV.GridLines = true
         Me.olvAGV.Location = New System.Drawing.Point(0, 0)
         Me.olvAGV.Name = "olvAGV"
-        Me.olvAGV.Size = New System.Drawing.Size(351, 378)
+        Me.olvAGV.Size = New System.Drawing.Size(472, 378)
         Me.olvAGV.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.olvAGV.TabIndex = 7
         Me.olvAGV.TileSize = New System.Drawing.Size(300, 100)
@@ -684,15 +692,17 @@ Partial Class MainForm
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartConnecting)
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartEmptyTime)
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartAGVSupply)
-        Me.olvPart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnPartGroup, Me.OlvColumnPartName, Me.OlvColumnPartStatus, Me.OlvColumnPartConnecting, Me.OlvColumnPartEmptyTime, Me.OlvColumnPartAGVSupply})
+        Me.olvPart.AllColumns.Add(Me.OlvColumnPartPalletNo)
+        Me.olvPart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnPartGroup, Me.OlvColumnPartName, Me.OlvColumnPartStatus, Me.OlvColumnPartConnecting, Me.OlvColumnPartEmptyTime, Me.OlvColumnPartAGVSupply, Me.OlvColumnPartPalletNo})
         Me.olvPart.ContextMenuStrip = Me.MenuLstViewPart
         Me.olvPart.Dock = System.Windows.Forms.DockStyle.Fill
         Me.olvPart.FullRowSelect = true
         Me.olvPart.GridLines = true
+        Me.olvPart.HeaderUsesThemes = false
         Me.olvPart.Location = New System.Drawing.Point(0, 0)
         Me.olvPart.Name = "olvPart"
         Me.olvPart.SelectedColumnTint = System.Drawing.Color.FromArgb(CType(CType(15,Byte),Integer), CType(CType(192,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(0,Byte),Integer))
-        Me.olvPart.Size = New System.Drawing.Size(361, 378)
+        Me.olvPart.Size = New System.Drawing.Size(489, 378)
         Me.olvPart.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.olvPart.TabIndex = 8
         Me.olvPart.TileSize = New System.Drawing.Size(230, 100)
@@ -712,8 +722,7 @@ Partial Class MainForm
         '
         Me.OlvColumnPartName.AspectName = "Name"
         Me.OlvColumnPartName.CellPadding = Nothing
-        Me.OlvColumnPartName.Groupable = false
-        Me.OlvColumnPartName.Sortable = false
+        Me.OlvColumnPartName.CheckBoxes = true
         Me.OlvColumnPartName.Text = "Name"
         '
         'OlvColumnPartStatus
@@ -740,6 +749,12 @@ Partial Class MainForm
         Me.OlvColumnPartAGVSupply.AspectName = "AGVSupply"
         Me.OlvColumnPartAGVSupply.CellPadding = Nothing
         Me.OlvColumnPartAGVSupply.Text = "AGV Supply"
+        '
+        'OlvColumnPartPalletNo
+        '
+        Me.OlvColumnPartPalletNo.AspectName = "PalletNo"
+        Me.OlvColumnPartPalletNo.CellPadding = Nothing
+        Me.OlvColumnPartPalletNo.Text = "Pallet no"
         '
         'MenuLstViewPart
         '
@@ -817,7 +832,7 @@ Partial Class MainForm
         Me.TabChart.Location = New System.Drawing.Point(4, 22)
         Me.TabChart.Name = "TabChart"
         Me.TabChart.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabChart.Size = New System.Drawing.Size(722, 384)
+        Me.TabChart.Size = New System.Drawing.Size(874, 384)
         Me.TabChart.TabIndex = 1
         Me.TabChart.Text = "AGV performent"
         Me.TabChart.UseVisualStyleBackColor = true
@@ -1099,7 +1114,7 @@ Partial Class MainForm
         Me.agvChart.Legends.Add(Legend1)
         Me.agvChart.Location = New System.Drawing.Point(3, 3)
         Me.agvChart.Name = "agvChart"
-        Me.agvChart.Size = New System.Drawing.Size(716, 378)
+        Me.agvChart.Size = New System.Drawing.Size(868, 378)
         Me.agvChart.TabIndex = 0
         Me.agvChart.Text = "ChartPerformance"
         Title1.Font = New System.Drawing.Font("Cambria", 36!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -1116,7 +1131,7 @@ Partial Class MainForm
         Me.TabMap.Location = New System.Drawing.Point(4, 22)
         Me.TabMap.Name = "TabMap"
         Me.TabMap.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabMap.Size = New System.Drawing.Size(722, 384)
+        Me.TabMap.Size = New System.Drawing.Size(874, 384)
         Me.TabMap.TabIndex = 2
         Me.TabMap.Text = "Map"
         Me.TabMap.UseVisualStyleBackColor = true
@@ -1133,7 +1148,7 @@ Partial Class MainForm
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(716, 378)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(868, 378)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'TablePanel_Header
@@ -1153,7 +1168,7 @@ Partial Class MainForm
         Me.TablePanel_Header.RowCount = 1
         Me.TablePanel_Header.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
         Me.TablePanel_Header.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-        Me.TablePanel_Header.Size = New System.Drawing.Size(710, 74)
+        Me.TablePanel_Header.Size = New System.Drawing.Size(862, 74)
         Me.TablePanel_Header.TabIndex = 19
         '
         'ButtonFindAGV
@@ -1171,7 +1186,7 @@ Partial Class MainForm
         Me.PanelAlarm.BackColor = System.Drawing.Color.Transparent
         Me.PanelAlarm.Controls.Add(Me.LabelAlarm)
         Me.PanelAlarm.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelAlarm.Location = New System.Drawing.Point(-119, 3)
+        Me.PanelAlarm.Location = New System.Drawing.Point(-90, 3)
         Me.PanelAlarm.Name = "PanelAlarm"
         Me.PanelAlarm.Size = New System.Drawing.Size(1, 68)
         Me.PanelAlarm.TabIndex = 17
@@ -1192,7 +1207,7 @@ Partial Class MainForm
         Me.labelMapName.Dock = System.Windows.Forms.DockStyle.Fill
         Me.labelMapName.Font = New System.Drawing.Font("Constantia", 36!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.labelMapName.ForeColor = System.Drawing.Color.Red
-        Me.labelMapName.Location = New System.Drawing.Point(-640, 0)
+        Me.labelMapName.Location = New System.Drawing.Point(-488, 0)
         Me.labelMapName.Name = "labelMapName"
         Me.labelMapName.Size = New System.Drawing.Size(790, 74)
         Me.labelMapName.TabIndex = 1
@@ -1219,7 +1234,7 @@ Partial Class MainForm
         Me.Panel_Appendix.Controls.Add(Me.Label_Red, 2, 0)
         Me.Panel_Appendix.Controls.Add(Me.Label_AquaDetail, 1, 2)
         Me.Panel_Appendix.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel_Appendix.Location = New System.Drawing.Point(156, 3)
+        Me.Panel_Appendix.Location = New System.Drawing.Point(308, 3)
         Me.Panel_Appendix.Name = "Panel_Appendix"
         Me.Panel_Appendix.RowCount = 3
         Me.Panel_Appendix.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
@@ -1386,7 +1401,7 @@ Partial Class MainForm
         Me.Panel_Map.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel_Map.Location = New System.Drawing.Point(3, 83)
         Me.Panel_Map.Name = "Panel_Map"
-        Me.Panel_Map.Size = New System.Drawing.Size(710, 481)
+        Me.Panel_Map.Size = New System.Drawing.Size(862, 481)
         Me.Panel_Map.TabIndex = 0
         '
         'LabelCardNotExit
@@ -1405,7 +1420,7 @@ Partial Class MainForm
         Me.PictureBoxMap.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBoxMap.Location = New System.Drawing.Point(0, 0)
         Me.PictureBoxMap.Name = "PictureBoxMap"
-        Me.PictureBoxMap.Size = New System.Drawing.Size(708, 479)
+        Me.PictureBoxMap.Size = New System.Drawing.Size(860, 479)
         Me.PictureBoxMap.TabIndex = 0
         Me.PictureBoxMap.TabStop = false
         Me.PictureBoxMap.Visible = false
@@ -1432,7 +1447,7 @@ Partial Class MainForm
         '
         Me.TabLog.Location = New System.Drawing.Point(4, 22)
         Me.TabLog.Name = "TabLog"
-        Me.TabLog.Size = New System.Drawing.Size(722, 384)
+        Me.TabLog.Size = New System.Drawing.Size(874, 384)
         Me.TabLog.TabIndex = 3
         Me.TabLog.Text = "History"
         Me.TabLog.UseVisualStyleBackColor = true
@@ -1515,7 +1530,7 @@ Partial Class MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(730, 456)
+        Me.ClientSize = New System.Drawing.Size(979, 456)
         Me.Controls.Add(Me.MainTabControl)
         Me.Controls.Add(Me.MainStatus)
         Me.Controls.Add(Me.MainMenu)
@@ -1701,4 +1716,6 @@ End Sub
     Friend WithEvents CrossViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DebugFormToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ForceUploadToServerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DisplayPartToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OlvColumnPartPalletNo As OLVColumn
 End Class

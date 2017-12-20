@@ -11,6 +11,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlSystemLibrary", "Con
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlSystemSetting", "Control system setting\ControlSystemSetting.vbproj", "{2DD74705-9FB0-47B5-9D15-B1ECBF08252D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF9FF4DB-2244-458B-9F8D-1543B67D4F56}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

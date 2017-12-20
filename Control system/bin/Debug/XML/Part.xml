@@ -4,160 +4,120 @@
     <Id>0</Id>
     <Name>TS13-01</Name>
     <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>222</Route>
+    <TargetPoint>0</TargetPoint>
+    <Route>28</Route>
     <EndDevices>0</EndDevices>
     <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>5</Priority>
-    <Group>0</Group>
+    <TextSource>1</TextSource>
+    <RemainStock>0</RemainStock>
+    <Priority>1</Priority>
+    <Group>1</Group>
     <Count>0</Count>
-    <Target>47</Target>
-    <CycleTime>0</CycleTime>
-    <Description>0</Description>
-    <EmptyCount>4</EmptyCount>
-    <X>1663</X>
-    <Y>312</Y>
-  </Part>
-  <Part>
-    <Id>1</Id>
-    <Name>TS13-02</Name>
-    <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>2</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>4</Priority>
-    <Group>0</Group>
-    <Count>3</Count>
-    <Target>8</Target>
-    <CycleTime>0</CycleTime>
-    <Description>0</Description>
-    <EmptyCount>3</EmptyCount>
-    <X>1615</X>
-    <Y>358</Y>
-  </Part>
-  <Part>
-    <Id>2</Id>
-    <Name>TM14-01</Name>
-    <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>3</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>3</Priority>
-    <Group>0</Group>
-    <Count>0</Count>
-    <Target>8</Target>
+    <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
     <EmptyCount>0</EmptyCount>
-    <X>1558</X>
-    <Y>311</Y>
+    <X>1837</X>
+    <Y>50</Y>
+  </Part>
+  <Part>
+    <Id>1</Id>
+    <Name>TS17-02</Name>
+    <Enable>true</Enable>
+    <TargetPoint>0</TargetPoint>
+    <Route>27</Route>
+    <EndDevices>0</EndDevices>
+    <Text>true</Text>
+    <TextSource>1</TextSource>
+    <RemainStock>0</RemainStock>
+    <Priority>2</Priority>
+    <Group>1</Group>
+    <Count>0</Count>
+    <Target>0</Target>
+    <CycleTime>0</CycleTime>
+    <Description>0</Description>
+    <EmptyCount>0</EmptyCount>
+    <X>1795</X>
+    <Y>50</Y>
+  </Part>
+  <Part>
+    <Id>2</Id>
+    <Name>TS17-01</Name>
+    <Enable>true</Enable>
+    <TargetPoint>0</TargetPoint>
+    <Route>26</Route>
+    <EndDevices>0</EndDevices>
+    <Text>true</Text>
+    <TextSource>1</TextSource>
+    <RemainStock>0</RemainStock>
+    <Priority>3</Priority>
+    <Group>1</Group>
+    <Count>0</Count>
+    <Target>0</Target>
+    <CycleTime>0</CycleTime>
+    <Description>0</Description>
+    <EmptyCount>0</EmptyCount>
+    <X>1748</X>
+    <Y>52</Y>
   </Part>
   <Part>
     <Id>3</Id>
     <Name>TM14-02</Name>
     <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>2</Route>
+    <TargetPoint>0</TargetPoint>
+    <Route>25</Route>
     <EndDevices>0</EndDevices>
     <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>2</Priority>
-    <Group>0</Group>
-    <Count>5</Count>
+    <TextSource>1</TextSource>
+    <RemainStock>14</RemainStock>
+    <Priority>4</Priority>
+    <Group>1</Group>
+    <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>1</EmptyCount>
-    <X>1516</X>
-    <Y>359</Y>
+    <EmptyCount>0</EmptyCount>
+    <X>1693</X>
+    <Y>53</Y>
   </Part>
   <Part>
     <Id>4</Id>
     <Name>TM14-03</Name>
     <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>1</Route>
+    <TargetPoint>0</TargetPoint>
+    <Route>24</Route>
     <EndDevices>0</EndDevices>
     <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>1</Priority>
-    <Group>0</Group>
+    <TextSource>1</TextSource>
+    <RemainStock>16</RemainStock>
+    <Priority>5</Priority>
+    <Group>1</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>2</EmptyCount>
-    <X>1456</X>
-    <Y>310</Y>
+    <EmptyCount>0</EmptyCount>
+    <X>360</X>
+    <Y>113</Y>
   </Part>
   <Part>
     <Id>5</Id>
     <Name>TM14-04</Name>
     <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>32</Route>
+    <TargetPoint>0</TargetPoint>
+    <Route>23</Route>
     <EndDevices>0</EndDevices>
     <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>5</Priority>
-    <Group>0</Group>
+    <TextSource>1</TextSource>
+    <RemainStock>16</RemainStock>
+    <Priority>6</Priority>
+    <Group>1</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>33</EmptyCount>
-    <X>1417</X>
-    <Y>360</Y>
-  </Part>
-  <Part>
-    <Id>6</Id>
-    <Name>TM16-05</Name>
-    <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>5</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>4</Priority>
-    <Group>0</Group>
-    <Count>0</Count>
-    <Target>0</Target>
-    <CycleTime>0</CycleTime>
-    <Description>0</Description>
-    <EmptyCount>3</EmptyCount>
-    <X>1355</X>
-    <Y>311</Y>
-  </Part>
-  <Part>
-    <Id>7</Id>
-    <Name>TM16-06</Name>
-    <Enable>true</Enable>
-    <TargetPoint>1</TargetPoint>
-    <Route>2</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>0</TextSource>
-    <RemainStock>1</RemainStock>
-    <Priority>3</Priority>
-    <Group>0</Group>
-    <Count>3</Count>
-    <Target>0</Target>
-    <CycleTime>0</CycleTime>
-    <Description>0</Description>
-    <EmptyCount>2</EmptyCount>
-    <X>1317</X>
-    <Y>358</Y>
+    <EmptyCount>0</EmptyCount>
+    <X>245</X>
+    <Y>113</Y>
   </Part>
 </DocumentElement>

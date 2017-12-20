@@ -7,11 +7,24 @@
 *.sln.docstates
 
 # Build results
-
+**/[Dd]ebug/*
+[Dd]ebugPublic/
 [Rr]elease/
-x64/
-build/
+[Rr]eleases/
+[Xx]64/
+[Xx]86/
+[Bb]uild/
+bld/
+# [Bb]in/
 [Oo]bj/
+
+# Re-Include file
+!Control system/bin/Debug/img
+!Control system/bin/Debug/XML
+!Control system/bin/Debug/setting.ini
+!Control system/bin/Debug/ObjectListView.dll
+!Control system setting/bin/Debug/XML
+
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/

@@ -58,6 +58,13 @@
       <Project>{9e3eaaeb-1ed3-47a3-990e-18557e413440}</Project>
       <Name>AGVControlSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ControlSystemLibrary\ControlSystemLibrary.vbproj">
+      <Project>{1115160a-ea7e-466e-a328-19006fdf7ad4}</Project>
+      <Name>ControlSystemLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -8,7 +8,7 @@ Public Module GeneralVariable
     Public TextList() As TextSource
 
     Public PartList As List(Of CPart)
-    'Public PartListRefer As List(Of CPart)
+    Public PalletList As List(Of CPart)
     Public isNeedToReset As Boolean
     Public MapPartWidth As Integer
     Public MapPartHeight As Integer
@@ -29,6 +29,7 @@ Public Module GeneralVariable
     Public DayName As String = ""
     Public DebugMode As Boolean = False
     Public TimerChangePartSttValue As Integer
+    Public TimerFree As Integer
 
     Structure LineGroup
         Public Name As String
@@ -89,7 +90,7 @@ Public Module GeneralVariable
 
     Public WorkingTimeArray() As struct_Workingtime
     Public isPreOnTime As Boolean = False
-    Public RequestRouteConcept As string
+    Public RequestRouteConcept As Concept
     Public Path_Text As String
     Public Tab_start As Byte = 0
     Public NextPartNeedSupply() As Integer
@@ -109,5 +110,10 @@ Public Module GeneralVariable
         THREAD
         REQUEST_AGV
         CROSS_FUNCTION
+    End Enum
+
+    Public Enum Concept
+        NORMAL
+        PALLET
     End Enum
 End Module

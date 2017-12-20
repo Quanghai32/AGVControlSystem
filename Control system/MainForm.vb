@@ -21,16 +21,18 @@ Public Class MainForm
         ReadSetting()
         Record("System", "Running", "Startup")
         ReadXmlData()
+        SetEventPalletList()
         RecordInitialInfor()
         RecordPartEmptyCounterInit()
 
         Select Case RequestRouteConcept
-            Case "Normal"
+            Case Concept.NORMAL
 
-            Case "2Routes"
+            Case Concept.PALLET
                 RequestForm = New SupplyForm
                 RequestForm.TopMost = True
                 RequestForm.Show()
+                PalletList = New List(Of CPart)()
         End Select
 
         SetupHostXbee()
@@ -88,7 +90,12 @@ Public Class MainForm
 
     Private Sub RequestDataTimer_Tick(sender As Object, e As EventArgs) Handles RequestDataTimer.Tick
         RequestDataTimer.Stop()
-        RequestData()
+        Select Case RequestRouteConcept
+            Case Concept.NORMAL
+                RequestData()
+            Case Concept.PALLET
+                RequestDataPallet()
+        End Select
         RequestDataTimer.Start()
     End Sub
     Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick '500 ms
@@ -735,23 +742,28 @@ Public Class MainForm
         olvPart.AddDecoration(New EditingCellBorderDecoration(True))
         Dim tlist As TypedObjectListView(Of CPart) = New TypedObjectListView(Of CPart)(olvPart)
         tlist.GenerateAspectGetters()
-        OlvColumnPartConnecting.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
-                                                                            Dim part As CPart = CType(row, CPart)
-                                                                            If (part.connecting) Then
-                                                                                Return "Connected"
-                                                                            Else
-                                                                                Return "Disconnect"
-                                                                            End If
-                                                                        End Function)
-        OlvColumnPartGroup.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
-                                                                       Dim part As CPart = CType(row, CPart)
-                                                                       Return LineGroupArray(part.group).Name
-                                                                   End Function)
+        'OlvColumnPartConnecting.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+        '                                                                    Dim part As CPart = CType(row, CPart)
+        '                                                                    If (part.connecting) Then
+        '                                                                        Return "Connected"
+        '                                                                    Else
+        '                                                                        Return "Disconnect"
+        '                                                                    End If
+        '                                                                End Function)
+
+        'OlvColumnPartName.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+        '                                                              Dim part As CPart = CType(row, CPart)
+        '                                                              Return part.Name
+        '                                                          End Function)
+        'OlvColumnPartGroup.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+        '                                                               Dim part As CPart = CType(row, CPart)
+        '                                                               Return LineGroupArray(part.group).Name
+        '                                                           End Function)
         olvPart.ItemRenderer = New PartRenderer()
         olvPart.SetObjects(list)
         olvPart.View = View.Tile
         olvPart.OwnerDraw = True
-        olvPart.Sort(1)
+        'olvPart.Sort(1)
     End Sub
 
     Class PartRenderer
@@ -848,7 +860,7 @@ Public Class MainForm
 
             Dim txt As String
             If IsOptionShow = True Then
-                txt = part.Name + " (" + part.route.ToString + ")" 'TODO: name and route
+                txt = part.Name + "_" + part.PalletNo.ToString() + " (" + part.route.ToString + ")"
             Else
                 txt = part.index.ToString + ". " + part.Name
             End If
@@ -882,7 +894,13 @@ Public Class MainForm
                 fmt.Alignment = StringAlignment.Near
                 If IsOptionShow = True Then
                     If part.Enable Then
-                        txt = "Count: " + part.SupplyCount.ToString + "/" + part.target.ToString
+
+                        Select Case RequestRouteConcept
+                            Case Concept.NORMAL
+                                txt = "Count: " + part.SupplyCount.ToString + "/" + part.target.ToString
+                            Case Concept.PALLET
+                                txt = "Remain: " + part.RemainPallet.ToString + "|Stock: " + part.RemainStock.ToString
+                        End Select
                         g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                         textBoxRect.Y += size.Height - 2
                         If part.AGVSupply = "" Then
@@ -907,7 +925,7 @@ Public Class MainForm
                     textBoxRect.Y += size.Height
                     'host				
                     txt = "Host:" + part.parent.Host.ToString   '"Host: " & index
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         If IsNothing(part.parent.myXbee.port) = False Then
                             txt = txt & "|" & part.parent.myXbee.port.PortName
                         Else
@@ -919,7 +937,7 @@ Public Class MainForm
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     'CH and ID
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         txt = "CH:" & Conversion.Hex(part.parent.myXbee.CH) & "|ID:" & Conversion.Hex(part.parent.myXbee.ID)
                     Else
                         txt = "Text"
@@ -1046,7 +1064,7 @@ Public Class MainForm
                     End If
                 Else                                                'show setting
                     'End
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         txt = "End:" & part.EndDevice & "." & part.NumberInEnd.ToString & "|" & Conversion.Hex(part.parent.Address)
                     End If
 
@@ -1054,7 +1072,7 @@ Public Class MainForm
                     textBoxRect.Y += size.Height
                     'host				
                     txt = "Host:" + part.parent.Host.ToString   '"Host: " & index
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         If IsNothing(part.parent.myXbee.port) = False Then
                             txt = txt & "|" & part.parent.myXbee.port.PortName
                         Else
@@ -1066,7 +1084,7 @@ Public Class MainForm
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     'CH and ID
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         txt = "CH:" & Conversion.Hex(part.parent.myXbee.CH) & "|ID:" & Conversion.Hex(part.parent.myXbee.ID)
                     Else
                         txt = "Text"
@@ -1115,7 +1133,13 @@ Public Class MainForm
     Public Sub DisplayPart()
         'olvPart.View = View.Tile
         olvPart.OwnerDraw = True
-        InitializeOlvPart(PartList)
+        Select Case RequestRouteConcept
+            Case Concept.NORMAL
+                InitializeOlvPart(PartList)
+            Case Concept.PALLET
+                InitializeOlvPart(PalletList)
+        End Select
+
     End Sub
 
 #End Region
@@ -1124,9 +1148,23 @@ Public Class MainForm
         'olvAGV.BuildList()
         'olvPart.BuildList()
         'Refresh()
+        'DisplayPart()
         olvAGV.Refresh()
         olvPart.Refresh()
+    End Sub
 
+    Private Sub SetEventPalletList()
+        For Each a In TextList
+            AddHandler a.PalletListChange, AddressOf RefreshPalletList
+        Next
+    End Sub
+
+    Private Sub RefreshPalletList()
+        If Me.InvokeRequired Then
+            Me.Invoke(New Action(AddressOf RefreshPalletList))
+        Else
+            DisplayPart()
+        End If     
     End Sub
 #End Region
 #Region "Display Chart"  'chart size = 1863, 952
@@ -1731,5 +1769,9 @@ Public Class MainForm
 
     Private Sub ForceUploadToServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForceUploadToServerToolStripMenuItem.Click
         UploadToServer()
+    End Sub
+
+    Private Sub DisplayPartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayPartToolStripMenuItem.Click
+        DisplayPart()
     End Sub
 End Class

@@ -106,15 +106,25 @@ Module XmlReader
         Next
     End Sub
 
-    Private Sub ReadPart()
+       Private Sub ReadPart()
         Dim myDataTable As DataTable = New DataTable
+        Dim endDevicesTB As DataTable = New DataTable
+        'Dim dss As DataSet = New DataSet
         Dim ds As DataSet = New DataSet
+
         ds.ReadXml(".\XML\Part.xml")
         myDataTable = ds.Tables(0)
-
+        ds.ReadXml(".\XML\EndDevices.xml")
+        endDevicesTB = ds.Tables(0)
         PartList = New List(Of CPart)
 
-        'Read Part table
+        Dim listIDEndDevices As List(Of Int16) = New List(Of Int16)
+        listIDEndDevices.Clear()
+        For tempID As Byte = 0 To endDevicesTB.Rows.Count - 1
+            listIDEndDevices.Add(endDevicesTB.Rows(tempID)("Id"))
+        Next
+        Dim arrayIDEndDevices() As Integer = New Integer((listIDEndDevices.Count) - 1) {}
+
         For i As Byte = 0 To myDataTable.Rows.Count - 1
             Dim part As CPart = New CPart() With {.TIME_EMPTY = TimerChangePartSttValue, .TIME_FULL = TimerChangePartSttValue}
             part.index = myDataTable.Rows(i)("ID")
@@ -122,7 +132,6 @@ Module XmlReader
             part.Enable = Boolean.Parse(myDataTable.Rows(i)("Enable"))
             part.TargetPoint = myDataTable.Rows(i)("TargetPoint")
             part.route = myDataTable.Rows(i)("Route")
-            part.EndDevice = myDataTable.Rows(i)("EndDevices")
             part.Text = Boolean.Parse(myDataTable.Rows(i)("Text"))
             part.TextSource = myDataTable.Rows(i)("TextSource")
             part.RemainStock = myDataTable.Rows(i)("RemainStock")
@@ -136,14 +145,21 @@ Module XmlReader
             part.EmptyCount = myDataTable.Rows(i)("EmptyCount")
             part.X = myDataTable.Rows(i)("X")
             part.Y = myDataTable.Rows(i)("y")
-            
+            part.EndDevice = myDataTable.Rows(i)("EndDevices")
+
+            For temp As Byte = 0 To listIDEndDevices.Count - 1
+                If part.EndDevice = listIDEndDevices(temp) Then
+                    arrayIDEndDevices(temp) = arrayIDEndDevices(temp) + 1
+                    part.NumberInEnd = arrayIDEndDevices(temp)
+                End If
+            Next
 
             If part.Text = False Then
                 part.parent = EndDevicesArray(part.EndDevice)
                 EndDevicesArray(part.EndDevice).Parts.Add(part)
             Else
                 part.parent = TextList(part.TextSource)
-                TextList(part.TextSource).Parts.Add(part)
+                TextList(part.TextSource).TextPalletList.Add(part)
                 TextList(part.TextSource).Init()
             End If
 
@@ -288,6 +304,7 @@ Module XmlReader
             AGVList(i).index = i ' myDataTable.Rows(i)("id")
             AGVList(i).HostControl = myDataTable.Rows(i)("Host Xbee")
             AGVList(i).SupplyCount = myDataTable.Rows(i)("Count")
+            AGVList(i)._TIME_FREE = TimerFree
             AGVGroupArray(AGVList(i).group).MaxAGV += 1
             If IsNothing(AGVGroupArray(AGVList(i).group).ChildAGV) Then
                 AGVGroupArray(AGVList(i).group).ChildAGV = New Collection
