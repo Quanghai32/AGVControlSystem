@@ -106,15 +106,42 @@ Module XmlReader
         Next
     End Sub
 
+    'Private Sub ReadPart()
     Private Sub ReadPart()
+        '''''''''''*2_read status part was being suppling_''''''''''''''
+        Dim isExistsRecordFile As Boolean = False
+        Dim listRecordPart As List(Of String()) = New List(Of String())
+        listRecordPart.Clear()
+        Dim dtRecordPart As List(Of String) = New List(Of String)()
+        If File.Exists("Record_Part.txt") Then
+            isExistsRecordFile = True
+            dtRecordPart = File.ReadLines("Record_Part.txt").ToList()
+            For t As Integer = 0 To dtRecordPart.Count - 1
+                Dim arrayRecordPart = dtRecordPart(t).Split(",")
+                listRecordPart.Add(arrayRecordPart)
+            Next
+            File.Delete("Record_Part.txt")
+        Else
+            isExistsRecordFile = False
+        End If
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Dim myDataTable As DataTable = New DataTable
+        Dim endDevicesTB As DataTable = New DataTable
         Dim ds As DataSet = New DataSet
+
         ds.ReadXml(".\XML\Part.xml")
         myDataTable = ds.Tables(0)
-
+        ds.ReadXml(".\XML\EndDevices.xml")
+        endDevicesTB = ds.Tables(0)
         PartList = New List(Of CPart)
 
-        'Read Part table
+        Dim listIDEndDevices As List(Of Int16) = New List(Of Int16)
+        listIDEndDevices.Clear()
+        For tempID As Byte = 0 To endDevicesTB.Rows.Count - 1
+            listIDEndDevices.Add(endDevicesTB.Rows(tempID)("Id"))
+        Next
+        Dim arrayIDEndDevices() As Integer = New Integer((listIDEndDevices.Count) - 1) {}
+
         For i As Byte = 0 To myDataTable.Rows.Count - 1
             Dim part As CPart = New CPart() With {.TIME_EMPTY = TimerChangePartSttValue, .TIME_FULL = TimerChangePartSttValue}
             part.index = myDataTable.Rows(i)("ID")
@@ -122,7 +149,6 @@ Module XmlReader
             part.Enable = Boolean.Parse(myDataTable.Rows(i)("Enable"))
             part.TargetPoint = myDataTable.Rows(i)("TargetPoint")
             part.route = myDataTable.Rows(i)("Route")
-            part.EndDevice = myDataTable.Rows(i)("EndDevices")
             part.Text = Boolean.Parse(myDataTable.Rows(i)("Text"))
             part.TextSource = myDataTable.Rows(i)("TextSource")
             part.RemainStock = myDataTable.Rows(i)("RemainStock")
@@ -136,14 +162,66 @@ Module XmlReader
             part.EmptyCount = myDataTable.Rows(i)("EmptyCount")
             part.X = myDataTable.Rows(i)("X")
             part.Y = myDataTable.Rows(i)("y")
-            
 
             If part.Text = False Then
+                ''''''''''''''*2_read status part was being suppling_''''''''''''''''''
+                If isExistsRecordFile = True Then
+                    Dim arrayPartRecord As String() = New String() {0, 0}
+                    Dim isPartInPartBefore As Boolean = False
+                    For temp As Integer = 0 To listRecordPart.Count - 1
+                        If part.Name = listRecordPart(temp)(0) Then
+                            arrayPartRecord(0) = listRecordPart(temp)(0)
+                            arrayPartRecord(1) = listRecordPart(temp)(1)
+                            isPartInPartBefore = True
+                            Exit For
+                        End If
+                    Next
+                    If isPartInPartBefore Then
+                        part.AGVSupply = arrayPartRecord(1)
+                        part.Status = False
+                        isPartInPartBefore = False
+                    Else
+                        part.AGVSupply = ""
+                    End If
+                Else
+                    part.AGVSupply = ""
+                End If
+                ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                 part.parent = EndDevicesArray(part.EndDevice)
                 EndDevicesArray(part.EndDevice).Parts.Add(part)
             Else
+                ''''''''''''''*2_read status part was being suppling_''''''''''''''''''
+                If isExistsRecordFile = True Then
+                    Dim indexListRecordPart As List(Of Integer) = New List(Of Integer)()
+                    For temp As Integer = 0 To listRecordPart.Count - 1
+                        If part.Name = listRecordPart(temp)(0) Then
+                            indexListRecordPart.Add(temp)
+                        End If
+                    Next
+                    If indexListRecordPart.Count > 0 Then
+                        part.AGVSupply = listRecordPart(indexListRecordPart(0))(1)
+                        part.PalletNo = listRecordPart(indexListRecordPart(0))(2)
+                        part.Status = False
+                        For tempp As Integer = 1 To indexListRecordPart.Count - 1
+                            Dim samePart As CPart = New CPart()
+                            samePart = ClonePart(part)
+                            samePart.AGVSupply = listRecordPart(indexListRecordPart(tempp))(1)
+                            samePart.PalletNo = listRecordPart(indexListRecordPart(tempp))(2)
+                            samePart.Status = False
+
+                            samePart.parent = TextList(part.TextSource)
+                            TextList(part.TextSource).TextPalletList.Add(samePart)
+                            PalletList.Add(samePart)
+                            TextList(part.TextSource).Init()
+                        Next
+                    End If
+                Else
+                    part.AGVSupply = ""
+                End If
+                ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                 part.parent = TextList(part.TextSource)
-                TextList(part.TextSource).Parts.Add(part)
+                TextList(part.TextSource).TextPalletList.Add(part)
+                PalletList.Add(part)
                 TextList(part.TextSource).Init()
             End If
 
@@ -288,6 +366,7 @@ Module XmlReader
             AGVList(i).index = i ' myDataTable.Rows(i)("id")
             AGVList(i).HostControl = myDataTable.Rows(i)("Host Xbee")
             AGVList(i).SupplyCount = myDataTable.Rows(i)("Count")
+            AGVList(i)._TIME_FREE = TimerFree
             AGVGroupArray(AGVList(i).group).MaxAGV += 1
             If IsNothing(AGVGroupArray(AGVList(i).group).ChildAGV) Then
                 AGVGroupArray(AGVList(i).group).ChildAGV = New Collection

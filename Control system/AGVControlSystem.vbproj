@@ -282,6 +282,7 @@
     <Compile Include="Concept\Concept2Part.vb" />
     <Compile Include="Concept\ClassToTest.vb" />
     <Compile Include="Concept\NormalConcept.vb" />
+    <Compile Include="Concept\PalletConcept.vb" />
     <Compile Include="Concept\SupplyForm.Designer.vb">
       <DependentUpon>SupplyForm.vb</DependentUpon>
     </Compile>
@@ -293,6 +294,12 @@
     </Compile>
     <Compile Include="Concept\ucAgvSupply.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditPartForm.Designer.vb">
+      <DependentUpon>EditPartForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EditPartForm.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="MapAGV\MapPart.Designer.vb">
       <DependentUpon>MapPart.vb</DependentUpon>
@@ -382,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Debug form.resx">
       <DependentUpon>Debug form.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditPartForm.resx">
+      <DependentUpon>EditPartForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>

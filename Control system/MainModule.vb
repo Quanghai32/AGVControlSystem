@@ -37,7 +37,7 @@ Public Module MainModule
         Part_EmptyCount = settingFile.ReadValue("Path_EmptyCount", "value")
         BlockName = settingFile.ReadValue("BLOCK_NAME", "value")
         ServerName = settingFile.ReadValue("ServerName", "value")
-
+        TimerFree = Int32.Parse(settingFile.ReadValue("TimerFree", "value"))
         pathLogFile = settingFile.ReadValue("PathLog", "value")
         pathPerformance = settingFile.ReadValue("PathPerformance", "value")
         DurationCopy = Int32.Parse(settingFile.ReadValue("DurationCopy", "value"))
@@ -704,4 +704,26 @@ Public Module MainModule
         End If
     End Sub
 
+    Public Function ClonePart(ByVal part As CPart) As CPart
+        If part Is Nothing Then Return Nothing
+        Return New CPart() With
+            {
+                .Name = part.Name,
+                .route = part.route,
+                .Text = part.Text,
+                .TextSource = part.TextSource,
+                .X = part.X,
+                .Y = part.Y,
+                .target = part.target,
+                .TargetPoint = part.TargetPoint,
+                .RemainStock = part.RemainStock,
+                .priority = part.priority,
+                .group = part.group,
+                .TIME_EMPTY = part.TIME_EMPTY,
+                .TIME_FULL = part.TIME_FULL,
+                .CycleTime = part.CycleTime,
+                .NumberInEnd = part.NumberInEnd,
+                .Enable = True
+            }
+    End Function
 End Module

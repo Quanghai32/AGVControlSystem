@@ -4,4 +4,8 @@
     <Id>0</Id>
     <Address>40D4B3BD</Address>
   </HostXbee>
+  <HostXbee>
+    <Id>1</Id>
+    <Address>456123</Address>
+  </HostXbee>
 </DocumentElement>

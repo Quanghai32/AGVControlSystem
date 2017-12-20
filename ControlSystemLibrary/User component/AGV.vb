@@ -70,7 +70,7 @@ Public Class AGV
     Private _WorkingStatus As RobocarWorkingStatusValue = RobocarWorkingStatusValue.SUPPLYING
     Private _Position As Integer
     Private _TIMEOUT As Integer = 4000
-    Private _TIME_FREE As Integer = 5000
+    Public _TIME_FREE As Integer = 5
     Private _TimePowerOn As Byte() = New Byte(3) {0, 0, 0, 0}
     Private _PrevPostion As Integer = 0
 

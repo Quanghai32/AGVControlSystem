@@ -20,14 +20,15 @@ Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadSetting()
         Record("System", "Running", "Startup")
+        PalletList = New List(Of CPart)()
         ReadXmlData()
+        SetEventPalletList()
         RecordInitialInfor()
         RecordPartEmptyCounterInit()
-
         Select Case RequestRouteConcept
-            Case "Normal"
+            Case Concept.NORMAL
 
-            Case "2Routes"
+            Case Concept.PALLET
                 RequestForm = New SupplyForm
                 RequestForm.TopMost = True
                 RequestForm.Show()
@@ -88,7 +89,12 @@ Public Class MainForm
 
     Private Sub RequestDataTimer_Tick(sender As Object, e As EventArgs) Handles RequestDataTimer.Tick
         RequestDataTimer.Stop()
-        RequestData()
+        Select Case RequestRouteConcept
+            Case Concept.NORMAL
+                RequestData()
+            Case Concept.PALLET
+                RequestDataPallet()
+        End Select
         RequestDataTimer.Start()
     End Sub
     Private Sub DisplayTimer_Tick(sender As Object, e As EventArgs) Handles DisplayTimer.Tick '500 ms
@@ -132,6 +138,7 @@ Public Class MainForm
             MenuAGVConfirmAll.Enabled = True
             MenuAGVEnable.Visible = False
             VitualAGVToolStripMenuItem.Visible = False
+            TestToolStripMenuItem.Visible = False
             LoadDataToolStripMenuItem.Visible = False
         ElseIf olvAGV.SelectedIndices.Count = 1 Then
             MenuAGVView.Visible = False
@@ -141,8 +148,10 @@ Public Class MainForm
             MenuAGVEnable.Visible = True
             If DebugMode Then
                 VitualAGVToolStripMenuItem.Visible = True
+                TestToolStripMenuItem.Visible = True
             Else
                 VitualAGVToolStripMenuItem.Visible = False
+                TestToolStripMenuItem.Visible = False
             End If
             LoadDataToolStripMenuItem.Visible = True
             If CType(olvAGV.SelectedObject, AGV).Enable Then
@@ -157,6 +166,7 @@ Public Class MainForm
             MenuAGVConfirmAll.Enabled = True
             MenuAGVEnable.Visible = False
             VitualAGVToolStripMenuItem.Visible = False
+            TestToolStripMenuItem.Visible = False
             LoadDataToolStripMenuItem.Visible = False
         End If
         'If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
@@ -627,6 +637,8 @@ Public Class MainForm
             MenuPartEnable.Visible = False
             LoadPartToolStripMenuItem.Visible = False
             VitualPartToolStripMenuItem.Visible = False
+            EditToolStripMenuItem1.Visible = False
+
         ElseIf olvPart.SelectedIndices.Count = 1 Then
             MenuPartView.Visible = False
             MenuPartConfirmConn.Visible = True
@@ -636,8 +648,10 @@ Public Class MainForm
             LoadPartToolStripMenuItem.Visible = True
             If DebugMode Then
                 VitualPartToolStripMenuItem.Visible = True
+                EditToolStripMenuItem1.Visible = True
             Else
                 VitualPartToolStripMenuItem.Visible = False
+                EditToolStripMenuItem1.Visible = False
             End If
             If CType(olvPart.SelectedObject, CPart).Enable Then
                 MenuPartEnable.Text = "Disable"
@@ -652,6 +666,7 @@ Public Class MainForm
             MenuPartEnable.Visible = False
             LoadPartToolStripMenuItem.Visible = False
             VitualPartToolStripMenuItem.Visible = False
+            EditToolStripMenuItem1.Visible = False
         End If
         'If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
         '    MenuPartEnable.Enabled = True
@@ -735,23 +750,28 @@ Public Class MainForm
         olvPart.AddDecoration(New EditingCellBorderDecoration(True))
         Dim tlist As TypedObjectListView(Of CPart) = New TypedObjectListView(Of CPart)(olvPart)
         tlist.GenerateAspectGetters()
-        OlvColumnPartConnecting.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
-                                                                            Dim part As CPart = CType(row, CPart)
-                                                                            If (part.connecting) Then
-                                                                                Return "Connected"
-                                                                            Else
-                                                                                Return "Disconnect"
-                                                                            End If
-                                                                        End Function)
-        OlvColumnPartGroup.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
-                                                                       Dim part As CPart = CType(row, CPart)
-                                                                       Return LineGroupArray(part.group).Name
-                                                                   End Function)
+        'OlvColumnPartConnecting.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+        '                                                                    Dim part As CPart = CType(row, CPart)
+        '                                                                    If (part.connecting) Then
+        '                                                                        Return "Connected"
+        '                                                                    Else
+        '                                                                        Return "Disconnect"
+        '                                                                    End If
+        '                                                                End Function)
+
+        'OlvColumnPartName.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+        '                                                              Dim part As CPart = CType(row, CPart)
+        '                                                              Return part.Name
+        '                                                          End Function)
+        'OlvColumnPartGroup.AspectGetter = New AspectGetterDelegate(Function(row As Object) As String
+        '                                                               Dim part As CPart = CType(row, CPart)
+        '                                                               Return LineGroupArray(part.group).Name
+        '                                                           End Function)
         olvPart.ItemRenderer = New PartRenderer()
         olvPart.SetObjects(list)
         olvPart.View = View.Tile
         olvPart.OwnerDraw = True
-        olvPart.Sort(1)
+        'olvPart.Sort(1)
     End Sub
 
     Class PartRenderer
@@ -848,7 +868,7 @@ Public Class MainForm
 
             Dim txt As String
             If IsOptionShow = True Then
-                txt = part.Name + " (" + part.route.ToString + ")" 'TODO: name and route
+                txt = part.Name + "_" + part.PalletNo.ToString() + " (" + part.route.ToString + ")"
             Else
                 txt = part.index.ToString + ". " + part.Name
             End If
@@ -882,7 +902,13 @@ Public Class MainForm
                 fmt.Alignment = StringAlignment.Near
                 If IsOptionShow = True Then
                     If part.Enable Then
-                        txt = "Count: " + part.SupplyCount.ToString + "/" + part.target.ToString
+
+                        Select Case RequestRouteConcept
+                            Case Concept.NORMAL
+                                txt = "Count: " + part.SupplyCount.ToString + "/" + part.target.ToString
+                            Case Concept.PALLET
+                                txt = "Remain: " + part.RemainPallet.ToString + "|Stock: " + part.RemainStock.ToString
+                        End Select
                         g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                         textBoxRect.Y += size.Height - 2
                         If part.AGVSupply = "" Then
@@ -907,7 +933,7 @@ Public Class MainForm
                     textBoxRect.Y += size.Height
                     'host				
                     txt = "Host:" + part.parent.Host.ToString   '"Host: " & index
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         If IsNothing(part.parent.myXbee.port) = False Then
                             txt = txt & "|" & part.parent.myXbee.port.PortName
                         Else
@@ -919,7 +945,7 @@ Public Class MainForm
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     'CH and ID
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         txt = "CH:" & Conversion.Hex(part.parent.myXbee.CH) & "|ID:" & Conversion.Hex(part.parent.myXbee.ID)
                     Else
                         txt = "Text"
@@ -1046,7 +1072,7 @@ Public Class MainForm
                     End If
                 Else                                                'show setting
                     'End
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         txt = "End:" & part.EndDevice & "." & part.NumberInEnd.ToString & "|" & Conversion.Hex(part.parent.Address)
                     End If
 
@@ -1054,7 +1080,7 @@ Public Class MainForm
                     textBoxRect.Y += size.Height
                     'host				
                     txt = "Host:" + part.parent.Host.ToString   '"Host: " & index
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         If IsNothing(part.parent.myXbee.port) = False Then
                             txt = txt & "|" & part.parent.myXbee.port.PortName
                         Else
@@ -1066,7 +1092,7 @@ Public Class MainForm
                     g.DrawString(txt, uFont, TextBrush, textBoxRect, fmt)
                     textBoxRect.Y += size.Height
                     'CH and ID
-                    If RequestRouteConcept = "Normal" Then
+                    If RequestRouteConcept = Concept.NORMAL Then
                         txt = "CH:" & Conversion.Hex(part.parent.myXbee.CH) & "|ID:" & Conversion.Hex(part.parent.myXbee.ID)
                     Else
                         txt = "Text"
@@ -1115,7 +1141,13 @@ Public Class MainForm
     Public Sub DisplayPart()
         'olvPart.View = View.Tile
         olvPart.OwnerDraw = True
-        InitializeOlvPart(PartList)
+        Select Case RequestRouteConcept
+            Case Concept.NORMAL
+                InitializeOlvPart(PartList)
+            Case Concept.PALLET
+                InitializeOlvPart(PalletList)
+        End Select
+
     End Sub
 
 #End Region
@@ -1124,9 +1156,23 @@ Public Class MainForm
         'olvAGV.BuildList()
         'olvPart.BuildList()
         'Refresh()
+        'DisplayPart()
         olvAGV.Refresh()
         olvPart.Refresh()
+    End Sub
 
+    Private Sub SetEventPalletList()
+        For Each a In TextList
+            AddHandler a.PalletListChange, AddressOf RefreshPalletList
+        Next
+    End Sub
+
+    Private Sub RefreshPalletList()
+        If InvokeRequired Then
+            Me.Invoke(New Action(AddressOf RefreshPalletList))
+        Else
+            DisplayPart()
+        End If
     End Sub
 #End Region
 #Region "Display Chart"  'chart size = 1863, 952
@@ -1649,7 +1695,7 @@ Public Class MainForm
 
     Private Sub MainMenuSetting_Click(sender As Object, e As EventArgs) Handles MainMenuSetting.Click
         Try
-            System.Diagnostics.Process.Start("Control System setting.exe")
+            System.Diagnostics.Process.Start("ControlSystemSetting.exe")
         Catch
         End Try
     End Sub
@@ -1731,5 +1777,97 @@ Public Class MainForm
 
     Private Sub ForceUploadToServerToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForceUploadToServerToolStripMenuItem.Click
         UploadToServer()
+    End Sub
+
+    Private Sub DisplayPartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayPartToolStripMenuItem.Click
+        DisplayPart()
+    End Sub
+
+    Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub RunToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RunToolStripMenuItem.Click
+        Dim rbc As AGV = CType(olvAGV.SelectedObject, AGV)
+        rbc.AGVRun()
+    End Sub
+
+    Private Sub StopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem.Click
+        Dim rbc As AGV = CType(olvAGV.SelectedObject, AGV)
+        rbc.AGVStop()
+    End Sub
+
+    Private Sub EditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem1.Click
+        Dim part As CPart = CType(olvPart.SelectedObject, CPart)
+        Dim PartNameCurrently As String
+        PartNameCurrently = part.Name
+        Dim editPartForm As New EditPartForm() With {.PartName = part.Name, .PartRoute = part.route, .PartTargetPoint = part.TargetPoint, .PartRemainStock = part.RemainStock, .PartTarget = part.target, .PartCycleTime = part.CycleTime}
+        editPartForm.ShowDialog()
+
+        If Not editPartForm.Visible Then
+            Dim dtt As DataTable = New DataTable()
+            dtt = editPartForm.dt
+            If dtt.Rows.Count <> 0 Then
+                part.Name = dtt.Rows(0)("Name")
+                part.TargetPoint = dtt.Rows(0)("TargetPoint")
+                part.route = dtt.Rows(0)("Route")
+                part.RemainStock = dtt.Rows(0)("RemainStock")
+                part.target = dtt.Rows(0)("Target")
+                part.CycleTime = dtt.Rows(0)("CycleTime")
+
+                Dim dataTB As DataTable = New DataTable()
+                Dim ds As DataSet = New DataSet()
+                ds.ReadXml(".\XML\Part.xml")
+                dataTB = ds.Tables(0)
+                For roww As Integer = 0 To dataTB.Rows.Count - 1
+                    If dataTB.Rows(roww)("Name") = PartNameCurrently Then
+                        dataTB.Rows(roww)("Name") = part.Name
+                        dataTB.Rows(roww)("TargetPoint") = part.TargetPoint
+                        dataTB.Rows(roww)("Route") = part.route
+                        dataTB.Rows(roww)("RemainStock") = part.RemainStock
+                        dataTB.Rows(roww)("Target") = part.target
+                        dataTB.Rows(roww)("CycleTime") = part.CycleTime
+                    End If
+                Next
+                dataTB.WriteXml(".\XML\Part.xml")
+            End If
+        End If
+    End Sub
+
+    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If File.Exists("Record_Part.txt") Then
+            File.Delete("Record_Part.txt")
+        End If
+        If MessageBox.Show("Bạn muốn tắt ứng dụng và sẽ khởi động ngay sau đó?" + vbCrLf + "-> YES = Lưu lại thông tin về các Part đang được cấp." + vbCrLf +
+                           "-> NO = Hủy bỏ lưu thông tin.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            Dim listSuppylingPart As List(Of String) = New List(Of String)()
+            listSuppylingPart.Clear()
+
+            If RequestRouteConcept = Concept.NORMAL Then
+                For i As Integer = 0 To PartList.Count - 1
+                    If PartList(i).AGVSupply <> "" Then
+                        listSuppylingPart.Add(PartList(i).Name + "," + PartList(i).AGVSupply.ToString())
+                    End If
+                Next
+            End If
+            If RequestRouteConcept = Concept.PALLET Then
+                For i As Integer = 0 To PalletList.Count - 1
+                    If PalletList(i).AGVSupply <> "" Then
+                        listSuppylingPart.Add(PalletList(i).Name + "," + PalletList(i).AGVSupply.ToString() + "," + PalletList(i).PalletNo.ToString())
+                    End If
+                Next
+            End If
+
+            If listSuppylingPart.Count > 0 Then
+                Dim str As String = String.Empty
+                For temp As Integer = 0 To listSuppylingPart.Count - 2
+                    str = str + listSuppylingPart(temp) + vbCrLf
+                Next
+                str = str + listSuppylingPart(listSuppylingPart.Count - 1)
+                File.WriteAllText("Record_Part.txt", str)
+            End If
+        ElseIf MessageBoxButtons.YesNoCancel = DialogResult.No Then
+            File.Delete("Record_Part.txt")
+        End If
     End Sub
 End Class

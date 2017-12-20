@@ -2,6 +2,156 @@
 <DocumentElement>
   <Chart>
     <Id>0</Id>
+    <Name>AGV 01</Name>
+    <EMG>0.0182000316666667</EMG>
+    <Safety>0.0539244133333334</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0.018034365</Out_x0020_line>
+    <Battery_x0020_empty>0.0183343816666667</Battery_x0020_empty>
+    <No_x0020_cart>0.00936001666666667</No_x0020_cart>
+    <Normal>0.07930014</Normal>
+    <Free>0.451460880000001</Free>
+    <Pole_x0020_error>6.12455498833333</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>191.513448010001</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>1</Id>
+    <Name>AGV 02</Name>
+    <EMG>0.0358644033333333</EMG>
+    <Safety>0.0265200466666667</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0.055814465</Out_x0020_line>
+    <Battery_x0020_empty>0.0265705533333333</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.277031336666667</Free>
+    <Pole_x0020_error>6.62973789166666</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>191.235078530001</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>2</Id>
+    <Name>AGV 03</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0.01835105</Out_x0020_line>
+    <Battery_x0020_empty>0.018384385</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.0360187283333333</Free>
+    <Pole_x0020_error>5.480851825</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>192.733011238335</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>3</Id>
+    <Name>AGV 04</Name>
+    <EMG>0.0184600316666667</EMG>
+    <Safety>0</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0.0178843566666667</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0.0176800316666667</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.564539161666666</Free>
+    <Pole_x0020_error>0.554592979999999</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>197.113460665001</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>4</Id>
+    <Name>AGV 05</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0.01742003</Stop>
+    <Out_x0020_line>0</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0.0189677516666667</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.0180176983333333</Free>
+    <Pole_x0020_error>0.495456201666667</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>197.736755545001</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>5</Id>
+    <Name>AGV 06</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0</Free>
+    <Pole_x0020_error>0</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>198.286617226668</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>6</Id>
+    <Name>AGV 07</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0.01821771</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.0641621416666666</Free>
+    <Pole_x0020_error>1.11680658</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>197.087430795001</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>7</Id>
+    <Name>AGV 08</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.0273000483333333</Free>
+    <Pole_x0020_error>0.862421515</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>197.396895663335</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>8</Id>
+    <Name>AGV 09</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.0356200616666667</Free>
+    <Pole_x0020_error>0.68900121</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>197.561995955001</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>9</Id>
+    <Name>AGV 10</Name>
+    <EMG>0</EMG>
+    <Safety>0</Safety>
+    <Stop>0</Stop>
+    <Out_x0020_line>0</Out_x0020_line>
+    <Battery_x0020_empty>0</Battery_x0020_empty>
+    <No_x0020_cart>0.0184600333333333</No_x0020_cart>
+    <Normal>0</Normal>
+    <Free>0.01768003</Free>
+    <Pole_x0020_error>0.76284134</Pole_x0020_error>
+    <Disconnect>0</Disconnect>
+    <Shutdown>197.487635823335</Shutdown>
+  </Chart>
+  <Chart>
+    <Id>10</Id>
     <Name>Cua 01</Name>
     <EMG>0</EMG>
     <Safety>0</Safety>
@@ -10,28 +160,28 @@
     <Battery_x0020_empty>0.0173166666666667</Battery_x0020_empty>
     <No_x0020_cart>0</No_x0020_cart>
     <Normal>0</Normal>
-    <Free>10.6542666666667</Free>
-    <Pole_x0020_error>0.317600000000001</Pole_x0020_error>
+    <Free>10.6891067266667</Free>
+    <Pole_x0020_error>0.380260110000001</Pole_x0020_error>
     <Disconnect>0</Disconnect>
-    <Shutdown>23.2149333333332</Shutdown>
+    <Shutdown>183.901433723335</Shutdown>
   </Chart>
   <Chart>
-    <Id>1</Id>
+    <Id>11</Id>
     <Name>Cua 02</Name>
     <EMG>0.0178666666666667</EMG>
     <Safety>0.0353166666666667</Safety>
     <Stop>1.20815</Stop>
-    <Out_x0020_line>0.01715</Out_x0020_line>
+    <Out_x0020_line>0.0356100333333333</Out_x0020_line>
     <Battery_x0020_empty>0.0174333333333333</Battery_x0020_empty>
     <No_x0020_cart>0</No_x0020_cart>
     <Normal>0.05285</Normal>
-    <Free>16.91355</Free>
-    <Pole_x0020_error>0.3792</Pole_x0020_error>
+    <Free>17.0001301516667</Free>
+    <Pole_x0020_error>0.454860133333334</Pole_x0020_error>
     <Disconnect>0</Disconnect>
-    <Shutdown>18.8610999999999</Shutdown>
+    <Shutdown>179.464400241668</Shutdown>
   </Chart>
   <Chart>
-    <Id>2</Id>
+    <Id>12</Id>
     <Name>Của 03</Name>
     <EMG>0</EMG>
     <Safety>0</Safety>
@@ -41,8 +191,8 @@
     <No_x0020_cart>0</No_x0020_cart>
     <Normal>0</Normal>
     <Free>0</Free>
-    <Pole_x0020_error>0</Pole_x0020_error>
+    <Pole_x0020_error>0.0538200933333333</Pole_x0020_error>
     <Disconnect>0</Disconnect>
-    <Shutdown>37.2831333333332</Shutdown>
+    <Shutdown>198.013313800001</Shutdown>
   </Chart>
 </DocumentElement>

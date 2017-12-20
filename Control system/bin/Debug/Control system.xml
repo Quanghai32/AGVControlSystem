@@ -38,6 +38,22 @@ Control system
  <returns>Return true if FirstPart's priority is higher or same with SecondPart's</returns>
  <remarks></remarks>
 </member>
+<member name="M:Control_system.PalletConcept.isAGVFree4Supply(System.Byte)">
+ <summary>
+ Check AGV that it's already for request new route or not
+ </summary>
+ <param name="AGVNum">The order number of AGV</param>
+ <returns>Return true if it's already for request new route, otherwise return false</returns>
+</member>
+<member name="M:Control_system.PalletConcept.ComparePartPriority(System.Byte,System.Byte)">
+ <summary>
+ Compare priority of two parts
+ </summary>
+ <param name="CurentPart">First part to compare</param>
+ <param name="PrevPart">Second part to compare</param>
+ <returns>Return true if FirstPart's priority is higher or same with SecondPart's</returns>
+ <remarks></remarks>
+</member>
 <member name="T:Control_system.CrossFunction.CrossStruct">
  <summary>
  InCrossPosition(): các thẻ trong điểm Cross

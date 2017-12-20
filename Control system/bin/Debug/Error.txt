@@ -258,3 +258,55 @@
    at System.Windows.Forms.Control.WndProc(Message& m)
    at System.Windows.Forms.Form.WmShowWindow(Message& m)
    at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+12/28/2017 5:25:58 PM: System.InvalidOperationException: An error occurred creating the form. See Exception.InnerException for details.  The error is: Object reference not set to an instance of an object. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Windows.Forms.ListView.ColumnHeaderCollection.AddRange(ColumnHeader[] values)
+   at Control_system.MainForm.InitializeComponent() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\MainForm.Designer.vb:line 718
+   at Control_system.MainForm..ctor() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\MainForm.vb:line 1580
+   --- End of inner exception stack trace ---
+   at Control_system.My.MyProject.MyForms.Create__Instance__[T](T Instance) in :line 190
+   at Control_system.My.MyProject.MyForms.get_MainForm()
+   at Control_system.My.MyApplication.OnCreateMainForm() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\My Project\Application.Designer.vb:line 35
+   at Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase.OnRun()
+   at Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase.DoApplicationModel()
+12/28/2017 6:12:05 PM: System.InvalidOperationException: An error occurred creating the form. See Exception.InnerException for details.  The error is: Object reference not set to an instance of an object. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Windows.Forms.ListView.ColumnHeaderCollection.AddRange(ColumnHeader[] values)
+   at Control_system.MainForm.InitializeComponent() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\MainForm.Designer.vb:line 718
+   at Control_system.MainForm..ctor() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\MainForm.vb:line 1580
+   --- End of inner exception stack trace ---
+   at Control_system.My.MyProject.MyForms.Create__Instance__[T](T Instance) in :line 190
+   at Control_system.My.MyProject.MyForms.get_MainForm()
+   at Control_system.My.MyApplication.OnCreateMainForm() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\My Project\Application.Designer.vb:line 35
+   at Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase.OnRun()
+   at Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase.DoApplicationModel()
+12/28/2017 6:25:20 PM: System.InvalidOperationException: An error occurred creating the form. See Exception.InnerException for details.  The error is: Object reference not set to an instance of an object. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.Windows.Forms.ListView.ColumnHeaderCollection.AddRange(ColumnHeader[] values)
+   at Control_system.MainForm.InitializeComponent() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\MainForm.Designer.vb:line 718
+   at Control_system.MainForm..ctor() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\MainForm.vb:line 1580
+   --- End of inner exception stack trace ---
+   at Control_system.My.MyProject.MyForms.Create__Instance__[T](T Instance) in :line 190
+   at Control_system.My.MyProject.MyForms.get_MainForm()
+   at Control_system.My.MyApplication.OnCreateMainForm() in D:\Quynh\VS project\AGVControlSystem (5)\AGVControlSystem\Control system\My Project\Application.Designer.vb:line 35
+   at Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase.OnRun()
+   at Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase.DoApplicationModel()
+12/28/2017 6:37:39 PM: System.ArgumentOutOfRangeException: InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+   at System.Windows.Forms.ListView.ColumnHeaderCollection.get_Item(Int32 index)
+   at BrightIdeasSoftware.ObjectListView.GetColumn(Int32 index)
+   at BrightIdeasSoftware.ObjectListView.BuildCellEvent(CellEventArgs args, Point location)
+   at BrightIdeasSoftware.ObjectListView.OnMouseMove(MouseEventArgs e)
+   at System.Windows.Forms.Control.WmMouseMove(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ListView.WndProc(Message& m)
+   at BrightIdeasSoftware.ObjectListView.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+12/28/2017 6:42:58 PM: System.ArgumentOutOfRangeException: InvalidArgument=Value of '0' is not valid for 'index'.
+Parameter name: index
+   at System.Windows.Forms.ListView.ColumnHeaderCollection.get_Item(Int32 index)
+   at BrightIdeasSoftware.ObjectListView.GetColumn(Int32 index)
+   at BrightIdeasSoftware.ObjectListView.BuildCellEvent(CellEventArgs args, Point location)
+   at BrightIdeasSoftware.ObjectListView.OnMouseMove(MouseEventArgs e)
+   at System.Windows.Forms.Control.WmMouseMove(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ListView.WndProc(Message& m)
+   at BrightIdeasSoftware.ObjectListView.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)

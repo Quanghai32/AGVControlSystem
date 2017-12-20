@@ -2,32 +2,102 @@
 <DocumentElement>
   <AGV>
     <Id>0</Id>
-    <Name>Cua 01</Name>
+    <Name>AGV 01</Name>
     <Enable>true</Enable>
     <Address>40B2764D</Address>
-    <Host_x0020_Xbee>0</Host_x0020_Xbee>
-    <Count>5</Count>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>16</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
   <AGV>
     <Id>1</Id>
-    <Name>Cua 02</Name>
+    <Name>AGV 02</Name>
     <Enable>true</Enable>
     <Address>0</Address>
-    <Host_x0020_Xbee>0</Host_x0020_Xbee>
-    <Count>6</Count>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>17</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
   <AGV>
     <Id>2</Id>
-    <Name>Của 03</Name>
+    <Name>AGV 03</Name>
     <Enable>true</Enable>
     <Address>0</Address>
-    <Host_x0020_Xbee>0</Host_x0020_Xbee>
-    <Count>0</Count>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>11</Count>
     <Group>0</Group>
-    <Part>0</Part>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>3</Id>
+    <Name>AGV 04</Name>
+    <Enable>True</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>10</Count>
+    <Group>0</Group>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>4</Id>
+    <Name>AGV 05</Name>
+    <Enable>True</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>8</Count>
+    <Group>0</Group>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>5</Id>
+    <Name>AGV 06</Name>
+    <Enable>True</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>8</Count>
+    <Group>1</Group>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>6</Id>
+    <Name>AGV 07</Name>
+    <Enable>True</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>10</Count>
+    <Group>1</Group>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>7</Id>
+    <Name>AGV 08</Name>
+    <Enable>True</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>8</Count>
+    <Group>1</Group>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>8</Id>
+    <Name>AGV 09</Name>
+    <Enable>True</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>8</Count>
+    <Group>1</Group>
+    <Part>all</Part>
+  </AGV>
+  <AGV>
+    <Id>9</Id>
+    <Name>AGV 10</Name>
+    <Enable>True</Enable>
+    <Address>0</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+    <Count>8</Count>
+    <Group>1</Group>
+    <Part>all</Part>
   </AGV>
 </DocumentElement>
