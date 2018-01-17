@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{D6202130-ACE8-4411-B7F4-7D8284A7CB15}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ControlSystemLibrary</RootNamespace>
+    <AssemblyName>ControlSystemLibrary</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ControlSystemLibrary.xml</DocumentationFile>
+    <NOWARN>1591,660,661</NOWARN>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>ControlSystemLibrary.xml</DocumentationFile>
+    <NOWARN>1591,660,661</NOWARN>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="mscorlib" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>.\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="User component\Cpart.cs" />
+    <Compile Include="User component\AGV.cs" />
+    <Compile Include="User component\CHistory.cs" />
+    <Compile Include="User component\IXbeeDevices.cs" />
+    <Compile Include="User component\CIniFile.cs" />
+    <Compile Include="User component\EndDevices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Application.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="User component\XBee.cs" />
+    <Compile Include="User control\AGVDisplay.cs" />
+    <Compile Include="User control\AGVDisplay.Designer.cs">
+      <DependentUpon>AGVDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User control\BatteryDisplay.cs" />
+    <Compile Include="User control\BatteryDisplay.Designer.cs">
+      <DependentUpon>BatteryDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User control\CustomText.cs" />
+    <Compile Include="User control\CustomText.Designer.cs">
+      <DependentUpon>CustomText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User control\PartDisplayControl.cs" />
+    <Compile Include="User control\PartDisplayControl.designer.cs">
+      <DependentUpon>PartDisplayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User control\PartSingleDisplay.cs" />
+    <Compile Include="User control\PartSingleDisplay.Designer.cs">
+      <DependentUpon>PartSingleDisplay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User control\User control for Map\EndPointMap.cs" />
+    <Compile Include="User control\User control for Map\EndPointMap.Designer.cs">
+      <DependentUpon>EndPointMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User control\verticalText.cs" />
+    <Compile Include="User control\verticalText.Designer.cs">
+      <DependentUpon>verticalText.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User control\AGVDisplay.resx">
+      <DependentUpon>AGVDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User control\BatteryDisplay.resx">
+      <DependentUpon>BatteryDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User control\CustomText.resx">
+      <DependentUpon>CustomText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User control\PartDisplayControl.resx">
+      <DependentUpon>PartDisplayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User control\PartSingleDisplay.resx">
+      <DependentUpon>PartSingleDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User control\User control for Map\EndPointMap.resx">
+      <DependentUpon>EndPointMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User control\verticalText.resx">
+      <DependentUpon>verticalText.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
+</Project>

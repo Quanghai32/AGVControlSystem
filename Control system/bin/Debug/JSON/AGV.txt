@@ -1,0 +1,102 @@
+[
+  {
+    "Id": "0",
+    "Name": "AGV 01",
+    "Enable": "true",
+    "Address": "40B2764D",
+    "Host Xbee": "1",
+    "Count": "20",
+    "Group": "0",
+    "Part": "all"
+  },
+  {
+    "Id": "1",
+    "Name": "AGV 02",
+    "Enable": "true",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "24",
+    "Group": "0",
+    "Part": "all"
+  },
+  {
+    "Id": "2",
+    "Name": "AGV 03",
+    "Enable": "true",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "12",
+    "Group": "0",
+    "Part": "all"
+  },
+  {
+    "Id": "3",
+    "Name": "AGV 04",
+    "Enable": "True",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "11",
+    "Group": "0",
+    "Part": "all"
+  },
+  {
+    "Id": "4",
+    "Name": "AGV 05",
+    "Enable": "True",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "9",
+    "Group": "0",
+    "Part": "all"
+  },
+  {
+    "Id": "5",
+    "Name": "AGV 06",
+    "Enable": "True",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "10",
+    "Group": "1",
+    "Part": "all"
+  },
+  {
+    "Id": "6",
+    "Name": "AGV 07",
+    "Enable": "True",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "11",
+    "Group": "1",
+    "Part": "all"
+  },
+  {
+    "Id": "7",
+    "Name": "AGV 08",
+    "Enable": "True",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "10",
+    "Group": "1",
+    "Part": "all"
+  },
+  {
+    "Id": "8",
+    "Name": "AGV 09",
+    "Enable": "True",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "8",
+    "Group": "1",
+    "Part": "all"
+  },
+  {
+    "Id": "9",
+    "Name": "AGV 10",
+    "Enable": "True",
+    "Address": "0",
+    "Host Xbee": "1",
+    "Count": "8",
+    "Group": "1",
+    "Part": "all"
+  }
+]

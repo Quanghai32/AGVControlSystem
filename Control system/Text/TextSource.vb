@@ -8,6 +8,7 @@
     Private _connecting As Boolean
     Private _Id As Integer
     Public Event PalletListChange()
+    Public Event statusLogFileModified(ByVal isDisconnect As Boolean)
 
     Public Sub New(ByVal id As Integer, ByVal filePath As String, ByVal analyseMethod As IAnalyses)
         TextPalletList = New List(Of CPart)
@@ -46,23 +47,82 @@
         End Set
     End Property
 
-
+    Dim checkLOGfile As Integer = 0
+    Dim isLogFileModified As Boolean = False
+    Dim index1 As Integer = 0
+    Dim index2 As Integer = 0
     Sub timerTxt_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReadTime.Elapsed
         ReadTime.Stop()
         Try
             CopyFile(_filePath)
+            '''''''''''''''''''''_check log file is modified???_'''''''''''''''''''''''''''''
+
+            checkLOGfile = checkLOGfile + 1
+            If checkLOGfile = 5 Then
+                isLogFileModified = checkLogFileModified()
+                If isLogFileModified = False Then
+                    index1 = index1 + 1
+                End If
+                If isLogFileModified = True Then
+                    index2 = index2 + 1
+                End If
+            End If
+
+            If isLogFileModified = True Then
+                connecting = False
+            End If
+
+            If isLogFileModified = True And index2 = 1 Then
+                index1 = 0
+                index2 = index2 + 1
+                RaiseEvent statusLogFileModified(True)
+            End If
+            If isLogFileModified = False And index1 = 1 Then
+                index2 = 0
+                index1 = index1 + 1
+                RaiseEvent statusLogFileModified(False)
+            End If
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Catch
             ReadTime.Start()
             connecting = False
         End Try
         ReadTime.Start()
     End Sub
+    Dim listModifiedFile As List(Of String) = New List(Of String)()
+    Private Function checkLogFileModified() As Boolean
+        checkLOGfile = 0
+        Dim isLogFileModified1 As Boolean = False
+        Dim lastModified = File.GetLastWriteTime(_filePath)
+        listModifiedFile.Add(lastModified)
+        If listModifiedFile.Count > 1 Then
+            If listModifiedFile(listModifiedFile.Count - 1) = listModifiedFile(listModifiedFile.Count - 2) Then
+                isLogFileModified1 = True  ' = log file hasn't changed
+            End If
+        End If
+        Return isLogFileModified1
+    End Function
 
     Sub DisconnectTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DisConnectTimer.Elapsed
         DisConnectTimer.Stop()
         connecting = False
         DisConnectTimer.Start()
     End Sub
+
+    'Dim listModified As List(Of String) = New List(Of String)()
+    'Private Sub checkLOGfile()
+    '    Dim lastModified = File.GetLastWriteTime(_filePath)
+    '    listModified.Add(lastModified.ToString())
+    '    If listModified.Count > 1 Then
+    '        If listModified(listModified.Count - 1) = listModified(listModified.Count - 2) Then
+    '            ToolStripStatusLabelCheckLOGfile.Text = "Source LOG data hasn't modified!"
+    '            ToolStripStatusLabelCheckLOGfile.BackColor = Color.Red
+    '        Else
+    '            ToolStripStatusLabelCheckLOGfile.Text = ""
+    '            listModified.RemoveAt(listModified.Count - 2)
+    '        End If
+    '    End If
+    'End Sub
 
     Public Structure Data
         Public Name As String
