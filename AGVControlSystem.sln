@@ -11,6 +11,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlSystemLibrary", "Con
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ControlSystemSetting", "Control system setting\ControlSystemSetting.vbproj", "{2DD74705-9FB0-47B5-9D15-B1ECBF08252D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlSystemLibraryCSharp", "ControlSystemLibraryC#\ControlSystemLibraryCSharp.csproj", "{D6202130-ACE8-4411-B7F4-7D8284A7CB15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,18 @@ Global
 		{2DD74705-9FB0-47B5-9D15-B1ECBF08252D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2DD74705-9FB0-47B5-9D15-B1ECBF08252D}.Release|x86.ActiveCfg = Release|Any CPU
 		{2DD74705-9FB0-47B5-9D15-B1ECBF08252D}.Release|x86.Build.0 = Release|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Debug|x86.Build.0 = Debug|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Release|x86.ActiveCfg = Release|Any CPU
+		{D6202130-ACE8-4411-B7F4-7D8284A7CB15}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

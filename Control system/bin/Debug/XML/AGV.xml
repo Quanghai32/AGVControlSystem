@@ -6,7 +6,7 @@
     <Enable>true</Enable>
     <Address>40B2764D</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>16</Count>
+    <Count>20</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
@@ -16,7 +16,7 @@
     <Enable>true</Enable>
     <Address>0</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>17</Count>
+    <Count>24</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
@@ -26,7 +26,7 @@
     <Enable>true</Enable>
     <Address>0</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>11</Count>
+    <Count>13</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
@@ -36,7 +36,7 @@
     <Enable>True</Enable>
     <Address>0</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>10</Count>
+    <Count>11</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
@@ -46,7 +46,7 @@
     <Enable>True</Enable>
     <Address>0</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>8</Count>
+    <Count>9</Count>
     <Group>0</Group>
     <Part>all</Part>
   </AGV>
@@ -56,7 +56,7 @@
     <Enable>True</Enable>
     <Address>0</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>8</Count>
+    <Count>10</Count>
     <Group>1</Group>
     <Part>all</Part>
   </AGV>
@@ -66,7 +66,7 @@
     <Enable>True</Enable>
     <Address>0</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>10</Count>
+    <Count>12</Count>
     <Group>1</Group>
     <Part>all</Part>
   </AGV>
@@ -76,7 +76,7 @@
     <Enable>True</Enable>
     <Address>0</Address>
     <Host_x0020_Xbee>1</Host_x0020_Xbee>
-    <Count>8</Count>
+    <Count>10</Count>
     <Group>1</Group>
     <Part>all</Part>
   </AGV>

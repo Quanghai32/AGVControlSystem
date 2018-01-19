@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" standalone="yes"?>
 <DocumentElement>
   <Part>
     <Id>0</Id>
@@ -7,16 +7,16 @@
     <TargetPoint>0</TargetPoint>
     <Route>0</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>1</Priority>
     <Group>2</Group>
-    <Count>3</Count>
+    <Count>4</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>2</EmptyCount>
+    <EmptyCount>3</EmptyCount>
     <X>1837</X>
     <Y>50</Y>
   </Part>
@@ -27,16 +27,16 @@
     <TargetPoint>0</TargetPoint>
     <Route>1</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>2</Priority>
     <Group>2</Group>
-    <Count>3</Count>
+    <Count>7</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
-    <EmptyCount>1</EmptyCount>
+    <EmptyCount>2</EmptyCount>
     <X>1795</X>
     <Y>50</Y>
   </Part>
@@ -47,12 +47,12 @@
     <TargetPoint>0</TargetPoint>
     <Route>3</Route>
     <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>3</Priority>
     <Group>2</Group>
-    <Count>3</Count>
+    <Count>6</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
@@ -66,9 +66,9 @@
     <Enable>true</Enable>
     <TargetPoint>0</TargetPoint>
     <Route>4</Route>
-    <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <EndDevices>1</EndDevices>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>4</Priority>
     <Group>1</Group>
@@ -86,9 +86,9 @@
     <Enable>true</Enable>
     <TargetPoint>0</TargetPoint>
     <Route>5</Route>
-    <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <EndDevices>1</EndDevices>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>5</Priority>
     <Group>1</Group>
@@ -106,9 +106,9 @@
     <Enable>true</Enable>
     <TargetPoint>0</TargetPoint>
     <Route>6</Route>
-    <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <EndDevices>1</EndDevices>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>6</Priority>
     <Group>1</Group>
@@ -126,13 +126,13 @@
     <Enable>True</Enable>
     <TargetPoint>0</TargetPoint>
     <Route>7</Route>
-    <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <EndDevices>1</EndDevices>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>7</Priority>
     <Group>1</Group>
-    <Count>0</Count>
+    <Count>2</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
@@ -146,9 +146,9 @@
     <Enable>True</Enable>
     <TargetPoint>0</TargetPoint>
     <Route>8</Route>
-    <EndDevices>0</EndDevices>
-    <Text>false</Text>
-    <TextSource>1</TextSource>
+    <EndDevices>1</EndDevices>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
     <RemainStock>10</RemainStock>
     <Priority>8</Priority>
     <Group>1</Group>
