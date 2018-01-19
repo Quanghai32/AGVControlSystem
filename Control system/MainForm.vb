@@ -23,6 +23,7 @@ Public Class MainForm
         PalletList = New List(Of CPart)()
         ReadXmlData()
         SetEventPalletList()
+        SetStatusLogFile()
         RecordInitialInfor()
         RecordPartEmptyCounterInit()
         Select Case RequestRouteConcept
@@ -1174,6 +1175,28 @@ Public Class MainForm
             DisplayPart()
         End If
     End Sub
+
+    Private Sub SetStatusLogFile()
+        For Each a In TextList
+            AddHandler a.statusLogFileModified, AddressOf showStatusLogFile
+        Next
+    End Sub
+
+    Private Sub showStatusLogFile(ByVal isDisconnect As Boolean)
+        If InvokeRequired Then
+            Me.Invoke(New Action(Of Boolean)(AddressOf showStatusLogFile), isDisconnect)
+        Else
+            If isDisconnect = True Then
+                ToolStripStatusLabelCheckLOGfile.Text = "Mất kết nối dữ liệu từ hệ thống HOÀN KIẾM!"
+                MainStatus.BackColor = Color.Red
+                ToolStripStatusLabelCheckLOGfile.ForeColor = Color.Yellow
+            Else
+                ToolStripStatusLabelCheckLOGfile.Text = ""
+            End If
+
+        End If
+    End Sub
+
 #End Region
 #Region "Display Chart"  'chart size = 1863, 952
     Public Sub ChartAddSeries(ByVal name As String, ByVal SeriesColor As Color, Optional hatchStyle As ChartHatchStyle = ChartHatchStyle.None)
@@ -1838,8 +1861,13 @@ Public Class MainForm
         If File.Exists("Record_Part.txt") Then
             File.Delete("Record_Part.txt")
         End If
-        If MessageBox.Show("Bạn muốn tắt ứng dụng và sẽ khởi động ngay sau đó?" + vbCrLf + "-> YES = Lưu lại thông tin về các Part đang được cấp." + vbCrLf +
-                           "-> NO = Hủy bỏ lưu thông tin.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+
+        If RequestRouteConcept = Concept.PALLET Then
+            RequestForm.Close()
+        End If
+
+        If MessageBox.Show("Có phải bạn muốn tắt ứng dụng và sẽ khởi động ngay sau đó?" + vbCrLf + "-> YES = LƯU thông tin về các AGV đang đi cấp hàng." + vbCrLf +
+                           "-> NO = HỦY lưu thông tin các AGV đang đi cấp.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
             Dim listSuppylingPart As List(Of String) = New List(Of String)()
             listSuppylingPart.Clear()
 

@@ -128,11 +128,12 @@ Module XmlReader
         Dim myDataTable As DataTable = New DataTable
         Dim endDevicesTB As DataTable = New DataTable
         Dim ds As DataSet = New DataSet
+        Dim dss As DataSet = New DataSet
 
         ds.ReadXml(".\XML\Part.xml")
         myDataTable = ds.Tables(0)
-        ds.ReadXml(".\XML\EndDevices.xml")
-        endDevicesTB = ds.Tables(0)
+        dss.ReadXml(".\XML\EndDevices.xml")
+        endDevicesTB = dss.Tables(0)
         PartList = New List(Of CPart)
 
         Dim listIDEndDevices As List(Of Int16) = New List(Of Int16)
@@ -162,7 +163,16 @@ Module XmlReader
             part.EmptyCount = myDataTable.Rows(i)("EmptyCount")
             part.X = myDataTable.Rows(i)("X")
             part.Y = myDataTable.Rows(i)("y")
+            part.EndDevice = myDataTable.Rows(i)("EndDevices")
 
+            ''''''''''''''''''''''''''''''_hien thi thu tu Part trong EndDevice_'''''''''''''''''''''''''
+            For temp As Byte = 0 To listIDEndDevices.Count - 1
+                If part.EndDevice = listIDEndDevices(temp) Then
+                    arrayIDEndDevices(temp) = arrayIDEndDevices(temp) + 1
+                    part.NumberInEnd = arrayIDEndDevices(temp)
+                End If
+            Next
+            '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             If part.Text = False Then
                 ''''''''''''''*2_read status part was being suppling_''''''''''''''''''
                 If isExistsRecordFile = True Then

@@ -68,6 +68,7 @@ Partial Class MainForm
         Me.DebugFormToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainStatus = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabelCheckLOGfile = New System.Windows.Forms.ToolStripStatusLabel()
         Me.imgAGVBig = New System.Windows.Forms.ImageList(Me.components)
         Me.MainTabControl = New System.Windows.Forms.TabControl()
         Me.TabMainForm = New System.Windows.Forms.TabPage()
@@ -179,6 +180,7 @@ Partial Class MainForm
         Me.TimerAndonMap = New System.Windows.Forms.Timer(Me.components)
         Me.RequestDataTimer = New System.Windows.Forms.Timer(Me.components)
         Me.MainMenu.SuspendLayout()
+        Me.MainStatus.SuspendLayout()
         Me.MainTabControl.SuspendLayout()
         Me.TabMainForm.SuspendLayout()
         CType(Me.SplitContainerOverView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -479,11 +481,17 @@ Partial Class MainForm
         '
         'MainStatus
         '
+        Me.MainStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelCheckLOGfile})
         Me.MainStatus.Location = New System.Drawing.Point(0, 434)
         Me.MainStatus.Name = "MainStatus"
         Me.MainStatus.Size = New System.Drawing.Size(882, 22)
         Me.MainStatus.TabIndex = 1
         Me.MainStatus.Text = "StatusStrip1"
+        '
+        'ToolStripStatusLabelCheckLOGfile
+        '
+        Me.ToolStripStatusLabelCheckLOGfile.Name = "ToolStripStatusLabelCheckLOGfile"
+        Me.ToolStripStatusLabelCheckLOGfile.Size = New System.Drawing.Size(0, 17)
         '
         'imgAGVBig
         '
@@ -1569,6 +1577,8 @@ Partial Class MainForm
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MainMenu.ResumeLayout(False)
         Me.MainMenu.PerformLayout()
+        Me.MainStatus.ResumeLayout(False)
+        Me.MainStatus.PerformLayout()
         Me.MainTabControl.ResumeLayout(False)
         Me.TabMainForm.ResumeLayout(False)
         Me.SplitContainerOverView.Panel1.ResumeLayout(False)
@@ -1750,4 +1760,5 @@ Partial Class MainForm
     Friend WithEvents StopToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents OlvColumn As OLVColumn
+    Friend WithEvents ToolStripStatusLabelCheckLOGfile As ToolStripStatusLabel
 End Class

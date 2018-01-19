@@ -1,0 +1,12 @@
+[
+  {
+    "Id": "0",
+    "Address": "1",
+    "Host Xbee": "0"
+  },
+  {
+    "Id": "1",
+    "Address": "21",
+    "Host Xbee": "0"
+  }
+]
