@@ -1,123 +1,123 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" standalone="yes"?>
 <DocumentElement>
   <Part>
     <Id>0</Id>
-    <Name>TS13-01</Name>
+    <Name>par1</Name>
     <Enable>true</Enable>
     <TargetPoint>0</TargetPoint>
-    <Route>28</Route>
+    <Route>0</Route>
     <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>1</TextSource>
-    <RemainStock>0</RemainStock>
-    <Priority>1</Priority>
-    <Group>1</Group>
+    <Text>True</Text>
+    <TextSource>0</TextSource>
+    <RemainStock>10</RemainStock>
+    <Priority>0</Priority>
+    <Group>0</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
     <EmptyCount>0</EmptyCount>
-    <X>1837</X>
-    <Y>50</Y>
+    <X>0</X>
+    <Y>0</Y>
   </Part>
   <Part>
     <Id>1</Id>
-    <Name>TS17-02</Name>
-    <Enable>true</Enable>
+    <Name>par2</Name>
+    <Enable>false</Enable>
     <TargetPoint>0</TargetPoint>
-    <Route>27</Route>
+    <Route>0</Route>
     <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>1</TextSource>
+    <Text>false</Text>
+    <TextSource>0</TextSource>
     <RemainStock>0</RemainStock>
-    <Priority>2</Priority>
-    <Group>1</Group>
+    <Priority>0</Priority>
+    <Group>0</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
     <EmptyCount>0</EmptyCount>
-    <X>1795</X>
-    <Y>50</Y>
+    <X>0</X>
+    <Y>0</Y>
   </Part>
   <Part>
     <Id>2</Id>
-    <Name>TS17-01</Name>
-    <Enable>true</Enable>
+    <Name>par3</Name>
+    <Enable>false</Enable>
     <TargetPoint>0</TargetPoint>
-    <Route>26</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>1</TextSource>
+    <Route>0</Route>
+    <EndDevices>1</EndDevices>
+    <Text>false</Text>
+    <TextSource>0</TextSource>
     <RemainStock>0</RemainStock>
-    <Priority>3</Priority>
-    <Group>1</Group>
+    <Priority>0</Priority>
+    <Group>0</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
     <EmptyCount>0</EmptyCount>
-    <X>1748</X>
-    <Y>52</Y>
+    <X>0</X>
+    <Y>0</Y>
   </Part>
   <Part>
     <Id>3</Id>
-    <Name>TM14-02</Name>
-    <Enable>true</Enable>
+    <Name>par4</Name>
+    <Enable>false</Enable>
     <TargetPoint>0</TargetPoint>
-    <Route>25</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>1</TextSource>
-    <RemainStock>14</RemainStock>
-    <Priority>4</Priority>
-    <Group>1</Group>
+    <Route>0</Route>
+    <EndDevices>1</EndDevices>
+    <Text>false</Text>
+    <TextSource>0</TextSource>
+    <RemainStock>0</RemainStock>
+    <Priority>0</Priority>
+    <Group>0</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
     <EmptyCount>0</EmptyCount>
-    <X>1693</X>
-    <Y>53</Y>
+    <X>0</X>
+    <Y>0</Y>
   </Part>
   <Part>
     <Id>4</Id>
-    <Name>TM14-03</Name>
-    <Enable>true</Enable>
+    <Name>par5</Name>
+    <Enable>false</Enable>
     <TargetPoint>0</TargetPoint>
-    <Route>24</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>1</TextSource>
-    <RemainStock>16</RemainStock>
-    <Priority>5</Priority>
-    <Group>1</Group>
+    <Route>0</Route>
+    <EndDevices>2</EndDevices>
+    <Text>false</Text>
+    <TextSource>0</TextSource>
+    <RemainStock>0</RemainStock>
+    <Priority>0</Priority>
+    <Group>0</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
     <EmptyCount>0</EmptyCount>
-    <X>360</X>
-    <Y>113</Y>
+    <X>0</X>
+    <Y>0</Y>
   </Part>
   <Part>
     <Id>5</Id>
-    <Name>TM14-04</Name>
-    <Enable>true</Enable>
+    <Name>par6</Name>
+    <Enable>false</Enable>
     <TargetPoint>0</TargetPoint>
-    <Route>23</Route>
-    <EndDevices>0</EndDevices>
-    <Text>true</Text>
-    <TextSource>1</TextSource>
-    <RemainStock>16</RemainStock>
-    <Priority>6</Priority>
-    <Group>1</Group>
+    <Route>0</Route>
+    <EndDevices>3</EndDevices>
+    <Text>false</Text>
+    <TextSource>0</TextSource>
+    <RemainStock>0</RemainStock>
+    <Priority>0</Priority>
+    <Group>0</Group>
     <Count>0</Count>
     <Target>0</Target>
     <CycleTime>0</CycleTime>
     <Description>0</Description>
     <EmptyCount>0</EmptyCount>
-    <X>245</X>
-    <Y>113</Y>
+    <X>0</X>
+    <Y>0</Y>
   </Part>
 </DocumentElement>

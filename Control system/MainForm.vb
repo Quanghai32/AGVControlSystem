@@ -20,11 +20,12 @@ Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadSetting()
         Record("System", "Running", "Startup")
+        PalletList = New List(Of CPart)()
         ReadXmlData()
         SetEventPalletList()
+        SetStatusLogFile()
         RecordInitialInfor()
         RecordPartEmptyCounterInit()
-
         Select Case RequestRouteConcept
             Case Concept.NORMAL
 
@@ -32,7 +33,6 @@ Public Class MainForm
                 RequestForm = New SupplyForm
                 RequestForm.TopMost = True
                 RequestForm.Show()
-                PalletList = New List(Of CPart)()
         End Select
 
         SetupHostXbee()
@@ -139,6 +139,7 @@ Public Class MainForm
             MenuAGVConfirmAll.Enabled = True
             MenuAGVEnable.Visible = False
             VitualAGVToolStripMenuItem.Visible = False
+            TestToolStripMenuItem.Visible = False
             LoadDataToolStripMenuItem.Visible = False
         ElseIf olvAGV.SelectedIndices.Count = 1 Then
             MenuAGVView.Visible = False
@@ -148,8 +149,10 @@ Public Class MainForm
             MenuAGVEnable.Visible = True
             If DebugMode Then
                 VitualAGVToolStripMenuItem.Visible = True
+                TestToolStripMenuItem.Visible = True
             Else
                 VitualAGVToolStripMenuItem.Visible = False
+                TestToolStripMenuItem.Visible = False
             End If
             LoadDataToolStripMenuItem.Visible = True
             If CType(olvAGV.SelectedObject, AGV).Enable Then
@@ -164,6 +167,7 @@ Public Class MainForm
             MenuAGVConfirmAll.Enabled = True
             MenuAGVEnable.Visible = False
             VitualAGVToolStripMenuItem.Visible = False
+            TestToolStripMenuItem.Visible = False
             LoadDataToolStripMenuItem.Visible = False
         End If
         'If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
@@ -634,6 +638,8 @@ Public Class MainForm
             MenuPartEnable.Visible = False
             LoadPartToolStripMenuItem.Visible = False
             VitualPartToolStripMenuItem.Visible = False
+            EditToolStripMenuItem1.Visible = False
+
         ElseIf olvPart.SelectedIndices.Count = 1 Then
             MenuPartView.Visible = False
             MenuPartConfirmConn.Visible = True
@@ -643,8 +649,10 @@ Public Class MainForm
             LoadPartToolStripMenuItem.Visible = True
             If DebugMode Then
                 VitualPartToolStripMenuItem.Visible = True
+                EditToolStripMenuItem1.Visible = True
             Else
                 VitualPartToolStripMenuItem.Visible = False
+                EditToolStripMenuItem1.Visible = False
             End If
             If CType(olvPart.SelectedObject, CPart).Enable Then
                 MenuPartEnable.Text = "Disable"
@@ -659,6 +667,7 @@ Public Class MainForm
             MenuPartEnable.Visible = False
             LoadPartToolStripMenuItem.Visible = False
             VitualPartToolStripMenuItem.Visible = False
+            EditToolStripMenuItem1.Visible = False
         End If
         'If My.User.IsInRole(ApplicationServices.BuiltInRole.Administrator) Then
         '    MenuPartEnable.Enabled = True
@@ -1160,12 +1169,33 @@ Public Class MainForm
     End Sub
 
     Private Sub RefreshPalletList()
-        If Me.InvokeRequired Then
+        If InvokeRequired Then
             Me.Invoke(New Action(AddressOf RefreshPalletList))
         Else
             DisplayPart()
-        End If     
+        End If
     End Sub
+
+    Private Sub SetStatusLogFile()
+        For Each a In TextList
+            AddHandler a.statusLogFileModified, AddressOf showStatusLogFile
+        Next
+    End Sub
+
+    Private Sub showStatusLogFile(ByVal isDisconnect As Boolean)
+        If InvokeRequired Then
+            Me.Invoke(New Action(Of Boolean)(AddressOf showStatusLogFile), isDisconnect)
+        Else
+            If isDisconnect = True Then
+                ToolStripStatusLabelCheckLOGfile.Text = "Hệ thống HOÀN KIẾM không xuất dữ liệu!"
+                MainStatus.BackColor = Color.Red
+                ToolStripStatusLabelCheckLOGfile.ForeColor = Color.Yellow
+            Else
+                ToolStripStatusLabelCheckLOGfile.Text = ""
+            End If
+        End If
+    End Sub
+
 #End Region
 #Region "Display Chart"  'chart size = 1863, 952
     Public Sub ChartAddSeries(ByVal name As String, ByVal SeriesColor As Color, Optional hatchStyle As ChartHatchStyle = ChartHatchStyle.None)
@@ -1687,7 +1717,7 @@ Public Class MainForm
 
     Private Sub MainMenuSetting_Click(sender As Object, e As EventArgs) Handles MainMenuSetting.Click
         Try
-            System.Diagnostics.Process.Start("Control System setting.exe")
+            System.Diagnostics.Process.Start("ControlSystemSetting.exe")
         Catch
         End Try
     End Sub
@@ -1773,5 +1803,98 @@ Public Class MainForm
 
     Private Sub DisplayPartToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DisplayPartToolStripMenuItem.Click
         DisplayPart()
+    End Sub
+
+    Private Sub TestToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub RunToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RunToolStripMenuItem.Click
+        Dim rbc As AGV = CType(olvAGV.SelectedObject, AGV)
+        rbc.AGVRun()
+    End Sub
+
+    Private Sub StopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StopToolStripMenuItem.Click
+        Dim rbc As AGV = CType(olvAGV.SelectedObject, AGV)
+        rbc.AGVStop()
+    End Sub
+
+    Private Sub EditToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EditToolStripMenuItem1.Click
+        Dim part As CPart = CType(olvPart.SelectedObject, CPart)
+        Dim PartNameCurrently As String
+        PartNameCurrently = part.Name
+        Dim editPartForm As New EditPartForm() With {.PartName = part.Name, .PartRoute = part.route, .PartTargetPoint = part.TargetPoint, .PartRemainStock = part.RemainStock, .PartTarget = part.target, .PartCycleTime = part.CycleTime}
+        editPartForm.ShowDialog()
+
+        If Not editPartForm.Visible Then
+            Dim dtt As DataTable = New DataTable()
+            dtt = editPartForm.dt
+            If dtt.Rows.Count <> 0 Then
+                part.Name = dtt.Rows(0)("Name")
+                part.TargetPoint = dtt.Rows(0)("TargetPoint")
+                part.route = dtt.Rows(0)("Route")
+                part.RemainStock = dtt.Rows(0)("RemainStock")
+                part.target = dtt.Rows(0)("Target")
+                part.CycleTime = dtt.Rows(0)("CycleTime")
+
+                Dim dataTB As DataTable = New DataTable()
+                Dim ds As DataSet = New DataSet()
+                ds.ReadXml(".\XML\Part.xml")
+                dataTB = ds.Tables(0)
+                For roww As Integer = 0 To dataTB.Rows.Count - 1
+                    If dataTB.Rows(roww)("Name") = PartNameCurrently Then
+                        dataTB.Rows(roww)("Name") = part.Name
+                        dataTB.Rows(roww)("TargetPoint") = part.TargetPoint
+                        dataTB.Rows(roww)("Route") = part.route
+                        dataTB.Rows(roww)("RemainStock") = part.RemainStock
+                        dataTB.Rows(roww)("Target") = part.target
+                        dataTB.Rows(roww)("CycleTime") = part.CycleTime
+                    End If
+                Next
+                dataTB.WriteXml(".\XML\Part.xml")
+            End If
+        End If
+    End Sub
+
+    Private Sub MainForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If File.Exists("Record_Part.txt") Then
+            File.Delete("Record_Part.txt")
+        End If
+
+        If RequestRouteConcept = Concept.PALLET Then
+            RequestForm.Close()
+        End If
+
+        If MessageBox.Show("Có phải bạn muốn tắt ứng dụng và sẽ khởi động ngay sau đó?" + vbCrLf + "-> YES = LƯU thông tin về các AGV đang đi cấp hàng." + vbCrLf +
+                           "-> NO = HỦY lưu thông tin các AGV đang đi cấp.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            Dim listSuppylingPart As List(Of String) = New List(Of String)()
+            listSuppylingPart.Clear()
+
+            If RequestRouteConcept = Concept.NORMAL Then
+                For i As Integer = 0 To PartList.Count - 1
+                    If PartList(i).AGVSupply <> "" Then
+                        listSuppylingPart.Add(PartList(i).Name + "," + PartList(i).AGVSupply.ToString())
+                    End If
+                Next
+            End If
+            If RequestRouteConcept = Concept.PALLET Then
+                For i As Integer = 0 To PalletList.Count - 1
+                    If PalletList(i).AGVSupply <> "" Then
+                        listSuppylingPart.Add(PalletList(i).Name + "," + PalletList(i).AGVSupply.ToString() + "," + PalletList(i).PalletNo.ToString())
+                    End If
+                Next
+            End If
+
+            If listSuppylingPart.Count > 0 Then
+                Dim str As String = String.Empty
+                For temp As Integer = 0 To listSuppylingPart.Count - 2
+                    str = str + listSuppylingPart(temp) + vbCrLf
+                Next
+                str = str + listSuppylingPart(listSuppylingPart.Count - 1)
+                File.WriteAllText("Record_Part.txt", str)
+            End If
+        ElseIf MessageBoxButtons.YesNoCancel = DialogResult.No Then
+            File.Delete("Record_Part.txt")
+        End If
     End Sub
 End Class

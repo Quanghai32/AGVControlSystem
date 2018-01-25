@@ -5,4 +5,19 @@
     <Address>0</Address>
     <Host_x0020_Xbee>0</Host_x0020_Xbee>
   </EndDevices>
+  <EndDevices>
+    <Id>1</Id>
+    <Address>1</Address>
+    <Host_x0020_Xbee>0</Host_x0020_Xbee>
+  </EndDevices>
+  <EndDevices>
+    <Id>2</Id>
+    <Address>2</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+  </EndDevices>
+  <EndDevices>
+    <Id>3</Id>
+    <Address>3</Address>
+    <Host_x0020_Xbee>1</Host_x0020_Xbee>
+  </EndDevices>
 </DocumentElement>

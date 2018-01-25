@@ -7,7 +7,8 @@
     Private _fileName As String
     Private _connecting As Boolean
     Private _Id As Integer
-    Public Event PalletListChange
+    Public Event PalletListChange()
+    Public Event statusLogFileModified(ByVal isDisconnect As Boolean)
 
     Public Sub New(ByVal id As Integer, ByVal filePath As String, ByVal analyseMethod As IAnalyses)
         TextPalletList = New List(Of CPart)
@@ -46,17 +47,61 @@
         End Set
     End Property
 
-
+    Dim checkLOGfile As Integer = 0
+    Dim isLogFileModified As Boolean = False
+    Dim index1 As Integer = 0
+    Dim index2 As Integer = 0
     Sub timerTxt_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReadTime.Elapsed
         ReadTime.Stop()
         Try
             CopyFile(_filePath)
+            '''''''''''''''''''''_check log file is modified???_'''''''''''''''''''''''''''''
+
+            checkLOGfile = checkLOGfile + 1
+            If checkLOGfile = 5 Then
+                isLogFileModified = checkLogFileModified()
+                If isLogFileModified = False Then
+                    index1 = index1 + 1
+                End If
+                If isLogFileModified = True Then
+                    index2 = index2 + 1
+                End If
+            End If
+
+            If isLogFileModified = True Then
+                connecting = False
+            End If
+
+            If isLogFileModified = True And index2 = 1 Then
+                index1 = 0
+                index2 = index2 + 1
+                RaiseEvent statusLogFileModified(True)
+            End If
+            If isLogFileModified = False And index1 = 1 Then
+                index2 = 0
+                index1 = index1 + 1
+                RaiseEvent statusLogFileModified(False)
+            End If
+            ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Catch
             ReadTime.Start()
             connecting = False
         End Try
         ReadTime.Start()
     End Sub
+    Dim listModifiedFile As List(Of String) = New List(Of String)()
+    Private Function checkLogFileModified() As Boolean
+        checkLOGfile = 0
+        Dim isLogFileModified1 As Boolean = False
+        Dim lastModified = File.GetLastWriteTime(_filePath)
+        listModifiedFile.Add(lastModified)
+        If listModifiedFile.Count > 1 Then
+            If listModifiedFile(listModifiedFile.Count - 1) = listModifiedFile(listModifiedFile.Count - 2) Then
+                isLogFileModified1 = True  ' = log file hasn't changed
+            End If
+        End If
+        Return isLogFileModified1
+    End Function
 
     Sub DisconnectTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DisConnectTimer.Elapsed
         DisConnectTimer.Stop()
@@ -70,22 +115,6 @@
     End Structure
 
     Private Sub CopyFile(ByVal srcPath As String)
-        'If Not File.Exists(srcPath) Then Return
-        'Static prevFile = File.GetLastWriteTime(srcPath)
-        'Static isFileNotChange As Boolean = False
-        'Dim currentFileModifyTime = File.GetLastWriteTime(srcPath)
-        'If (prevFile = currentFileModifyTime) Then
-        '    If isFileNotChange
-
-        '    End If
-        '    isFileNotChange = True
-        '    DisConnectTimer.Start()
-        'Else
-        '    isFileNotChange = False
-        '    DisConnectTimer.Stop()
-        '    prevFile = currentFileModifyTime
-        'End If
-
         Try
             File.Copy(srcPath, _fileName, True)
             GetdataReceive()
@@ -107,25 +136,26 @@
             Dim TempArray() As String = Split(line, ",")
             Dim LineName = TempArray(0)
             Dim RemainValue As Integer = Int32.Parse(TempArray(1))
-            Dim PalletNo = TempArray(2)
+            Dim PalletNo As Integer
+            Int32.TryParse(TempArray(2),PalletNo)
 
             Dim tempPallet As CPart = TextPalletList.FirstOrDefault(Function(p) p.Name = LineName)
             If tempPallet Is Nothing Then 'neu chua co trong PalletList
                 Dim tempPart As CPart = ClonePart(PartList.FirstOrDefault(Function(p) p.Name = LineName))
                 'Dim tempPart As CPart = PartList.FirstOrDefault(Function(p) p.Name = LineName).ClonePart()
                 If tempPart Is Nothing Then 'neu khong co trong PartList reference thi warning
-                    Debug.Print("Don't have part " + LineName + " pallet: " + PalletNo)
+                    Debug.Print("Don't have part " + LineName + " pallet: " + PalletNo.ToString())
                 Else 'neu da co trong reference thi them moi vao PalletList
                     tempPart.RemainPallet = RemainValue
                     tempPart.PalletNo = PalletNo
                     tempPart.IsSetRemainValue = True
                     tempPart.parent = Me
                     TextPalletList.Add(tempPart)
-                    RaiseEvent PalletListChange
+                    RaiseEvent PalletListChange()
                     PalletList.Add(tempPart)
                 End If
             Else 'da co trong PalletList
-                Dim tempPallett As CPart = TextPalletList.FirstOrDefault(Function(p) p.PalletNo = PalletNo And p.Name = LineName)
+                Dim tempPallett As CPart = TextPalletList.FirstOrDefault(Function(p) p.PalletNo.ToString() = PalletNo And p.Name = LineName)
                 If tempPallett Is Nothing Then 'neu chua co Pallet No thi them moi Pallet No
                     Dim tempPart = ClonePart(PartList.FirstOrDefault(Function(p) p.Name = LineName))
                     'Dim tempPart = PartList.FirstOrDefault(Function(p) p.Name = LineName).ClonePart()
@@ -134,7 +164,7 @@
                     tempPart.IsSetRemainValue = True
                     tempPart.parent = Me
                     TextPalletList.Add(tempPart)
-                    RaiseEvent PalletListChange
+                    RaiseEvent PalletListChange()
                     PalletList.Add(tempPart)
                 Else 'Neu da co Pallet No --> cap nhat Remain value
                     TextPalletList.FirstOrDefault(Function(p) p.PalletNo = PalletNo And p.Name = LineName).RemainPallet = RemainValue
@@ -145,8 +175,8 @@
         TextPalletList.RemoveAll(Function(p) p.IsSetRemainValue = False)
         Dim count = PalletList.Count
         PalletList.RemoveAll(Function(p) p.IsSetRemainValue = False And p.TextSource = Me.Id)
-        If count <> PalletList.Count
-            RaiseEvent PalletListChange
+        If count <> PalletList.Count Then
+            RaiseEvent PalletListChange()
         End If
         TextPalletList.ForEach(Function(p) p.IsSetRemainValue = False)
         fStream.Close()

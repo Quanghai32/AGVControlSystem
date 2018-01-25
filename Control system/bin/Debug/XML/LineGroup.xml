@@ -2,10 +2,6 @@
 <DocumentElement>
   <LineGroup>
     <Id>0</Id>
-    <Name>PDC</Name>
-  </LineGroup>
-  <LineGroup>
-    <Id>1</Id>
-    <Name>LOG</Name>
+    <Name>0</Name>
   </LineGroup>
 </DocumentElement>

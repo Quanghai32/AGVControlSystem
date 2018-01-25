@@ -107,15 +107,32 @@ Module XmlReader
     End Sub
 
        Private Sub ReadPart()
+        '''''''''''*2_read status part was being suppling_''''''''''''''
+        Dim isExistsRecordFile As Boolean = False
+        Dim listRecordPart As List(Of String()) = New List(Of String())
+        listRecordPart.Clear()
+        Dim dtRecordPart As List(Of String) = New List(Of String)()
+        If File.Exists("Record_Part.txt") Then
+            isExistsRecordFile = True
+            dtRecordPart = File.ReadLines("Record_Part.txt").ToList()
+            For t As Integer = 0 To dtRecordPart.Count - 1
+                Dim arrayRecordPart = dtRecordPart(t).Split(",")
+                listRecordPart.Add(arrayRecordPart)
+            Next
+            File.Delete("Record_Part.txt")
+        Else
+            isExistsRecordFile = False
+        End If
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Dim myDataTable As DataTable = New DataTable
         Dim endDevicesTB As DataTable = New DataTable
-        'Dim dss As DataSet = New DataSet
         Dim ds As DataSet = New DataSet
+        Dim dss As DataSet = New DataSet
 
         ds.ReadXml(".\XML\Part.xml")
         myDataTable = ds.Tables(0)
-        ds.ReadXml(".\XML\EndDevices.xml")
-        endDevicesTB = ds.Tables(0)
+        dss.ReadXml(".\XML\EndDevices.xml")
+        endDevicesTB = dss.Tables(0)
         PartList = New List(Of CPart)
 
         Dim listIDEndDevices As List(Of Int16) = New List(Of Int16)
@@ -147,19 +164,73 @@ Module XmlReader
             part.Y = myDataTable.Rows(i)("y")
             part.EndDevice = myDataTable.Rows(i)("EndDevices")
 
+            ''''''''''''''''''''''''''''''_hien thi thu tu Part trong EndDevice_'''''''''''''''''''''''''
             For temp As Byte = 0 To listIDEndDevices.Count - 1
                 If part.EndDevice = listIDEndDevices(temp) Then
                     arrayIDEndDevices(temp) = arrayIDEndDevices(temp) + 1
                     part.NumberInEnd = arrayIDEndDevices(temp)
                 End If
             Next
-
+            '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
             If part.Text = False Then
+                ''''''''''''''*2_read status part was being suppling_''''''''''''''''''
+                If isExistsRecordFile = True Then
+                    Dim arrayPartRecord As String() = New String() {0, 0}
+                    Dim isPartInPartBefore As Boolean = False
+                    For temp As Integer = 0 To listRecordPart.Count - 1
+                        If part.Name = listRecordPart(temp)(0) Then
+                            arrayPartRecord(0) = listRecordPart(temp)(0)
+                            arrayPartRecord(1) = listRecordPart(temp)(1)
+                            isPartInPartBefore = True
+                            Exit For
+                        End If
+                    Next
+                    If isPartInPartBefore Then
+                        part.AGVSupply = arrayPartRecord(1)
+                        part.Status = False
+                        isPartInPartBefore = False
+                    Else
+                        part.AGVSupply = ""
+                    End If
+                Else
+                    part.AGVSupply = ""
+                End If
+                ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                 part.parent = EndDevicesArray(part.EndDevice)
                 EndDevicesArray(part.EndDevice).Parts.Add(part)
             Else
+                ''''''''''''''*2_read status part was being suppling_''''''''''''''''''
+                If isExistsRecordFile = True Then
+                    Dim indexListRecordPart As List(Of Integer) = New List(Of Integer)()
+                    For temp As Integer = 0 To listRecordPart.Count - 1
+                        If part.Name = listRecordPart(temp)(0) Then
+                            indexListRecordPart.Add(temp)
+                        End If
+                    Next
+                    If indexListRecordPart.Count > 0 Then
+                        part.AGVSupply = listRecordPart(indexListRecordPart(0))(1)
+                        part.PalletNo = listRecordPart(indexListRecordPart(0))(2)
+                        part.Status = False
+                        For tempp As Integer = 1 To indexListRecordPart.Count - 1
+                            Dim samePart As CPart = New CPart()
+                            samePart = ClonePart(part)
+                            samePart.AGVSupply = listRecordPart(indexListRecordPart(tempp))(1)
+                            samePart.PalletNo = listRecordPart(indexListRecordPart(tempp))(2)
+                            samePart.Status = False
+
+                            samePart.parent = TextList(part.TextSource)
+                            TextList(part.TextSource).TextPalletList.Add(samePart)
+                            PalletList.Add(samePart)
+                            TextList(part.TextSource).Init()
+                        Next
+                    End If
+                Else
+                    part.AGVSupply = ""
+                End If
+                ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                 part.parent = TextList(part.TextSource)
                 TextList(part.TextSource).TextPalletList.Add(part)
+                PalletList.Add(part)
                 TextList(part.TextSource).Init()
             End If
 

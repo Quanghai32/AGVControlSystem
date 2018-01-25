@@ -2,6 +2,10 @@
 <DocumentElement>
   <HostXbee>
     <Id>0</Id>
-    <Address>40D4B3BD</Address>
+    <Address>012</Address>
+  </HostXbee>
+  <HostXbee>
+    <Id>1</Id>
+    <Address>123</Address>
   </HostXbee>
 </DocumentElement>

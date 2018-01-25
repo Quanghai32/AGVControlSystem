@@ -68,19 +68,20 @@ Partial Class MainForm
         Me.DebugFormToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DisplayPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainStatus = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabelCheckLOGfile = New System.Windows.Forms.ToolStripStatusLabel()
         Me.imgAGVBig = New System.Windows.Forms.ImageList(Me.components)
         Me.MainTabControl = New System.Windows.Forms.TabControl()
         Me.TabMainForm = New System.Windows.Forms.TabPage()
         Me.SplitContainerOverView = New System.Windows.Forms.SplitContainer()
         Me.olvAGV = New BrightIdeasSoftware.ObjectListView()
-        Me.OlvColumnGroup = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnName = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPart = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnWorkingType = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPosition = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnStatus = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnConnecting = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnBattery = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnGroup = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPart = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnWorkingType = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPosition = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnStatus = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnConnecting = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnBattery = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
         Me.MenuLstViewAGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MenuAGVView = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuAGVViewSmallIcon = New System.Windows.Forms.ToolStripMenuItem()
@@ -91,14 +92,17 @@ Partial Class MainForm
         Me.MenuAGVEnable = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VitualAGVToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RunToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.olvPart = New BrightIdeasSoftware.ObjectListView()
-        Me.OlvColumnPartGroup = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPartName = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPartStatus = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPartConnecting = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPartEmptyTime = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPartAGVSupply = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
-        Me.OlvColumnPartPalletNo = CType(New BrightIdeasSoftware.OLVColumn(),BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartGroup = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartStatus = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartConnecting = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartEmptyTime = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumnPartAGVSupply = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+        Me.OlvColumn = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
         Me.MenuLstViewPart = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.MenuPartView = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPartViewSmallIcon = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,6 +114,7 @@ Partial Class MainForm
         Me.MenuPartEnable = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VitualPartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabChart = New System.Windows.Forms.TabPage()
         Me.panelDetail = New System.Windows.Forms.TableLayoutPanel()
         Me.LabelAgvDetail = New System.Windows.Forms.Label()
@@ -174,29 +179,30 @@ Partial Class MainForm
         Me.AndonTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TimerAndonMap = New System.Windows.Forms.Timer(Me.components)
         Me.RequestDataTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.MainMenu.SuspendLayout
-        Me.MainTabControl.SuspendLayout
-        Me.TabMainForm.SuspendLayout
-        CType(Me.SplitContainerOverView,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SplitContainerOverView.Panel1.SuspendLayout
-        Me.SplitContainerOverView.Panel2.SuspendLayout
-        Me.SplitContainerOverView.SuspendLayout
-        CType(Me.olvAGV,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.MenuLstViewAGV.SuspendLayout
-        CType(Me.olvPart,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.MenuLstViewPart.SuspendLayout
-        Me.TabChart.SuspendLayout
-        Me.panelDetail.SuspendLayout
-        CType(Me.agvChart,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabMap.SuspendLayout
-        Me.TableLayoutPanel1.SuspendLayout
-        Me.TablePanel_Header.SuspendLayout
-        Me.PanelAlarm.SuspendLayout
-        Me.Panel_Appendix.SuspendLayout
-        Me.Panel_Map.SuspendLayout
-        CType(Me.PictureBoxMap,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.ContextMenuMap.SuspendLayout
-        Me.SuspendLayout
+        Me.MainMenu.SuspendLayout()
+        Me.MainStatus.SuspendLayout()
+        Me.MainTabControl.SuspendLayout()
+        Me.TabMainForm.SuspendLayout()
+        CType(Me.SplitContainerOverView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainerOverView.Panel1.SuspendLayout()
+        Me.SplitContainerOverView.Panel2.SuspendLayout()
+        Me.SplitContainerOverView.SuspendLayout()
+        CType(Me.olvAGV, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuLstViewAGV.SuspendLayout()
+        CType(Me.olvPart, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuLstViewPart.SuspendLayout()
+        Me.TabChart.SuspendLayout()
+        Me.panelDetail.SuspendLayout()
+        CType(Me.agvChart, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabMap.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.TablePanel_Header.SuspendLayout()
+        Me.PanelAlarm.SuspendLayout()
+        Me.Panel_Appendix.SuspendLayout()
+        Me.Panel_Map.SuspendLayout()
+        CType(Me.PictureBoxMap, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenuMap.SuspendLayout()
+        Me.SuspendLayout()
         '
         'MainMenu
         '
@@ -205,7 +211,7 @@ Partial Class MainForm
         Me.MainMenu.Margin = New System.Windows.Forms.Padding(0, 0, 20, 0)
         Me.MainMenu.Name = "MainMenu"
         Me.MainMenu.Padding = New System.Windows.Forms.Padding(6, 2, 10, 2)
-        Me.MainMenu.Size = New System.Drawing.Size(979, 24)
+        Me.MainMenu.Size = New System.Drawing.Size(882, 24)
         Me.MainMenu.TabIndex = 0
         Me.MainMenu.Text = "MenuStrip1"
         '
@@ -218,19 +224,19 @@ Partial Class MainForm
         '
         'NewToolStripMenuItem
         '
-        Me.NewToolStripMenuItem.Image = CType(resources.GetObject("NewToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.NewToolStripMenuItem.Image = CType(resources.GetObject("NewToolStripMenuItem.Image"), System.Drawing.Image)
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N),System.Windows.Forms.Keys)
+        Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.NewToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
         '
-        Me.OpenToolStripMenuItem.Image = CType(resources.GetObject("OpenToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.OpenToolStripMenuItem.Image = CType(resources.GetObject("OpenToolStripMenuItem.Image"), System.Drawing.Image)
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O),System.Windows.Forms.Keys)
+        Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
         Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
@@ -241,10 +247,10 @@ Partial Class MainForm
         '
         'SaveToolStripMenuItem
         '
-        Me.SaveToolStripMenuItem.Image = CType(resources.GetObject("SaveToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.SaveToolStripMenuItem.Image = CType(resources.GetObject("SaveToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S),System.Windows.Forms.Keys)
+        Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
@@ -261,16 +267,16 @@ Partial Class MainForm
         '
         'PrintToolStripMenuItem
         '
-        Me.PrintToolStripMenuItem.Image = CType(resources.GetObject("PrintToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.PrintToolStripMenuItem.Image = CType(resources.GetObject("PrintToolStripMenuItem.Image"), System.Drawing.Image)
         Me.PrintToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
-        Me.PrintToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P),System.Windows.Forms.Keys)
+        Me.PrintToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.PrintToolStripMenuItem.Text = "&Print"
         '
         'PrintPreviewToolStripMenuItem
         '
-        Me.PrintPreviewToolStripMenuItem.Image = CType(resources.GetObject("PrintPreviewToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.PrintPreviewToolStripMenuItem.Image = CType(resources.GetObject("PrintPreviewToolStripMenuItem.Image"), System.Drawing.Image)
         Me.PrintPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.PrintPreviewToolStripMenuItem.Name = "PrintPreviewToolStripMenuItem"
         Me.PrintPreviewToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
@@ -297,14 +303,14 @@ Partial Class MainForm
         'UndoToolStripMenuItem
         '
         Me.UndoToolStripMenuItem.Name = "UndoToolStripMenuItem"
-        Me.UndoToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z),System.Windows.Forms.Keys)
+        Me.UndoToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
         Me.UndoToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.UndoToolStripMenuItem.Text = "&Undo"
         '
         'RedoToolStripMenuItem
         '
         Me.RedoToolStripMenuItem.Name = "RedoToolStripMenuItem"
-        Me.RedoToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y),System.Windows.Forms.Keys)
+        Me.RedoToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
         Me.RedoToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.RedoToolStripMenuItem.Text = "&Redo"
         '
@@ -315,28 +321,28 @@ Partial Class MainForm
         '
         'CutToolStripMenuItem
         '
-        Me.CutToolStripMenuItem.Image = CType(resources.GetObject("CutToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.CutToolStripMenuItem.Image = CType(resources.GetObject("CutToolStripMenuItem.Image"), System.Drawing.Image)
         Me.CutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X),System.Windows.Forms.Keys)
+        Me.CutToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
         Me.CutToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.CutToolStripMenuItem.Text = "Cu&t"
         '
         'CopyToolStripMenuItem
         '
-        Me.CopyToolStripMenuItem.Image = CType(resources.GetObject("CopyToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.CopyToolStripMenuItem.Image = CType(resources.GetObject("CopyToolStripMenuItem.Image"), System.Drawing.Image)
         Me.CopyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C),System.Windows.Forms.Keys)
+        Me.CopyToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
         Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.CopyToolStripMenuItem.Text = "&Copy"
         '
         'PasteToolStripMenuItem
         '
-        Me.PasteToolStripMenuItem.Image = CType(resources.GetObject("PasteToolStripMenuItem.Image"),System.Drawing.Image)
+        Me.PasteToolStripMenuItem.Image = CType(resources.GetObject("PasteToolStripMenuItem.Image"), System.Drawing.Image)
         Me.PasteToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V),System.Windows.Forms.Keys)
+        Me.PasteToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
         Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.PasteToolStripMenuItem.Text = "&Paste"
         '
@@ -374,14 +380,14 @@ Partial Class MainForm
         'ShowAllCardToolStripMenuItem
         '
         Me.ShowAllCardToolStripMenuItem.Name = "ShowAllCardToolStripMenuItem"
-        Me.ShowAllCardToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D1),System.Windows.Forms.Keys)
+        Me.ShowAllCardToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D1), System.Windows.Forms.Keys)
         Me.ShowAllCardToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
         Me.ShowAllCardToolStripMenuItem.Text = "Show Setting"
         '
         'ShowAllCardToolStripMenuItem1
         '
         Me.ShowAllCardToolStripMenuItem1.Name = "ShowAllCardToolStripMenuItem1"
-        Me.ShowAllCardToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D2),System.Windows.Forms.Keys)
+        Me.ShowAllCardToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D2), System.Windows.Forms.Keys)
         Me.ShowAllCardToolStripMenuItem1.Size = New System.Drawing.Size(192, 22)
         Me.ShowAllCardToolStripMenuItem1.Text = "Show all card"
         '
@@ -394,14 +400,14 @@ Partial Class MainForm
         'MainMenuSetting
         '
         Me.MainMenuSetting.Name = "MainMenuSetting"
-        Me.MainMenuSetting.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S),System.Windows.Forms.Keys)
+        Me.MainMenuSetting.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.MainMenuSetting.Size = New System.Drawing.Size(181, 22)
         Me.MainMenuSetting.Text = "Setting"
         '
         'DebugModeToolStripMenuItem
         '
         Me.DebugModeToolStripMenuItem.Name = "DebugModeToolStripMenuItem"
-        Me.DebugModeToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D),System.Windows.Forms.Keys)
+        Me.DebugModeToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
         Me.DebugModeToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.DebugModeToolStripMenuItem.Text = "Debug mode"
         '
@@ -427,7 +433,7 @@ Partial Class MainForm
         'SearchToolStripMenuItem
         '
         Me.SearchToolStripMenuItem.Name = "SearchToolStripMenuItem"
-        Me.SearchToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F),System.Windows.Forms.Keys)
+        Me.SearchToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.F), System.Windows.Forms.Keys)
         Me.SearchToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.SearchToolStripMenuItem.Text = "&Search"
         '
@@ -475,15 +481,21 @@ Partial Class MainForm
         '
         'MainStatus
         '
+        Me.MainStatus.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelCheckLOGfile})
         Me.MainStatus.Location = New System.Drawing.Point(0, 434)
         Me.MainStatus.Name = "MainStatus"
-        Me.MainStatus.Size = New System.Drawing.Size(979, 22)
+        Me.MainStatus.Size = New System.Drawing.Size(882, 22)
         Me.MainStatus.TabIndex = 1
         Me.MainStatus.Text = "StatusStrip1"
         '
+        'ToolStripStatusLabelCheckLOGfile
+        '
+        Me.ToolStripStatusLabelCheckLOGfile.Name = "ToolStripStatusLabelCheckLOGfile"
+        Me.ToolStripStatusLabelCheckLOGfile.Size = New System.Drawing.Size(0, 17)
+        '
         'imgAGVBig
         '
-        Me.imgAGVBig.ImageStream = CType(resources.GetObject("imgAGVBig.ImageStream"),System.Windows.Forms.ImageListStreamer)
+        Me.imgAGVBig.ImageStream = CType(resources.GetObject("imgAGVBig.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.imgAGVBig.TransparentColor = System.Drawing.Color.Transparent
         Me.imgAGVBig.Images.SetKeyName(0, "Disable.jpg")
         Me.imgAGVBig.Images.SetKeyName(1, "0-Connect.jpg")
@@ -513,7 +525,7 @@ Partial Class MainForm
         Me.MainTabControl.Location = New System.Drawing.Point(0, 24)
         Me.MainTabControl.Name = "MainTabControl"
         Me.MainTabControl.SelectedIndex = 0
-        Me.MainTabControl.Size = New System.Drawing.Size(979, 410)
+        Me.MainTabControl.Size = New System.Drawing.Size(882, 410)
         Me.MainTabControl.TabIndex = 2
         '
         'TabMainForm
@@ -522,10 +534,10 @@ Partial Class MainForm
         Me.TabMainForm.Location = New System.Drawing.Point(4, 22)
         Me.TabMainForm.Name = "TabMainForm"
         Me.TabMainForm.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabMainForm.Size = New System.Drawing.Size(971, 384)
+        Me.TabMainForm.Size = New System.Drawing.Size(874, 384)
         Me.TabMainForm.TabIndex = 0
         Me.TabMainForm.Text = "Overview"
-        Me.TabMainForm.UseVisualStyleBackColor = true
+        Me.TabMainForm.UseVisualStyleBackColor = True
         '
         'SplitContainerOverView
         '
@@ -540,8 +552,8 @@ Partial Class MainForm
         'SplitContainerOverView.Panel2
         '
         Me.SplitContainerOverView.Panel2.Controls.Add(Me.olvPart)
-        Me.SplitContainerOverView.Size = New System.Drawing.Size(965, 378)
-        Me.SplitContainerOverView.SplitterDistance = 472
+        Me.SplitContainerOverView.Size = New System.Drawing.Size(868, 378)
+        Me.SplitContainerOverView.SplitterDistance = 425
         Me.SplitContainerOverView.TabIndex = 0
         '
         'olvAGV
@@ -557,38 +569,38 @@ Partial Class MainForm
         Me.olvAGV.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnGroup, Me.OlvColumnName, Me.OlvColumnPart, Me.OlvColumnWorkingType, Me.OlvColumnPosition, Me.OlvColumnStatus, Me.OlvColumnConnecting, Me.OlvColumnBattery})
         Me.olvAGV.ContextMenuStrip = Me.MenuLstViewAGV
         Me.olvAGV.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.olvAGV.FullRowSelect = true
-        Me.olvAGV.GridLines = true
+        Me.olvAGV.FullRowSelect = True
+        Me.olvAGV.GridLines = True
         Me.olvAGV.Location = New System.Drawing.Point(0, 0)
         Me.olvAGV.Name = "olvAGV"
-        Me.olvAGV.Size = New System.Drawing.Size(472, 378)
+        Me.olvAGV.Size = New System.Drawing.Size(425, 378)
         Me.olvAGV.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.olvAGV.TabIndex = 7
         Me.olvAGV.TileSize = New System.Drawing.Size(300, 100)
-        Me.olvAGV.UseCompatibleStateImageBehavior = false
-        Me.olvAGV.UseTranslucentSelection = true
+        Me.olvAGV.UseCompatibleStateImageBehavior = False
+        Me.olvAGV.UseTranslucentSelection = True
         Me.olvAGV.View = System.Windows.Forms.View.Details
         '
         'OlvColumnGroup
         '
         Me.OlvColumnGroup.AspectName = "Group"
         Me.OlvColumnGroup.CellPadding = Nothing
-        Me.OlvColumnGroup.IsTileViewColumn = true
+        Me.OlvColumnGroup.IsTileViewColumn = True
         Me.OlvColumnGroup.Text = "Group"
         '
         'OlvColumnName
         '
         Me.OlvColumnName.AspectName = "Name"
         Me.OlvColumnName.CellPadding = Nothing
-        Me.OlvColumnName.Groupable = false
+        Me.OlvColumnName.Groupable = False
         Me.OlvColumnName.Text = "Name"
-        Me.OlvColumnName.UseFiltering = false
+        Me.OlvColumnName.UseFiltering = False
         '
         'OlvColumnPart
         '
         Me.OlvColumnPart.AspectName = "SupplyPartStatus"
         Me.OlvColumnPart.CellPadding = Nothing
-        Me.OlvColumnPart.IsTileViewColumn = true
+        Me.OlvColumnPart.IsTileViewColumn = True
         Me.OlvColumnPart.Text = "Part supply"
         '
         'OlvColumnWorkingType
@@ -607,7 +619,7 @@ Partial Class MainForm
         '
         Me.OlvColumnStatus.AspectName = "Status"
         Me.OlvColumnStatus.CellPadding = Nothing
-        Me.OlvColumnStatus.IsTileViewColumn = true
+        Me.OlvColumnStatus.IsTileViewColumn = True
         Me.OlvColumnStatus.Text = "Status"
         '
         'OlvColumnConnecting
@@ -624,9 +636,9 @@ Partial Class MainForm
         '
         'MenuLstViewAGV
         '
-        Me.MenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuAGVView, Me.MenuAGVConfirmConn, Me.MenuAGVEnable, Me.LoadDataToolStripMenuItem, Me.VitualAGVToolStripMenuItem})
+        Me.MenuLstViewAGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuAGVView, Me.MenuAGVConfirmConn, Me.MenuAGVEnable, Me.LoadDataToolStripMenuItem, Me.VitualAGVToolStripMenuItem, Me.TestToolStripMenuItem})
         Me.MenuLstViewAGV.Name = "ContextMenuStrip1"
-        Me.MenuLstViewAGV.Size = New System.Drawing.Size(182, 114)
+        Me.MenuLstViewAGV.Size = New System.Drawing.Size(182, 136)
         '
         'MenuAGVView
         '
@@ -684,6 +696,25 @@ Partial Class MainForm
         Me.VitualAGVToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.VitualAGVToolStripMenuItem.Text = "Vitual AGV"
         '
+        'TestToolStripMenuItem
+        '
+        Me.TestToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunToolStripMenuItem, Me.StopToolStripMenuItem})
+        Me.TestToolStripMenuItem.Name = "TestToolStripMenuItem"
+        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.TestToolStripMenuItem.Text = "Test"
+        '
+        'RunToolStripMenuItem
+        '
+        Me.RunToolStripMenuItem.Name = "RunToolStripMenuItem"
+        Me.RunToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.RunToolStripMenuItem.Text = "Run"
+        '
+        'StopToolStripMenuItem
+        '
+        Me.StopToolStripMenuItem.Name = "StopToolStripMenuItem"
+        Me.StopToolStripMenuItem.Size = New System.Drawing.Size(98, 22)
+        Me.StopToolStripMenuItem.Text = "Stop"
+        '
         'olvPart
         '
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartGroup)
@@ -692,37 +723,37 @@ Partial Class MainForm
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartConnecting)
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartEmptyTime)
         Me.olvPart.AllColumns.Add(Me.OlvColumnPartAGVSupply)
-        Me.olvPart.AllColumns.Add(Me.OlvColumnPartPalletNo)
-        Me.olvPart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnPartGroup, Me.OlvColumnPartName, Me.OlvColumnPartStatus, Me.OlvColumnPartConnecting, Me.OlvColumnPartEmptyTime, Me.OlvColumnPartAGVSupply, Me.OlvColumnPartPalletNo})
+        Me.olvPart.AllColumns.Add(Me.OlvColumn)
+        Me.olvPart.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumnPartGroup, Me.OlvColumnPartName, Me.OlvColumnPartStatus, Me.OlvColumnPartConnecting, Me.OlvColumnPartEmptyTime, Me.OlvColumnPartAGVSupply, Me.OlvColumn})
         Me.olvPart.ContextMenuStrip = Me.MenuLstViewPart
         Me.olvPart.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.olvPart.FullRowSelect = true
-        Me.olvPart.GridLines = true
-        Me.olvPart.HeaderUsesThemes = false
+        Me.olvPart.FullRowSelect = True
+        Me.olvPart.GridLines = True
+        Me.olvPart.HeaderUsesThemes = False
         Me.olvPart.Location = New System.Drawing.Point(0, 0)
         Me.olvPart.Name = "olvPart"
-        Me.olvPart.SelectedColumnTint = System.Drawing.Color.FromArgb(CType(CType(15,Byte),Integer), CType(CType(192,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(0,Byte),Integer))
-        Me.olvPart.Size = New System.Drawing.Size(489, 378)
+        Me.olvPart.SelectedColumnTint = System.Drawing.Color.FromArgb(CType(CType(15, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.olvPart.Size = New System.Drawing.Size(439, 378)
         Me.olvPart.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.olvPart.TabIndex = 8
         Me.olvPart.TileSize = New System.Drawing.Size(230, 100)
-        Me.olvPart.TintSortColumn = true
-        Me.olvPart.UseCompatibleStateImageBehavior = false
-        Me.olvPart.UseTranslucentSelection = true
+        Me.olvPart.TintSortColumn = True
+        Me.olvPart.UseCompatibleStateImageBehavior = False
+        Me.olvPart.UseTranslucentSelection = True
         Me.olvPart.View = System.Windows.Forms.View.Details
         '
         'OlvColumnPartGroup
         '
         Me.OlvColumnPartGroup.AspectName = "group"
         Me.OlvColumnPartGroup.CellPadding = Nothing
-        Me.OlvColumnPartGroup.IsTileViewColumn = true
+        Me.OlvColumnPartGroup.IsTileViewColumn = True
         Me.OlvColumnPartGroup.Text = "Line"
         '
         'OlvColumnPartName
         '
         Me.OlvColumnPartName.AspectName = "Name"
         Me.OlvColumnPartName.CellPadding = Nothing
-        Me.OlvColumnPartName.CheckBoxes = true
+        Me.OlvColumnPartName.CheckBoxes = True
         Me.OlvColumnPartName.Text = "Name"
         '
         'OlvColumnPartStatus
@@ -750,18 +781,17 @@ Partial Class MainForm
         Me.OlvColumnPartAGVSupply.CellPadding = Nothing
         Me.OlvColumnPartAGVSupply.Text = "AGV Supply"
         '
-        'OlvColumnPartPalletNo
+        'OlvColumn
         '
-        Me.OlvColumnPartPalletNo.AspectName = "PalletNo"
-        Me.OlvColumnPartPalletNo.CellPadding = Nothing
-        Me.OlvColumnPartPalletNo.Text = "Pallet no"
+        Me.OlvColumn.AspectName = "PalletNo"
+        Me.OlvColumn.CellPadding = Nothing
         '
         'MenuLstViewPart
         '
-        Me.MenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuPartView, Me.MenuPartConfirmConn, Me.MenuPartEnable, Me.LoadPartToolStripMenuItem, Me.VitualPartToolStripMenuItem})
+        Me.MenuLstViewPart.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuPartView, Me.MenuPartConfirmConn, Me.MenuPartEnable, Me.LoadPartToolStripMenuItem, Me.VitualPartToolStripMenuItem, Me.EditToolStripMenuItem1})
         Me.MenuLstViewPart.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.MenuLstViewPart.Name = "contMenuListViewPart"
-        Me.MenuLstViewPart.Size = New System.Drawing.Size(182, 114)
+        Me.MenuLstViewPart.Size = New System.Drawing.Size(182, 136)
         '
         'MenuPartView
         '
@@ -825,6 +855,12 @@ Partial Class MainForm
         Me.VitualPartToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.VitualPartToolStripMenuItem.Text = "Vitual part"
         '
+        'EditToolStripMenuItem1
+        '
+        Me.EditToolStripMenuItem1.Name = "EditToolStripMenuItem1"
+        Me.EditToolStripMenuItem1.Size = New System.Drawing.Size(181, 22)
+        Me.EditToolStripMenuItem1.Text = "Edit"
+        '
         'TabChart
         '
         Me.TabChart.Controls.Add(Me.panelDetail)
@@ -835,15 +871,15 @@ Partial Class MainForm
         Me.TabChart.Size = New System.Drawing.Size(874, 384)
         Me.TabChart.TabIndex = 1
         Me.TabChart.Text = "AGV performent"
-        Me.TabChart.UseVisualStyleBackColor = true
+        Me.TabChart.UseVisualStyleBackColor = True
         '
         'panelDetail
         '
-        Me.panelDetail.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.panelDetail.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panelDetail.BackColor = System.Drawing.Color.LightGray
         Me.panelDetail.ColumnCount = 2
-        Me.panelDetail.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50!))
-        Me.panelDetail.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67!))
+        Me.panelDetail.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.panelDetail.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67.0!))
         Me.panelDetail.Controls.Add(Me.LabelAgvDetail, 0, 0)
         Me.panelDetail.Controls.Add(Me.Label2, 0, 1)
         Me.panelDetail.Controls.Add(Me.Label3, 0, 2)
@@ -871,26 +907,26 @@ Partial Class MainForm
         Me.panelDetail.Location = New System.Drawing.Point(579, 138)
         Me.panelDetail.Name = "panelDetail"
         Me.panelDetail.RowCount = 14
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.panelDetail.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.panelDetail.Size = New System.Drawing.Size(137, 243)
         Me.panelDetail.TabIndex = 1
         '
         'LabelAgvDetail
         '
-        Me.LabelAgvDetail.AutoSize = true
+        Me.LabelAgvDetail.AutoSize = True
         Me.LabelAgvDetail.Location = New System.Drawing.Point(3, 0)
         Me.LabelAgvDetail.Name = "LabelAgvDetail"
         Me.LabelAgvDetail.Size = New System.Drawing.Size(0, 13)
@@ -898,7 +934,7 @@ Partial Class MainForm
         '
         'Label2
         '
-        Me.Label2.AutoSize = true
+        Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(3, 20)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
@@ -907,7 +943,7 @@ Partial Class MainForm
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(3, 40)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(61, 13)
@@ -916,7 +952,7 @@ Partial Class MainForm
         '
         'Label4
         '
-        Me.Label4.AutoSize = true
+        Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(3, 60)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(40, 13)
@@ -925,7 +961,7 @@ Partial Class MainForm
         '
         'Label5
         '
-        Me.Label5.AutoSize = true
+        Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(3, 80)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(29, 13)
@@ -934,7 +970,7 @@ Partial Class MainForm
         '
         'Label6
         '
-        Me.Label6.AutoSize = true
+        Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(3, 100)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(28, 13)
@@ -943,7 +979,7 @@ Partial Class MainForm
         '
         'Label7
         '
-        Me.Label7.AutoSize = true
+        Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(3, 120)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(37, 13)
@@ -952,7 +988,7 @@ Partial Class MainForm
         '
         'Label8
         '
-        Me.Label8.AutoSize = true
+        Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(3, 140)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(31, 13)
@@ -961,7 +997,7 @@ Partial Class MainForm
         '
         'Label9
         '
-        Me.Label9.AutoSize = true
+        Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(3, 160)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(42, 13)
@@ -970,7 +1006,7 @@ Partial Class MainForm
         '
         'Label10
         '
-        Me.Label10.AutoSize = true
+        Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(3, 180)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(59, 13)
@@ -979,7 +1015,7 @@ Partial Class MainForm
         '
         'Label11
         '
-        Me.Label11.AutoSize = true
+        Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(3, 200)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(52, 13)
@@ -988,7 +1024,7 @@ Partial Class MainForm
         '
         'Label12
         '
-        Me.Label12.AutoSize = true
+        Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(3, 220)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(43, 13)
@@ -997,7 +1033,7 @@ Partial Class MainForm
         '
         'LabelTotal
         '
-        Me.LabelTotal.AutoSize = true
+        Me.LabelTotal.AutoSize = True
         Me.LabelTotal.Location = New System.Drawing.Point(73, 0)
         Me.LabelTotal.Name = "LabelTotal"
         Me.LabelTotal.Size = New System.Drawing.Size(27, 13)
@@ -1006,7 +1042,7 @@ Partial Class MainForm
         '
         'LabelShutdown
         '
-        Me.LabelShutdown.AutoSize = true
+        Me.LabelShutdown.AutoSize = True
         Me.LabelShutdown.Location = New System.Drawing.Point(73, 20)
         Me.LabelShutdown.Name = "LabelShutdown"
         Me.LabelShutdown.Size = New System.Drawing.Size(53, 13)
@@ -1015,7 +1051,7 @@ Partial Class MainForm
         '
         'LabelDisconnect
         '
-        Me.LabelDisconnect.AutoSize = true
+        Me.LabelDisconnect.AutoSize = True
         Me.LabelDisconnect.Location = New System.Drawing.Point(73, 40)
         Me.LabelDisconnect.Name = "LabelDisconnect"
         Me.LabelDisconnect.Size = New System.Drawing.Size(59, 13)
@@ -1024,7 +1060,7 @@ Partial Class MainForm
         '
         'LabelNormal
         '
-        Me.LabelNormal.AutoSize = true
+        Me.LabelNormal.AutoSize = True
         Me.LabelNormal.Location = New System.Drawing.Point(73, 60)
         Me.LabelNormal.Name = "LabelNormal"
         Me.LabelNormal.Size = New System.Drawing.Size(38, 13)
@@ -1033,7 +1069,7 @@ Partial Class MainForm
         '
         'LabelStop
         '
-        Me.LabelStop.AutoSize = true
+        Me.LabelStop.AutoSize = True
         Me.LabelStop.Location = New System.Drawing.Point(73, 80)
         Me.LabelStop.Name = "LabelStop"
         Me.LabelStop.Size = New System.Drawing.Size(27, 13)
@@ -1042,7 +1078,7 @@ Partial Class MainForm
         '
         'LabelFree
         '
-        Me.LabelFree.AutoSize = true
+        Me.LabelFree.AutoSize = True
         Me.LabelFree.Location = New System.Drawing.Point(73, 100)
         Me.LabelFree.Name = "LabelFree"
         Me.LabelFree.Size = New System.Drawing.Size(25, 13)
@@ -1051,7 +1087,7 @@ Partial Class MainForm
         '
         'LabelSafety
         '
-        Me.LabelSafety.AutoSize = true
+        Me.LabelSafety.AutoSize = True
         Me.LabelSafety.Location = New System.Drawing.Point(73, 120)
         Me.LabelSafety.Name = "LabelSafety"
         Me.LabelSafety.Size = New System.Drawing.Size(35, 13)
@@ -1060,7 +1096,7 @@ Partial Class MainForm
         '
         'LabelEMG
         '
-        Me.LabelEMG.AutoSize = true
+        Me.LabelEMG.AutoSize = True
         Me.LabelEMG.Location = New System.Drawing.Point(73, 140)
         Me.LabelEMG.Name = "LabelEMG"
         Me.LabelEMG.Size = New System.Drawing.Size(27, 13)
@@ -1069,7 +1105,7 @@ Partial Class MainForm
         '
         'LabelNoCart
         '
-        Me.LabelNoCart.AutoSize = true
+        Me.LabelNoCart.AutoSize = True
         Me.LabelNoCart.Location = New System.Drawing.Point(73, 160)
         Me.LabelNoCart.Name = "LabelNoCart"
         Me.LabelNoCart.Size = New System.Drawing.Size(40, 13)
@@ -1078,7 +1114,7 @@ Partial Class MainForm
         '
         'LabelBatteryLow
         '
-        Me.LabelBatteryLow.AutoSize = true
+        Me.LabelBatteryLow.AutoSize = True
         Me.LabelBatteryLow.Location = New System.Drawing.Point(73, 180)
         Me.LabelBatteryLow.Name = "LabelBatteryLow"
         Me.LabelBatteryLow.Size = New System.Drawing.Size(39, 13)
@@ -1087,7 +1123,7 @@ Partial Class MainForm
         '
         'LabelPoleErr
         '
-        Me.LabelPoleErr.AutoSize = true
+        Me.LabelPoleErr.AutoSize = True
         Me.LabelPoleErr.Location = New System.Drawing.Point(73, 200)
         Me.LabelPoleErr.Name = "LabelPoleErr"
         Me.LabelPoleErr.Size = New System.Drawing.Size(27, 13)
@@ -1096,7 +1132,7 @@ Partial Class MainForm
         '
         'LabelOutLine
         '
-        Me.LabelOutLine.AutoSize = true
+        Me.LabelOutLine.AutoSize = True
         Me.LabelOutLine.Location = New System.Drawing.Point(73, 220)
         Me.LabelOutLine.Name = "LabelOutLine"
         Me.LabelOutLine.Size = New System.Drawing.Size(41, 13)
@@ -1108,8 +1144,8 @@ Partial Class MainForm
         ChartArea1.Name = "ChartArea1"
         Me.agvChart.ChartAreas.Add(ChartArea1)
         Me.agvChart.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Font = New System.Drawing.Font("Cambria", 20!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Legend1.IsTextAutoFit = false
+        Legend1.Font = New System.Drawing.Font("Cambria", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Legend1.IsTextAutoFit = False
         Legend1.Name = "Legend1"
         Me.agvChart.Legends.Add(Legend1)
         Me.agvChart.Location = New System.Drawing.Point(3, 3)
@@ -1117,7 +1153,7 @@ Partial Class MainForm
         Me.agvChart.Size = New System.Drawing.Size(868, 378)
         Me.agvChart.TabIndex = 0
         Me.agvChart.Text = "ChartPerformance"
-        Title1.Font = New System.Drawing.Font("Cambria", 36!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Title1.Font = New System.Drawing.Font("Cambria", 36.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Title1.ForeColor = System.Drawing.Color.Maroon
         Title1.Name = "Title1"
         Title1.ShadowOffset = 3
@@ -1134,19 +1170,19 @@ Partial Class MainForm
         Me.TabMap.Size = New System.Drawing.Size(874, 384)
         Me.TabMap.TabIndex = 2
         Me.TabMap.Text = "Map"
-        Me.TabMap.UseVisualStyleBackColor = true
+        Me.TabMap.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.TablePanel_Header, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel_Map, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(868, 378)
         Me.TableLayoutPanel1.TabIndex = 0
@@ -1156,8 +1192,8 @@ Partial Class MainForm
         Me.TablePanel_Header.ColumnCount = 4
         Me.TablePanel_Header.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.9781!))
         Me.TablePanel_Header.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 81.0219!))
-        Me.TablePanel_Header.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 796!))
-        Me.TablePanel_Header.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 558!))
+        Me.TablePanel_Header.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 796.0!))
+        Me.TablePanel_Header.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 558.0!))
         Me.TablePanel_Header.Controls.Add(Me.ButtonFindAGV, 0, 0)
         Me.TablePanel_Header.Controls.Add(Me.PanelAlarm, 1, 0)
         Me.TablePanel_Header.Controls.Add(Me.labelMapName, 2, 0)
@@ -1166,8 +1202,8 @@ Partial Class MainForm
         Me.TablePanel_Header.Location = New System.Drawing.Point(3, 3)
         Me.TablePanel_Header.Name = "TablePanel_Header"
         Me.TablePanel_Header.RowCount = 1
-        Me.TablePanel_Header.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
-        Me.TablePanel_Header.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50!))
+        Me.TablePanel_Header.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TablePanel_Header.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TablePanel_Header.Size = New System.Drawing.Size(862, 74)
         Me.TablePanel_Header.TabIndex = 19
         '
@@ -1179,7 +1215,7 @@ Partial Class MainForm
         Me.ButtonFindAGV.Size = New System.Drawing.Size(1, 68)
         Me.ButtonFindAGV.TabIndex = 16
         Me.ButtonFindAGV.Text = "Find AGV"
-        Me.ButtonFindAGV.UseVisualStyleBackColor = true
+        Me.ButtonFindAGV.UseVisualStyleBackColor = True
         '
         'PanelAlarm
         '
@@ -1193,7 +1229,7 @@ Partial Class MainForm
         '
         'LabelAlarm
         '
-        Me.LabelAlarm.AutoSize = true
+        Me.LabelAlarm.AutoSize = True
         Me.LabelAlarm.ImageAlign = System.Drawing.ContentAlignment.TopLeft
         Me.LabelAlarm.Location = New System.Drawing.Point(4, -14)
         Me.LabelAlarm.Name = "LabelAlarm"
@@ -1203,9 +1239,9 @@ Partial Class MainForm
         '
         'labelMapName
         '
-        Me.labelMapName.AutoSize = true
+        Me.labelMapName.AutoSize = True
         Me.labelMapName.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.labelMapName.Font = New System.Drawing.Font("Constantia", 36!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.labelMapName.Font = New System.Drawing.Font("Constantia", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.labelMapName.ForeColor = System.Drawing.Color.Red
         Me.labelMapName.Location = New System.Drawing.Point(-488, 0)
         Me.labelMapName.Name = "labelMapName"
@@ -1217,10 +1253,10 @@ Partial Class MainForm
         'Panel_Appendix
         '
         Me.Panel_Appendix.ColumnCount = 4
-        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10!))
-        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40!))
-        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10!))
-        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40!))
+        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.Panel_Appendix.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
         Me.Panel_Appendix.Controls.Add(Me.Label_YellowDetail, 3, 2)
         Me.Panel_Appendix.Controls.Add(Me.Label_Green, 0, 0)
         Me.Panel_Appendix.Controls.Add(Me.Label_VioletDetail, 3, 1)
@@ -1245,9 +1281,9 @@ Partial Class MainForm
         '
         'Label_YellowDetail
         '
-        Me.Label_YellowDetail.AutoSize = true
+        Me.Label_YellowDetail.AutoSize = True
         Me.Label_YellowDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_YellowDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_YellowDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_YellowDetail.Location = New System.Drawing.Point(333, 46)
         Me.Label_YellowDetail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_YellowDetail.Name = "Label_YellowDetail"
@@ -1257,10 +1293,10 @@ Partial Class MainForm
         '
         'Label_Green
         '
-        Me.Label_Green.AutoSize = true
+        Me.Label_Green.AutoSize = True
         Me.Label_Green.BackColor = System.Drawing.Color.GreenYellow
         Me.Label_Green.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_Green.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_Green.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_Green.Location = New System.Drawing.Point(3, 2)
         Me.Label_Green.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_Green.Name = "Label_Green"
@@ -1270,9 +1306,9 @@ Partial Class MainForm
         '
         'Label_VioletDetail
         '
-        Me.Label_VioletDetail.AutoSize = true
+        Me.Label_VioletDetail.AutoSize = True
         Me.Label_VioletDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_VioletDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_VioletDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_VioletDetail.Location = New System.Drawing.Point(333, 24)
         Me.Label_VioletDetail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_VioletDetail.Name = "Label_VioletDetail"
@@ -1282,10 +1318,10 @@ Partial Class MainForm
         '
         'Label_Gray
         '
-        Me.Label_Gray.AutoSize = true
+        Me.Label_Gray.AutoSize = True
         Me.Label_Gray.BackColor = System.Drawing.Color.Gray
         Me.Label_Gray.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_Gray.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_Gray.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_Gray.Location = New System.Drawing.Point(3, 24)
         Me.Label_Gray.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_Gray.Name = "Label_Gray"
@@ -1295,9 +1331,9 @@ Partial Class MainForm
         '
         'Label_RedDetail
         '
-        Me.Label_RedDetail.AutoSize = true
+        Me.Label_RedDetail.AutoSize = True
         Me.Label_RedDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_RedDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_RedDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_RedDetail.Location = New System.Drawing.Point(333, 2)
         Me.Label_RedDetail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_RedDetail.Name = "Label_RedDetail"
@@ -1307,10 +1343,10 @@ Partial Class MainForm
         '
         'Label_Violet
         '
-        Me.Label_Violet.AutoSize = true
+        Me.Label_Violet.AutoSize = True
         Me.Label_Violet.BackColor = System.Drawing.Color.Violet
         Me.Label_Violet.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_Violet.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_Violet.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_Violet.Location = New System.Drawing.Point(278, 24)
         Me.Label_Violet.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_Violet.Name = "Label_Violet"
@@ -1320,10 +1356,10 @@ Partial Class MainForm
         '
         'Label_Yellow
         '
-        Me.Label_Yellow.AutoSize = true
+        Me.Label_Yellow.AutoSize = True
         Me.Label_Yellow.BackColor = System.Drawing.Color.Yellow
         Me.Label_Yellow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_Yellow.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_Yellow.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_Yellow.Location = New System.Drawing.Point(278, 46)
         Me.Label_Yellow.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_Yellow.Name = "Label_Yellow"
@@ -1333,9 +1369,9 @@ Partial Class MainForm
         '
         'Label_GreenDetail
         '
-        Me.Label_GreenDetail.AutoSize = true
+        Me.Label_GreenDetail.AutoSize = True
         Me.Label_GreenDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_GreenDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_GreenDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_GreenDetail.Location = New System.Drawing.Point(58, 2)
         Me.Label_GreenDetail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_GreenDetail.Name = "Label_GreenDetail"
@@ -1345,10 +1381,10 @@ Partial Class MainForm
         '
         'Label_Aqua
         '
-        Me.Label_Aqua.AutoSize = true
+        Me.Label_Aqua.AutoSize = True
         Me.Label_Aqua.BackColor = System.Drawing.Color.Cyan
         Me.Label_Aqua.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_Aqua.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_Aqua.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_Aqua.Location = New System.Drawing.Point(3, 46)
         Me.Label_Aqua.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_Aqua.Name = "Label_Aqua"
@@ -1358,9 +1394,9 @@ Partial Class MainForm
         '
         'Label_GrayDetail
         '
-        Me.Label_GrayDetail.AutoSize = true
+        Me.Label_GrayDetail.AutoSize = True
         Me.Label_GrayDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_GrayDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_GrayDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_GrayDetail.Location = New System.Drawing.Point(58, 24)
         Me.Label_GrayDetail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_GrayDetail.Name = "Label_GrayDetail"
@@ -1370,10 +1406,10 @@ Partial Class MainForm
         '
         'Label_Red
         '
-        Me.Label_Red.AutoSize = true
+        Me.Label_Red.AutoSize = True
         Me.Label_Red.BackColor = System.Drawing.Color.Red
         Me.Label_Red.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_Red.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_Red.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_Red.Location = New System.Drawing.Point(278, 2)
         Me.Label_Red.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_Red.Name = "Label_Red"
@@ -1383,9 +1419,9 @@ Partial Class MainForm
         '
         'Label_AquaDetail
         '
-        Me.Label_AquaDetail.AutoSize = true
+        Me.Label_AquaDetail.AutoSize = True
         Me.Label_AquaDetail.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label_AquaDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label_AquaDetail.Font = New System.Drawing.Font("Times New Roman", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label_AquaDetail.Location = New System.Drawing.Point(58, 46)
         Me.Label_AquaDetail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Label_AquaDetail.Name = "Label_AquaDetail"
@@ -1406,13 +1442,13 @@ Partial Class MainForm
         '
         'LabelCardNotExit
         '
-        Me.LabelCardNotExit.AutoSize = true
+        Me.LabelCardNotExit.AutoSize = True
         Me.LabelCardNotExit.Location = New System.Drawing.Point(4, 652)
         Me.LabelCardNotExit.Name = "LabelCardNotExit"
         Me.LabelCardNotExit.Size = New System.Drawing.Size(46, 13)
         Me.LabelCardNotExit.TabIndex = 1
         Me.LabelCardNotExit.Text = "No Card"
-        Me.LabelCardNotExit.Visible = false
+        Me.LabelCardNotExit.Visible = False
         '
         'PictureBoxMap
         '
@@ -1422,8 +1458,8 @@ Partial Class MainForm
         Me.PictureBoxMap.Name = "PictureBoxMap"
         Me.PictureBoxMap.Size = New System.Drawing.Size(860, 479)
         Me.PictureBoxMap.TabIndex = 0
-        Me.PictureBoxMap.TabStop = false
-        Me.PictureBoxMap.Visible = false
+        Me.PictureBoxMap.TabStop = False
+        Me.PictureBoxMap.Visible = False
         '
         'ContextMenuMap
         '
@@ -1450,11 +1486,11 @@ Partial Class MainForm
         Me.TabLog.Size = New System.Drawing.Size(874, 384)
         Me.TabLog.TabIndex = 3
         Me.TabLog.Text = "History"
-        Me.TabLog.UseVisualStyleBackColor = true
+        Me.TabLog.UseVisualStyleBackColor = True
         '
         'imgPartBig
         '
-        Me.imgPartBig.ImageStream = CType(resources.GetObject("imgPartBig.ImageStream"),System.Windows.Forms.ImageListStreamer)
+        Me.imgPartBig.ImageStream = CType(resources.GetObject("imgPartBig.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.imgPartBig.TransparentColor = System.Drawing.Color.Transparent
         Me.imgPartBig.Images.SetKeyName(0, "Disable.jpg")
         Me.imgPartBig.Images.SetKeyName(1, "0-Connect.jpg")
@@ -1466,7 +1502,7 @@ Partial Class MainForm
         '
         'imgPartSmall
         '
-        Me.imgPartSmall.ImageStream = CType(resources.GetObject("imgPartSmall.ImageStream"),System.Windows.Forms.ImageListStreamer)
+        Me.imgPartSmall.ImageStream = CType(resources.GetObject("imgPartSmall.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.imgPartSmall.TransparentColor = System.Drawing.Color.Transparent
         Me.imgPartSmall.Images.SetKeyName(0, "Disable.jpg")
         Me.imgPartSmall.Images.SetKeyName(1, "0-Connect.jpg")
@@ -1478,7 +1514,7 @@ Partial Class MainForm
         '
         'imgAGVSmall
         '
-        Me.imgAGVSmall.ImageStream = CType(resources.GetObject("imgAGVSmall.ImageStream"),System.Windows.Forms.ImageListStreamer)
+        Me.imgAGVSmall.ImageStream = CType(resources.GetObject("imgAGVSmall.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.imgAGVSmall.TransparentColor = System.Drawing.Color.Transparent
         Me.imgAGVSmall.Images.SetKeyName(0, "Disable.jpg")
         Me.imgAGVSmall.Images.SetKeyName(1, "0-Connect.jpg")
@@ -1528,49 +1564,51 @@ Partial Class MainForm
         '
         'MainForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(979, 456)
+        Me.ClientSize = New System.Drawing.Size(882, 456)
         Me.Controls.Add(Me.MainTabControl)
         Me.Controls.Add(Me.MainStatus)
         Me.Controls.Add(Me.MainMenu)
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MainMenu
         Me.Name = "MainForm"
         Me.Text = "AGV Control System"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.MainMenu.ResumeLayout(false)
-        Me.MainMenu.PerformLayout
-        Me.MainTabControl.ResumeLayout(false)
-        Me.TabMainForm.ResumeLayout(false)
-        Me.SplitContainerOverView.Panel1.ResumeLayout(false)
-        Me.SplitContainerOverView.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainerOverView,System.ComponentModel.ISupportInitialize).EndInit
-        Me.SplitContainerOverView.ResumeLayout(false)
-        CType(Me.olvAGV,System.ComponentModel.ISupportInitialize).EndInit
-        Me.MenuLstViewAGV.ResumeLayout(false)
-        CType(Me.olvPart,System.ComponentModel.ISupportInitialize).EndInit
-        Me.MenuLstViewPart.ResumeLayout(false)
-        Me.TabChart.ResumeLayout(false)
-        Me.panelDetail.ResumeLayout(false)
-        Me.panelDetail.PerformLayout
-        CType(Me.agvChart,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabMap.ResumeLayout(false)
-        Me.TableLayoutPanel1.ResumeLayout(false)
-        Me.TablePanel_Header.ResumeLayout(false)
-        Me.TablePanel_Header.PerformLayout
-        Me.PanelAlarm.ResumeLayout(false)
-        Me.PanelAlarm.PerformLayout
-        Me.Panel_Appendix.ResumeLayout(false)
-        Me.Panel_Appendix.PerformLayout
-        Me.Panel_Map.ResumeLayout(false)
-        Me.Panel_Map.PerformLayout
-        CType(Me.PictureBoxMap,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ContextMenuMap.ResumeLayout(false)
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.MainMenu.ResumeLayout(False)
+        Me.MainMenu.PerformLayout()
+        Me.MainStatus.ResumeLayout(False)
+        Me.MainStatus.PerformLayout()
+        Me.MainTabControl.ResumeLayout(False)
+        Me.TabMainForm.ResumeLayout(False)
+        Me.SplitContainerOverView.Panel1.ResumeLayout(False)
+        Me.SplitContainerOverView.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainerOverView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainerOverView.ResumeLayout(False)
+        CType(Me.olvAGV, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuLstViewAGV.ResumeLayout(False)
+        CType(Me.olvPart, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuLstViewPart.ResumeLayout(False)
+        Me.TabChart.ResumeLayout(False)
+        Me.panelDetail.ResumeLayout(False)
+        Me.panelDetail.PerformLayout()
+        CType(Me.agvChart, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabMap.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TablePanel_Header.ResumeLayout(False)
+        Me.TablePanel_Header.PerformLayout()
+        Me.PanelAlarm.ResumeLayout(False)
+        Me.PanelAlarm.PerformLayout()
+        Me.Panel_Appendix.ResumeLayout(False)
+        Me.Panel_Appendix.PerformLayout()
+        Me.Panel_Map.ResumeLayout(False)
+        Me.Panel_Map.PerformLayout()
+        CType(Me.PictureBoxMap, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuMap.ResumeLayout(False)
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
     Friend WithEvents MainMenu As System.Windows.Forms.MenuStrip
     Friend WithEvents MainStatus As System.Windows.Forms.StatusStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1717,5 +1755,10 @@ End Sub
     Friend WithEvents DebugFormToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ForceUploadToServerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayPartToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OlvColumnPartPalletNo As OLVColumn
+    Friend WithEvents TestToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RunToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents StopToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EditToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents OlvColumn As OLVColumn
+    Friend WithEvents ToolStripStatusLabelCheckLOGfile As ToolStripStatusLabel
 End Class

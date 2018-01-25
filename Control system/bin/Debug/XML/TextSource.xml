@@ -2,10 +2,6 @@
 <DocumentElement>
   <TextSource>
     <Id>0</Id>
-    <Path>\\cts-filesv\project\SPECIAL\19.AGV Control System\00.Share\Log_export.txt</Path>
-  </TextSource>
-  <TextSource>
-    <Id>1</Id>
-    <Path>D:\HAI\00. VisualStudio\00. Project\AGVControlSystem\AGVControlSystem\Control system\bin\Debug\Log_export.txt</Path>
+    <Path>./Log_Export.txt</Path>
   </TextSource>
 </DocumentElement>

@@ -2,14 +2,6 @@
 <DocumentElement>
   <AGVGroup>
     <Id>0</Id>
-    <Name>TRAY</Name>
-  </AGVGroup>
-  <AGVGroup>
-    <Id>1</Id>
-    <Name>BIG PART</Name>
-  </AGVGroup>
-  <AGVGroup>
-    <Id>2</Id>
-    <Name>SCN</Name>
+    <Name>0</Name>
   </AGVGroup>
 </DocumentElement>
